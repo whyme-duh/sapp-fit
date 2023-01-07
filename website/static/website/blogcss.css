@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Andika&display=swap');
+
+
+:root{
+    --title-family :'Unbounded', cursive;
+    --role-font :'Roboto Mono', monospace;
+    --quote-family:'Lobster Two', cursive;
+
+    --blog-font : 'Andika', sans-serif;
+    --container-width: 60%;
+
+    --margin-top:10em;
+    --padding-bottom:10em;
+    --blog-title:'Roboto Condensed', sans-serif;
+}
+
+*{
+    margin: 0 auto;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    min-width: 600px;
+    color: black;
+
+}
+/* header and nav */
+main{
+    position: relative;
+}
+header{
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(204, 178, 136);
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.logo{
+    width: 200px;
+    height: 100px;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.icon{
+    visibility: hidden;
+}
+
+
+.socials .fa{
+    padding: 1em;
+    font-size: clamp(0.3em, 2.5vh, 1.2em);
+    color: black;
+}
+.fa-facebook:hover{
+    color: blue;
+}
+.fa-youtube:hover{
+    color: red;
+}
+.fa-pinterest:hover{
+    color: red;
+}
+.fa-instagram:hover{
+    color: red;
+}
+
+@media only screen and (max-width:500px){
+    .fa{
+        padding: 0.4em;
+        font-size:15em;
+    }
+}
+main{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    margin-top: 1%;
+    width: 65%;
+}
+.thumbnail{
+    width: 100%;
+    padding-block: 1.5em;
+    height: 50vh;
+}
+.blog-content{
+    width: 100%;
+    margin-top: 2%;
+}
+.title{
+    font-size: 2em;
+    font-family: var(--blog-font);
+}
+
+.blog-content p{
+    font-size: 1.25em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(63, 63, 63);
+}
+
+.other-blogs{
+    margin-top: 3%;
+    width: 30%;
+    padding: 1em;
+}
+.other-blogs h2{
+    font-family:var(--blog-title);
+    text-align: center;
+}
+.related{
+    display: flex;
+    margin-top: 2em;
+
+}
+.rel-detail{
+    padding: 0.2em;
+    cursor: pointer;
+    padding-left: 1em;
+}
+
+.rel-detail p{
+    padding-top: 0.3em;
+}
+.other-blogs a{
+    color: black;
+}
+.rel-detail:hover{
+    background-color: rgb(212, 208, 208);
+}
+/* for post */
+button:active{
+    border-style: outset;
+}
+@media only screen and (max-width:450px){
+    main{
+        flex-wrap: wrap;
+        margin-inline: 0;
+        width: 100%;
+        padding-bottom: 5em;
+    }
+    .container{
+        width: 80%;
+        padding-bottom: 3em;
+        border-bottom: 1px solid grey;
+    }
+    .other-blogs{
+        width: 100%;
+        margin-inline: 10%;
+    }
+}

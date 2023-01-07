@@ -1,0 +1,60 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'website/blogcss.css'%}">
+    {% for object in blogs %}
+    <title>{{object.title}}</title>
+    {% endfor %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <header>
+        <div class="brand"><a href="{% url 'home-page' %}"><img src="/media/images/bg/Untitled-1.svg" alt="svg" class="logo"></a></div>
+
+        <div class="socials">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-instagram"></a>
+            <a href="#" class="fa fa-youtube"></a>
+            <a href="#" class="fa fa-pinterest"></a>
+        </div>
+        
+    </header>
+    <main>
+        <div class="container">
+            <div class="blog-content">
+                {% for object in blogs %}
+                <h1 class="title">{{object.title}}</h1>
+                {{object.date|date}}
+
+                <img src="{{object.thumbnail.url}}" alt="" class="thumbnail">
+                <p>
+                {{object.content|safe}}
+
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="other-blogs">
+            <h2>More Related Blogs</h2>
+            {% for rel in related_blogs|slice:4 %}
+            <a href="{% url 'blog-detail' rel.slug %}">
+                <div class="related">
+                    <img src="{{rel.thumbnail.url}}" alt="" width="70px" >
+                    <div class="rel-detail">
+                        <h4>{{rel.title}}</h4>
+                        <p>{{rel.content|safe|truncatewords:20}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+    
+</body>
+</html>

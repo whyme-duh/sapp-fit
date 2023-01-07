@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'website/style.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SapFit</title>
+</head>
+<body>
+    <!-- <div class="intro">
+        <h1 class="intro-header">
+            <span class="logo">Sap</span><span class="logo">Fit.</span>
+        </h1>
+    </div> -->
+   <main>
+        <div class="header">
+            {% for obj in about %}
+            <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
+            {% endfor %}
+            
+            <div class="right-side" id="responsive">
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'home-page' %}">Home</a></li>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#blogs">Blogs</a></li>
+                        <li><a href="#contact">Contacts</a></li>
+                    </ul>
+                </nav>
+                <div class="socials">
+                    {% for link in about %}
+                    <a href="{{link.facebook}}" class="fa fa-facebook"></a>
+                    <a href="{{link.instagram}}" class="fa fa-instagram"></a>
+                    <a href="{{link.youtube}}" class="fa fa-youtube"></a>
+                    <a href="{{link.pinterest}}" class="fa fa-pinterest"></a>
+                    {% endfor %}
+                </div>
+                
+            </div>
+            <a href="javascript:void(0)" class="icon" onclick="navFunction()">
+                <i class="fa fa-bars"></i></a>
+        </div>
+        <div class="first-page">
+            {% for obj in about %}
+            <img src="{{obj.backgroundImage.url}}" alt="background-images" class="bg-image">
+            {% endfor %}
+            <div class="first-page-content">
+                <h1>I'M <br> <span class="name">Sapp-Fit</span></h1>
+                <h2 class="role">Fitness & Personal Trainer</h2>
+                <div class="hr">
+                    <div class="line"></div>
+                </div>
+                <!-- <p class="content-para">Sed egestas, ante et vulputate volutpat, eros pede
+                semper est, vitae luctus metus libero eu augue.
+                Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est</p> -->
+                <a href="#about"><button>Learn More</button></a>
+                
+            </div>
+        </div>
+        <div class="about-container" id="about">
+            <div class="about hidden" >
+                {% for obj in about %}
+
+                <img src="{{obj.profileImage.url}}" alt="profile" class="about-image">
+                <div class="about-content">
+                    <h1 class="title">About Me</h1>
+                    <p class="bio">
+                        {{obj.bio}}
+                    </p>
+                    <a href="#contact"><button>Train With Me <i class="fas fa-dumbbell"></i></button></a>
+                </div>
+            </div>
+        </div>
+        <div class="quotes-container">
+            <div class="quotes">
+                <h1 class="quote">"</h1>
+                <h1 class="sentence">{{obj.quotes}} </h1>
+                <h1 class="quote second">"</h1>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="services-container">
+            <div class="services hidden" id="services">
+                <h1 class="title">My Services</h1>
+                <div class="services-list">
+                    {% for service in services %}
+                    <div class="card child">
+                        <img src="{{service.icon.url}}" alt="grp-img" class="service-img">
+                        <h3 class="service-title">{{service.title}}</h3>
+                        <p class="service-detail">{{service.detail}}</p>
+                        <h5 class="price">Rs. {{service.price}}/hr</h5>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="blogs-container" id="blogs">
+            <h1 class="title" >Blogs and Posts</h1>
+
+            <div class="blog hidden">
+                <div class="blogs-list">
+                    {% for blog in blogs|slice:2 %}
+                    <a href="{% url 'blog-detail' blog.slug %}">
+                        <div class="blog-card child">
+                            <div class="img-part">
+                                <img src="{{blog.thumbnail.url}}" alt="img">
+                            </div>
+                            <div class="blog-detail">
+                                <div class="blog-content">
+                                    <h3 class="blog-title">{{blog.title}}</h3>
+                                    <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    
+
+                    
+                </div>
+                <hr>
+                <div class="posts-list">
+                    {% for post in posts|slice:2 %}
+                    <a href="{{post.link}}">
+                        <div class="blog-card child">
+                            <div class="img-part">
+                                <img src="{{post.thumbnail.url}}" alt="img">
+                            </div>
+                                <div class="blog-detail">
+                                    <div class="blog-content">
+                                        <h3 class="blog-title">{{post.title}}</h3>
+                                        <p class="blog-para">{{post.content|safe|truncatewords:25}}</p>
+                                    </div>
+                                </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if blogs.count >= 3   %}
+            <a href="{% url 'blogs'%}"><button>See All</button></a>
+            {% else %}
+                &nbsp;
+            {% endif %}
+
+        </div>
+        <div class="contacts-container">
+            <div class="contact-content hidden">
+                <div class="map">
+                    <h1 class="title">Meet Me At Pump</h1>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="contact" id="contact">
+                    <h1 class="title">Contact Me</h1>
+                    <p class="bio">Feel free to contact me anytime.</p>
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        {{form}}
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+        // this helps to remove the confirm resubmission alert message
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+    <script src="{% static 'website/index.js' %}"></script>
+</body>
+</html>
