@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'website/style.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'website/style.css'%}">
     <title>SapFit</title>
 </head>
 <body>
@@ -31,14 +31,14 @@
                         <li><a href="#contact">Contacts</a></li>
                     </ul>
                 </nav>
-                <div class="socials">
+                <!-- <div class="socials">
                     {% for link in about %}
                     <a href="{{link.facebook}}" class="fa fa-facebook"></a>
                     <a href="{{link.instagram}}" class="fa fa-instagram"></a>
                     <a href="{{link.youtube}}" class="fa fa-youtube"></a>
                     <a href="{{link.pinterest}}" class="fa fa-pinterest"></a>
                     {% endfor %}
-                </div>
+                </div> -->
                 
             </div>
             <a href="javascript:void(0)" class="icon" onclick="navFunction()">
@@ -160,19 +160,39 @@
                 <div class="contact" id="contact">
                     <h1 class="title">Contact Me</h1>
                     <p class="bio">Feel free to contact me anytime.</p>
-                    <form action="#" method="POST">
+                  
+                    <!-- <form action="#" method="POST">
                         {% csrf_token %}
                         {{form}}
                         <input type="submit" value="Submit">
-                    </form>
+                    </form> -->
+                    <div class="contact-detail">
+                        <p><i class="fa fa-envelope"></i>&nbsp; saprinashrestha72@gmail.com</p>
+                        <p><i class="fa fa-phone"></i>&nbsp; +977 9893247</p>
+                        <div class="other-contact">
+                            <h2>Social Media Contacts</h2>  
+                            <div class="socials">
+
+                                {% for link in about %}
+                                <a href="{{link.facebook}}" class="fa fa-facebook"></a>
+                                <a href="{{link.instagram}}" class="fa fa-instagram"></a>
+                                <a href="{{link.youtube}}" class="fa fa-youtube"></a>
+                                <a href="{{link.pinterest}}" class="fa fa-pinterest"></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
             
         </div>
     </main>
     <footer>
-        
+    
+        <p>&copy; Copyright {{date}}</p>
     </footer>
+    
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script>
         // this helps to remove the confirm resubmission alert message

@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from .models import AboutAndQuote, Service, Blog, Post
 from website.form import ContactForm
+import datetime
 from django.views.generic import DetailView
 
 form = ContactForm()
@@ -12,7 +13,8 @@ context = {
         'blogs': Blog.objects.all(),
         'posts' : Post.objects.all(),
         'form':form,
-        'count' : count
+        'count' : count,
+        'date' :datetime.datetime.today().strftime("%Y")
     }
 
 def index(request):
@@ -40,9 +42,11 @@ def index(request):
 
 
 def BlogDetailView(request, slug):
+    # to fetch the logo detail
+    about = AboutAndQuote.objects.all()
     blogs = Blog.objects.filter(slug=slug)
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
-    return render(request, 'website/blogdetail.html', {'blogs' : blogs, 'related_blogs' : related_blogs})
+    return render(request, 'website/blogdetail.html', {'blogs' : blogs, 'related_blogs' : related_blogs,'about' : about})
 
 
 def BlogPostView(request):

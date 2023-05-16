@@ -11,8 +11,9 @@
 </head>
 <body>
     <header>
-        <div class="brand"><a href="{% url 'home-page' %}"><img src="/media/images/bg/Untitled-1.svg" alt="svg" class="logo"></a></div>
-`
+        {% for obj in about %}
+        <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
+        {% endfor %}
         <div class="socials">
             <a href="#" class="fa fa-facebook"></a>
             <a href="#" class="fa fa-instagram"></a>

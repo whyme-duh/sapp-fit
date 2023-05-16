@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
 :root{
     --title-family :'Unbounded', cursive;
     --role-font :'Roboto Mono', monospace;
     --quote-family:'Lobster Two', cursive;
     --container-width: 60%;
-
+    --paragraph-font: 'Rubik', sans-serif;
     --margin-top:10em;
     --padding-bottom:10em;
     --blog-title:'Roboto Condensed', sans-serif;
@@ -61,21 +61,8 @@ body{
 }
 /* ------------- */
 /* header and nav */
-main{
-    position: relative;
-}
-.header{
-    position: fixed;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    z-index: 2;
-    padding-inline:5em;
-    /* border: 1px solid black; */
-    background-color: transparent;
-    justify-content: space-around;
-    
-}
+
+
 .hidden{
     opacity: 0;
 }
@@ -111,14 +98,29 @@ transition-delay: 1.2s;
     position: relative;
     right: 0%;
   }
+
+.header{
+    width: 80%;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding-inline:10%;
+    justify-content: space-between;
+    background-color: transparent;
+    
+}
+.brand{
+    width: 50%;
+}
 .brand img{
     width: 200px;
+
     height: 100px;
     max-width: 150px;
 }
 nav ul{
     display: flex;
-    justify-content: center;
     list-style-type: none;
 }
 a{
@@ -127,13 +129,12 @@ a{
 .icon{
     visibility: hidden;
 }
+
 .right-side{
-    width: 70%;
+    width: 50%;
     display: flex;
-    margin: 0;
-    flex-direction: row;
-    justify-content: space-between;
 }
+
 
 nav ul a{
     font-size: 1.25em;
@@ -147,21 +148,20 @@ li a:hover{
     color: rgb(255, 255, 255);
 }
 .socials .fa{
-    padding: 1em;
-    font-size: 1.2em;
-    color: black;
+    padding: 20px;
+    font-size: 25px;
+    width: 25px;
+    text-align: center;
+    text-decoration: none;
+    margin: 0.5em;
+    border-radius: 50%;
+    background-color: #ba9686;
+    color: white;
+
 }
-.fa-facebook:hover{
-    color: blue;
-}
-.fa-youtube:hover{
-    color: red;
-}
-.fa-pinterest:hover{
-    color: red;
-}
-.fa-instagram:hover{
-    color: red;
+.socials .fa:hover{
+    background-color: #a58577;
+
 }
 @media only screen and (max-width:1400px){
     
@@ -183,16 +183,13 @@ li a:hover{
         top: 0;
         height: 100vh;
         background-color: rgb(204, 178, 136);
-
         position: absolute;
         display: flex;
         flex-direction: column;
-
     }
     .right-side-responsive ul{
         padding: 0;
         margin-top: 10em;
-
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -603,14 +600,37 @@ iframe{
     width: 100%;
 }
 .contact{
-    width: 50%;
+    align-items: center;
+    padding-inline: 10%;
+    width: 40%;
 }
 .contact .title{
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
-.contact .bio{
-    text-align: center;
+
+.contact-detail{
+    padding-top: 1.5em;
+}
+.contact-detail p{
+    color: grey;
+    font-family: var(--paragraph-font);
+    font-size: 1.15em;
+    padding: 0.25em;
+    align-items: center;
+}
+.fa-envelop{
+    color: black;
+}
+.other-contact{
+    
+    margin-top: 3em;
+}
+.other-contact h2{
+    padding-bottom: 1em;
+    color: black;
+    font-family: var(--title-family);
+    font-size: 1em;
 }
 form{
     width: 70%;
@@ -655,6 +675,26 @@ input[type='submit']:hover{
     background-color:rgb(221, 159, 93);
 }
 
+
+/* footer */
+
+footer{
+    background-color: rgb(238, 202, 164);
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.copyright{
+    margin-top: 1.5em;
+    background-color: #8a5a44;
+    text-align: center;
+    font-family: var(--role-font);
+}
 @media only screen and (max-width:450px){
     .header{
         margin: 0;
