@@ -50,3 +50,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+
+class Testimonial(models.Model):
+    testimonial = models.CharField(max_length=150)
+    user_name = models.CharField(max_length=80)
+    user_img = models.ImageField(upload_to='images/testimonial')
+
+
+    def __str__(self) -> str:
+        return self.user_name

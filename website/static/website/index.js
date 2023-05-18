@@ -32,7 +32,7 @@ const header = document.querySelector('.header');
 
 window.onscroll = () =>{
     if(window.scrollY>100){
-        header.style.background ="#CCB288";
+        header.style.background ="#e7b178";
     }
     else{
         header.style.background = "transparent";

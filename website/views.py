@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
-from .models import AboutAndQuote, Service, Blog, Post
+from .models import AboutAndQuote, Service, Blog, Post, Testimonial
 from website.form import ContactForm
 import datetime
 from django.views.generic import DetailView
@@ -14,7 +14,8 @@ context = {
         'posts' : Post.objects.all(),
         'form':form,
         'count' : count,
-        'date' :datetime.datetime.today().strftime("%Y")
+        'date' :datetime.datetime.today().strftime("%Y"),
+        'testimonials' : Testimonial.objects.all()
     }
 
 def index(request):

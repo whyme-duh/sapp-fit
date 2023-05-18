@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Rubik&display=swap');
 
 :root{
     --title-family :'Unbounded', cursive;
@@ -12,6 +13,7 @@
     --paragraph-font: 'Rubik', sans-serif;
     --margin-top:10em;
     --padding-bottom:10em;
+    --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
 }
 
@@ -106,6 +108,7 @@ transition-delay: 1.2s;
     display: flex;
     align-items: center;
     padding-inline:10%;
+    padding-block: 1em;
     justify-content: space-between;
     background-color: transparent;
     
@@ -116,7 +119,7 @@ transition-delay: 1.2s;
 .brand img{
     width: 200px;
 
-    height: 100px;
+    height: 50px;
     max-width: 150px;
 }
 nav ul{
@@ -131,7 +134,7 @@ a{
 }
 
 .right-side{
-    width: 50%;
+    width: 60%;
     display: flex;
 }
 
@@ -148,9 +151,9 @@ li a:hover{
     color: rgb(255, 255, 255);
 }
 .socials .fa{
-    padding: 20px;
-    font-size: 25px;
-    width: 25px;
+    padding: 15px;
+    font-size: 20px;
+    width: 20px;
     text-align: center;
     text-decoration: none;
     margin: 0.5em;
@@ -450,8 +453,83 @@ li a:hover{
 .services-list{
     margin-top: calc(var(--margin-top)/3);
     display: flex;
+    gap: 2em;
     width: 100%;
     justify-content: space-evenly;
+}
+.service-card{
+    position: relative;
+    width: 30%;
+}
+.service-card img{
+    border-radius: 15px;
+    width: 100%;
+    height: 400px;
+}
+.overlay-color{
+    border-radius: 15px;
+    width: 100%;
+    height: 400px;
+    top: 0;
+    background-color: transparent;
+    position: absolute;
+}
+.service-name {
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--title-family);
+    text-align: center;
+    top: 50%;
+    padding: 0em 0 0.5em 0.5em  ;
+    color: white;
+    position: absolute;
+}
+.service-content{
+    display: block;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    align-items: start;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    position: absolute;
+    font-family: var(--paragraph-font);
+    bottom: -100;
+    padding-bottom: 1em;
+    background-color: #F6DCC9;
+    visibility: hidden;
+}
+
+.service-content > *{
+    padding:0.5em;
+}
+.service-content h2{
+    margin-inline:0;
+}
+.service-card:hover .overlay-color{
+    transition: 0.25s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.625);
+}
+
+@keyframes animate{
+    0%{
+        bottom: -100;
+    }
+    50%{
+        bottom:-50 ;
+    }
+    100%{
+        bottom: 0;
+    }
+}
+.service-card:hover .service-name{
+    visibility: hidden;
+}
+.service-card:hover .service-content{
+    bottom: 0;
+    transform: 0.25s ease-in-out;
+    transition-duration: 1s;
+    visibility: visible;
 }
 .card{
     padding: 1em;
@@ -580,6 +658,56 @@ small{
     background-color: #b65329;
 
 }
+
+/* testimonials */
+
+.testimonials-container{
+   width: var(--container-width);
+   height: 50vh;
+}
+.testimonials-container .title{
+    text-align: center;
+}
+.testimonial-list{
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: calc(var(--margin-top) - 5em);
+    width: 100%;
+
+}
+.testinomial-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+    height: fit-content;
+    background-color: #F6F2F2;
+    border-radius: 10px;
+    width: 30%;
+    padding: 2em;
+}
+.testinomial-card p{
+    font-family: var(--testinomial-font);
+}
+.user{
+    padding-top: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.user h4{
+    margin:0;
+    padding:0;
+    font-family: var(--testinomial-font);
+}
+.testinomial-card img{
+    margin: 0;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+}
 /* contacts */
 .contacts-container{
     padding-bottom: var(--padding-bottom);
@@ -596,6 +724,7 @@ small{
     width: 50%;
 }
 iframe{
+    border-radius: 10px;
     margin-top: 3em;
     width: 100%;
 }
@@ -627,8 +756,8 @@ iframe{
     margin-top: 3em;
 }
 .other-contact h2{
-    padding-bottom: 1em;
-    color: black;
+    padding-bottom: 2em;
+    color: #774936;
     font-family: var(--title-family);
     font-size: 1em;
 }

@@ -28,17 +28,12 @@
                         <li><a href="#about">About Me</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#blogs">Blogs</a></li>
+                        <li><a href="#testimonial">Testimonials</a></li>
                         <li><a href="#contact">Contacts</a></li>
+
                     </ul>
                 </nav>
-                <!-- <div class="socials">
-                    {% for link in about %}
-                    <a href="{{link.facebook}}" class="fa fa-facebook"></a>
-                    <a href="{{link.instagram}}" class="fa fa-instagram"></a>
-                    <a href="{{link.youtube}}" class="fa fa-youtube"></a>
-                    <a href="{{link.pinterest}}" class="fa fa-pinterest"></a>
-                    {% endfor %}
-                </div> -->
+               
                 
             </div>
             <a href="javascript:void(0)" class="icon" onclick="navFunction()">
@@ -54,9 +49,7 @@
                 <div class="hr">
                     <div class="line"></div>
                 </div>
-                <!-- <p class="content-para">Sed egestas, ante et vulputate volutpat, eros pede
-                semper est, vitae luctus metus libero eu augue.
-                Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est</p> -->
+               
                 <a href="#about"><button>Learn More</button></a>
                 
             </div>
@@ -89,14 +82,18 @@
                 <h1 class="title">My Services</h1>
                 <div class="services-list">
                     {% for service in services %}
-                    <div class="card child">
-                        <img src="{{service.icon.url}}" alt="grp-img" class="service-img">
-                        <h3 class="service-title">{{service.title}}</h3>
-                        <p class="service-detail">{{service.detail}}</p>
-                        <h5 class="price">Rs. {{service.price}}/hr</h5>
+                    <div class="service-card">
+                        <img src={{service.icon.url}} alt="img" class="img">
+                        <div class="overlay-color"></div>
+                        <h1 class="service-name">{{service.title}}</h1>
+                        <div class="service-content">
+                            <h2>{{service.title}}</h2>
+                            <p>{{service.detail}}</p>
+                            <p>{{service.price}}</p>
+                        </div>
                     </div>
-                    {% endfor %}
-                    
+                    {% endfor %} 
+
                 </div>
             </div>
         </div>
@@ -144,12 +141,30 @@
                     {% endfor %}
                 </div>
             </div>
-            {% if blogs.count >= 3   %}
+            {% if blogs.count >= 2   %}
             <a href="{% url 'blogs'%}"><button>See All</button></a>
             {% else %}
                 &nbsp;
             {% endif %}
 
+        </div>
+        <div class="testimonials-container" id ="testimonial">
+            <h1 class="title">Testimonials</h1>
+            <div class="testimonial-list">
+                {% for testi in testimonials %}
+
+                <div class="testinomial-card">
+                    <p>{{testi.testimonial}}
+                    </p>
+
+                    <div class="user">
+                        <h4>{{testi.user_name}}</h4>
+                        <img src={{testi.user_img.url}} alt="">
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         <div class="contacts-container">
             <div class="contact-content hidden">
@@ -170,7 +185,7 @@
                         <p><i class="fa fa-envelope"></i>&nbsp; saprinashrestha72@gmail.com</p>
                         <p><i class="fa fa-phone"></i>&nbsp; +977 9893247</p>
                         <div class="other-contact">
-                            <h2>Social Media Contacts</h2>  
+                            <h2 class="sub-title">Social Media Contacts</h2>  
                             <div class="socials">
 
                                 {% for link in about %}
