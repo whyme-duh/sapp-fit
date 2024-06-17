@@ -6,38 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'website/bloglist.css'%}">
+    <link rel="stylesheet" href="{% static 'website/style.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Blogs & Posts</title>
 </head>
 <body>
-    <header>
-        {% for obj in about %}
-            <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg" class="logo"></a></div>
-            {% endfor %}
-        <div class="socials">
-            <a href="#" class="fa fa-facebook"></a>
-            <a href="#" class="fa fa-instagram"></a>
-            <a href="#" class="fa fa-youtube"></a>
-            <a href="#" class="fa fa-pinterest"></a>
-        </div>
-        
-    </header>
+       {% include 'website/navbar.html' %}    
     <main>
         <div class="container">
             <div class="option">
                 <a href="{%url 'blogs' %}" class="active">Blogs</a>
                 <a href="{% url 'posts' %}">Posts</a>
             </div>
-            <div class="blogs-list" id="blogs-list">
+            <div class="blogs-lists" id="blogs-list">
                 {% for blog in blogs %}
-                <div class="blog-content child">
+                <a href="{% url 'blog-detail' blog.slug%}">
+                <div class="blogs-content child">
                     <img src="{{blog.thumbnail.url}}" alt="img">
-                    <div class="blog-detail">
+                    <div class="blogs-detail">
                         <h2>{{blog.title}}</h2>
-                        <p>{{blog.content|safe|truncatewords:40}}</p>
-                        <button><a href="{% url 'blog-detail' blog.slug %}">Read More</a> </button>
+                        <p>{{blog.content|safe|truncatewords:35}}</p>
+                        <small>April 14 - 8 min</small>
+                            
+                        <!-- <button><a href="{% url 'blog-detail' blog.slug %}">Read More</a> </button> -->
                     </div>
                 </div>
+            </a>
                 {% endfor %}
 
             </div>

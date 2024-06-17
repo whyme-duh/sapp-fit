@@ -33,14 +33,17 @@ body{
 main{
     position: relative;
 }
-header{
-    color: white;
-    width: 100%;
+.navbar{
+    /* margin-top: 5em; */
+    color: black;
+    width: 80%;
     display: flex;
+    padding: 1em;
     flex-wrap: wrap;
     background-color: rgb(204, 178, 136);
     align-items: center;
     justify-content: space-between;
+    padding-inline:10%;
     
 }
 .brand-logo{
@@ -56,23 +59,6 @@ a{
 }
 
 
-.socials .fa{
-    padding: 1em;
-    font-size: clamp(0.3em, 2.5vh, 1.2em);
-    color: black;
-}
-.fa-facebook:hover{
-    color: blue;
-}
-.fa-youtube:hover{
-    color: red;
-}
-.fa-pinterest:hover{
-    color: red;
-}
-.fa-instagram:hover{
-    color: red;
-}
 
 @media only screen and (max-width:500px){
     .fa{
@@ -81,9 +67,8 @@ a{
     }
 }
 main{
-    width: 60%;
-    display: flex;
-    justify-content: center;
+    width: 70%;
+    
 }
 .container{
     margin-top: 1%;

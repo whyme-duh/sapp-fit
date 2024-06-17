@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'website/blogcss.css'%}">
+    <link rel="stylesheet" href="{% static 'website/style.css'%}">
     {% for object in blogs %}
     <title>{{object.title}}</title>
     {% endfor %}
@@ -15,17 +16,9 @@
 </head>
 <body>
     <header>
-        {% for obj in about %}
-        <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg" class="brand-logo"></a></div>
-        {% endfor %}
-        <div class="socials">
-            <a href="#" class="fa fa-facebook"></a>
-            <a href="#" class="fa fa-instagram"></a>
-            <a href="#" class="fa fa-youtube"></a>
-            <a href="#" class="fa fa-pinterest"></a>
-        </div>
-        
-    </header>
+        {% include 'website/navbar.html' %}
+
+    </header>        
     <main>
         <div class="container">
             <div class="blog-content">

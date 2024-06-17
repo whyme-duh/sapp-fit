@@ -89,7 +89,7 @@
                         <div class="service-content">
                             <h2>{{service.title}}</h2>
                             <p>{{service.detail}}</p>
-                            <p>{{service.price}}</p>
+                            <p>Rs.{{service.price}}</p>
                         </div>
                     </div>
                     {% endfor %} 
@@ -146,17 +146,14 @@
             {% else %}
                 &nbsp;
             {% endif %}
-
         </div>
         <div class="testimonials-container" id ="testimonial">
             <h1 class="title">Testimonials</h1>
             <div class="testimonial-list">
                 {% for testi in testimonials %}
-
                 <div class="testinomial-card">
                     <p>{{testi.testimonial}}
                     </p>
-
                     <div class="user">
                         <h4>{{testi.user_name}}</h4>
                         <img src={{testi.user_img.url}} alt="">
@@ -185,7 +182,7 @@
                         <p><i class="fa fa-envelope"></i>&nbsp; saprinashrestha72@gmail.com</p>
                         <p><i class="fa fa-phone"></i>&nbsp; +977 9893247</p>
                         <div class="other-contact">
-                            <h2 class="sub-title">Social Media Contacts</h2>  
+                            <!-- <h2 class="sub-title">Social Media Contacts</h2>   -->
                             <div class="socials">
 
                                 {% for link in about %}

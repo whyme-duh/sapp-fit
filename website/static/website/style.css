@@ -458,6 +458,7 @@ li a:hover{
     justify-content: space-evenly;
 }
 .service-card{
+    cursor: pointer;
     position: relative;
     width: 30%;
 }
@@ -605,6 +606,7 @@ hr{
     margin: 0;
 }
 .img-part img{
+    border-radius: 10px;
     width: 120px;
     height: 120px;
 }
@@ -618,6 +620,7 @@ hr{
 }
 .blog-content{
     margin: 0;
+    padding: 0.45em;
     width: 100%;
     padding-left: 1em;
 }
