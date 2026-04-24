@@ -4,14 +4,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Rubik&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 :root{
     --title-family :'Unbounded', cursive;
+    --trial-font : "Bungee", sans-serif;
     --role-font :'Roboto Mono', monospace;
     --quote-family:'Lobster Two', cursive;
     --container-width: 60%;
     --paragraph-font: 'Rubik', sans-serif;
-    --margin-top:10em;
+    --margin-top:5em;
     --padding-bottom:10em;
     --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
@@ -103,6 +104,7 @@ transition-delay: 1.2s;
 /* navbar styles */
 .navbar{
     display: flex;
+    background-color: #ffe5c199;
     justify-content: space-between;
     align-items: center;
     
@@ -271,7 +273,7 @@ li a:hover{
     color: #8a5a44;
     font-size:3.5em ;
     letter-spacing: 1px;
-    font-family: var(--title-family);
+    font-family: var(--trial-font);
 }
 .name{
     color: #774936;
@@ -405,7 +407,7 @@ li a:hover{
     background-size: cover;
     background-attachment: fixed;
     box-shadow: inset 500px 800px 10px rgba(231, 177, 120, 0.397);
-    height: 50vh;
+    height: 30vh;
     color: white;
     font-family: var(--quote-family);
 }
@@ -442,19 +444,19 @@ li a:hover{
 .services-list{
     margin-top: calc(var(--margin-top)/3);
     display: flex;
-    gap: 2em;
+    gap: 3em;
     width: 100%;
     justify-content: space-evenly;
 }
 .service-card{
     cursor: pointer;
     position: relative;
-    width: 30%;
+    width: 50%;
 }
 .service-card img{
     border-radius: 15px;
     width: 100%;
-    height: 400px;
+    height: 450px;
 }
 .overlay-color{
     border-radius: 15px;
@@ -880,11 +882,13 @@ footer{
         margin: 1em;
         font-size: 0.65em;
     }
+   
     .service-title{
         font-size: 1.5em;
     }
     .service-detail{
         font-size: 1.5em;
+        padding: 0;
     }
     .price{
         font-size: 1.5em;
