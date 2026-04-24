@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['192.168.1.71', '127.0.0.1']
 
 INSTALLED_APPS = [
     'ckeditor',
+    "django_browser_reload",
     'website.apps.WebsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

@@ -16,29 +16,7 @@
         </h1>
     </div> -->
    <main>
-        <div class="header">
-            {% for obj in about %}
-            <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
-            {% endfor %}
-            
-            <div class="right-side" id="responsive">
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'home-page' %}">Home</a></li>
-                        <li><a href="#about">About Me</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#blogs">Blogs</a></li>
-                        <li><a href="#testimonial">Testimonials</a></li>
-                        <li><a href="#contact">Contacts</a></li>
-
-                    </ul>
-                </nav>
-               
-                
-            </div>
-            <a href="javascript:void(0)" class="icon" onclick="navFunction()">
-                <i class="fa fa-bars"></i></a>
-        </div>
+       {% include 'website/navbar.html' %}    
         <div class="first-page">
             {% for obj in about %}
             <img src="{{obj.backgroundImage.url}}" alt="background-images" class="bg-image">

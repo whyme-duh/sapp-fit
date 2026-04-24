@@ -5,24 +5,19 @@
             {% for obj in about %}
             <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
             {% endfor %}
-            
-            <div class="right-side" id="responsive">
-                <nav>
+                <nav class="right-side" id="responsive">
                     <ul>
                         <li><a href="{% url 'home-page' %}">Home</a></li>
                         <li><a href="#about">About Me</a></li>
                         <li><a href="#services">Services</a></li>
-                        <li><a href="http://127.0.0.1:8000/#:~:text=Prenatal%20Exercise-,Blogs%20and%20Posts,-Why%20you%20should">Blogs</a></li>
+                        <li><a href="#blogs">Blogs</a></li>
                         <li><a href="#testimonial">Testimonials</a></li>
                         <li><a href="#contact">Contacts</a></li>
-        
                     </ul>
-                </nav>
-               
-                
-            </div>
-            <a href="javascript:void(0)" class="icon" onclick="navFunction()">
+                    <a href="javascript:void(0)" class="icon" onclick="navFunction()">
                 <i class="fa fa-bars"></i></a>
+                </nav>
+            
         </div>
     </body>
 </html>
