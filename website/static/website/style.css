@@ -16,6 +16,7 @@
     --padding-bottom:10em;
     --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
+    --navbar-color: #ffe5c199;
 }
 
 *{
@@ -37,11 +38,13 @@ body{
     height: 100vh;
     background-color: black;
     width: 100%;
+    color: white;
 }
 .intro-header{
     position: absolute;
     top: 50%;
     left: 50%;
+    font-size: 3em;
     transform: translate(-50%, -50%);
 }
 .intro span{
@@ -50,6 +53,10 @@ body{
     bottom: -20px;
     opacity: 0;
 
+}
+.logo{
+    font-family: var(--title-family);
+    font-weight: 800;
 }
 .logo.add{
     bottom: 0;
@@ -61,6 +68,10 @@ body{
     bottom: 150px;
     transition: ease-in-out 0.5s;
 
+}
+.sappfit{
+    color: rgb(255, 167, 4);
+    font-weight: 900;
 }
 /* ------------- */
 /* header and nav */
@@ -104,21 +115,23 @@ transition-delay: 1.2s;
 /* navbar styles */
 .navbar{
     display: flex;
-    background-color: #ffe5c199;
+    background-color: var(--navbar-color);
     justify-content: space-between;
     align-items: center;
+    padding: 1em;
     
 }
-.brand{
-    padding: 1em;
-}
+
 .brand img{
     width: 150px;
 }
 
 nav ul{
     display: flex;
+    gap: 2em;
     list-style-type: none;
+    align-items: center;
+    justify-content: center;
 }
 a{
     text-decoration: none;
@@ -131,15 +144,13 @@ a{
 
 
 nav ul a{
-    font-size: 1.25em;
+    font-size: 1.35em;
     font-family: var(--role-font);
     color: black;
 }
-nav ul li{
-    padding: 1em;
-}
+
 li a:hover{
-    color: rgb(255, 255, 255);
+    color: rgb(248, 62, 0);
 }
 .socials .fa{
     padding: 15px;
@@ -678,6 +689,7 @@ small{
     height: fit-content;
     background-color: #F6F2F2;
     border-radius: 10px;
+    margin-top: 2em;
     width: 30%;
     padding: 2em;
 }
@@ -711,8 +723,7 @@ small{
 .contact-content{
     width: 80%;
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    justify-content: space-between;
 }
 .map{
     width: 50%;
@@ -725,7 +736,6 @@ iframe{
 .contact{
     align-items: center;
     padding-inline: 10%;
-    width: 40%;
 }
 .contact .title{
     width: 100%;
@@ -802,20 +812,21 @@ input[type='submit']:hover{
 /* footer */
 
 footer{
-    background-color: rgb(238, 202, 164);
+    background-color: var(--navbar-color);
     display: flex;
-    justify-content: center;
-    padding: 1em;
     flex-direction: column;
+    font-family: var(--testinomial-font);
     align-items: center;
+    
 }
 
 
 
 .copyright{
-    margin-top: 1.5em;
-    background-color: #8a5a44;
+    background-color: var(--navbar-color);
+    width: 100%;
     text-align: center;
+    padding-bottom: 1em;
     font-family: var(--role-font);
 }
 @media only screen and (max-width:450px){

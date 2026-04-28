@@ -10,11 +10,11 @@
     <title>SapFit</title>
 </head>
 <body>
-    <!-- <div class="intro">
+    <div class="intro">
         <h1 class="intro-header">
-            <span class="logo">Sap</span><span class="logo">Fit.</span>
+            <span class="logo">Master Your Body </span><span class="logo"> &nbsp;with <span class="logo sappfit">SAPPFIT</span></span>
         </h1>
-    </div> -->
+    </div>
    <main>
        {% include 'website/navbar.html' %}    
         <div class="first-page">
@@ -23,7 +23,7 @@
             {% endfor %}
             <div class="first-page-content">
                 <h1>Hi,</h1>
-                <h1>I'M <br> <span class="name">Sapp-Fit</span></h1>
+                <h1>I'M <span class="name">Sapp-Fit</span></h1>
                 <h2 class="role">Fitness Influencer & Personal Trainer</h2>
                 <div class="hr">
                     <div class="line"></div>
@@ -151,12 +151,6 @@
                 <div class="contact" id="contact">
                     <h1 class="title">Contact Me</h1>
                     <p class="bio">Feel free to contact me anytime.</p>
-                  
-                    <!-- <form action="#" method="POST">
-                        {% csrf_token %}
-                        {{form}}
-                        <input type="submit" value="Submit">
-                    </form> -->
                     <div class="contact-detail">
                         <p><i class="fa fa-envelope"></i>&nbsp; saprinashrestha72@gmail.com</p>
                         <p><i class="fa fa-phone"></i>&nbsp; +977 9893247</p>
@@ -179,10 +173,8 @@
             
         </div>
     </main>
-    <footer>
-    
-        <p>&copy; Copyright {{date}}</p>
-    </footer>
+        {% include 'website/navbar.html' %}
+        <p class="copyright">&copy; Copyright {{date}}</p>
     
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script>

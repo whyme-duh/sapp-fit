@@ -2,27 +2,35 @@ let intro = document.querySelector('.intro');
 let introheader = document.querySelector('.intro-header');
 let logos = document.querySelectorAll('.logo');
 
-window.addEventListener("DOMContentLoaded", ()=>{
-    logos.forEach((logo, index) => {
-        setTimeout(()=>{
-            setTimeout(()=>{
-                logo.classList.add('add');
-                
-            }, (index+1) * 400)
-        })
-        setTimeout(()=>{
-            logos.forEach((logo, index)=>{
-                setTimeout(()=>{
-                    logo.classList.remove('add');
-                    logo.classList.add('fade');
-                }, (index+1) * 50)
-            })
-        }, 2000)
+window.addEventListener("DOMContentLoaded", ()=>{   
+    let splashScreenCount = parseInt(localStorage.getItem('splashScreenCount')) || 0;
 
-        setTimeout(() =>{
-            intro.style.top = "-100vh";
-        }, 2300)
-    })
+    if (splashScreenCount == 1){
+        intro.style.display = "none";
+    } 
+    else{
+        localStorage.setItem('splashScreenCount', splashScreenCount + 1);
+        logos.forEach((logo, index) => {
+            setTimeout(()=>{
+                setTimeout(()=>{
+                    logo.classList.add('add');
+                    
+                }, (index+1) * 400)
+            })
+            setTimeout(()=>{
+                logos.forEach((logo, index)=>{
+                    setTimeout(()=>{
+                        logo.classList.remove('add');
+                        logo.classList.add('fade');
+                    }, (index+1) * 50)
+                })
+            }, 2000)
+
+            setTimeout(() =>{
+                intro.style.top = "-100vh";
+            }, 2300)
+        })
+    }
 })
 
 
