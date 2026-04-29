@@ -18,62 +18,9 @@
     --blog-title:'Roboto Condensed', sans-serif;
 }
 
-*{
-    margin: 0 auto;
-}
-html{
-    scroll-behavior: smooth;
-}
-body{
-    min-width: 600px;
-    color: black;
-
-}
-/* header and nav */
-main{
-    position: relative;
-}
-.navbar{
-    /* margin-top: 5em; */
-    color: black;
-    width: 80%;
-    display: flex;
-    padding: 1em;
-    flex-wrap: wrap;
-    background-color: rgb(204, 178, 136);
-    align-items: center;
-    justify-content: space-between;
-    padding-inline:10%;
-    
-}
-.brand-logo{
-    width: 100px;
-    height: 100px;
-}
-a{
-    text-decoration: none;
-    color: white;
-}
-.icon{
-    visibility: hidden;
-}
 
 
 
-@media only screen and (max-width:500px){
-    .fa{
-        padding: 0.4em;
-        font-size:15em;
-    }
-}
-main{
-    width: 70%;
-    
-}
-.container{
-    margin-top: 1%;
-    width: 65%;
-}
 .thumbnail{
     width: 100%;
     padding-block: 1.5em;

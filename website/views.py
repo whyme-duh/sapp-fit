@@ -38,7 +38,7 @@ def index(request):
                 send_mail(subject, message, email, ['ritikshrestha94@gmail.com'], fail_silently=False)
             except BadHeaderError:
                 return HttpResponse("Invalid!")
-    return render(request, 'website/index.html', context)
+    return render(request, 'website/home.html', context)
 
 
 

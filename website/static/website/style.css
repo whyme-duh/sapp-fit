@@ -16,7 +16,8 @@
     --padding-bottom:10em;
     --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
-    --navbar-color: #ffe5c199;
+    --navbar-color: #faedcd;
+    --button-color: #d4a373;
 }
 
 *{
@@ -319,7 +320,7 @@ li a:hover{
     animation: opacAnimation 1.5s ease-in;
     font-family: var(--role-font);
     border: none;
-    background-color: rgb(231, 177, 120);
+    background-color: var(--button-color);
     font-size: 1.15em;
     cursor: pointer;
 }
@@ -329,6 +330,14 @@ li a:hover{
 
 }
 
+.top-page-contacts{
+    margin-top: 1em;
+}
+
+.top-page-contacts .socials a{
+    background: white;
+    color: var(--button-color);
+}
 /* about page */
 
 @keyframes aboutAnimation{
