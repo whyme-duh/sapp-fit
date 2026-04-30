@@ -26,7 +26,11 @@
     padding-block: 1.5em;
     height: 50vh;
 }
+.blog-container{
+    width: 80%;
+}
 .blog-content{
+    padding: 1em;
     width: 100%;
     margin-top: 2%;
 }
