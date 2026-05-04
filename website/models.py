@@ -61,3 +61,26 @@ class Testimonial(models.Model):
 
     def __str__(self) -> str:
         return self.user_name
+    
+
+
+class Client(models.Model):
+
+    GENDER_CHOICES = [
+        ("Male" , "Male"),
+        ("Female", "Female"),
+        ("Other" , "Other")
+    ]
+
+    STATUS_CHOICES = [
+        ("Ongoing" , "Ongoing"),
+        ("Completed", "Completed"),
+    ]
+
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    gender = models.TextField(choices= GENDER_CHOICES)
+    started_training_from = models.DateField()
+    services = models.ForeignKey(Service, on_delete= models.PROTECT)
+    any_problem = models.TextField()
+    status = models.TextField(choices= STATUS_CHOICES)
