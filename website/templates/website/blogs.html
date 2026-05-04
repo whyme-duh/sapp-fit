@@ -2,25 +2,31 @@
 {% block content %}
     <title>{% block title %}Blogs{% endblock %}</title>
 
-
+<div class=" navbar">
+    {% for obj in about %}
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
+    {% endfor %}
+        
+    
+</div>
 <div class="blog-container">
     <div class="blog-header">
-        <h1>My Blogs</h1>
+        <h1>Read My Latest Blogs</h1>
+        <p>Here are some of my blogs that I have written. Hope it helps!</p>
     </div>
     <div class="blog-lists" id="blogs-list">
         {% for blog in blogs %}
-        <a href="{% url 'blog-detail' blog.slug%}">
             <div class="blogs-content child">
+                <a href="{% url 'blog-detail' blog.slug%}">
                 <img src="{{blog.thumbnail.url}}" alt="img">
                 <div class="blogs-detail">
                     <h2>{{blog.title}}</h2>
-                    <p>{{blog.content|safe|truncatewords:35}}</p>
+                    <p>{{blog.content|safe|truncatewords:15}}</p>
                     <small>April 14 - 8 min</small>
-                        
                     <!-- <button><a href="{% url 'blog-detail' blog.slug %}">Read More</a> </button> -->
                 </div>
+                </a>
             </div>
-        </a>
         {% endfor %}
     </div>
 </div>

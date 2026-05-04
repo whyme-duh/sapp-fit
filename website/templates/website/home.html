@@ -2,6 +2,8 @@
     <title>{% block title %}SAPP-FIT{% endblock %}</title>
 
 {% block content %}
+       {% include 'website/navbar.html' %}    
+
         <div class="first-page">
             {% for obj in about %}
             <img src="{{obj.backgroundImage.url}}" alt="background-images" class="bg-image">

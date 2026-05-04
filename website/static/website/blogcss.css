@@ -19,24 +19,28 @@
 }
 
 
+.go-back-link{
+    font-weight: 800;
 
-
-.thumbnail{
-    width: 100%;
-    padding-block: 1.5em;
-    height: 50vh;
+    text-decoration: underline;
 }
+
+
 .blog-container{
-    width: 80%;
+    margin-top: 2em;
+    width: 70%;
 }
 .blog-content{
-    padding: 1em;
-    width: 100%;
-    margin-top: 2%;
+    margin-top: 2em;
 }
+
 .title{
-    font-size: 2em;
+    font-size: 3em;
     font-family: var(--blog-font);
+}
+.published-date{
+    font-size: 1em;
+    margin-block: 1em;
 }
 
 .blog-content p{
@@ -46,13 +50,14 @@
 }
 
 .other-blogs{
-    margin-top: 3%;
-    width: 30%;
+    margin-top: 3em;
+    width: 100%;
     padding: 1em;
 }
-.other-blogs h2{
-    font-family:var(--blog-title);
+.other-blogs h1{
+    font-family: var(--role-font);
     text-align: center;
+    margin-bottom: 2em;
 }
 .related{
     display: flex;

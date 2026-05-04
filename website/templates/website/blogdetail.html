@@ -5,31 +5,37 @@
     {{object.title}}
     {% endfor %}
     {%endblock %}</title>
+<div class=" navbar">
+    {% for obj in about %}
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
+    {% endfor %}
+        
+    
+</div>
 <div class="blog-container">
     <div class="blog-content">
-        {% for object in blogs %}
-        <h1 class="title">{{object.title}}</h1>
-        {{object.date|date}}
+        <a href="{% url 'blogs' %}" class="go-back-link">Go Back</a>
 
-        <img src="{{object.thumbnail.url}}" alt="" class="thumbnail">
-        <p>
+        {% for object in blogs %}
+        <h1 class="title"> {{object.title}}</h1>
+        <small class="published-date">Published At: {{object.date|date}}</small>
         {{object.content|safe}}
 
-        </p>
         {% endfor %}
     </div>
     <div class="other-blogs">
-        <h2>More Related Blogs</h2>
+        <h1>Other Related Blogs</h1>
         {% for rel in related_blogs|slice:4 %}
-        <a href="{% url 'blog-detail' rel.slug %}">
-            <div class="related">
-                <img src="{{rel.thumbnail.url}}" alt="" width="70px" >
-                <div class="rel-detail">
-                    <h4>{{rel.title}}</h4>
-                    <p>{{rel.content|safe|truncatewords:20}}</p>
+        <div class="blogs-content child">
+                <a href="{% url 'blog-detail' rel.slug%}">
+                <img src="{{rel.thumbnail.url}}" alt="img">
+                <div class="blogs-detail">
+                    <h2>{{rel.title}}</h2>
+                    <p>{{rel.content|safe|truncatewords:15}}</p>
+                    <small>April 14 - 8 min</small>
                 </div>
+                </a>
             </div>
-        </a>
         {% endfor %}
     </div>
     {% endblock %}
