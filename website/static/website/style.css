@@ -459,7 +459,7 @@ li a:hover{
     padding-bottom: var(--padding-bottom);
     
 }
-.services{
+.services, .merch{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -583,6 +583,56 @@ li a:hover{
     font-family: var(--role-font);
     padding-bottom: 1em;
 }
+
+/* merch container */
+.merch-container{
+    margin-top: var(--margin-top);
+    padding-bottom: var(--padding-bottom);
+}
+.merch-list{
+    margin-top: calc(var(--margin-top)/2);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.5em;
+}
+.slogan{
+    font-family: var(--quote-family);
+    font-size: 1.5em;
+    color: #ba9686;
+    margin-top: 1em;
+}
+.merch-image{
+    width: 500px;
+}
+.product-card{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.product-card img{
+    width: 300px;
+    height: 350px;
+    border-radius: 10px;
+}
+.product-card h3{
+    font-family: var(--title-family);
+    margin-block: 0.25em;
+    font-size: 0.75em;
+}
+.product-card strike{
+    color: red;
+    font-size: 0.75em;
+}
+.product-card p{
+    font-family: var(--nav-font);
+    font-size: 0.85em;
+}
+.product-card:hover{
+    background-color: rgba(237, 235, 235, 0.266);
+    border-radius: 10px;
+}
 /* gallary */
 .blogs-container{
     display: flex;
@@ -660,7 +710,7 @@ small{
     background-color: rgba(233, 232, 232, 0.211);
 }
 
-.blogs-container button{
+.blogs-container button, .merch-container button{
     margin-top: 4em;
     border: none;
     font-family: var(--role-font);
