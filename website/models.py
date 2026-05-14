@@ -84,3 +84,5 @@ class Client(models.Model):
     services = models.ForeignKey(Service, on_delete= models.PROTECT)
     any_problem = models.TextField()
     status = models.TextField(choices= STATUS_CHOICES)
+
+    
