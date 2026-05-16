@@ -1,5 +1,5 @@
 {% extends 'website/index.html '%}
-    <title>{% block title %}SAPP-FIT{% endblock %}</title>
+    <title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
 
 {% block content %}
        {% include 'website/navbar.html' %}    
@@ -16,16 +16,6 @@
                     <div class="line"></div>
                 </div>
                
-                <!-- <div class="top-page-contacts">
-                    <div class="socials">
-                        {% for link in about %}
-                        <a href="{{link.facebook}}" class="fa fa-facebook"></a>
-                        <a href="{{link.instagram}}" class="fa fa-instagram"></a>
-                        <a href="{{link.youtube}}" class="fa fa-youtube"></a>
-                        <a href="{{link.pinterest}}" class="fa fa-pinterest"></a>
-                        {% endfor %}
-                    </div>
-                </div> -->
                 <a href="#services"><button>View My Services <i class="fas fa-dumbbell"></i></button></a>
                 
 
@@ -60,16 +50,16 @@
                 <h1 class="title">My Services</h1>
                 <div class="services-list">
                     {% for service in services %}
-                    <div class="service-card">
-                        <img src={{service.icon.url}} alt="img" class="img">
-                        <div class="overlay-color"></div>
-                        <h1 class="service-name">{{service.title}}</h1>
-                        <div class="service-content">
-                            <h2 class="service-title">{{service.title}}</h2>
-                            <p class="service-detail">{{service.detail|safe}}</p>
-                            <p class="price">Rs.{{service.price}}</p>
-                        </div>
-                    </div>
+                    <a href="{% url 'service-detail' service.slug %}" class="service-card">
+                            <img src={{service.icon.url}} alt="img" class="img">
+                            <div class="overlay-color"></div>
+                            <h1 class="service-name">{{service.title}}</h1>
+                            <div class="service-content">
+                                <h2 class="service-title">{{service.title}}</h2>
+                                <p class="service-detail">{{service.info}}</p>
+                                <p class="price">Rs.{{service.price}}</p>
+                            </div>
+                    </a>
                     {% endfor %} 
 
                 </div>
@@ -147,7 +137,7 @@
                     </p>
                     <div class="user">
                         <h4>{{testi.user_name}}</h4>
-                        <img src={{testi.user_img.url}} alt="">
+                        <p>A member</p>
 
                     </div>
                 </div>

@@ -42,6 +42,12 @@ def index(request):
 
 
 
+def service_detail_view(request, slug):
+    service = Service.objects.get(slug = slug)
+    return render(request, 'website/service.html', context = {'service' : service})
+
+
+
 def BlogDetailView(request, slug):
     # to fetch the logo detail
     about = AboutAndQuote.objects.all()

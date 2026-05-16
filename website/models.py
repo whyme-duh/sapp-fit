@@ -21,13 +21,15 @@ class AboutAndQuote(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=80)
+    info = models.TextField(null = True, blank = True)
     detail = RichTextField(null = True, blank = True)
     price= models.IntegerField()
     icon = models.ImageField(upload_to='images/pics')
+    slug = models.SlugField(null = True)
 
 
     def __str__(self):
-        return self.title
+        return f'{self.title} (Rs. {self.price})'
 
 
 class Blog(models.Model):

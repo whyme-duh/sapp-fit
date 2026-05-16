@@ -1,0 +1,11 @@
+{% extends 'website/index.html' %}
+<title>{{service.title}}</title>
+
+{% block content %}
+{% include 'website/navbar.html' %}
+
+<div class="container">
+    {{service}}
+</div>
+
+{% endblock %}

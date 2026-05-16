@@ -289,7 +289,7 @@ li a:hover{
     animation: introAnimation 0.5s ease-in;
     color: #8a5a44;
     font-size:3.5em ;
-    letter-spacing: 1px;
+    letter-spacing: l;
     font-family: var(--trial-font);
 }
 .name{
@@ -372,7 +372,7 @@ li a:hover{
 .about-image{
     width: 400px;
     height: 500px;
-    box-shadow: -100px 70px 1px rgb(246, 220, 201);
+    box-shadow: -100px 70px l rgb(246, 220, 201);
 }
 .about-content{
     
@@ -515,29 +515,7 @@ li a:hover{
     color: white;
     position: absolute;
 }
-.service-content{
-    display: block;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    align-items: start;
-    align-items: center;
-    width: 100%;
-    height: fit-content;
-    max-height: 500px;
-    position: absolute;
-    font-family: var(--paragraph-font);
-    bottom: -100;
-    padding-bottom: 1em;
-    background-color: #F6DCC9;
-    visibility: hidden;
-}
 
-.service-content > *{
-    padding:0.5em;
-}
-.service-content h2{
-    margin-inline:0;
-}
 .service-card:hover .overlay-color{
     transition: 0.25s ease-in-out;
     background-color: rgba(0, 0, 0, 0.625);
@@ -580,23 +558,48 @@ li a:hover{
     background-color: rgb(239, 209, 154);
 }
 
+.service-content{
+    display: block;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    align-items: start;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    max-height: 500px;
+    position: absolute;
+    font-family: var(--paragraph-font);
+    bottom: -100;
+    padding-bottom: 1em;
+    background-color: #F6DCC9;
+    visibility: hidden;
+}
+
+.service-content {
+    width: fit-content;
+    padding-inline: 1em;
+    padding-block: 0.5em;
+}
+
+.service-card h2, .service-card p {
+    padding: 0.25em;
+}
+
 .service-img{
     width: 50px;
     height: auto;
     padding: 1em;
 }
 .service-title{
-    padding: 0.5em;
     font-family: var(--title-family);
 }
 .service-detail{
     font-family: var(--role-font);
-    padding: 1em;
     font-size: 0.9em;
 }
 .price{
+    font-weight: 700;
     font-family: var(--role-font);
-    padding-bottom: 1em;
 }
 
 /* merch container */
@@ -786,13 +789,14 @@ small{
 .user{
     padding-top: 1em;
     width: 100%;
-    display: flex;
+    display: block;
     justify-content: space-between;
     align-items: end;
 }
 .user h4{
     margin:0;
     padding:0;
+    margin-bottom: 0.25em;
     font-family: var(--testinomial-font);
 }
 .testinomial-card img{
@@ -872,7 +876,7 @@ textarea{
 input{
     margin-top: 1em;
     border-radius: 10px;
-    border: 1px solid grey;
+    border: l solid grey;
     width: 100%;
     padding: 1em;
     margin-bottom: 1em;
@@ -947,7 +951,7 @@ footer{
     .about-image{
         width: 200px;
         height: 300px;
-        box-shadow: -50px 50px 1px rgb(246, 220, 201);
+        box-shadow: -50px 50px l rgb(246, 220, 201);
 
     }
     .about-content{
@@ -1034,6 +1038,20 @@ footer{
     }
     .blog-card{
         font-size: 0.85em;
+    }
+    /* testimonials */
+    .testimonials-container{
+        width: 90%;
+    }
+    
+    .testimonial-list{
+        width: 100%;
+
+    }
+    .testinomial-card{
+        width: 30%;
+        padding: 1em;
+        font-size: 0.75em;
     }
     /* contacts */
     .contact-content{
