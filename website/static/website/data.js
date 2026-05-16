@@ -51,6 +51,7 @@ async function loadDataFromMerch(){
            
     }catch(e){
         console.log("error occured", e);
+        console.log("Hi1");
         renderProducts(container, template_products, viewBtn);
     }
 }

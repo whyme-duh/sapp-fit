@@ -280,8 +280,8 @@ li a:hover{
     position: absolute;
     width: 35%;
     top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
+    left: -5%;
+    transform: translate(50%, -50%);
 }
 .first-page-content h1{
 
@@ -481,10 +481,9 @@ li a:hover{
 .services-list{
     margin-top: calc(var(--margin-top)/2);
     display: flex;
-    
+    flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 .service-card{
     width: 22%;
@@ -608,6 +607,7 @@ li a:hover{
 .merch-list{
     margin-top: calc(var(--margin-top)/2);
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     align-items: center;
     justify-content: space-around;
@@ -923,13 +923,20 @@ footer{
     }
     .first-page,  .bg-image{
         height: 60vh;
+        object-fit: cover;
     }
   
     .first-page-content{
         font-size: 0.6em;
+        width: 70%;
+        left: -30%;
     }
     .title{
         font-size: 1.5em;
+    }
+    .top-page-contacts .socials a{
+        font-size: 1.25em;
+        padding: 1.25em;
     }
     .about{
         width: 80%;
@@ -949,17 +956,17 @@ footer{
     }
 
     .quotes-container{
-        background-size:cover;
+        background-size:contain;
         background-repeat: no-repeat;
         padding: 1em;
-        height: 30vh;
+        height: 20vh;
     }
     .quotes{
         width: 100%;
         font-size: 0.75em;
     }
     .sentence{
-        text-align: left;
+        text-align: center;
         padding: 0;
     }
 
@@ -970,15 +977,20 @@ footer{
     }
     .services{
         width: 100%;
-    }    
+      
+    }   
     .services-list{
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    .card{
-        width: 50%;
+        justify-content: center;
+        align-items: center;
+    } 
+    
+    .service-card{
+        width: 40%;
         margin: 1em;
         font-size: 0.65em;
+    }
+    .service-card img , .overlay-color{
+        height: 300px;
     }
    
     .service-title{
@@ -991,6 +1003,19 @@ footer{
     .price{
         font-size: 1.5em;
     }
+
+    /* for merch container */
+    .merch-list{
+        gap: 1em;
+    }
+    .slogan{
+        text-align: center;
+    }
+    .notice{
+        text-align: center;
+    }
+    
+
     /* blogs */
     .blogs-container{
         margin-top: 3em;
