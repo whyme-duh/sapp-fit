@@ -2,10 +2,36 @@
 <title>{{service.title}}</title>
 
 {% block content %}
-{% include 'website/navbar.html' %}
-
-<div class="container">
-    {{service}}
+<div class=" navbar">
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{logo.url}}" alt="svg"></a></div>
+</div>
+<div class="service-detail-container">
+    <div class="service-header">
+        <img src="{{service.icon.url}}" alt="service" class="service-detail-image">
+        <div class="service-header-content">
+            <h1>{{service.title}}</h1>
+            <p>{{service.info}}</p>
+            <button class="book-now-btn">Book Now</button>
+        </div>
+    </div>
+    <div class="service-detail-list">
+        <h1>Services Offerd</h1>
+        <p>{{service.detail|safe}}</p>
+    </div>
+    <div class="services-list">
+        {% for obj in other_services %}
+        <a href="{% url 'service-detail' obj.slug %}" class="service-card">
+            <img src={{obj.icon.url}} alt="img" class="img">
+            <div class="overlay-color"></div>
+            <h1 class="service-name">{{obj.title}}</h1>
+            <div class="service-content">
+                <h2 class="service-title">{{obj.title}}</h2>
+                <p class="service-detail">{{obj.info}}</p>
+                <p class="price">Rs.{{obj.price}}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

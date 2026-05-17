@@ -1,0 +1,36 @@
+.service-detail-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-header{
+    position: relative;
+}
+.service-header{
+    width: 100%;
+}
+
+.service-detail-image{
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.service-header-content{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+}
+.service-header-content h1{
+    font-size: 4em;
+    color: white;
+}
+.book-now-btn{
+    padding-inline: 1.5em;
+    padding-block: 0.75em;
+    background-color:bisque;
+    border: none;
+}

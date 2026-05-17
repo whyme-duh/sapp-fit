@@ -44,7 +44,9 @@ def index(request):
 
 def service_detail_view(request, slug):
     service = Service.objects.get(slug = slug)
-    return render(request, 'website/service.html', context = {'service' : service})
+    other_services = Service.objects.all().exclude(slug = slug)
+    logo = AboutAndQuote.objects.all().first()
+    return render(request, 'website/service.html', context = {'service' : service, 'logo' : logo.logo, "other_services" : other_services})
 
 
 
