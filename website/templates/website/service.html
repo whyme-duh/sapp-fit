@@ -1,7 +1,8 @@
 {% extends 'website/index.html' %}
-<title>{{service.title}}</title>
+<title>{{service.title}} Hi</title>
 
 {% block content %}
+
 <div class=" navbar">
     <div class="brand"><a href="{% url 'home-page' %}"><img src="{{logo.url}}" alt="svg"></a></div>
 </div>
@@ -11,12 +12,17 @@
         <div class="service-header-content">
             <h1>{{service.title}}</h1>
             <p>{{service.info}}</p>
-            <button class="book-now-btn">Book Now</button>
+            <a href=""><button class="book-now-btn">Book Now</button></a>
         </div>
     </div>
     <div class="service-detail-list">
-        <h1>Services Offerd</h1>
-        <p>{{service.detail|safe}}</p>
+        <h1>Service Detail</h1>
+        <p>Find out all the services I provide below:</p>
+        <ul>
+            {% for obj in service.feature.all %}
+                <li>{{obj.service_item}}</li>
+            {% endfor %}
+        </ul>
     </div>
     <div class="services-list">
         {% for obj in other_services %}

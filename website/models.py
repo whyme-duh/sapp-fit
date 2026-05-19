@@ -16,13 +16,17 @@ class AboutAndQuote(models.Model):
     def __str__(self):
         return self.bio
 
-   
+class ServiceFeatureItem(models.Model):
+    service_item = models.TextField(null = True)
+
+    def __str__(self):
+        return self.service_item
 
 
 class Service(models.Model):
     title = models.CharField(max_length=80)
     info = models.TextField(null = True, blank = True)
-    detail = RichTextField(null = True, blank = True)
+    feature = models.ManyToManyField(ServiceFeatureItem, blank = True, related_name="services")
     price= models.IntegerField()
     icon = models.ImageField(upload_to='images/pics')
     slug = models.SlugField(null = True)
@@ -30,6 +34,9 @@ class Service(models.Model):
 
     def __str__(self):
         return f'{self.title} (Rs. {self.price})'
+    
+
+
 
 
 class Blog(models.Model):

@@ -1,3 +1,11 @@
+@import 'style.css';
+
+:root {
+    --text-primary: #4A3B32; /* Warm brown */
+    --accent-color: #C87965; /* Muted terracotta */
+    --bg-color: #FAFAF7;     /* Soft beige */
+}
+
 .service-detail-container{
     width: 80%;
     display: flex;
@@ -7,6 +15,7 @@
 }
 
 .service-header{
+    font-family: var(--title-family);
     position: relative;
 }
 .service-header{
@@ -26,11 +35,82 @@
 }
 .service-header-content h1{
     font-size: 4em;
+    text-shadow: 2px 2px #555;
     color: white;
 }
 .book-now-btn{
-    padding-inline: 1.5em;
-    padding-block: 0.75em;
-    background-color:bisque;
+    margin-top: 1em;
+    padding: 14px 35px;
+    background-color: var(--accent-color);
+    color: #fff;
     border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.service-detail-list {
+    margin-top: 2em;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    margin-bottom: 80px;
+}
+
+.service-detail-list h1 {
+    font-size: 2rem;
+    font-family: var(--title-family);
+    margin-bottom: 10px;
+}
+
+.service-detail-list p {
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.service-detail-list ul {
+    list-style-type: none; /* Removes standard bullets for a cleaner look */
+    padding: 0;
+}
+
+.service-detail-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.service-detail-list li::before {
+    content: "✓";
+    color: var(--accent-color);
+    /* background-color: rgb(151, 238, 151);
+    border-radius: 50%;
+    font-weight: bold;
+    padding-block: 0.25em;
+    padding-inline: 0.5em; */
+    font-size: 1.2rem;
+}
+
+.service-detail-list li:last-child {
+    border-bottom: none;
+}
+
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+    .service-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .service-detail-image {
+        max-width: 100%;
+    }
 }
