@@ -14,29 +14,36 @@
             <p>{{service.info}}</p>
             <a href=""><button class="book-now-btn">Book Now</button></a>
         </div>
+        <button class="price-pill">@ Rs. {{service.price}}</button>
+        
     </div>
     <div class="service-detail-list">
         <h1>Service Detail</h1>
         <p>Find out all the services I provide below:</p>
         <ul>
             {% for obj in service.feature.all %}
-                <li>{{obj.service_item}}</li>
+                <li><i class="fa fa-check" aria-hidden="true"></i>{{obj.service_item}}</li>
             {% endfor %}
         </ul>
     </div>
-    <div class="services-list">
-        {% for obj in other_services %}
-        <a href="{% url 'service-detail' obj.slug %}" class="service-card">
-            <img src={{obj.icon.url}} alt="img" class="img">
-            <div class="overlay-color"></div>
-            <h1 class="service-name">{{obj.title}}</h1>
-            <div class="service-content">
-                <h2 class="service-title">{{obj.title}}</h2>
-                <p class="service-detail">{{obj.info}}</p>
-                <p class="price">Rs.{{obj.price}}</p>
-            </div>
-        </a>
-        {% endfor %}
+    <div class="other-services-container">
+        <div class="other-services">
+            <h1>Other Services</h1>
+        </div>
+        <div class="services-list">
+            {% for obj in other_services %}
+            <a href="{% url 'service-detail' obj.slug %}" class="service-card">
+                <img src={{obj.icon.url}} alt="img" class="img">
+                <div class="overlay-color"></div>
+                <h1 class="service-name">{{obj.title}}</h1>
+                <div class="service-content">
+                    <h2 class="service-title">{{obj.title}}</h2>
+                    <p class="service-detail">{{obj.info}}</p>
+                    <p class="price">Rs.{{obj.price}}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
     </div>
 </div>
 

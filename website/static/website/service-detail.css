@@ -17,9 +17,8 @@
 .service-header{
     font-family: var(--title-family);
     position: relative;
-}
-.service-header{
     width: 100%;
+
 }
 
 .service-detail-image{
@@ -30,16 +29,41 @@
 
 .service-header-content{
     position: absolute;
-    top: 50%;
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+    top: 30%;
     left: 5%;
+}
+.price-pill{
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    border: none;
+    padding: 1em;
+    padding-inline: 2em;
+    background-color: rgb(151, 244, 151);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: 0.95em;
+    font-family: var(--paragraph-font);
 }
 .service-header-content h1{
     font-size: 4em;
     text-shadow: 2px 2px #555;
     color: white;
+    padding-bottom: 0.15em;
+}
+.service-header-content p{
+    font-family: var(--role-font);
+    text-shadow: 2px 2px #424242;
+    font-size: 0.9em;
+    color: white;
 }
 .book-now-btn{
-    margin-top: 1em;
+    margin-top: 2em;
     padding: 14px 35px;
     background-color: var(--accent-color);
     color: #fff;
@@ -52,21 +76,24 @@
 }
 
 .service-detail-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     margin-top: 2em;
     background-color: #fff;
     padding: 50px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     margin-bottom: 80px;
 }
 
 .service-detail-list h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-family: var(--title-family);
     margin-bottom: 10px;
 }
 
 .service-detail-list p {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-bottom: 25px;
     color: #666;
 }
@@ -75,32 +102,58 @@
     list-style-type: none; /* Removes standard bullets for a cleaner look */
     padding: 0;
 }
-
+.service-detail-list ul{
+    margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2em;
+}
 .service-detail-list li {
-    padding: 15px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 1.1rem;
     display: flex;
     align-items: center;
+    font-family: var(--paragraph-font);
+    box-shadow: 5px 5px 10px rgb(230, 230, 230);
+    padding: 2em;
+    border-radius: 5px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.1rem;
     gap: 15px;
+    cursor: pointer;
+    width: 350px;
+}
+.service-detail-list li:hover{
+    transform: translateY(-5px);
+    background-color: rgba(231, 230, 230, 0.474);
+}
+.service-detail-list li:hover .fa-check{
+    background-color: rgb(0, 255, 0);
 }
 
-.service-detail-list li::before {
-    content: "✓";
-    color: var(--accent-color);
-    /* background-color: rgb(151, 238, 151);
+.fa-check{
+    background-color: lightgreen;
+    font-size: 0.75em;
+    padding-inline: 0.5em;
+    padding-block: 0.5em;
     border-radius: 50%;
-    font-weight: bold;
-    padding-block: 0.25em;
-    padding-inline: 0.5em; */
-    font-size: 1.2rem;
+    color: white;
 }
 
 .service-detail-list li:last-child {
     border-bottom: none;
 }
-
-
+.other-services-container{
+    width: 100%;
+}
+.other-services{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.other-services h1{
+    font-family: var(--title-family);
+}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 900px) {
