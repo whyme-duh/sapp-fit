@@ -1,5 +1,6 @@
 {% extends 'website/index.html' %}
-<title>{{service.title}} Hi</title>
+
+<title>{%block title%} {{service.title}} {% endblock %}</title>
 
 {% block content %}
 

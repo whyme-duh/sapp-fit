@@ -836,6 +836,7 @@ iframe{
 .contact-detail{
     padding-top: 1.5em;
 }
+
 .contact-detail p{
     color: grey;
     font-family: var(--paragraph-font);
@@ -920,6 +921,7 @@ footer{
     padding-bottom: 1em;
     font-family: var(--role-font);
 }
+
 @media only screen and (max-width:450px){
     .header{
         margin: 0;

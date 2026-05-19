@@ -154,7 +154,13 @@
                     <h1 class="title">Contact Me</h1>
                     <p class="bio">Slide into my DMs to start your fitness journey, or message me directly below</p>
                     <div class="contact-detail">
-                        <p><i class="fa fa-instagram"></i>&nbsp; @sappfit</p>
+                        {% for link in about %}
+
+                        <a href="{{link.instagram}}">
+                            <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
+                        </a>
+                                {% endfor %}
+
                         <p><i class="fa fa-phone"></i>&nbsp; +977 9893247</p>
                         <p><i class="fa fa-envelope"></i>&nbsp; saprinashrestha72@gmail.com</p>
                         <div class="other-contact">

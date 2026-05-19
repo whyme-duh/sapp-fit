@@ -14,6 +14,10 @@
                         <li><a href="#blogs">Blogs</a></li>
                         <li><a href="#testimonial">Testimonials</a></li>
                         <li><a href="#contact">Contacts</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'client-view' %}">Clients</a></li>
+
+                        {% endif %}
                     </ul>
                     <a href="javascript:void(0)" class="icon" onclick="navFunction()">
                 <i class="fa fa-bars"></i></a>

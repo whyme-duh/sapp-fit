@@ -1,0 +1,74 @@
+{% extends 'website/index.html' %}
+<title>{% block title %} Clients {% endblock %}</title>
+{% block content %}
+<div class=" navbar">
+    {% for obj in about %}
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
+    {% endfor %}
+</div>
+
+<div class="dashboard-container">
+        
+        <div class="page-header">
+            <h1>Client Overview</h1>
+            <button class="btn btn-primary">+ Add New Client</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Active Clients</h3>
+                <p class="stat-number">18</p>
+                <span class="stat-trend positive">↑ 2 this month</span>
+            </div>
+            <div class="stat-card">
+                <h3>Sessions This Week</h3>
+                <p class="stat-number">12</p>
+                <span class="stat-trend">4 remaining</span>
+            </div>
+            <div class="stat-card">
+                <h3>Packages Expiring Soon</h3>
+                <p class="stat-number text-accent">3</p>
+                <span class="stat-trend">Requires follow-up</span>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div class="table-header">
+                <h2>All Clients</h2>
+                <input type="text" class="search-input" placeholder="Search clients...">
+            </div>
+            
+            <div class="table-responsive">
+                <table class="client-table">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Active Package</th>
+                            <th>Sessions Left</th>
+                            <th>Last Session</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                        <tr>
+                            <td class="client-name-cell">
+                                <div class="avatar-small">{{client.name}}</div>
+                                <span>{{client.name}}</span>
+                            </td>
+                            <td>{{client.services.title}}</td>
+                            <td><span class="session-badge">4 left</span></td>
+                            <td>{{client.started_training_from}}</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td><a href="#" class="action-link">View Details</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

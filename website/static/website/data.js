@@ -51,7 +51,6 @@ async function loadDataFromMerch(){
            
     }catch(e){
         console.log("error occured", e);
-        console.log("Hi1");
         renderProducts(container, template_products, viewBtn);
     }
 }
@@ -65,12 +64,12 @@ function renderProducts(container, data, viewBtn){
     notice.innerText = "* Please note that price and products may vary from what is shown here! Thank you!"
     sloganEnd.innerText = "Get your premium fit from Sappfit Wear @sappfitwear";
     container.innerHTML = data.map(product => `
-        <a href="${product.product_url}"> 
+       
         <div class="product-card">
             <img src="${product.image_url}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>Rs. ${product.price}</p>
         </div>
-        </a>
+        
     `).join('');
 }

@@ -155,7 +155,6 @@
     font-family: var(--title-family);
 }
 
-/* --- Responsive Adjustments --- */
 @media (max-width: 900px) {
     .service-header {
         flex-direction: column;

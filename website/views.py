@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, render, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
-from .models import AboutAndQuote, Service, Blog, Post, Testimonial
+from .models import AboutAndQuote, Client, Service, Blog, Post, Testimonial
 from website.form import ContactForm
+from django.contrib.auth.decorators import login_required
 import datetime
 from django.views.generic import DetailView
 
@@ -65,3 +66,15 @@ def BlogPostView(request):
 
 def PostView(request):
     return render(request,'website/posts.html',  context)
+
+
+@login_required
+def client_view(request):
+    if request.user.username == "admin":
+        about = AboutAndQuote.objects.all()
+        clients = Client.objects.all()
+        return render(request, 'website/clients.html', {'clients' : clients, 'about' : about})
+    
+    else:
+        return redirect('home-page')
+
