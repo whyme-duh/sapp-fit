@@ -3,6 +3,7 @@ from django.core.mail import send_mail, BadHeaderError
 from .models import AboutAndQuote, Client, Service, Blog, Post, Testimonial
 from website.form import ContactForm
 from django.contrib.auth.decorators import login_required
+from  django.contrib import messages 
 import datetime
 from django.views.generic import DetailView
 
@@ -25,11 +26,11 @@ def index(request):
         count += 1
         
 
-    if (request.method == "GET"):
+    if request.method == "GET":
         form = ContactForm()
 
    
-    if (request.method == "POST"):
+    if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
             subject = form.cleaned_data['subject']
@@ -68,12 +69,31 @@ def PostView(request):
     return render(request,'website/posts.html',  context)
 
 
+from .form import ClientForm
+
 @login_required
 def client_view(request):
     if request.user.username == "admin":
+        active_clients_count = Client.objects.filter(status = "Ongoing").count()
         about = AboutAndQuote.objects.all()
         clients = Client.objects.all()
-        return render(request, 'website/clients.html', {'clients' : clients, 'about' : about})
+
+        # this is for the form for adding a client from this page
+        form = ClientForm()
+        if request.method == "POST":
+            form = ClientForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, f'New client succesfully added!')
+                return redirect('client-view')
+            else:
+                return messages.error(request, f'Error occured. Try again!')
+
+
+
+            
+            
+        return render(request, 'website/clients.html', {'clients' : clients, 'about' : about, "active_clients_count": active_clients_count, 'form': form})
     
     else:
         return redirect('home-page')

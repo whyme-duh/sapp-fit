@@ -17,7 +17,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Active Clients</h3>
-                <p class="stat-number">18</p>
+                <p class="stat-number">{{active_clients_count}}</p>
                 <span class="stat-trend positive">↑ 2 this month</span>
             </div>
             <div class="stat-card">
@@ -30,6 +30,16 @@
                 <p class="stat-number text-accent">3</p>
                 <span class="stat-trend">Requires follow-up</span>
             </div>
+        </div>
+
+        <div class="modal-container">
+            <h1>Add the details of a client you want to add</h1>
+            <form method = "POST">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit">
+            </form>
+
         </div>
 
         <div class="table-card">
@@ -54,7 +64,7 @@
                         {% for client in clients %}
                         <tr>
                             <td class="client-name-cell">
-                                <div class="avatar-small">{{client.name}}</div>
+                                <div class="avatar-small">{{client.name|slice:"2"}}</div>
                                 <span>{{client.name}}</span>
                             </td>
                             <td>{{client.services.title}}</td>
