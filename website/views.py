@@ -73,28 +73,51 @@ from .form import ClientForm
 
 @login_required
 def client_view(request):
-    if request.user.username == "admin":
-        active_clients_count = Client.objects.filter(status = "Ongoing").count()
-        about = AboutAndQuote.objects.all()
-        clients = Client.objects.all()
-
-        # this is for the form for adding a client from this page
-        form = ClientForm()
-        if request.method == "POST":
-            form = ClientForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, f'New client succesfully added!')
-                return redirect('client-view')
-            else:
-                return messages.error(request, f'Error occured. Try again!')
-
-
-
-            
-            
-        return render(request, 'website/clients.html', {'clients' : clients, 'about' : about, "active_clients_count": active_clients_count, 'form': form})
-    
-    else:
+    if not request.user.is_superuser:
         return redirect('home-page')
+    
+    if request.method == "POST":
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'New client succesfully added!')
+            return redirect('client-view')
+        else:
+            messages.error(request, f'Error occured. Try again!')
+    else:
+        form = ClientForm()
+    active_clients_count = Client.objects.filter(status = "Ongoing").count()
+    about = AboutAndQuote.objects.all()
+    clients = Client.objects.all()
+    return render(request, 'website/clients/clients.html', {'clients' : clients, 'about' : about, "active_clients_count": active_clients_count, 'form': form})
 
+
+@login_required
+def delete_client(request, id):
+    if not request.user.is_superuser:
+        return redirect('home-page')
+    try:
+        Client.objects.get(id = id).delete()
+        messages.success(request, f'Deleted successfully')
+        return redirect('client-view')
+    except:
+        messages.error(request, f'Failed to Delete')
+    return redirect('client-view')
+
+
+@login_required
+def edit_client(request, id):
+    if not request.user.is_superuser:
+        return redirect('home-page')
+    
+    client = get_object_or_404(Client, id = id)
+    if request.method == "POST":
+        form = ClientForm(request.POST, instance = client)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"{client.name}'s details updated!")
+        else:
+            messages.error(request, f"Failed to update the client's detail. Try again!")
+    else:
+        form = ClientForm()
+    return redirect('client-view')

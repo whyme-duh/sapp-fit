@@ -50,7 +50,6 @@ window.onscroll = () =>{
 // responsive navbar
 
 const responsiveNav = document.getElementById('responsive');
-
 function navFunction(){
     if(responsiveNav.classList == "right-side"){
         responsiveNav.className = "right-side-responsive";
@@ -77,3 +76,47 @@ hiddenClass.forEach((el)=> observer.observe(el));
 childElemets.forEach((el)=> observer.observe(el));
 
 
+
+
+
+const modal = document.getElementById('modal-container');
+const form = document.getElementById('clientForm');
+const modalTitle = document.getElementById('modalTitle');
+const submitBtn = document.querySelector('.modal-footer .btn-primary');
+
+function openAddModal() {
+    form.reset(); 
+    form.action = "{% url 'client-view' %}"; 
+    modalTitle.innerText = "Add New Client";
+    submitBtn.innerText = "Save Client";
+    modal.style.display = 'flex';
+}
+
+function openEditModal(button) {
+    const data = button.dataset;
+
+    document.getElementById('id_name').value = data.name;
+    document.getElementById('id_age').value = data.age;
+    document.getElementById('id_gender').value = data.gender;
+    document.getElementById('id_started_training_from').value = data.date;
+    document.getElementById('id_services').value = data.service;
+    document.getElementById('id_status').value = data.status;
+    document.getElementById('id_any_problem').value = data.problem;
+
+    form.action = `/clients/${data.id}/edit/`; 
+    
+    modalTitle.innerText = "Edit Client Details";
+    submitBtn.innerText = "Update Details";
+    
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}

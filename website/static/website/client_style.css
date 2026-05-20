@@ -1,11 +1,9 @@
-/* --- 1. Global Reset & Box Sizing (THE OVERFLOW FIX) --- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* --- 2. Global Variables: Ultra-Clean SaaS --- */
 :root {
     --bg-color: #F9FAFB;       
     --card-bg: #FFFFFF;        
@@ -23,7 +21,7 @@ body {
     font-family: var(--font-family);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased; 
-    overflow-x: hidden; /* Prevents accidental horizontal scrolling on the body */
+    overflow-x: hidden; 
 }
 .navbar{
     display: flex;
@@ -32,7 +30,6 @@ body {
 }
 
 
-/* --- 4. Main Layout Containers --- */
 .dashboard-container {
     width: 100%;
     max-width: 1200px;
@@ -44,7 +41,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Allows wrapping on small screens */
+    flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 32px;
 }
@@ -55,7 +52,6 @@ body {
     letter-spacing: -0.025em;
 }
 
-/* --- 5. Buttons --- */
 .btn {
     padding: 10px 18px;
     border-radius: 8px;
@@ -74,7 +70,6 @@ body {
 
 
 
-/* --- 6. Stats Grid --- */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -128,7 +123,6 @@ body {
     width: fit-content;
 }
 
-/* --- 7. Table Card & Header --- */
 .table-card {
     background-color: var(--card-bg);
     border-radius: 16px;
@@ -141,7 +135,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Fixes rigid overflow */
+    flex-wrap: wrap; 
     gap: 16px;
     padding: 20px 24px;
     border-bottom: 1px solid var(--border-color);
@@ -157,7 +151,7 @@ body {
     border: 1px solid #D1D5DB;
     border-radius: 8px;
     width: 100%; 
-    max-width: 280px; /* Flexible width instead of fixed rigid width */
+    max-width: 280px; 
     font-family: var(--font-family);
     font-size: 0.875rem;
     color: var(--text-primary);
@@ -170,16 +164,15 @@ body {
     box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
-/* --- 8. Responsive Data Table --- */
 .table-responsive {
     width: 100%;
-    overflow-x: auto; /* Enables horizontal scroll ONLY inside the table if it gets too small */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
 }
 
 .client-table {
     width: 100%;
-    min-width: 800px; /* Forces the table to scroll rather than squishing data on mobile */
+    min-width: 800px; 
     border-collapse: collapse;
     text-align: left;
 }
@@ -209,7 +202,6 @@ body {
     border-bottom: none;
 }
 
-/* --- 9. Avatars & Badges --- */
 .client-name-cell {
     display: flex;
     align-items: center;
@@ -228,7 +220,7 @@ body {
     justify-content: center;
     font-size: 0.75rem;
     font-weight: 700;
-    flex-shrink: 0; /* Prevents avatar from turning into an oval */
+    flex-shrink: 0;
 }
 
 .status-badge {
@@ -239,12 +231,12 @@ body {
     white-space: nowrap;
 }
 
-.status-badge.active {
+.status-badge.Ongoing {
     background-color: #DEF7EC;
     color: #03543F;
 }
 
-.status-badge.inactive {
+.status-badge.Completed {
     background-color: #F3F4F6;
     color: #4B5563;
 }
@@ -259,15 +251,180 @@ body {
     padding: 4px 8px;
     border-radius: 12px;
 }
-
+.actions{
+    display: flex;
+    gap: 2em;
+}
 .action-link {
-    color: var(--accent-color);
     font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
+    padding-inline: 1em;
+    padding-block: 0.5em;
+    border-radius: 10px;
+}
+.edit{
+    background: rgb(212, 148, 19);
+    color: white;
+}
+.delete{
+    background: rgb(237, 55, 9);
+    color: white;
 }
 
-.action-link:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
+.edit:hover {
+    background: rgb(154, 106, 9);
+}
+.delete:hover {
+    background: rgb(146, 5, 5);
+}
+
+
+
+/* MODAL CONTAINER STYLE */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 24, 39, 0.4); 
+    backdrop-filter: blur(4px); 
+    display: none; 
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px; /* Keeps the form from getting too wide */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--text-primary);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--border-color);
+    background-color: #F9FAFB; 
+    border-radius: 0 0 16px 16px;
+}
+form{
+    width: 100%;
+}
+
+.modal-body {
+    width: 100%;
+    padding: 24px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    background-color: #FFFFFF;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* Fixes textarea resizing */
+.form-control[rows] {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.full-width {
+    grid-column: 1 / -1; /* Spans across both columns */
+}
+
+.mt-4 {
+    margin-top: 20px;
+}
+
+/* Secondary Button styling (Cancel button) */
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+    border: 1px solid #D1D5DB;
+}
+
+.btn-secondary:hover {
+    background-color: #F3F4F6;
+}
+
+/* Responsive adjustments for phones */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Stacks to 1 column on small screens */
+    }
+    .modal-box {
+        height: 100%;
+        border-radius: 0;
+        max-width: 100%;
+    }
+    .modal-footer {
+        border-radius: 0;
+    }
 }

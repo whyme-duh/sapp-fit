@@ -91,7 +91,10 @@ class Client(models.Model):
     gender = models.TextField(choices= GENDER_CHOICES)
     started_training_from = models.DateField()
     services = models.ForeignKey(Service, on_delete= models.PROTECT)
-    any_problem = models.TextField()
+    any_problem = models.TextField(default="N/A")
     status = models.TextField(choices= STATUS_CHOICES)
+
+    def __str__(self):
+        return self.name
 
     
