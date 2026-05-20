@@ -588,26 +588,23 @@ li a:hover{
 }
 
 .service-content{
+    width: 100%;
     display: block;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    align-items: start;
-    align-items: center;
-    width: 100%;
     height: fit-content;
-    max-height: 500px;
     position: absolute;
     font-family: var(--paragraph-font);
-    bottom: -100;
     padding-bottom: 1em;
     background-color: #F6DCC9;
     visibility: hidden;
 }
 
-.service-content {
-    width: fit-content;
-    padding-inline: 1em;
-    padding-block: 0.5em;
+.service-content-detail{
+    padding: 1em;
+}
+.service-content-detail .price{
+    margin-top: 0.5em;
 }
 
 .service-card h2, .service-card p {

@@ -166,3 +166,13 @@
         max-width: 100%;
     }
 }
+@media (max-width: 450px) {
+    .service-header-content{
+        font-size: 0.75em;
+    }
+    .price-pill{
+        font-size: 0.55em;
+        left: 0;
+        width: fit-content;
+    }
+}

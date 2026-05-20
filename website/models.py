@@ -65,8 +65,7 @@ class Post(models.Model):
 class Testimonial(models.Model):
     testimonial = models.CharField(max_length=150)
     user_name = models.CharField(max_length=80)
-    user_img = models.ImageField(upload_to='images/testimonial')
-
+    user_category = models.CharField(max_length=80, blank = True)
 
     def __str__(self) -> str:
         return self.user_name
