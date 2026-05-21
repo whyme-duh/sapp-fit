@@ -17,6 +17,9 @@ class BookingForm(forms.Form):
             }
         )
     )
+    service_type = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 
+                                                                                 'value': '',
+                                                                                 'disabled': 'disabled'}))
         
 
 class ClientForm(forms.ModelForm):

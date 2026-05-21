@@ -3,10 +3,7 @@ from . models import AboutAndQuote, Booking, Service, Blog, Post, ServiceFeature
 
 admin.site.register(AboutAndQuote)
 admin.site.register(Post)
-admin.site.register(Client)
-admin.site.register(Testimonial)
 admin.site.register(ServiceFeatureItem)
-admin.site.register(Booking)
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
@@ -19,4 +16,21 @@ class ServiceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     filter_horizontal = ('feature',)
 
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'service', 'preferred_date')
+    list_filter = ('service', 'preferred_date', 'email')
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):  
+    list_display = ('user_name', 'user_category')
+    list_filter = ('user_category',)
+
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):   
+    list_display = ('name', 'gender', 'started_training_from', 'status')
+    list_filter = ('services', 'status',)
 

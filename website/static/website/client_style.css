@@ -363,6 +363,7 @@ form{
     gap: 20px;
 }
 
+
 .form-group label {
     display: block;
     font-size: 0.875rem;
@@ -402,6 +403,9 @@ form{
 .mt-4 {
     margin-top: 20px;
 }
+.bt-4 {
+    margin-bottom: 10px;
+}
 
 /* Secondary Button styling (Cancel button) */
 .btn-secondary {
@@ -412,6 +416,11 @@ form{
 
 .btn-secondary:hover {
     background-color: #F3F4F6;
+}
+
+input:disabled{
+    background-color: #E5E7EB;
+    color: grey;
 }
 
 /* Responsive adjustments for phones */

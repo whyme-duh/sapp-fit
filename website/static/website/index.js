@@ -76,7 +76,7 @@ hiddenClass.forEach((el)=> observer.observe(el));
 childElemets.forEach((el)=> observer.observe(el));
 
 
-
+const quotesContainer = document.querySelector('.quotes-container');
 
 
 const modal = document.getElementById('modal-container');

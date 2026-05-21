@@ -163,6 +163,7 @@
     font-family: var(--title-family);
 }
 
+
 @media (max-width: 900px) {
     .service-header {
         flex-direction: column;

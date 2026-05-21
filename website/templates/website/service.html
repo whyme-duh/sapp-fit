@@ -28,7 +28,7 @@
     <div class="modal-overlay" id="modal-container">
         <div class="modal-box">
             <div class="modal-header">
-                <h2 id="modalTitle">Request a Booking</h2>
+                <h2 id="modalTitle">Request a {{service.title}}</h2>
                 <button class="close-btn" onclick="closeModal()">×</button>
             </div>
             <form method="POST" id="clientForm">
@@ -36,18 +36,23 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="{{ form.name.id_for_label }}">First Name</label>
-                        {% render_field form.name class="form-control" placeholder="Jane" %}
+                        {% render_field form.name class="form-control bt-4" placeholder="Jane" %}
                     </div>
 
                     <div class="form-group">
                         <label for="{{ form.email.id_for_label }}">Email</label>
-                        {% render_field form.email class="form-control" placeholder="jane@example.com" %}
+                        {% render_field form.email class="form-control bt-4" placeholder="jane@example.com" %}
                     </div>
 
                     <div class="form-group">
                         <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
-                        {% render_field form.phone_number class="form-control" placeholder="e.g. +977 98-------- " %}
+                        {% render_field form.phone_number class="form-control bt-4" placeholder="9xxx xx xx xx " %}
                     </div>
+                    <div class="form-group">
+                        <label for="{{ form.service_type.id_for_label }}">Service</label>
+                        {% render_field form.service_type class="form-control bt-4" value=service.title %}
+                    </div>
+
 
                     
                     <div class="form-group">
@@ -59,7 +64,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Book Now</button>
+                    <button type="submit" class="btn btn-primary">Send Request</button>
                 </div>
             </form>
 
@@ -85,9 +90,11 @@
                 <div class="overlay-color"></div>
                 <h1 class="service-name">{{obj.title}}</h1>
                 <div class="service-content">
-                    <h2 class="service-title">{{obj.title}}</h2>
-                    <p class="service-detail">{{obj.info}}</p>
-                    <p class="price">Rs.{{obj.price}}</p>
+                    <div class="service-content-detail">
+                        <h2 class="service-title">{{obj.title}}</h2>
+                        <p class="service-detail">{{obj.info}}</p>
+                        <p class="price">Rs.{{obj.price}}</p>
+                    </div>
                 </div>
             </a>
             {% endfor %}

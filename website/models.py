@@ -8,6 +8,7 @@ class AboutAndQuote(models.Model):
     email_id = models.EmailField(blank = True)
     backgroundImage = models.ImageField(upload_to='images/bg', null=True)
     profileImage = models.ImageField(upload_to='images/bg', null=True)
+    quoteContainerImage = models.ImageField(upload_to='images/bg', null=True)
     quotes = models.CharField(max_length=150)
     logo = models.FileField(upload_to='images/icon')
     facebook = models.URLField(null=True)
