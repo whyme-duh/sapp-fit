@@ -3,7 +3,7 @@
 SAPPFIT is a custom web platform built for personal fitness trainer Saprina Shrestha (aka Sapp-Fit). It is designed to provide a seamless booking experience for clients while serving as a powerful, centralized management dashboard for the trainer.
 
 ## 📸 App Interface
-<img src="docs/website.png" width="400" alt="Client Dashboard">
+![SAPPFIT Hero Image](docs/website.png)
 
 <table>
   <tr>
