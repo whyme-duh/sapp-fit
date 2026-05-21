@@ -86,9 +86,6 @@ const submitBtn = document.querySelector('.modal-footer .btn-primary');
 
 function openAddModal() {
     form.reset(); 
-    form.action = "{% url 'client-view' %}"; 
-    modalTitle.innerText = "Add New Client";
-    submitBtn.innerText = "Save Client";
     modal.style.display = 'flex';
 }
 

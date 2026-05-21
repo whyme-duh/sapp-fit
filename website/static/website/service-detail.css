@@ -1,12 +1,20 @@
 @import 'style.css';
 
 :root {
-    --text-primary: #4A3B32; /* Warm brown */
-    --accent-color: #C87965; /* Muted terracotta */
-    --bg-color: #FAFAF7;     /* Soft beige */
+    --text-primary: #4A3B32;
+    --accent-color: #C87965; 
+    --bg-color: #FAFAF7;     
+    --card-bg: #FFFFFF;        
+    --text-primary: #111827;   
+    --text-secondary: #6B7280; 
+    --accent-color: #4F46E5;   
+    --accent-hover: #4338CA;   
+    --border-color: #E5E7EB;   
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .service-detail-container{
+    margin: 0 auto;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -168,11 +176,15 @@
 }
 @media (max-width: 450px) {
     .service-header-content{
-        font-size: 0.75em;
+        left: 0;
     }
     .price-pill{
-        font-size: 0.55em;
-        left: 0;
+        font-size: 0.65em;
         width: fit-content;
+        top: 10%;
+        left: 40%;
+        height: fit-content;
+        margin-top: 3em;
     }
 }
+

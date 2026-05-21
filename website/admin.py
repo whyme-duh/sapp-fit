@@ -1,11 +1,12 @@
 from django.contrib import admin
-from . models import AboutAndQuote, Service, Blog, Post, ServiceFeatureItem,Testimonial, Client
+from . models import AboutAndQuote, Booking, Service, Blog, Post, ServiceFeatureItem,Testimonial, Client
 
 admin.site.register(AboutAndQuote)
 admin.site.register(Post)
 admin.site.register(Client)
 admin.site.register(Testimonial)
 admin.site.register(ServiceFeatureItem)
+admin.site.register(Booking)
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):

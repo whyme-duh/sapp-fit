@@ -4,6 +4,8 @@ import PIL
 
 class AboutAndQuote(models.Model):
     bio = models.TextField()
+    phone_number = models.IntegerField(default= 98123123122, max_length = 10)
+    email_id = models.EmailField(blank = True)
     backgroundImage = models.ImageField(upload_to='images/bg', null=True)
     profileImage = models.ImageField(upload_to='images/bg', null=True)
     quotes = models.CharField(max_length=150)
@@ -65,7 +67,7 @@ class Post(models.Model):
 class Testimonial(models.Model):
     testimonial = models.CharField(max_length=150)
     user_name = models.CharField(max_length=80)
-    user_category = models.CharField(max_length=80, blank = True)
+    user_category = models.CharField(max_length=80, default="A member")
 
     def __str__(self) -> str:
         return self.user_name
@@ -96,4 +98,23 @@ class Client(models.Model):
     def __str__(self):
         return self.name
 
+
+class Booking(models.Model):
+
+    status_choices = [
+        ("Pending" , "Pending"),    
+        ("Confirmed" , "Confirmed"),
+        ("Cancelled" , "Cancelled") ]
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.IntegerField( max_length = 10)
+    service = models.ForeignKey(Service, on_delete=models.PROTECT)
+    message = models.TextField(blank=True)
+    preferred_date = models.DateField() 
+    status = models.CharField(max_length=20, choices=status_choices, default="Pending")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return f'{self.name} - {self.service.title}'
     

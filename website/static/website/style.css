@@ -883,46 +883,7 @@ iframe{
     font-family: var(--title-family);
     font-size: 1em;
 }
-form{
-    width: 70%;
-    font-family: var(--role-font);
-}
-label{
-    width: 100%;
 
-}
-textarea{
-    width: 100%;
-    padding: 1em;
-    border-radius: 10px;
-    margin-top: 1em;
-
-
-}
-input{
-    border-radius: 10px;
-    border: l solid grey;
-    width: 100%;
-    padding: 1em;
-    margin-bottom: 1em;
-
-}
-input[type='submit']{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.9em;
-    font-family: var(--role-font);
-    border: none;
-    background-color: rgb(231, 177, 120);
-    align-content: center;
-    cursor: pointer;
-}
-input[type='submit']:hover{
-    transition: 0.5s;
-    background-color:rgb(221, 159, 93);
-}
 
 
 /* footer */

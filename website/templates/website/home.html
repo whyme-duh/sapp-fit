@@ -81,6 +81,7 @@
             </div>
         </div>
 
+        {% if blogs or posts %}
         <div class="blogs-container" id="blogs">
             <h1 class="title" >Blogs and Posts</h1>
 
@@ -130,7 +131,10 @@
                 &nbsp;
             {% endif %}
         </div>
-        <div class="testimonials-container" id ="testimonial">
+
+        {% endif %}
+        {% if testimonials %}
+         <div class="testimonials-container" id ="testimonial">
             <h1 class="title">Testimonials</h1>
             <div class="testimonial-list">
                 {% for testi in testimonials %}
@@ -139,13 +143,14 @@
                     </p>
                     <div class="user">
                         <h4>{{testi.user_name}}</h4>
-                        <p>A member</p>
+                        <p>{{testi.user_category}}</p>
 
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
         <div class="contacts-container">
             <div class="contact-content hidden">
                 <div class="map">
@@ -156,25 +161,17 @@
                     <h1 class="title">Contact Me</h1>
                     <p class="bio">Slide into my DMs to start your fitness journey, or message me directly below</p>
                     <div class="contact-detail">
-                        {% for link in about %}
-
-                        <a href="{{link.instagram}}">
+                        <a href="{{about.0.instagram}}">
                             <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
                         </a>
-                                {% endfor %}
-
-                        <p><i class="fa fa-phone"></i>&nbsp; +977 9893247</p>
-                        <p><i class="fa fa-envelope"></i>&nbsp; saprinashrestha72@gmail.com</p>
+                        <p><i class="fa fa-phone"></i>&nbsp; +977 {{about.0.phone_number}}</p>
+                        <p><i class="fa fa-envelope"></i>&nbsp; {{about.0.email_id}}</p>
                         <div class="other-contact">
-                            <!-- <h2 class="sub-title">Social Media Contacts</h2>   -->
                             <div class="socials">
-
-                                {% for link in about %}
-                                <a href="{{link.facebook}}" class="fa fa-facebook"></a>
-                                <a href="{{link.instagram}}" class="fa fa-instagram"></a>
-                                <a href="{{link.youtube}}" class="fa fa-youtube"></a>
-                                <a href="{{link.pinterest}}" class="fa fa-pinterest"></a>
-                                {% endfor %}
+                                <a href="{{about.0.facebook}}" class="fa fa-facebook"></a>
+                                <a href="{{about.0.instagram}}" class="fa fa-instagram"></a>
+                                <a href="{{about.0.youtube}}" class="fa fa-youtube"></a>
+                                <a href="{{about.0.pinterest}}" class="fa fa-pinterest"></a>
                             </div>
                         </div>
                         

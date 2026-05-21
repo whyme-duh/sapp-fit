@@ -1,54 +1,53 @@
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
-from .models import AboutAndQuote, Client, Service, Blog, Post, Testimonial
-from website.form import ContactForm
+from .models import AboutAndQuote, Booking, Client, Service, Blog, Post, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 import datetime
 from django.views.generic import DetailView
 
-form = ContactForm()
 count = 0
 context = {
         'about' : AboutAndQuote.objects.all(),
         'services': Service.objects.all(),
         'blogs': Blog.objects.all(),
         'posts' : Post.objects.all(),
-        'form':form,
         'count' : count,
         'date' :datetime.datetime.today().strftime("%Y"),
         'testimonials' : Testimonial.objects.all()
     }
 
 def index(request):
-    count =0
-    for i in Blog.objects.all():
-        count += 1
-        
-
-    if request.method == "GET":
-        form = ContactForm()
-
-   
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            email = form.cleaned_data['email']
-            message =form.cleaned_data['message']
-            try:
-                send_mail(subject, message, email, ['ritikshrestha94@gmail.com'], fail_silently=False)
-            except BadHeaderError:
-                return HttpResponse("Invalid!")
     return render(request, 'website/home.html', context)
 
 
 
 def service_detail_view(request, slug):
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            service_type = Service.objects.get(slug = slug)
+            preferred_date = form.cleaned_data['preferred_date']
+            phone_number = form.cleaned_data['phone_number']
+            Booking.objects.create(
+                name = name,
+                email = email,
+                phone_number = phone_number,
+                service = service_type,
+                preferred_date = preferred_date,
+            )
+            messages.success(request, f'Your booking request has been sent! We will contact you soon.')
+            return redirect('service-detail', slug = slug)
+        else:
+            messages.error(request, f'Error occured. Try again!')
+    else:
+        form = BookingForm()
     service = Service.objects.get(slug = slug)
     other_services = Service.objects.all().exclude(slug = slug)
     logo = AboutAndQuote.objects.all().first()
-    return render(request, 'website/service.html', context = {'service' : service, 'logo' : logo.logo, "other_services" : other_services})
+    return render(request, 'website/service.html', context = {'service' : service, 'logo' : logo.logo, "other_services" : other_services, 'form' : form})
 
 
 
@@ -69,7 +68,7 @@ def PostView(request):
     return render(request,'website/posts.html',  context)
 
 
-from .form import ClientForm
+from .form import BookingForm, ClientForm
 
 @login_required
 def client_view(request):
@@ -121,3 +120,6 @@ def edit_client(request, id):
     else:
         form = ClientForm()
     return redirect('client-view')
+
+
+
