@@ -2,6 +2,28 @@
 
 SAPPFIT is a custom web platform built for personal fitness trainer Saprina Shrestha (aka Sapp-Fit). It is designed to provide a seamless booking experience for clients while serving as a powerful, centralized management dashboard for the trainer.
 
+## 📸 App Interface
+<img src="docs/website.png" width="400" alt="Client Dashboard">
+
+<table>
+  <tr>
+    <td><b>Client Dashboard</b></td>
+    <td><b>Booking Modal</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/client.png" width="400" alt="Client Dashboard"></td>
+    <td><img src="docs/booking.png" width="400" alt="Booking Modal"></td>
+  </tr>
+  <tr>
+    <td><b>Service Catalog</b></td>
+    <td><b>Interactive Toast Notifications</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/services.png" width="400" alt="Service Catalog"></td>
+    <td><img src="docs/toast-success.gif" width="400" alt="Toast Notification GIF"></td>
+  </tr>
+</table>
+
 ## 🌟 Public-Facing Features (For Clients)
 
 * **Service Catalog:** A dedicated page showcasing the different personal training packages and services offered at Pump.
