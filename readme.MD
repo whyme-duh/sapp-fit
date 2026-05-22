@@ -14,10 +14,7 @@ SAPPFIT is a custom web platform built for personal fitness trainer Saprina Shre
     <td><img src="docs/client.png" width="400" alt="Client Dashboard"></td>
     <td><img src="docs/booking.png" width="400" alt="Booking Modal"></td>
   </tr>
-  <tr>
-    <td><b>Service Catalog</b></td>
-    <td><b>Interactive Toast Notifications</b></td>
-  </tr>
+  
   
 </table>
 

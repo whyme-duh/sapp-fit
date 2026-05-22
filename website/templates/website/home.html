@@ -81,49 +81,47 @@
             </div>
         </div>
 
-        {% if blogs or posts %}
+        {% if blogs%}
         <div class="blogs-container" id="blogs">
-            <h1 class="title" >Blogs and Posts</h1>
-
+            <h1 class="title" >Blogs</h1>
             <div class="blog hidden">
                 <div class="blogs-list">
                     {% for blog in blogs|slice:2 %}
-                    <a href="{% url 'blog-detail' blog.slug %}">
                         <div class="blog-card child">
                             <div class="img-part">
                                 <img src="{{blog.thumbnail.url}}" alt="img">
                             </div>
                             <div class="blog-detail">
                                 <div class="blog-content">
-                                    <h3 class="blog-title">{{blog.title}}</h3>
+                                    <h3 class="blog-title">{{blog.title|title}}</h3>
                                     <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>
                                 </div>
+                                <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
                             </div>
                         </div>
-                    </a>
                     {% endfor %}
                     
 
                     
-                </div>
-                <hr>
-                <div class="posts-list">
-                    {% for post in posts|slice:2 %}
-                    <a href="{{post.link}}">
-                        <div class="blog-card child">
-                            <div class="img-part">
-                                <img src="{{post.thumbnail.url}}" alt="img">
-                            </div>
-                                <div class="blog-detail">
-                                    <div class="blog-content">
-                                        <h3 class="blog-title">{{post.title}}</h3>
-                                        <p class="blog-para">{{post.content|safe|truncatewords:25}}</p>
-                                    </div>
+                    <!-- </div>
+                    <hr>
+                    <div class="posts-list">
+                        {% for post in posts|slice:2 %}
+                        <a href="{{post.link}}">
+                            <div class="blog-card child">
+                                <div class="img-part">
+                                    <img src="{{post.thumbnail.url}}" alt="img">
                                 </div>
-                        </div>
-                    </a>
-                    {% endfor %}
-                </div>
+                                    <div class="blog-detail">
+                                        <div class="blog-content">
+                                            <h3 class="blog-title">{{post.title}}</h3>
+                                            <p class="blog-para">{{post.content|safe|truncatewords:25}}</p>
+                                        </div>
+                                    </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div> -->
             </div>
             {% if blogs.count >= 2   %}
             <a href="{% url 'blogs'%}"><button>See All</button></a>
