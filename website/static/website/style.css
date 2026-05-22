@@ -535,6 +535,7 @@ li a:hover{
 }
 .service-name {
     left:50%;
+    text-shadow: 5px 5px 10px rgb(0, 0, 0);
     transform: translate(-50%, -50%);
     font-family: var(--title-family);
     text-align: center;
