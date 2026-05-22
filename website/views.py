@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
-from .models import AboutAndQuote, Booking, Client, Service, Blog, Post, Testimonial
+from .models import AboutAndQuote, Booking, Client, Service, Blog, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 import datetime
@@ -12,7 +12,6 @@ context = {
         'about' : AboutAndQuote.objects.all(),
         'services': Service.objects.all(),
         'blogs': Blog.objects.all(),
-        'posts' : Post.objects.all(),
         'count' : count,
         'date' :datetime.datetime.today().strftime("%Y"),
         'testimonials' : Testimonial.objects.all()
@@ -70,6 +69,8 @@ def BlogDetailView(request, slug):
     about = AboutAndQuote.objects.all()
     blogs = Blog.objects.filter(slug=slug)
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
+
+    
     return render(request, 'website/blogdetail.html', {'blogs' : blogs, 'related_blogs' : related_blogs,'about' : about})
 
 

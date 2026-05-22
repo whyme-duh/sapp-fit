@@ -42,38 +42,34 @@ a{
     margin-top: 2em;
     display: flex;
     gap:2em;
+    width: 90%;
 }
 
 .blogs-content{
-    width: 25%;
+    width: 22%;
     margin: 0;
     box-shadow: 0px 0px 10px rgb(221, 221, 221);
-    display: block;
-    cursor: pointer;
-    border-radius: 5px;    /* background-color:rgb(238, 238, 238) ; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-radius: 5px;    
 }
 .blogs-content img{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
 }
 .blogs-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 1em;
     font-family:var(--blog-font);
 }
-.blogs-detail p{
-    font-size: 0.85em;
-}
 
-/* .blogs-detail:hover{
-    background-color:rgb(243, 239, 239) ;
 
-} */
-.blogs-detail p{
-    margin-top: 1em;
-}
 .blogs-detail button, .post-detail button{
     padding: 1em;
     border: none;
@@ -81,48 +77,34 @@ a{
     border-radius: 5px;
     background-color: rgb(89, 101, 199);
 }
-.blogs-small-detail{
+.blog-detail-content{
     display: block;
-    
+    margin-bottom: 2em;
 }
-/* posts */
-.post-list{
-    width: 100%;
+
+
+.read-more-btn{
+    padding: 0.5em;
+    font-size: 0.75em;
+    margin: 0;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(69, 87, 225);
+    color: white;
+}
+.read-more-btn:hover{
+    background-color: rgb(52, 63, 149);
+    cursor: pointer;
+}
+.small-text{
+    font-size: 0.75em;
+    color: grey;
+    margin: 0;
+}
+.blog-card-footer{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
+    justify-content: space-between;
 }
-
-.post-content{
-    margin: 0;
-    width: 45%;
-    margin: 1em;
-    display: flex;
-    justify-content:flex-start;
-    flex-direction: row;
-    background-color:rgb(222, 216, 216) ;
-
-}
-.post-content img{
-    margin: 0;
-    width: 100px;
-    height: 100px;
-}
-.post-detail{
-    font-family:var(--blog-font);
-    padding-left: 1em;
-    width: 100%;
-}
-.post-content:hover{
-    background-color:rgb(185, 179, 179) ;
-
-}
-.post-list a{
-    margin: 0;
-    color: black;
-}
-
 @media only screen and (max-width:450px){
     .container{
         width: 90%;
@@ -134,9 +116,7 @@ a{
     }
     .blog-content img{
         width: 100%;
-       
     }
-
     .post-content{
         width: 100%;
     }

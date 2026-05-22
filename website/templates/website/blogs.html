@@ -1,5 +1,6 @@
 {% extends 'website/index.html' %}
 {% block content %}
+
     <title>{% block title %}Blogs{% endblock %}</title>
 
 <div class=" navbar">
@@ -17,15 +18,17 @@
     <div class="blog-lists" id="blogs-list">
         {% for blog in blogs %}
             <div class="blogs-content child">
-                <a href="{% url 'blog-detail' blog.slug%}">
                 <img src="{{blog.thumbnail.url}}" alt="img">
                 <div class="blogs-detail">
-                    <h2>{{blog.title}}</h2>
-                    <p>{{blog.content|safe|truncatewords:15}}</p>
-                    <small>April 14 - 8 min</small>
-                    <!-- <button><a href="{% url 'blog-detail' blog.slug %}">Read More</a> </button> -->
+                    <div class="blog-detail-content">
+                        <h2>{{blog.title}}</h2>
+                        <p>{{blog.content|safe|truncatewords:15}}</p>
+                    </div>
+                    <div class="blog-card-footer">
+                        <a href="{% url 'blog-detail' blog.slug %}" class="read-more-btn">Read This Article</a>
+                        <p class="small-text">{{blog.date|date}} • {{blog.total_time_to_read}} min read</p>
+                    </div>
                 </div>
-                </a>
             </div>
         {% endfor %}
     </div>

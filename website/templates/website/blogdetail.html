@@ -22,20 +22,22 @@
 
         {% endfor %}
     </div>
+    {% if related_blogs %}
     <div class="other-blogs">
         <h1>Other Related Blogs</h1>
         {% for rel in related_blogs|slice:4 %}
-        <div class="blogs-content child">
+        <div class="blogs-content child related">
                 <a href="{% url 'blog-detail' rel.slug%}">
                 <img src="{{rel.thumbnail.url}}" alt="img">
-                <div class="blogs-detail">
+                <div class="rel-detail">
                     <h2>{{rel.title}}</h2>
                     <p>{{rel.content|safe|truncatewords:15}}</p>
-                    <small>April 14 - 8 min</small>
+                    <small>{{rel.date|date}} • {{rel.total_time_to_read}} min read</small>
                 </div>
                 </a>
             </div>
         {% endfor %}
     </div>
-    {% endblock %}
+    {% endif %}
 </div>
+    {% endblock %}

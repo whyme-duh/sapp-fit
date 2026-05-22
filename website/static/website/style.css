@@ -713,7 +713,7 @@ li a:hover{
     flex-direction: column;
     gap: 1em;
     margin-top: 5em;
-    width: 50%;
+    width: 70%;
 }
 .posts-list a, .blogs-list a{
     color: black;
@@ -722,6 +722,7 @@ hr{
     margin-top: 5em;
 }
 .blog-card{
+    width: 100%;
     padding: 1em;
     display: flex;
     justify-content: center;
@@ -741,6 +742,7 @@ hr{
 }
 .blog-detail{
     display: flex;
+    text-align:justify;
     flex-direction: column;
     width: 60%;
     margin: 0;
@@ -803,12 +805,24 @@ small{
 
 }
 
+.blog-card-footer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
+
+}
+.blog-card-footer small{
+    margin: 0;
+}
+
 /* testimonials */
 
 .testimonials-container{
     margin-top: var(--margin-top);
-   width: var(--container-width);
-   height: 50vh;
+    width: var(--container-width);
+    height: 50vh;
 }
 .testimonials-container .title{
     text-align: center;
@@ -857,14 +871,16 @@ small{
 }
 /* contacts */
 .contacts-container{
+    width: 100%;
     padding-bottom: var(--padding-bottom);
-    margin-top: 5em;
+    margin-top: calc(var(--margin-top) * 2);
     
 }
 .contact-content{
     width: 80%;
     display: flex;
     justify-content: space-between;
+    gap: 10em;
 }
 .map{
     width: 50%;
@@ -876,7 +892,6 @@ iframe{
 }
 .contact{
     align-items: center;
-    padding-inline: 10%;
 }
 .contact .title{
     width: 100%;

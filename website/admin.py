@@ -1,8 +1,7 @@
 from django.contrib import admin
-from . models import AboutAndQuote, Booking, Service, Blog, Post, ServiceFeatureItem,Testimonial, Client
+from . models import AboutAndQuote, Booking, Service, Blog, ServiceFeatureItem,Testimonial, Client
 
 admin.site.register(AboutAndQuote)
-admin.site.register(Post)
 admin.site.register(ServiceFeatureItem)
 
 @admin.register(Blog)
