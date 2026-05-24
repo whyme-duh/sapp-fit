@@ -686,7 +686,7 @@ li a:hover{
     color: grey;
     font-family: cursive;
 }
-/* gallary */
+/* blogs */
 .blogs-container{
     display: flex;
     justify-content: center;
@@ -726,7 +726,6 @@ hr{
     padding: 1em;
     display: flex;
     justify-content: center;
-    gap: 1em;
 
 }
 .img-part{
@@ -747,6 +746,7 @@ hr{
     width: 60%;
     margin: 0;
     padding: 0.45em;
+    padding-left:1em;
     cursor: pointer;
     align-content: flex-start;
     justify-content: space-between;

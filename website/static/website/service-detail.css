@@ -112,11 +112,10 @@
 }
 .service-detail-list ul{
     margin-top: 2em;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns:auto auto auto;
     gap: 2em;
+    width:100%;
 }
 .service-detail-list li {
     display: flex;
@@ -128,8 +127,6 @@
     border-bottom: 1px solid #f0f0f0;
     font-size: 1.1rem;
     gap: 15px;
-    cursor: pointer;
-    width: 350px;
 }
 .service-detail-list li:hover{
     transform: translateY(-5px);

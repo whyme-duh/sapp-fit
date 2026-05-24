@@ -19,10 +19,10 @@
         {% for blog in blogs %}
             <div class="blogs-content child">
                 <img src="{{blog.thumbnail.url}}" alt="img">
-                <div class="blogs-detail">
+                <div class="blog-detail">
                     <div class="blog-detail-content">
                         <h2>{{blog.title}}</h2>
-                        <p>{{blog.content|safe|truncatewords:15}}</p>
+                        <p>{{blog.content|safe|truncatewords:15}}</p>s
                     </div>
                     <div class="blog-card-footer">
                         <a href="{% url 'blog-detail' blog.slug %}" class="read-more-btn">Read This Article</a>
