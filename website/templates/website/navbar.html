@@ -5,28 +5,29 @@
             {% for obj in about %}
             <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
             {% endfor %}
-                <nav class="right-side" id="responsive">
-                    <ul>
-                        <li><a href="{% url 'home-page' %}">Home</a></li>
-                        <li><a href="#about">About Me</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#services">Shop</a></li>
-                        {% if blogs %}
-                        <li><a href="#blogs">Blogs</a></li>
-                        {% endif %} 
-                        {% if testimonials %}
-                        <li><a href="#testimonial">Testimonials</a></li>
-                        {% endif %}
-                        <li><a href="#contact">Contacts</a></li>
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'client-view' %}">Clients</a></li>
+            <nav class="right-side" id="responsive">
+                <ul>
+                    <li><a href="{% url 'home-page' %}">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#services">Shop</a></li>
+                    {% if blogs %}
+                    <li><a href="#blogs">Blogs</a></li>
+                    {% endif %} 
+                    {% if testimonials %}
+                    <li><a href="#testimonial">Testimonials</a></li>
+                    {% endif %}
+                    <li><a href="#contact">Contacts</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'client-view' %}">Clients</a></li>
 
-                        {% endif %}
-                    </ul>
-                    <a href="javascript:void(0)" class="icon" onclick="navFunction()">
-                <i class="fa fa-bars"></i></a>
-                </nav>
-            
+                    {% endif %}
+                </ul>
+                
+            </nav>
+             <a href="javascript:void(0)" class="icon" onclick="navFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
         </div>
     </body>
 </html>

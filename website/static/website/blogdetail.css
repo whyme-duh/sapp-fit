@@ -92,20 +92,25 @@
 button:active{
     border-style: outset;
 }
-@media only screen and (max-width:450px){
-    main{
-        flex-wrap: wrap;
-        margin-inline: 0;
-        width: 100%;
-        padding-bottom: 5em;
-    }
-    .container{
-        width: 80%;
+
+@media only screen and (max-width: 600px) {
+    
+    .blog-container{
+        width: 90%;
         padding-bottom: 3em;
         border-bottom: 1px solid grey;
     }
     .other-blogs{
         width: 100%;
-        margin-inline: 10%;
+    }
+    .other-blogs h1{
+        margin-bottom:1em;
+    }
+    .related-blog-card{
+        margin:0;
+        width: 100%;
+    }
+    .related-blog-card{
+        width: 100%;
     }
 }

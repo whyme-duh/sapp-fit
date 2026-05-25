@@ -16,7 +16,7 @@
     --container-width: 60%;
     --paragraph-font: 'Rubik', sans-serif;
     --margin-top:5em;
-    --padding-bottom:10em;
+    --padding-bottom:5em;
     --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
     --navbar-color: #faedcd;
@@ -172,7 +172,7 @@ a{
     text-decoration: none;
 }
 .icon{
-    visibility: hidden;
+    display:none;
 }
 
 
@@ -204,75 +204,51 @@ li a:hover{
     background-color: #a58577;
 
 }
-@media only screen and (max-width:1400px){
-    
-    .right-side{
-        position: relative;
-        display: none;
-    }
-    .icon{
-        visibility: visible;
-        text-decoration: none;
-        color: white;
-        position: relative;
-        align-self: center;
-    }
-    .right-side-responsive{
-        transition: ease-in 2s;
-        width: 25%;
-        right: 0;
-        top: 0;
-        height: 100vh;
-        background-color: rgb(204, 178, 136);
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-    }
-    .right-side-responsive ul{
-        padding: 0;
-        margin-top: 10em;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-    }
-   
-    
-}
+
 @media only screen and (max-width:450px){
+    .navbar{
+        justify-content: space-between;
+        position:relative;
+    }
+    .fa-bars{
+        color:rgb(178, 135, 48);
+    }
     
     .right-side{
-        position: relative;
         display: none;
+        position: absolute;
+        width:100%;
     }
     .icon{
-        visibility: visible;
+        display: block;
         text-decoration: none;
-        color: white;
         font-size:2em;
-        position: relative;
-        align-self: center;
     }
     .right-side-responsive{
-        width: 100%;
-        top: 100PX;
-        right: 0;
+        top: 140px;
         height: fit-content;
-        background-color: rgb(204, 178, 136);
-
-        position: absolute;
+        background-color: rgb(204, 177, 135);
+        z-index:100;
+        left:0;
         display: flex;
+        position:absolute;
         flex-direction: column;
-
+        box-sizing: border-box;
+        width:100%;
     }
+
     
     .right-side-responsive ul{
+        width:100%;
         margin: 0;
         padding: 0;
         display: flex;
         flex-direction: column;
-        justify-content: start;
-        align-items: flex-start;
+    }
+    .right-side-responsive li{
+        width:100%;
+        padding:0.5em;
+        text-align: center;
     }
    
     
@@ -388,6 +364,7 @@ li a:hover{
     }
 }
 .about-container{
+    margin-top: var(--margin-top);
     padding-bottom: var(--padding-bottom);
     /* background-color: rgb(230, 61, 61); */
 }
@@ -873,7 +850,7 @@ small{
 .contacts-container{
     width: 100%;
     padding-bottom: var(--padding-bottom);
-    margin-top: calc(var(--margin-top) * 2);
+    margin-top: var(--margin-top) ;
     
 }
 .contact-content{
@@ -946,7 +923,7 @@ footer{
     font-family: var(--role-font);
 }
 
-@media only screen and (max-width:450px){
+@media only screen and (max-width:600px){
     .header{
         margin: 0;
         padding: 0;
@@ -955,6 +932,8 @@ footer{
         height: 60vh;
         object-fit: cover;
     }
+   
+   
   
     .first-page-content{
         font-size: 0.6em;
@@ -1053,17 +1032,30 @@ footer{
     .blog{
         flex-direction: column;
     }
-    .blog hr{
-        width:100px;
-        height: 5px;
-        background-color: rgb(173, 172, 172);
-    }
-    .blogs-list, .posts-list{
+    
+    .blogs-list{
         width:90%;
         flex-wrap: wrap;
+        gap:2em;
     }
     .blog-card{
+        padding:1em;  
+        box-shadow: 0px 0px 10px rgb(221, 221, 221);
+        width:100%;
+        flex-direction: column;
         font-size: 0.85em;
+    }
+    .blog-card .img-part{
+        width:100%;
+    }
+    .blog-detail{
+        margin-top:1em;
+        padding:0;
+        width:100%;
+        font-size:1em;
+    }
+    .blog-content{
+        width:100%;
     }
     /* testimonials */
     .testimonials-container{
