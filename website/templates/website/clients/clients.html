@@ -15,7 +15,6 @@
 </div>
 
 <div class="dashboard-container">
-        
         <div class="page-header">
             <h1>Client Overview</h1>
             <button class="btn btn-primary" id="add-client-btn" onclick="openAddModal()">+ Add New Client</button>
@@ -100,7 +99,7 @@
         <div class="table-card">
             <div class="table-header">
                 <h2>All Clients</h2>
-                <input type="text" class="search-input" placeholder="Search clients...">
+                <input type="text" class="search-input" id="search-input" placeholder="Search clients..." >
             </div>
             
             <div class="table-responsive">
@@ -118,10 +117,9 @@
                     </thead>
                     <tbody>
                         {% for client in clients %}
-                        <tr>
-                            <td class="client-name-cell">
-                                <div class="avatar-small">{{client.name|slice:"2"}}</div>
-                                <span>{{client.name}}</span>
+                        <tr class="client-row">
+                            <td class="client-name">
+                               {{client.name}}
                             </td>
                             <td>{{client.age}}</td>
                             <td>{{client.services.title}}</td>
@@ -152,5 +150,9 @@
         </div>
 
     </div>
+
+{% endblock %}
+{% block extra_script %}
+<script src="{% static 'website/client.js' %}"></script>
 
 {% endblock %}

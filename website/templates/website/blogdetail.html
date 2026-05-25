@@ -1,10 +1,17 @@
 {% extends 'website/index.html' %}
-{% block content %}
+
+{% load static %}
+{% block extra_css %} 
+<link rel="stylesheet" href="{% static 'website/blogdetail.css'%}">
+
+{% endblock %}
 <title>{%block title %}
     {% for object in blogs %} 
     {{object.title}}
     {% endfor %}
     {%endblock %}</title>
+{% block content %}
+
 <div class=" navbar">
     {% for obj in about %}
     <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
@@ -14,19 +21,17 @@
 </div>
 <div class="blog-container">
     <div class="blog-content">
-
-        {% for object in blogs %}
-        <h1 class="title"> {{object.title}}</h1>
-        <small class="published-date">Published At: {{object.date|date}}</small>
-        {{object.content|safe}}
-
-        {% endfor %}
+        <h1 class="title"> {{blog.title}}</h1>
+        <small class="published-date">Published On: {{blog.date|date}}</small>
+        {{blog.content|safe}}
     </div>
+    <hr>
     {% if related_blogs %}
     <div class="other-blogs">
         <h1>Other Related Blogs</h1>
-        {% for rel in related_blogs|slice:4 %}
-        <div class="blogs-content child related">
+        <div class="related-blog-list">
+            {% for rel in related_blogs|slice:4 %}
+            <div class="related-blog-card">
                 <a href="{% url 'blog-detail' rel.slug%}">
                 <img src="{{rel.thumbnail.url}}" alt="img">
                 <div class="rel-detail">
@@ -36,8 +41,9 @@
                 </div>
                 </a>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
     {% endif %}
 </div>
-    {% endblock %}
+{% endblock %}

@@ -25,10 +25,8 @@ a{
     width: 75%;
 }
 .blog-header{
-    display: flex;
-    padding: 2em;
-    flex-direction: column;
-
+    padding-block-start:2em;
+    display: block;
 }
 .blog-header h1{
     font-size: 2.5em;
@@ -42,7 +40,7 @@ a{
     margin-top: 2em;
     display: flex;
     gap:2em;
-    width: 90%;
+    width: 100%;
 }
 
 .blogs-content{
@@ -67,6 +65,7 @@ a{
     justify-content: space-between;
     padding: 1em;
     font-family:var(--blog-font);
+    flex-grow:1;
 }
 
 
@@ -79,9 +78,10 @@ a{
 }
 .blog-detail-content{
     display: block;
-    margin-bottom: 2em;
 }
-
+.blog-detail-content p{
+    margin-top:0.5em;
+}
 
 .read-more-btn{
     padding: 0.5em;
@@ -104,20 +104,48 @@ a{
 .blog-card-footer{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top:1em;
 }
-@media only screen and (max-width:450px){
-    .container{
-        width: 90%;
+
+@media only screen and (max-width: 1024px) {
+    .blog-container {
+        width: 90%; 
     }
     
-    .blog-content{
-        flex-wrap: wrap;
-        margin-top: 2eme;
+    .blog-lists {
+        flex-wrap: wrap; 
+        justify-content: center; 
     }
-    .blog-content img{
-        width: 100%;
+
+    .blogs-content {
+        width: 45%; 
+        margin-bottom: 1em; 
     }
-    .post-content{
-        width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .blog-container {
+        width: 95%; 
     }
+
+    .blog-header h1 {
+        font-size: 2em; 
+    }
+
+    .blog-header p {
+        font-size: 1em;
+    }
+
+    .blog-lists {
+        flex-direction: column;
+        align-items: center; 
+        gap: 1.5em;
+    }
+
+    .blogs-content {
+        width: 100%; 
+    }
+    
 }

@@ -67,11 +67,10 @@ def service_detail_view(request, slug):
 def BlogDetailView(request, slug):
     # to fetch the logo detail
     about = AboutAndQuote.objects.all()
-    blogs = Blog.objects.filter(slug=slug)
+    blogs = Blog.objects.get(slug=slug)
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
 
-    
-    return render(request, 'website/blogdetail.html', {'blogs' : blogs, 'related_blogs' : related_blogs,'about' : about})
+    return render(request, 'website/blogdetail.html', {'blog' : blogs, 'related_blogs' : related_blogs,'about' : about})
 
 
 def BlogPostView(request):
