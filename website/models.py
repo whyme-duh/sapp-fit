@@ -41,13 +41,7 @@ class Service(models.Model):
     def __str__(self):
         return f'{self.title} (Rs. {self.price})'
     
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        img = PIL.Image.open(self.icon.path)
-        if img.height > 400 or img.width > 400:
-            output_size = (400, 400)
-            img.thumbnail(output_size)
-            img.save(self.thumbnail.path)
+    
     
 
 
@@ -63,13 +57,7 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
     
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        img = PIL.Image.open(self.thumbnail.path)
-        if img.height > 400 or img.width > 400:
-            output_size = (400, 400)
-            img.thumbnail(output_size)
-            img.save(self.thumbnail.path)
+    
 
     def total_time_to_read(self):
         return len(self.content.split()) // 200

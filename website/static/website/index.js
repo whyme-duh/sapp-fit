@@ -5,7 +5,7 @@ let logos = document.querySelectorAll('.logo');
 window.addEventListener("DOMContentLoaded", ()=>{   
     let splashScreenCount = parseInt(localStorage.getItem('splashScreenCount')) || 0;
 
-    if (splashScreenCount == 1){
+    if (splashScreenCount == 100){
         intro.style.display = "none";
     } 
     else{
