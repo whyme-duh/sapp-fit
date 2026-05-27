@@ -43,7 +43,7 @@ class Service(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = PIL.Image.open(self.thumbnail.path)
+        img = PIL.Image.open(self.icon.path)
         if img.height > 400 or img.width > 400:
             output_size = (400, 400)
             img.thumbnail(output_size)

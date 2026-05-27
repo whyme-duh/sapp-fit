@@ -7,14 +7,12 @@ import datetime
 from django.views.generic import DetailView
 from django_ratelimit.decorators import ratelimit
 
-count = 0
 context = {
-        'about' : AboutAndQuote.objects.all(),
-        'services': Service.objects.all(),
-        'blogs': Blog.objects.all(),
-        'count' : count,
-        'date' :datetime.datetime.today().strftime("%Y"),
-        'testimonials' : Testimonial.objects.all()
+    'about' : AboutAndQuote.objects.all(),
+    'services': Service.objects.all(),
+    'blogs': Blog.objects.all(),
+    'date' :datetime.datetime.today().strftime("%Y"),
+    'testimonials' : Testimonial.objects.all()
     }
 
 def index(request):
@@ -65,7 +63,6 @@ def service_detail_view(request, slug):
 
 
 def BlogDetailView(request, slug):
-    # to fetch the logo detail
     about = AboutAndQuote.objects.all()
     blogs = Blog.objects.get(slug=slug)
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
@@ -77,9 +74,6 @@ def BlogPostView(request):
     return render(request,'website/blogs.html',  context)
 
     
-
-def PostView(request):
-    return render(request,'website/posts.html',  context)
 
 
 from .form import BookingForm, ClientForm
