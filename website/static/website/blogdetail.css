@@ -59,6 +59,7 @@
     gap: 2em;
 }
 .related-blog-card{
+    margin:0;
     width:30%;
     display: flex;
     margin-bottom:2em;
