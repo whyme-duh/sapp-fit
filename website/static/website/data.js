@@ -4,20 +4,20 @@ const template_products = [
     {
         "name" : "Leggins", 
         "price" : 1200,
-        "image_url" : "/media/images/pics/finalized.png",
+        "image_url" : "https://bandsam.com/cdn/shop/files/oasis-fitwear-set-stylish-outfit-beige-1.webp?v=1754558852&width=1946",
         "discount_price": null
     },
     {
         "name" : "Tops", 
         "price" : 1500,
-        "image_url" : "/media/images/pics/finalized.png",
+        "image_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmo4IFq0gWX0WoscdxwzaTZnuiclrw85yF_g&s",
         "discount_price": null
         
     },
     {
         "name" : "Jacket", 
         "price" : 1200,
-        "image_url" : "/media/images/pics/finalized.png",
+        "image_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxPZSccu45BUrYNyJ6V8YAwpNeTSzi_KsBgA&s",
         "discount_price": null
     }
 ]
@@ -50,7 +50,7 @@ async function loadDataFromMerch(){
         }
            
     }catch(e){
-        console.log("error occured", e);
+        console.log("Error occured! The server might not be online.", e);
         renderProducts(container, template_products, viewBtn);
     }
 }

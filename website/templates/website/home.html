@@ -1,13 +1,10 @@
 {% extends 'website/index.html' %}
-    <title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
-
+<title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
 {% block content %}
 {% include 'website/navbar.html' %}    
 
 <div class="first-page">
-    {% for obj in about %}
-    <img src="{{obj.backgroundImage.url}}" alt="background-images" class="bg-image">
-    {% endfor %}
+    <img src="{{about.0.backgroundImage.url}}" alt="background-images" class="bg-image">
     <div class="first-page-content">
         <h1>Hi,</h1>
         <h1>I'M <span class="name">Sapp-Fit</span></h1>
@@ -21,23 +18,21 @@
 </div>
 <div class="about-container" id="about">
     <div class="about hidden" >
-        {% for obj in about %}
-        <img src="{{obj.profileImage.url}}" alt="profile" class="about-image">
+        <img src="{{about.0.profileImage.url}}" alt="profile" class="about-image">
         <div class="about-content">
             <h1 class="title">About Me</h1>
             <p class="bio">
-                {{obj.bio}}
+                {{about.0.bio}}
             </p>
             <a href="#contact"><button>Train With Me <i class="fas fa-dumbbell"></i></button></a>
         </div>
     </div>
 </div>
-<div class="quotes-container" style="background-image: url({{obj.quoteContainerImage.url}});">
+<div class="quotes-container" style="background-image: url({{about.0.quoteContainerImage.url}});">
     <div class="quotes">
         <h1 class="quote">"</h1>
-        <h1 class="sentence">{{obj.quotes}} </h1>
+        <h1 class="sentence">{{about.0.quotes}} </h1>
         <h1 class="quote second">"</h1>
-        {% endfor %}
 
     </div>
 </div>

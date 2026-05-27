@@ -1,11 +1,11 @@
-from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
-from django.core.mail import send_mail, BadHeaderError
+import datetime
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import AboutAndQuote, Booking, Client, Service, Blog, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
-import datetime
-from django.views.generic import DetailView
 from django_ratelimit.decorators import ratelimit
+from .form import BookingForm, ClientForm
+
 
 context = {
     'about' : AboutAndQuote.objects.all(),
@@ -66,17 +66,13 @@ def BlogDetailView(request, slug):
     about = AboutAndQuote.objects.all()
     blogs = Blog.objects.get(slug=slug)
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
-
-    return render(request, 'website/blogdetail.html', {'blog' : blogs, 'related_blogs' : related_blogs,'about' : about})
+    return render(request, 'website/blog/blogdetail.html', {'blog' : blogs, 'related_blogs' : related_blogs,'about' : about})
 
 
 def BlogPostView(request):
-    return render(request,'website/blogs.html',  context)
+    return render(request,'website/blog/blogs.html',  context)
 
     
-
-
-from .form import BookingForm, ClientForm
 
 @login_required
 def client_view(request):
