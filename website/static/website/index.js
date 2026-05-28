@@ -5,7 +5,7 @@ let logos = document.querySelectorAll('.logo');
 window.addEventListener("DOMContentLoaded", ()=>{   
     let splashScreenCount = parseInt(localStorage.getItem('splashScreenCount')) || 0;
 
-    if (splashScreenCount == 100){
+    if (splashScreenCount == 1){
         intro.style.display = "none";
     } 
     else{
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
             }, 2000)
 
             setTimeout(() =>{
-                intro.style.top = "-100vh";
+                intro.style.top = "-200vh";
             }, 2300)
         })
     }
@@ -64,7 +64,6 @@ hiddenClass.forEach((el)=> observer.observe(el));
 childElemets.forEach((el)=> observer.observe(el));
 
 
-const quotesContainer = document.querySelector('.quotes-container');
 
 
 const modal = document.getElementById('modal-container');

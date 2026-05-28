@@ -107,7 +107,7 @@
 }
 
 .service-detail-list ul {
-    list-style-type: none; /* Removes standard bullets for a cleaner look */
+    list-style-type: none; 
     padding: 0;
 }
 .service-detail-list ul{
@@ -172,7 +172,11 @@
         max-width: 100%;
     }
 }
-@media (max-width: 450px) {
+@media (max-width: 600px) {
+    .service-detail-container{
+        margin:0;
+        width:100%;
+    }
     .service-header-content{
         left: 0;
     }
@@ -183,6 +187,18 @@
         left: 40%;
         height: fit-content;
         margin-top: 3em;
+    }
+    .service-detail-list{
+        width:100%;
+    }
+    .service-detail-list ul{
+        width:100%;
+        display:flex;
+        flex-direction: column;
+
+    }
+    .service-detail-list li{
+        width:100%;
     }
 }
 

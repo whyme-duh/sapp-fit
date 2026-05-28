@@ -12,13 +12,8 @@
     {%endblock %}</title>
 {% block content %}
 
-<div class=" navbar">
-    {% for obj in about %}
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{obj.logo.url}}" alt="svg"></a></div>
-    {% endfor %}
-        
-    
-</div>
+{% include 'website/navbar.html' %}
+
 <div class="blog-container">
     <div class="blog-content">
         <h1 class="title"> {{blog.title}}</h1>

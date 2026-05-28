@@ -36,7 +36,7 @@ async function loadDataFromMerch(){
         if (data.length > 0){
             viewBtn.href = url + "/products";
             container.innerHTML = data.map(product => `
-            <a href="${product.product_url}"> 
+            <a href="${product.product_url}" > 
             <div class="product-card">
                 <img src="${product.image_url}" alt="${product.name}">
                 <h3>${product.name}</h3>
@@ -44,7 +44,7 @@ async function loadDataFromMerch(){
                 <p>Rs. ${product.price}</p>
             </div>
             </a>
-            `).join("")   ; 
+            `).join(""); 
         }else{
             renderProducts(container, template_products, viewBtn);
         }
@@ -62,7 +62,7 @@ function renderProducts(container, data, viewBtn){
     const notice = document.getElementById('notice');
     viewBtn.href = instapage;
     notice.innerText = "* Please note that price and products may vary from what is shown here! Thank you!"
-    sloganEnd.innerText = "Get your premium fit from Sappfit Wear @sappfitwear";
+    sloganEnd.innerHTML = "<p>Get your premium fit from Sappfit Wear <strong>@sappfitwear</strong></p>";
     container.innerHTML = data.map(product => `
        
         <div class="product-card">

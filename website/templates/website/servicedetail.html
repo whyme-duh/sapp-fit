@@ -11,9 +11,8 @@
 
 {% block content %}
 
-<div class=" navbar">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{logo.url}}" alt="svg"></a></div>
-</div>
+{% include 'website/navbar.html' %}
+
 <div class="service-detail-container">
     <div class="service-header">
         <img src="{{service.icon.url}}" alt="service" class="service-detail-image">

@@ -57,8 +57,8 @@ def service_detail_view(request, slug):
         form = BookingForm()
     service = Service.objects.get(slug = slug)
     other_services = Service.objects.all().exclude(slug = slug)
-    logo = AboutAndQuote.objects.all().first()
-    return render(request, 'website/service.html', context = {'service' : service, 'logo' : logo.logo, "other_services" : other_services, 'form' : form})
+    about = AboutAndQuote.objects.all()
+    return render(request, 'website/servicedetail.html', context = {'service' : service, 'about' : about, "other_services" : other_services, 'form' : form})
 
 
 

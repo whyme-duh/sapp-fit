@@ -1,8 +1,38 @@
 {% extends 'website/index.html' %}
 <title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
 {% block content %}
-{% include 'website/navbar.html' %}    
+<div class=" navbar ">
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{about.0.logo.url}}" alt="logo"></a></div>
+    <nav class="right-side" id="responsive">
+        <ul>
+            <li><a href="{% url 'home-page' %}">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#services">Shop</a></li>
+            {% if blogs %}
+            <li><a href="#blogs">Blogs</a></li>
+            {% endif %} 
+            {% if testimonials %}
+            <li><a href="#testimonial">Testimonials</a></li>
+            {% endif %}
+            <li><a href="#contact">Contacts</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'client-view' %}">Clients</a></li>
 
+            {% endif %}
+        </ul>
+        
+    </nav>
+        <a href="javascript:void(0)" class="icon" onclick="navFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>  
+<div class="intro">
+    <h1 class="intro-header">
+        <span class = "logo">Welcome!</span>
+        <span class="logo">Ready to Master Your Body with </span><span class="logo sappfit">SAPPFIT?</span>
+    </h1>
+</div>
 <div class="first-page">
     <img src="{{about.0.backgroundImage.url}}" alt="background-images" class="bg-image">
     <div class="first-page-content">
@@ -41,7 +71,7 @@
         <h1 class="title">My Services</h1>
         <div class="services-list">
             {% for service in services %}
-            <a href="{% url 'service-detail' service.slug %}" class="service-card">
+            <a href="{% url 'service-detail' service.slug %}" class="service-card child">
                     <img src={{service.icon.url}} alt="img" class="img">
                     <div class="overlay-color"></div>
                     <h1 class="service-name">{{service.title}}</h1>
@@ -63,7 +93,7 @@
     <div class="merch hidden" id="services">
         <h1 class="title">Sapp-Fit Wear</h1>
         <p class="slogan" id="slogan">Get your premium fit from Sappfit Wear</p>
-        <div class="merch-list" id="merch-list">
+        <div class="merch-list child" id="merch-list">
             
         </div>
         <a href="" id="visit-store"><button >Visit Store </button></a>
@@ -97,9 +127,9 @@
         </div>
     </div>
     {% if blogs.count >= 2   %}
-    <a href="{% url 'blogs'%}"><button>See All</button></a>
-    {% else %}
-        &nbsp;
+    <div class="see-all-wrapper">
+        <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
+    </div>
     {% endif %}
 </div>
 {% endif %}
@@ -151,6 +181,28 @@
     
 </div>
 <!-- this is for the footer as well -->
-{% include 'website/navbar.html' %}
+<div class=" navbar responsive-navbar">
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{about.0.logo.url}}" alt="svg"></a></div>
+    <nav class="right-side" id="responsive">
+        <ul>
+            <li><a href="{% url 'home-page' %}">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#services">Shop</a></li>
+            {% if blogs %}
+            <li><a href="#blogs">Blogs</a></li>
+            {% endif %} 
+            {% if testimonials %}
+            <li><a href="#testimonial">Testimonials</a></li>
+            {% endif %}
+            <li><a href="#contact">Contacts</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'client-view' %}">Clients</a></li>
+
+            {% endif %}
+        </ul>
+        
+    </nav>
+</div>
 <p class="copyright">&copy; Copyright {{date}}</p>
 {% endblock %}
