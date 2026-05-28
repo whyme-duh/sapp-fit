@@ -7,7 +7,7 @@ class BookingForm(forms.Form):
 
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number'}))          
+    phone_number = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -17,9 +17,14 @@ class BookingForm(forms.Form):
             }
         )
     )
-    service_type = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 
-                                                                                 'value': '',
-                                                                                 'disabled': 'disabled'}))
+    service_type = forms.CharField(
+        max_length=100, 
+        required=False,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 
+                'value': '',
+                'disabled': 'disabled',
+            }))
         
 
 class ClientForm(forms.ModelForm):

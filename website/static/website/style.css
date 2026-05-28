@@ -107,6 +107,9 @@ body{
 .toast.success {
     border-left: 4px solid #66fdcb; 
 }
+.toast.error {
+    background-color: #eb1f04; 
+}
 
 @keyframes slideInRight {
     from { transform: translateX(100%); opacity: 0; }
@@ -227,7 +230,7 @@ li a:hover{
         font-size:2em;
     }
     .right-side-responsive{
-        top: 140px;
+        top: 100px;
         height: fit-content;
         background-color: rgb(204, 177, 135);
         z-index:100;
@@ -289,7 +292,7 @@ li a:hover{
         left: -100%;
     }
     100%{
-        left: 0;
+        left: -5%;
     }
 }
 .first-page-content{

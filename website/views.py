@@ -1,10 +1,13 @@
 import datetime
 from django.shortcuts import get_object_or_404, redirect, render
+import threading
+from sapfit import settings
 from .models import AboutAndQuote, Booking, Client, Service, Blog, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 from django_ratelimit.decorators import ratelimit
 from .form import BookingForm, ClientForm
+from django.core.mail import send_mail
 
 
 context = {
@@ -18,6 +21,29 @@ context = {
 def index(request):
     return render(request, 'website/home.html', context)
 
+
+def send_email_about_booking(client_name, client_email, service_type, preferred_date):
+    subject  = f"New Booking Request from {client_name}"
+    message = f"""
+    Great news! You have a new booking request.
+    
+    Client Name: {client_name}
+    Client Email: {client_email}
+    Requested Service: {service_type}
+    Preferred Time: {preferred_date}
+    
+    Log into the SAPPFIT dashboard to approve or manage this booking.
+    """
+    try:
+        send_mail(
+            subject, 
+            message, 
+            settings.EMAIL_HOST_USER,
+            ['saprinashrestha72@gmail.com'],
+            fail_silently=False,
+        )
+    except Exception as e:  
+        print(f"Error sending email: {e}")
 
 @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def service_detail_view(request, slug):
@@ -48,11 +74,15 @@ def service_detail_view(request, slug):
                     service = service_type,
                     preferred_date = preferred_date,
                 )
+                email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, service_type, preferred_date))
+                email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
+                
             return redirect('service-detail', slug = slug)
             
         else:
-            messages.error(request, f'Error occured. Try again!')
+            error_details = form.errors.as_text()
+            messages.error(request, f'Error occured. Try again! Details: {error_details}')
     else:
         form = BookingForm()
     service = Service.objects.get(slug = slug)
