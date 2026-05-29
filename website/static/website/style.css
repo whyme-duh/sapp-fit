@@ -650,7 +650,7 @@ li a:hover{
     justify-content: flex-start;
 }
 .product-card img{
-    width: 300px;
+    width: 100%;
     height: 350px;
 }
 .product-card h3{
@@ -1061,15 +1061,31 @@ iframe{
     }
 
     /* for merch container */
+    .merch-container{
+        width:100%;
+    }
     .merch-list{
-        gap: 1em;
+        width:100%;
+        gap:1em;
+
+    }
+    .product-card{
+        width:100%;
+    }
+    .prodict-card img{
+        object-fit:cover;
+        width:100%;
+        height:auto;
     }
     .slogan{
         text-align: center;
+        font-size:1em;
     }
     .notice{
+        width:100%;
         text-align: center;
-        font-size:1.25em;
+        font-size:0.9em;
+
     }
     
 
@@ -1105,6 +1121,13 @@ iframe{
     .blog-content{
         width:100%;
     }
+    .see-all-wrapper{
+        width:100%;
+        justify-content: center;
+    }
+    .learn-more-btn{
+        margin:0;
+    }
     /* testimonials */
     .testimonials-container{
         width: 90%;
@@ -1124,14 +1147,13 @@ iframe{
         flex-wrap: wrap;
     }
     .map{
-        width: 90%;
+        width: 100%;
     }
     .map .title{
         text-align: center;
     }
     .contact{
-        margin-top: 2em;
-        width: 80%;
+        width: 100%;
     }
 
     form{

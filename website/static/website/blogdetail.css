@@ -101,6 +101,28 @@ button:active{
         padding-bottom: 3em;
         border-bottom: 1px solid grey;
     }
+    .title{
+        font-size: 2em;
+    }
+     .published-date{
+        font-size: 0.75em;
+     }
+     .blog-content p{
+        font-size: 1em;
+     }
+     .related-blog-list{
+        flex-direction: column;
+        align-items: center;
+     }
+     .related-blog-card{
+        width: 100%;
+     }
+     .related-blog-card img{
+        height: 200px;
+     }
+     .rel-detail{
+        font-size: 1em;
+     }
     .other-blogs{
         width: 100%;
     }

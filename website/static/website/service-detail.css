@@ -53,7 +53,7 @@
     padding-inline: 2em;
     background-color: rgb(151, 244, 151);
     border-radius: 20px;
-    color: rgb(0, 0, 0);
+    color:darkgreen;
     font-weight: 700;
     font-size: 0.95em;
     font-family: var(--paragraph-font);
@@ -66,7 +66,7 @@
 }
 .service-header-content p{
     font-family: var(--role-font);
-    text-shadow: 2px 2px #424242;
+    text-shadow: 1px 1px 1px #424242;
     font-size: 0.9em;
     color: white;
 }
@@ -172,12 +172,13 @@
         max-width: 100%;
     }
 }
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .service-detail-container{
         margin:0;
         width:100%;
     }
     .service-header-content{
+        font-size:0.6em;
         left: 0;
     }
     .price-pill{
@@ -190,6 +191,10 @@
     }
     .service-detail-list{
         width:100%;
+        padding:1em;
+    }
+    .service-detail-list h1{
+        font-size:2em;
     }
     .service-detail-list ul{
         width:100%;
@@ -199,6 +204,7 @@
     }
     .service-detail-list li{
         width:100%;
+        font-size: 0.8em;
     }
 }
 

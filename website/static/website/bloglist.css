@@ -127,7 +127,8 @@ a{
 
 @media only screen and (max-width: 600px) {
     .blog-container {
-        width: 95%; 
+        width: 90%; 
+        padding-bottom:2em;
     }
 
     .blog-header h1 {
