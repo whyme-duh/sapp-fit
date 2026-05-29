@@ -23,12 +23,21 @@ const template_products = [
 ]
 
 async function loadDataFromMerch(){
+
+    const isDebug = JSON.parse(document.getElementById('django-debug-mode').textContent);
+    var url = "http://127.0.0.1:8001/featured/";
+
+    if (!isDebug){
+        var url = "https://sappfitmerch.pythonanywhere.com/featured/";
+
+    }
+
     const container = document.getElementById('merch-list');
     const viewBtn = document.getElementById('visit-store');
 
     try{
-        const url = "http://127.0.0.1:8001/";
-        const response = await fetch(url+'featured/');
+        const response = await fetch(url);
+        console.log("response", response);
         if (!response.ok){
             throw new Error("Error occured as the server was unreachable.")
         }

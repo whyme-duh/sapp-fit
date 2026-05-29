@@ -15,7 +15,8 @@ context = {
     'services': Service.objects.all(),
     'blogs': Blog.objects.all(),
     'date' :datetime.datetime.today().strftime("%Y"),
-    'testimonials' : Testimonial.objects.all()
+    'testimonials' : Testimonial.objects.all(),
+    'debug': settings.DEBUG
     }
 
 def index(request):
