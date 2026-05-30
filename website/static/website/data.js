@@ -25,10 +25,10 @@ const template_products = [
 async function loadDataFromMerch(){
 
     const isDebug = JSON.parse(document.getElementById('django-debug-mode').textContent);
-    var url = "http://127.0.0.1:8001/featured/";
+    var url = "http://127.0.0.1:8001/";
 
     if (!isDebug){
-        var url = "https://sappfitmerch.pythonanywhere.com/featured/";
+        var url = "https://sappfitmerch.pythonanywhere.com/";
 
     }
 
@@ -36,22 +36,20 @@ async function loadDataFromMerch(){
     const viewBtn = document.getElementById('visit-store');
 
     try{
-        const response = await fetch(url);
+        const response = await fetch(url + "featured/");
         console.log("response", response);
         if (!response.ok){
             throw new Error("Error occured as the server was unreachable.")
         }
         const data = await response.json();
-        if (data.length > 0){
-            viewBtn.href = url + "/products";
+        if (data.length > 0 || data.length <= 3){
+            viewBtn.href = url + "products";
             container.innerHTML = data.map(product => `
-            <a href="${product.product_url}" > 
-            <div class="product-card">
+            <a href="${product.product_url}" class="product-card"> 
                 <img src="${product.image_url}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <strike>Rs. ${product.discount_price}</strike>
                 <p>Rs. ${product.price}</p>
-            </div>
             </a>
             `).join(""); 
         }else{
