@@ -830,38 +830,52 @@ small{
     background-color: #b65329;
 }
 /* testimonials */
-
-.testimonials-container{
+.testimonials-container {
     margin-top: var(--margin-top);
-    width: var(--container-width);
-    height: 50vh;
+    width: 80%;
 }
-.testimonials-container .title{
+.testimonials-container .title {
     text-align: center;
 }
-.testimonial-list{
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    margin-top: calc(var(--margin-top) - 5em);
-    width: 100%;
 
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width:100%;
+    margin-top: calc(var(--margin-top) - 3em);
 }
-.testinomial-card{
+
+.testimonial-list {
+    display: flex;
+    gap: 1em; 
+    width: 100%;
+    overflow-x: hidden; 
+    scroll-behavior: smooth; 
+    padding: 1em 0;
+    scroll-snap-type: x mandatory; 
+}
+
+.testinomial-card {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: end;
-    height: fit-content;
+    height: auto; 
     background-color: #F6F2F2;
     border-radius: 10px;
-    margin-top: 2em;
-    width: 30%;
     padding: 2em;
+    text-align: left;
+    flex: 0 0 calc((var(--container-width)) / 3); 
+    scroll-snap-align: start; 
 }
-.testinomial-card p{
+
+.testinomial-card h3{
+    margin:0;
+    text-align: left;
+    font-weight: 500;
     font-family: var(--testinomial-font);
 }
+
 .user{
     padding-top: 1em;
     width: 100%;
@@ -869,17 +883,31 @@ small{
     justify-content: space-between;
     align-items: end;
 }
+
 .user h4{
     margin:0;
     padding:0;
     margin-bottom: 0.25em;
     font-family: var(--testinomial-font);
 }
-.testinomial-card img{
-    margin: 0;
-    border-radius: 100%;
-    width: 60px;
-    height: 60px;
+
+.testinomial-card:hover{
+    background-color: whitesmoke;
+}
+
+@media only screen and (max-width: 1024px) {
+    .testinomial-card {
+        flex: 0 0 calc((100% - 1em) / 2); 
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-wrapper { width: 85%; margin: 0 auto; }
+    .testinomial-card {
+        flex: 0 0 100%; 
+    }
+    .slider-btn.prev { left: -20px; }
+    .slider-btn.next { right: -20px; }
 }
 /* contacts */
 .contacts-container{

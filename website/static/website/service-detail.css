@@ -66,7 +66,7 @@
 }
 .service-header-content p{
     font-family: var(--role-font);
-    text-shadow: 1px 1px 1px #424242;
+    text-shadow: 2px 2px 2px #000000;
     font-size: 0.9em;
     color: white;
 }
@@ -81,6 +81,9 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+.book-now-btn:hover{
+    background-color: #6f63f2;
 }
 
 .service-detail-list {

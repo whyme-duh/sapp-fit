@@ -19,9 +19,8 @@
         <div class="service-header-content">
             <h1>{{service.title}}</h1>
             <p>{{service.info}}</p>
-            <button class="book-now-btn" onclick="openAddModal()">Book Now</button>
+            <button class="book-now-btn" onclick="openAddModal()">Book Now for <span style="font-weight:800; color:rgb(151, 255, 82);"> Rs.{{service.price}}</span></button>
         </div>
-        <button class="price-pill">@ Rs. {{service.price}}</button>
         
     </div>
     <div class="modal-overlay" id="modal-container">

@@ -129,20 +129,24 @@
 </div>
 {% endif %}
 {% if testimonials %}
-<div class="testimonials-container" id ="testimonial">
+<div class="testimonials-container" id="testimonial">
     <h1 class="title">Testimonials</h1>
-    <div class="testimonial-list">
-        {% for testi in testimonials %}
-        <div class="testinomial-card">
-            <p>{{testi.testimonial}}
-            </p>
-            <div class="user">
-                <h4>{{testi.user_name}}</h4>
-                <p>{{testi.user_category}}</p>
+    
+    <div class="carousel-wrapper">
 
+        <div class="testimonial-list" id="testimonial-track">
+            {% for testi in testimonials %}
+            <div class="testinomial-card">
+                <h3>{{testi.testimonial}}</h3>
+                <div class="user">
+                    <h4>{{testi.user_name}}</h4>
+                    <p><i>{{testi.user_category}}</i></p>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+
+        
     </div>
 </div>
 {% endif %}

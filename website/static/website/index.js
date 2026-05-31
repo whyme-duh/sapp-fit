@@ -75,6 +75,7 @@ const submitBtn = document.querySelector('.modal-footer .btn-primary');
 function openAddModal() {
     form.reset(); 
     modal.style.display = 'flex';
+    // document.body.style.overflow = "hidden";
 }
 
 function openEditModal(button) {
@@ -98,10 +99,54 @@ function openEditModal(button) {
 
 function closeModal() {
     modal.style.display = 'none';
+    // document.body.style.overflow = "";
+
 }
 
 window.onclick = function(event) {
     if (event.target == modal) {
         closeModal();
+        
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const track = document.getElementById('testimonial-track');
+    
+    // Safety check: if no testimonials exist, stop the script
+    if (!track || track.children.length === 0) return;
+
+    let isAutoPlaying = true; // Flag to pause when user is reading
+
+    setInterval(() => {
+        // 1. THE CONDITION: If cards don't overflow the container, or user is hovering, do nothing!
+        if (track.scrollWidth <= track.clientWidth || !isAutoPlaying) return;
+
+        const card = track.querySelector('.testinomial-card');
+        const scrollAmount = card.offsetWidth + 16; // Card width + 1em (16px) gap
+
+        // 2. Check if we have hit the very end of the scroll track
+        // (Math.ceil fixes a bug where zoomed screens return fractional pixels)
+        if (Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth) {
+            // Slide smoothly all the way back to the beginning
+            track.scrollTo({ left: 0, behavior: 'smooth' }); 
+        } else {
+            // Slide to the next card
+            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }, 3500); // 3500ms = 3.5 seconds per slide. Adjust if you want it faster/slower!
+
+    /* ====================================================
+       UX CRITICAL: Pause the slider if the user is reading
+       ==================================================== */
+    // For Desktop (Mouse)
+    track.addEventListener('mouseenter', () => isAutoPlaying = false);
+    track.addEventListener('mouseleave', () => isAutoPlaying = true);
+    
+    // For Mobile (Touch)
+    track.addEventListener('touchstart', () => isAutoPlaying = false);
+    track.addEventListener('touchend', () => {
+        // Wait 2 seconds after they lift their finger before scrolling again
+        setTimeout(() => isAutoPlaying = true, 2000);
+    });
+});
