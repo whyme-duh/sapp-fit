@@ -1,0 +1,60 @@
+{%extends 'website/index.html'%}
+
+{%load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/customrequeststyle.css' %}">
+
+{% endblock %}
+
+<title>{% block title %}
+
+Custom Service Request
+
+{% endblock %}</title>
+
+{% block content %}
+{% include 'website/navbar.html' %}
+
+<div class="request-container">
+    <div class="request-header">
+        <h1 class="title">Your Blueprint for Success.</h1>
+        <p class="subtitle">Tell me about your goals, your schedule, and what you have access to. I'll build the exact roadmap to get you there.</p>
+    </div>
+
+    <div class="request-split">
+        <div class="request-info">
+            <h2>How it works:</h2>
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <h3>Share Your Details</h3>
+                    <p>Fill out the form with your goals, fitness level, and available equipment.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                    <h3>Custom Programming</h3>
+                    <p>I will design a highly effective 45-min or 60-min routine specifically for your body.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <h3>Get to Work</h3>
+                    <p>Receive your step-by-step PDF guide and start crushing your goals.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="request-form-wrapper">
+            <form action="" method="POST" class="custom-form">
+                {% csrf_token %}
+                {{form.as_p}}
+
+                <button type="submit" class="submit-btn">Request My Custom Plan</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

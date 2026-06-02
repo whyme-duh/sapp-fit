@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from website.models import Booking, Client, Service
+from website.models import Booking, Client, CustomService, Service
 
 
 class BookingForm(forms.Form):
@@ -33,6 +33,33 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = "__all__"  
 
+
+class CustomServiceForm(forms.Form):
+
+    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
+    phone_number = forms.CharField(max_length=10, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number'}))          
+    goal_choices = forms.ChoiceField(
+        choices=CustomService.GOAL_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    special_notes = forms.CharField(
+        max_length=500,
+        widget=forms.Textarea(
+            attrs={'class': 'form-control', 'placeholder': 'Any special notes or requirements', 'rows': 3}
+        )
+    )
+    equipment_used = forms.CharField(
+        max_length=500,
+        widget=forms.Textarea(
+            attrs={'class': 'form-control', 'placeholder': 'Equipment you plan to use', 'rows': 3}
+        )
+    )
+    preferred_duration = forms.ChoiceField(
+        choices=CustomService.DURATION_OPTIONS,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+   
 
 
   

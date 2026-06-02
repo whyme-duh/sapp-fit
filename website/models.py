@@ -118,3 +118,33 @@ class Booking(models.Model):
     def __str__(self):
         return f'{self.name} - {self.service.title}'
     
+
+class CustomService(models.Model):
+
+    GOAL_CHOICES = [
+        ("Fat Loss & Toning" , "Fat Loss & Toning"),    
+        ("Building Muscle & Strength" , "Building Muscle & Strength"),
+        ("General Health & Mobility" , "General Health & Mobility"),
+        ("Rehabilitation" , "Rehabilitation"),
+        ("HYROX / Event Prep", "HYROX / Event Prep"),
+        ("Other" , "Other")
+    ]
+
+    DURATION_OPTIONS = [
+        ("45 minutes", "45 minutes"),
+        ("1 hour", "1 hour"),
+        ("30 minutes", "30 minutes"),
+    ]
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.IntegerField( max_length = 10)
+    goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    special_notes = models.TextField(blank=True)
+    equipment_used = models.TextField(blank=True)
+    preffered_duration = models.CharField(max_length=20, choices=DURATION_OPTIONS, blank=True)
+
+    def __str__(self):
+        return f'{self.name} - Custom Service Request'
+    

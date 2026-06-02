@@ -2,11 +2,11 @@ import datetime
 from django.shortcuts import get_object_or_404, redirect, render
 import threading
 from sapfit import settings
-from .models import AboutAndQuote, Booking, Client, Service, Blog, Testimonial
+from .models import AboutAndQuote, Booking, Client, CustomService, Service, Blog, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 from django_ratelimit.decorators import ratelimit
-from .form import BookingForm, ClientForm
+from .form import BookingForm, ClientForm, CustomServiceForm
 from django.core.mail import send_mail
 
 
@@ -89,8 +89,57 @@ def service_detail_view(request, slug):
     service = Service.objects.get(slug = slug)
     other_services = Service.objects.all().exclude(slug = slug)
     about = AboutAndQuote.objects.all()
-    return render(request, 'website/servicedetail.html', context = {'service' : service, 'about' : about, "other_services" : other_services, 'form' : form})
+    return render(request, 'website/service/servicedetail.html', context = {'service' : service, 'about' : about, "other_services" : other_services, 'form' : form})
 
+def custom_service_request(request):
+    form = CustomServiceForm()
+    about = AboutAndQuote.objects.all()
+    if request.method == "POST":
+        form = CustomServiceForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone_number = form.cleaned_data['phone_number']
+            goal_choices = form.cleaned_data['goal_choices']
+            special_notes = form.cleaned_data['special_notes']
+            equipment_used = form.cleaned_data['equipment_used']
+            preferred_duration = form.cleaned_data['preferred_duration']
+
+            subject  = f"New Custom Service Request from {name}"
+            message = f"""
+            You have received a new custom service request.
+            
+            Name: {name}
+            Email: {email}
+            Phone Number: {phone_number}
+            Goal: {goal_choices}
+            Special Notes: {special_notes}
+            Equipment Used: {equipment_used}
+            Preferred Duration: {preferred_duration}
+            
+            Log into the SAPPFIT dashboard to review this request.
+            """
+            try:
+                send_mail(
+                    subject, 
+                    message, 
+                    settings.EMAIL_HOST_USER,
+                    ['saprinashrestha72@gmail.com'],
+                    fail_silently=False,    
+                )
+                CustomService.objects.create(
+                    name=name,
+                    email=email,
+                    phone_number=phone_number,
+                    goal_choices=goal_choices,
+                    special_notes=special_notes,
+                    equipment_used=equipment_used,
+                    preferred_duration=preferred_duration
+                )
+                messages.success(request, f'Your custom service request has been submitted!')
+            except:
+                messages.error(request, f'Error occurred while submitting the request. Please try again.')
+    return render(request, 'website/service/customservicepage.html', {'form':form, 'about' : about})
 
 
 def BlogDetailView(request, slug):

@@ -61,6 +61,8 @@
 
     </div>
 </div>
+
+
 <div class="services-container">
     <div class="services hidden" id="services">
         <h1 class="title">My Services</h1>
@@ -83,6 +85,13 @@
         </div>
     </div>
 </div>
+<div class="custom-plan-banner" style="background-color: #ffffff; padding: 4em 2em; text-align: center; color: white; margin-bottom:var(--margin-top); ">
+    <h2 style="font-family: var(--title-family); font-size: 2.5em; margin-bottom: 0.5em;color:#4A3B32;">Your Goals, Your Schedule.</h2>
+    <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;margin: 0 auto 2em auto;">
+        Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
+    </p>
+    <a href="{% url 'custom-service' %}" class="sell-all-btn" style="background-color: #c3855f; color: white; display: inline-block;font-size:1.15rem;font-family: var(--role-font);">Request a Custom Plan</a>
+</div>
 
 <div class="merch-container">
     <div class="merch hidden" id="services">
@@ -97,6 +106,8 @@
     </div>
 </div>
 
+
+    
 {% if blogs %}
 <div class="blogs-container" id="blogs">
     <h1 class="title" >Blogs</h1>
