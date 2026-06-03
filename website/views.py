@@ -23,26 +23,47 @@ def index(request):
     return render(request, 'website/home.html', context)
 
 
-def send_email_about_booking(client_name, client_email, service_type, preferred_date):
-    subject  = f"New Booking Request from {client_name}"
-    message = f"""
-    Great news! You have a new booking request.
-    
-    Client Name: {client_name}
-    Client Email: {client_email}
-    Requested Service: {service_type}
-    Preferred Time: {preferred_date}
-    
-    Log into the SAPPFIT dashboard to approve or manage this booking.
-    """
+def send_email_about_booking(client_name, client_email,request_type, **kwargs):
+    if request_type == "predefined-service":
+        subject  = f"New Booking Request from {client_name}"
+        message = f"""
+        Great news! You have a new booking request.
+        
+        Client Name: {client_name}
+        Client Email: {client_email}
+        Requested Service: {kwargs.get('service_type', 'N/A')}
+        Preferred Time: {kwargs.get('preferred_date', 'N/A')}
+        
+        Log into the SAPPFIT dashboard to approve or manage this booking.
+        """
+    elif request_type == "custom-service":
+        subject  = f"New Custom Service Request from {client_name}"
+        message = f"""
+        You have received a new custom service request.
+        
+        Name: {client_name}
+        Email: {client_email}
+        Phone Number: {kwargs.get('phone_number', 'N/A')}
+        Goal: {kwargs.get('goal_choices', 'N/A')}
+        Special Notes: {kwargs.get('special_notes', 'N/A')}
+        Equipment Used: {kwargs.get('equipment_used', 'N/A')}
+        Preferred Duration: {kwargs.get('preferred_duration', 'N/A')}
+        Workout Time: {kwargs.get('workout_time', 'N/A')}
+        
+        Log into the SAPPFIT dashboard to review this request.
+        """
+    else:
+        subject = "New Booking/Service Request"
+        message = f"You have received a new request from {client_name} ({client_email}). Please check the dashboard for details."
     try:
         send_mail(
             subject, 
             message, 
             settings.EMAIL_HOST_USER,
-            ['saprinashrestha72@gmail.com'],
+            ['ritikshrestha94@gmail.com'],
             fail_silently=False,
         )
+
     except Exception as e:  
         print(f"Error sending email: {e}")
 
@@ -75,7 +96,7 @@ def service_detail_view(request, slug):
                     service = service_type,
                     preferred_date = preferred_date,
                 )
-                email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, service_type, preferred_date))
+                email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
                 email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
                 
@@ -91,10 +112,17 @@ def service_detail_view(request, slug):
     about = AboutAndQuote.objects.all()
     return render(request, 'website/service/servicedetail.html', context = {'service' : service, 'about' : about, "other_services" : other_services, 'form' : form})
 
+@ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
     form = CustomServiceForm()
     about = AboutAndQuote.objects.all()
     if request.method == "POST":
+        was_limited = getattr(request, 'limited', False)
+
+        if was_limited:
+            messages.error(request, f'Too many booking requests from this IP. Please try again later.')
+            return redirect('home-page')
+
         form = CustomServiceForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -104,39 +132,42 @@ def custom_service_request(request):
             special_notes = form.cleaned_data['special_notes']
             equipment_used = form.cleaned_data['equipment_used']
             preferred_duration = form.cleaned_data['preferred_duration']
+            workout_time = form.cleaned_data['workout_time']
 
-            subject  = f"New Custom Service Request from {name}"
-            message = f"""
-            You have received a new custom service request.
-            
-            Name: {name}
-            Email: {email}
-            Phone Number: {phone_number}
-            Goal: {goal_choices}
-            Special Notes: {special_notes}
-            Equipment Used: {equipment_used}
-            Preferred Duration: {preferred_duration}
-            
-            Log into the SAPPFIT dashboard to review this request.
-            """
             try:
-                send_mail(
-                    subject, 
-                    message, 
-                    settings.EMAIL_HOST_USER,
-                    ['saprinashrestha72@gmail.com'],
-                    fail_silently=False,    
-                )
-                CustomService.objects.create(
-                    name=name,
-                    email=email,
-                    phone_number=phone_number,
-                    goal_choices=goal_choices,
-                    special_notes=special_notes,
-                    equipment_used=equipment_used,
-                    preferred_duration=preferred_duration
-                )
-                messages.success(request, f'Your custom service request has been submitted!')
+                if CustomService.objects.filter(
+                    name=name, 
+                    email=email, 
+                    phone_number=phone_number, 
+                    goal_choices=goal_choices, 
+                    preferred_duration=preferred_duration,
+                    workout_time=workout_time).exists():
+                    messages.error(request, f'You have already submitted a similar custom service request.')
+
+                else:
+                    CustomService.objects.create(
+                        name=name,
+                        email=email,
+                        phone_number=phone_number,
+                        goal_choices=goal_choices,
+                        special_notes=special_notes,
+                        equipment_used=equipment_used,
+                        preferred_duration=preferred_duration,
+                        workout_time=workout_time
+                    )
+                    email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
+                        'phone_number': phone_number,
+                        'goal_choices': goal_choices,
+                        'special_notes': special_notes,
+                        'equipment_used': equipment_used,
+                        'preferred_duration': preferred_duration,
+                        'workout_time': workout_time
+                    })
+                    # email_thread.start()
+                    messages.success(request, f'Your custom service request has been submitted!')
+                    return redirect('home-page')
+
+
             except:
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
     return render(request, 'website/service/customservicepage.html', {'form':form, 'about' : about})

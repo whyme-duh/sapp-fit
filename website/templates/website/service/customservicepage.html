@@ -35,7 +35,7 @@ Custom Service Request
                 <div class="step-num">2</div>
                 <div>
                     <h3>Custom Programming</h3>
-                    <p>I will design a highly effective 45-min or 60-min routine specifically for your body.</p>
+                    <p>I will design a highly effective 30-min, 45-min or 60-min routine specifically for your body.</p>
                 </div>
             </div>
             <div class="step">
@@ -48,9 +48,54 @@ Custom Service Request
         </div>
 
         <div class="request-form-wrapper">
-            <form action="" method="POST" class="custom-form">
+            <form method="POST" class="custom-form">
                 {% csrf_token %}
-                {{form.as_p}}
+                <div class="custom-form">
+    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{form.name.id_for_label}}" class="form-label">{{form.name.label}}</label>
+                            {{form.name}}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{form.phone_number.id_for_label}}" class="form-label">{{form.phone_number.label}}</label>
+                            {{form.phone_number}}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{form.workout_time.id_for_label}}" class="form-label">{{form.workout_time.label}}</label>
+                            {{form.workout_time}}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{form.preferred_duration.id_for_label}}" class="form-label">{{form.preferred_duration.label}}</label>
+                            {{form.preferred_duration}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{form.email.id_for_label}}" class="form-label">{{form.email.label}}</label>
+                        {{form.email}}
+                       
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.goal_choices.id_for_label}}" class="form-label">{{form.goal_choices.label}}</label>
+                        {{form.goal_choices}}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.equipment_used.id_for_label}}" class="form-label">{{form.equipment_used.label}}</label>
+                        {{form.equipment_used}}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.special_notes.id_for_label}}" class="form-label">{{form.special_notes.label}}</label>
+                        {{form.special_notes}}
+                    </div>
+
+                </div>
 
                 <button type="submit" class="submit-btn">Request My Custom Plan</button>
             </form>

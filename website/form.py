@@ -35,7 +35,6 @@ class ClientForm(forms.ModelForm):
 
 
 class CustomServiceForm(forms.Form):
-
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
     phone_number = forms.CharField(max_length=10, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number'}))          
@@ -56,10 +55,13 @@ class CustomServiceForm(forms.Form):
         )
     )
     preferred_duration = forms.ChoiceField(
-        choices=CustomService.DURATION_OPTIONS,
+        choices=CustomService.PLAN_DURATION_OPTIONS,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+    workout_time = forms.ChoiceField(
+        choices=CustomService.WORKOUT_TIME_OPTIONS,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    
    
-
-
   

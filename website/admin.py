@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import AboutAndQuote, Booking, Service, Blog, ServiceFeatureItem,Testimonial, Client
+from . models import AboutAndQuote, Booking, CustomService, Service, Blog, ServiceFeatureItem,Testimonial, Client
 
 admin.site.register(AboutAndQuote)
 admin.site.register(ServiceFeatureItem)
@@ -33,3 +33,7 @@ class ClientAdmin(admin.ModelAdmin):
     list_display = ('name', 'gender', 'started_training_from', 'status')
     list_filter = ('services', 'status',)
 
+
+@admin.register(CustomService)
+class CustomServiceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email','goal_choices')

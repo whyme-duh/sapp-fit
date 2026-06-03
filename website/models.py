@@ -130,7 +130,13 @@ class CustomService(models.Model):
         ("Other" , "Other")
     ]
 
-    DURATION_OPTIONS = [
+    PLAN_DURATION_OPTIONS = [
+        ("1 Week Plan", "1 Week Plan"),
+        ("4 Weeks Plan", "4 Weeks Plan"),
+        ("12 Weeks Plan", "12 Weeks Plan"),
+    ]
+
+    WORKOUT_TIME_OPTIONS = [
         ("45 minutes", "45 minutes"),
         ("1 hour", "1 hour"),
         ("30 minutes", "30 minutes"),
@@ -143,7 +149,8 @@ class CustomService(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     special_notes = models.TextField(blank=True)
     equipment_used = models.TextField(blank=True)
-    preffered_duration = models.CharField(max_length=20, choices=DURATION_OPTIONS, blank=True)
+    preferred_duration = models.CharField(max_length=20, choices=PLAN_DURATION_OPTIONS, blank=True)
+    workout_time = models.CharField(max_length=20, choices=WORKOUT_TIME_OPTIONS, blank=True)
 
     def __str__(self):
         return f'{self.name} - Custom Service Request'
