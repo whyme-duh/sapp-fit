@@ -48,6 +48,6 @@ Behind the scenes, SAPPFIT operates as a mini-SaaS platform to manage the day-to
 
 When the user fill the form with necessary detail, the user can either send request to the trainer or just use AI to get a preview/alternative response. 
 
-<img src = "docs/form.png" alt ="form">
+<img src = "docs/airesponse.png" alt ="form">
 
 This is the result that user is provided with.
