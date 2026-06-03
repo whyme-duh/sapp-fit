@@ -148,10 +148,20 @@ class CustomService(models.Model):
         ("Other", "Other"),
     ]
 
+    ACTIVITY_LEVEL_CHOICES = [
+        ("Sedentary", "Sedentary (little or no exercise)"),
+        ("Lightly Active", "Lightly Active (light exercise/sports 1-3 days/week)"),
+        ("Moderately Active", "Moderately Active (moderate exercise/sports 3-5 days/week)"),
+        ("Very Active", "Very Active (hard exercise/sports 6-7 days a week)"),
+        ("Super Active", "Super Active (very hard exercise/sports & physical job or 2x training)"),
+    ]
+
     name = models.CharField(max_length=100)
-    age = models.IntegerField(blank = True)
-    weight = models.IntegerField(blank = True)
+    age = models.IntegerField(blank = True, null = True)
+    weight = models.IntegerField(blank = True, null = True)
     gender = models.TextField(choices= Client.GENDER_CHOICES, blank = True)
+    activity_level = models.TextField(choices= ACTIVITY_LEVEL_CHOICES, blank = True)
+
     email = models.EmailField()
     phone_number = models.IntegerField( max_length = 10)
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)

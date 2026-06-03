@@ -61,7 +61,7 @@ def send_email_about_booking(client_name, client_email,request_type, **kwargs):
             subject, 
             message, 
             settings.EMAIL_HOST_USER,
-            ['ritikshrestha94@gmail.com'],
+            ['saprinashrestha72@gmail.com'],
             fail_silently=False,
         )
 
@@ -128,6 +128,9 @@ def custom_service_request(request):
         if form.is_valid():
             button_clicked = request.POST.get('action')
             name = form.cleaned_data['name']
+            age = form.cleaned_data['age']
+            weight = form.cleaned_data['weight']
+            gender = form.cleaned_data['gender']
             email = form.cleaned_data['email']
             phone_number = form.cleaned_data['phone_number']
             goal_choices = form.cleaned_data['goal_choices']
@@ -135,7 +138,7 @@ def custom_service_request(request):
             equipment_used = form.cleaned_data['equipment_used']
             preferred_duration = form.cleaned_data['preferred_duration']
             workout_time = form.cleaned_data['workout_time']
-
+            activity_level = form.cleaned_data['activity_level']
             try:
                 if button_clicked == "human_request":
                     if CustomService.objects.filter(
@@ -156,7 +159,11 @@ def custom_service_request(request):
                             special_notes=special_notes,
                             equipment_used=equipment_used,
                             preferred_duration=preferred_duration,
-                            workout_time=workout_time
+                            workout_time=workout_time,
+                            activity_level=activity_level,
+                            age = age,
+                            weight = weight,
+    
                         )
                         # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
                         #     'phone_number': phone_number,
@@ -164,7 +171,8 @@ def custom_service_request(request):
                         #     'special_notes': special_notes,
                         #     'equipment_used': equipment_used,
                         #     'preferred_duration': preferred_duration,
-                        #     'workout_time': workout_time
+                        #     'workout_time': workout_time,
+                        #     'activity_level': activity_level
                         # })
                         # email_thread.start()
                         
@@ -179,13 +187,14 @@ def custom_service_request(request):
                         goal=goal_choices,
                         equipment=equipment_used,
                         notes=special_notes,
-                        workout_time=workout_time
+                        workout_time=workout_time,
+                        activity_level=activity_level
                     )
-                    print(gemini_response_result)
                     request.session['workout_plan'] = gemini_response_result
                     return redirect('ai-response')
 
-            except:
+            except Exception as e:
+                print(f"Error processing custom service request: {e}")
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
     return render(request, 'website/service/customservicepage.html', {'form':form, 'about' : about})
 

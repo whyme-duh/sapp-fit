@@ -44,12 +44,14 @@ class CustomServiceForm(forms.Form):
     )
     special_notes = forms.CharField(
         max_length=500,
+        required = False,
         widget=forms.Textarea(
             attrs={'class': 'form-control', 'placeholder': 'Any special notes or requirements', 'rows': 3}
         )
     )
     equipment_used = forms.CharField(
         max_length=500,
+        required = False,
         widget=forms.Textarea(
             attrs={'class': 'form-control', 'placeholder': 'Equipment you plan to use', 'rows': 3}
         )
@@ -69,3 +71,7 @@ class CustomServiceForm(forms.Form):
         choices=CustomService.GENDER_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+    activity_level = forms.ChoiceField(
+        choices=CustomService.ACTIVITY_LEVEL_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )   

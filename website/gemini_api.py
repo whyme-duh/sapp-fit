@@ -1,7 +1,7 @@
 from sapfit import settings
 
 
-def gemini_response(duration, age, gender, weight, goal, equipment, notes, workout_time):
+def gemini_response(duration, age, gender, weight, goal, equipment, notes, workout_time, activity_level):
     from google import genai
 
     client = genai.Client(api_key=settings.GEMINI_API_KEY)
@@ -18,6 +18,7 @@ def gemini_response(duration, age, gender, weight, goal, equipment, notes, worko
             - Primary Goal: {goal}
             - Available Equipment: {equipment}
             - Special Notes/Injuries: {notes}
+            - Activity Level: {activity_level}
 
             CRITICAL INSTRUCTIONS:
             1. You must respond ONLY with a valid JSON object. Do not include markdown formatting like ```json, do not include introductory text, and do not include concluding text. Just the raw JSON object.
@@ -47,8 +48,9 @@ def gemini_response(duration, age, gender, weight, goal, equipment, notes, worko
                 "Tip 1 from Saprina regarding form or nutrition",
                 "Tip 2 regarding hydration or recovery"
             ]
+
+            Furthermore, add a notice on the importance of consulting with a healthcare provider before starting any new workout routine, especially if they have pre-existing conditions or injuries.
             }}
             """
         )
-    print(response.text)
     return response.text
