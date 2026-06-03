@@ -1,0 +1,88 @@
+{% extends 'website/index.html' %}
+
+{% load static %}
+
+{% block title %}Workout Plan - AI Generated{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'website/customrequeststyle.css' %}">
+{% endblock %}
+
+{% include 'website/navbar.html' %}
+
+{% block content %}
+
+<div class="workout-result-container">
+    {{workout_plan}}
+    <div class="workout-header">
+        <span class="ai-badge">✨ AI Generated Preview</span>
+        <h1 class="title">{{ workout.workout_title }}</h1>
+        <p class="duration-tag">⏱️ {{ workout.estimated_duration_minutes }} Minutes</p>
+    </div>
+
+    <div class="workout-section">
+        <h2 class="section-title">Warmup</h2>
+        <div class="exercise-list">
+            {% for item in workout.warmup %}
+            <div class="exercise-card">
+                <div class="card-header">
+                    <h3>{{ item.exercise }}</h3>
+                    <span class="time-badge">{{ item.duration }}</span>
+                </div>
+                <p>{{ item.instructions }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="workout-section">
+        <h2 class="section-title">Main Workout</h2>
+        <div class="exercise-grid">
+            {% for item in workout.main_workout %}
+            <div class="exercise-card main-card">
+                <h3>{{ item.exercise }}</h3>
+                
+                <div class="workout-stats">
+                    <div class="stat-box"><strong>Sets</strong><br>{{ item.sets }}</div>
+                    <div class="stat-box"><strong>Reps</strong><br>{{ item.reps }}</div>
+                    <div class="stat-box"><strong>Rest</strong><br>{{ item.rest }}</div>
+                </div>
+                
+                <p class="instructions"><strong style="color: #ba9686;">Form cue:</strong> {{ item.instructions }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="workout-section">
+        <h2 class="section-title">Cooldown</h2>
+        <div class="exercise-list">
+            {% for item in workout.cooldown %}
+            <div class="exercise-card">
+                <div class="card-header">
+                    <h3>{{ item.exercise }}</h3>
+                    <span class="time-badge">{{ item.duration }}</span>
+                </div>
+                <p>{{ item.instructions }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pro-tips-box">
+        <h2>💡 Saprina's Pro Tips</h2>
+        <ul>
+            {% for tip in workout.pro_tips %}
+            <li>{{ tip }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="conversion-cta">
+        <h2>Ready to make it official?</h2>
+        <p>This AI plan is a great starting point, but nothing beats human accountability and precision. Send this profile to Saprina for a professional review and to book your official guided session.</p>
+        <a href="#" class="submit-btn final-cta">Book Official Session</a>
+    </div>
+
+</div>
+{% endblock %}

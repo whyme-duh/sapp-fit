@@ -2,6 +2,7 @@ import datetime
 from django.shortcuts import get_object_or_404, redirect, render
 import threading
 from sapfit import settings
+from website.gemini_api import gemini_response
 from .models import AboutAndQuote, Booking, Client, CustomService, Service, Blog, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
@@ -125,6 +126,7 @@ def custom_service_request(request):
 
         form = CustomServiceForm(request.POST)
         if form.is_valid():
+            button_clicked = request.POST.get('action')
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             phone_number = form.cleaned_data['phone_number']
@@ -135,43 +137,71 @@ def custom_service_request(request):
             workout_time = form.cleaned_data['workout_time']
 
             try:
-                if CustomService.objects.filter(
-                    name=name, 
-                    email=email, 
-                    phone_number=phone_number, 
-                    goal_choices=goal_choices, 
-                    preferred_duration=preferred_duration,
-                    workout_time=workout_time).exists():
-                    messages.error(request, f'You have already submitted a similar custom service request.')
+                if button_clicked == "human_request":
+                    if CustomService.objects.filter(
+                            name=name, 
+                            email=email, 
+                            phone_number=phone_number, 
+                            goal_choices=goal_choices, 
+                            preferred_duration=preferred_duration,
+                            workout_time=workout_time).exists():
+                                messages.error(request, f'You have already submitted a similar custom service request.')
 
-                else:
-                    CustomService.objects.create(
-                        name=name,
-                        email=email,
-                        phone_number=phone_number,
-                        goal_choices=goal_choices,
-                        special_notes=special_notes,
-                        equipment_used=equipment_used,
-                        preferred_duration=preferred_duration,
+                    else:
+                        CustomService.objects.create(
+                            name=name,
+                            email=email,
+                            phone_number=phone_number,
+                            goal_choices=goal_choices,
+                            special_notes=special_notes,
+                            equipment_used=equipment_used,
+                            preferred_duration=preferred_duration,
+                            workout_time=workout_time
+                        )
+                        # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
+                        #     'phone_number': phone_number,
+                        #     'goal_choices': goal_choices,
+                        #     'special_notes': special_notes,
+                        #     'equipment_used': equipment_used,
+                        #     'preferred_duration': preferred_duration,
+                        #     'workout_time': workout_time
+                        # })
+                        # email_thread.start()
+                        
+                        messages.success(request, f'Your custom service request has been submitted!')
+                        return redirect('home-page')
+                elif button_clicked == "ai_preview":
+                    gemini_response_result = gemini_response(
+                        duration=preferred_duration,
+                        age=40,
+                        gender="Male",
+                        weight="70kg",
+                        goal=goal_choices,
+                        equipment=equipment_used,
+                        notes=special_notes,
                         workout_time=workout_time
                     )
-                    email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
-                        'phone_number': phone_number,
-                        'goal_choices': goal_choices,
-                        'special_notes': special_notes,
-                        'equipment_used': equipment_used,
-                        'preferred_duration': preferred_duration,
-                        'workout_time': workout_time
-                    })
-                    # email_thread.start()
-                    messages.success(request, f'Your custom service request has been submitted!')
-                    return redirect('home-page')
-
+                    print(gemini_response_result)
+                    request.session['workout_plan'] = gemini_response_result
+                    return redirect('ai-response')
 
             except:
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
     return render(request, 'website/service/customservicepage.html', {'form':form, 'about' : about})
 
+
+def ai_response(request):
+    ai_workout_plan = request.session.get('workout_plan')
+
+    if not ai_workout_plan:
+        messages.error(request, f'No AI-generated workout plan found. Please submit a custom service request first.')
+        return redirect('custom-service')
+    try:
+        import json
+        workout_data = json.loads(ai_workout_plan)
+    except json.JSONDecodeError:
+        return redirect('custom-service')
+    return render(request, 'website/service/geminiresponse.html', {'workout': workout_data})
 
 def BlogDetailView(request, slug):
     about = AboutAndQuote.objects.all()
@@ -235,6 +265,9 @@ def edit_client(request, id):
     else:
         form = ClientForm()
     return redirect('client-view')
+
+
+
 
 
 

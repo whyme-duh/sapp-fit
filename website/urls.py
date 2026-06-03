@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from website.views import client_view, custom_service_request, delete_client, index, BlogPostView, BlogDetailView, service_detail_view, edit_client
+from website.views import ai_response, client_view, custom_service_request, delete_client, gemini_response, index, BlogPostView, BlogDetailView, service_detail_view, edit_client
 
 urlpatterns = [
     path('', index, name ="home-page"),
     path('services/<slug:slug>/', service_detail_view, name ="service-detail"),
     path('custom-service/', custom_service_request, name ="custom-service"),
-    path('blogs/', BlogPostView, name='blogs'),
+    path('ai-response/', ai_response, name ="ai-response"),
+    path('blogs/', BlogPostView, name='blogs'),  
     path('blogs/<slug:slug>/', BlogDetailView, name='blog-detail'),
     path('clients/', client_view, name='client-view'),
     path('delete/<int:id>', delete_client, name='delete-client'),

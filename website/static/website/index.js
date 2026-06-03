@@ -150,3 +150,28 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => isAutoPlaying = true, 2000);
     });
 });
+
+// code below is for the custom service request page
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Grab your form (make sure your <form> tag has id="plan-request-form")
+    const form = document.getElementById("plan-request-form");
+    const loadingScreen = document.getElementById("ai-loading-screen");
+
+    if (form) {
+        form.addEventListener("submit", function(event) {
+            // 2. Find out WHICH button caused the submit
+            const buttonClicked = event.submitter;
+
+            // 3. If it was the AI button, show the loading screen
+            if (buttonClicked && buttonClicked.value === "ai_preview") {
+                // Show the overlay
+                loadingScreen.style.display = "flex";
+                
+                // Optional: Disable the button so they can't double-click it
+                buttonClicked.disabled = true;
+                
+                // We DON'T preventDefault() here, because we want the form to actually submit to Django!
+            }
+        });
+    }
+});

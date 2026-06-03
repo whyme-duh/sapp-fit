@@ -58,12 +58,26 @@ Custom Service Request
                             {{form.name}}
                         </div>
                         <div class="form-group">
-                            <label for="{{form.phone_number.id_for_label}}" class="form-label">{{form.phone_number.label}}</label>
-                            {{form.phone_number}}
+                            <label for="{{form.age.id_for_label}}" class="form-label">{{form.age.label}}</label>
+                            {{form.age}}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{form.weight.id_for_label}}" class="form-label">{{form.weight.label}}</label>
+                            {{form.weight}}
                         </div>
                     </div>
 
                     <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{form.email.id_for_label}}" class="form-label">{{form.email.label}}</label>
+                            {{form.email}}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{form.gender.id_for_label}}" class="form-label">{{form.gender.label}}</label>
+                            {{form.gender}}
+                        </div>
+                    </div>
+                     <div class="form-row">
                         <div class="form-group">
                             <label for="{{form.workout_time.id_for_label}}" class="form-label">{{form.workout_time.label}}</label>
                             {{form.workout_time}}
@@ -73,11 +87,6 @@ Custom Service Request
                             <label for="{{form.preferred_duration.id_for_label}}" class="form-label">{{form.preferred_duration.label}}</label>
                             {{form.preferred_duration}}
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="{{form.email.id_for_label}}" class="form-label">{{form.email.label}}</label>
-                        {{form.email}}
-                       
                     </div>
 
                     <div class="form-group">
@@ -96,9 +105,24 @@ Custom Service Request
                     </div>
 
                 </div>
-
-                <button type="submit" class="submit-btn">Request My Custom Plan</button>
+                <div class="button-group" style="display: flex; gap: 1em; margin-top: 2em;">
+                    <button type="submit" name="action" value="human_request" class="submit-btn primary">
+                        Request Official Plan
+                    </button>
+                    
+                    <button type="submit" name="action" value="ai_preview" class="submit-btn secondary" style="background-color: #d3c1c1; color: #333;">
+                        Ask AI for a Preview
+                    </button>
+                </div>
             </form>
+        </div>
+    </div>
+    <div id="ai-loading-screen" class="loading-overlay" style="display: none;">
+        <div class="loader-content">
+            <div class="custom-spinner"></div>
+            
+            <h2 style="font-family: var(--title-family); color: #333; margin-top: 1em;">Analyzing your profile...</h2>
+            <p style="color: #666; font-family: var(--paragraph-font);">Saprina's AI is building your custom 45-minute routine.</p>
         </div>
     </div>
 </div>

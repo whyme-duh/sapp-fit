@@ -63,5 +63,9 @@ class CustomServiceForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     
-   
-  
+    age = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Age'}))
+    weight = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Weight in kg'}))
+    gender  = forms.ChoiceField(
+        choices=CustomService.GENDER_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )

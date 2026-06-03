@@ -142,7 +142,16 @@ class CustomService(models.Model):
         ("30 minutes", "30 minutes"),
     ]
 
+    GENDER_CHOICES = [
+        ("Male", "Male"),
+        ("Female", "Female"),
+        ("Other", "Other"),
+    ]
+
     name = models.CharField(max_length=100)
+    age = models.IntegerField(blank = True)
+    weight = models.IntegerField(blank = True)
+    gender = models.TextField(choices= Client.GENDER_CHOICES, blank = True)
     email = models.EmailField()
     phone_number = models.IntegerField( max_length = 10)
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
