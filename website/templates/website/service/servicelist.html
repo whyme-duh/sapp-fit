@@ -1,0 +1,34 @@
+{% extends 'website/index.html'%}
+
+{% block title %}Our Services - SAPFIT{% endblock %}
+
+
+
+
+{% block content %}
+{% include 'website/navbar.html' %}
+
+<div class="services-container">
+    <div class="services hidden" id="services" style="align-items: flex-start;">
+        <h1 class="title" style="margin:0;margin-bottom:2em;">My Services</h1>
+        <div class="services-list">
+            {% for service in services %}
+            <a href="{% url 'service-detail' service.slug %}" class="service-card child">
+                    <img src={{service.icon.url}} alt="img" class="img">
+                    <div class="overlay-color"></div>
+                    <h1 class="service-name">{{service.title}}</h1>
+                    <div class="service-content">
+                        <div class="service-content-detail">
+                            <h2 class="service-title">{{service.title}}</h2>
+                            <p class="service-detail">{{service.info}}</p>
+                            <p class="price">Rs.{{service.price}}</p>
+                        </div>
+                    </div>
+            </a>
+            {% endfor %} 
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

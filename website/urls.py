@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from website.views import ai_response, client_view, custom_service_request, delete_client, gemini_response, index, BlogPostView, BlogDetailView, service_detail_view, edit_client
+from website.views import ai_response, client_view, custom_service_request, delete_client, gemini_response, index, BlogPostView, BlogDetailView, service_detail_view, edit_client, services
 
 urlpatterns = [
     path('', index, name ="home-page"),
+    path('services/', services, name ="services-page"),
     path('services/<slug:slug>/', service_detail_view, name ="service-detail"),
     path('custom-service/', custom_service_request, name ="custom-service"),
     path('ai-response/', ai_response, name ="ai-response"),

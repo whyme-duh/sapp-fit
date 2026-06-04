@@ -11,17 +11,20 @@ from .form import BookingForm, ClientForm, CustomServiceForm
 from django.core.mail import send_mail
 
 
-context = {
+
+def index(request):
+    return render(request, 'website/home.html', {
     'about' : AboutAndQuote.objects.all(),
     'services': Service.objects.all(),
     'blogs': Blog.objects.all(),
     'date' :datetime.datetime.today().strftime("%Y"),
     'testimonials' : Testimonial.objects.all(),
     'debug': settings.DEBUG
-    }
+    })
 
-def index(request):
-    return render(request, 'website/home.html', context)
+
+def services(request):
+    return render(request, 'website/service/servicelist.html', {"services": Service.objects.all()})
 
 
 def send_email_about_booking(client_name, client_email,request_type, **kwargs):
@@ -110,13 +113,11 @@ def service_detail_view(request, slug):
         form = BookingForm()
     service = Service.objects.get(slug = slug)
     other_services = Service.objects.all().exclude(slug = slug)
-    about = AboutAndQuote.objects.all()
-    return render(request, 'website/service/servicedetail.html', context = {'service' : service, 'about' : about, "other_services" : other_services, 'form' : form})
+    return render(request, 'website/service/servicedetail.html', context = {'service' : service, "other_services" : other_services, 'form' : form})
 
 @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
     form = CustomServiceForm()
-    about = AboutAndQuote.objects.all()
     if request.method == "POST":
         was_limited = getattr(request, 'limited', False)
 
@@ -165,15 +166,15 @@ def custom_service_request(request):
                             weight = weight,
     
                         )
-                        # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
-                        #     'phone_number': phone_number,
-                        #     'goal_choices': goal_choices,
-                        #     'special_notes': special_notes,
-                        #     'equipment_used': equipment_used,
-                        #     'preferred_duration': preferred_duration,
-                        #     'workout_time': workout_time,
-                        #     'activity_level': activity_level
-                        # })
+                        email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
+                            'phone_number': phone_number,
+                            'goal_choices': goal_choices,
+                            'special_notes': special_notes,
+                            'equipment_used': equipment_used,
+                            'preferred_duration': preferred_duration,
+                            'workout_time': workout_time,
+                            'activity_level': activity_level
+                        })
                         # email_thread.start()
                         
                         messages.success(request, f'Your custom service request has been submitted!')
@@ -181,9 +182,9 @@ def custom_service_request(request):
                 elif button_clicked == "ai_preview":
                     gemini_response_result = gemini_response(
                         duration=preferred_duration,
-                        age=40,
-                        gender="Male",
-                        weight="70kg",
+                        age=age,
+                        gender=gender,
+                        weight=weight,
                         goal=goal_choices,
                         equipment=equipment_used,
                         notes=special_notes,
@@ -196,7 +197,7 @@ def custom_service_request(request):
             except Exception as e:
                 print(f"Error processing custom service request: {e}")
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
-    return render(request, 'website/service/customservicepage.html', {'form':form, 'about' : about})
+    return render(request, 'website/service/customservicepage.html', {'form':form})
 
 
 def ai_response(request):
@@ -213,10 +214,9 @@ def ai_response(request):
     return render(request, 'website/service/geminiresponse.html', {'workout': workout_data})
 
 def BlogDetailView(request, slug):
-    about = AboutAndQuote.objects.all()
     blogs = Blog.objects.get(slug=slug)
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
-    return render(request, 'website/blog/blogdetail.html', {'blog' : blogs, 'related_blogs' : related_blogs,'about' : about})
+    return render(request, 'website/blog/blogdetail.html', {'blog' : blogs, 'related_blogs' : related_blogs})
 
 
 def BlogPostView(request):
@@ -240,9 +240,8 @@ def client_view(request):
     else:
         form = ClientForm()
     active_clients_count = Client.objects.filter(status = "Ongoing").count()
-    about = AboutAndQuote.objects.all()
     clients = Client.objects.all()
-    return render(request, 'website/clients/clients.html', {'clients' : clients, 'about' : about, "active_clients_count": active_clients_count, 'form': form})
+    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'form': form})
 
 
 @login_required

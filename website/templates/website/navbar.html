@@ -1,3 +1,5 @@
+{%load static %}
+
 <div class="navbar responsive-navbar">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{about.0.logo.url}}" alt="logo"></a></div>
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/logo.png' %}" alt="logo"></a></div>
 </div>

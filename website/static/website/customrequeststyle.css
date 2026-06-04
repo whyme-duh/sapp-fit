@@ -74,6 +74,18 @@
     font-size: 0.95em;
 }
 
+.note h4{
+    font-family: var(--role-font);
+    color:  #774936;
+    margin-bottom: 0.85em;
+}
+.note p{
+    font-family: var(--paragraph-font);
+    color: #555;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+    text-align: justify;
+}
 
 .custom-form {
     display: flex;
