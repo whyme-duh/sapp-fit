@@ -1,8 +1,8 @@
 from sapfit import settings
+from google import genai
 
 
 def gemini_response(duration, age, gender, weight, goal, equipment, notes, workout_time, activity_level):
-    from google import genai
 
     client = genai.Client(api_key=settings.GEMINI_API_KEY)
     response = client.models.generate_content(

@@ -33,6 +33,14 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = "__all__"  
 
+    def clean(self):
+        super(ClientForm, self).clean()
+        age = self.cleaned_data['age']
+
+        if age <10 or age > 100:
+            self._errors['age'] = self.error_class(["Please enter valid age!"]) 
+        return self.cleaned_data
+
 
 class CustomServiceForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))

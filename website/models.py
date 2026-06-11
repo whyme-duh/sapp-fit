@@ -4,7 +4,7 @@ import PIL
 
 class AboutAndQuote(models.Model):
     bio = models.TextField()
-    phone_number = models.IntegerField(default= 98123123122, max_length = 10)
+    phone_number = models.IntegerField(default= 9812312312)
     email_id = models.EmailField(blank = True)
     backgroundImage = models.ImageField(upload_to='images/bg', null=True)
     profileImage = models.ImageField(upload_to='images/bg', null=True)
@@ -38,6 +38,7 @@ class Service(models.Model):
     price= models.IntegerField()
     icon = models.ImageField(upload_to='images/pics')
     slug = models.SlugField(null = True)
+    
 
 
     def __str__(self):
@@ -89,16 +90,32 @@ class Client(models.Model):
         ("Completed", "Completed"),
     ]
 
+    PAID_OPTIONS = [
+        ("Paid", "Paid"),
+        ("Not Paid", "Not Paid")
+    ]
+
     name = models.CharField(max_length=100)
+    total_sessions = models.IntegerField(default = 1)
     age = models.IntegerField()
     gender = models.TextField(choices= GENDER_CHOICES)
     started_training_from = models.DateField()
     services = models.ForeignKey(Service, on_delete= models.PROTECT)
     any_problem = models.TextField(default="N/A")
-    status = models.TextField(choices= STATUS_CHOICES)
+    status = models.CharField(max_length = 100, choices= STATUS_CHOICES)
+    paid_or_not = models.CharField(max_length = 100, choices= PAID_OPTIONS, blank = True, null = True)
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        if self.total_sessions == 0:
+            self.status = "Completed"
+        super().save(*args, **kwargs)
+    
+
+    
+
 
 
 class Booking(models.Model):
@@ -109,7 +126,7 @@ class Booking(models.Model):
         ("Cancelled" , "Cancelled") ]
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.IntegerField( max_length = 10)
+    phone_number = models.IntegerField()
     service = models.ForeignKey(Service, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
     preferred_date = models.DateField() 
@@ -165,7 +182,7 @@ class CustomService(models.Model):
     activity_level = models.TextField(choices= ACTIVITY_LEVEL_CHOICES, blank = True)
 
     email = models.EmailField()
-    phone_number = models.IntegerField( max_length = 10)
+    phone_number = models.IntegerField()
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     special_notes = models.TextField(blank=True)

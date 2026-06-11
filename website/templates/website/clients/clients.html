@@ -54,6 +54,15 @@
                         <div class="form-group">
                             <label for="{{ form.age.id_for_label }}">Age</label>
                             {% render_field form.age class="form-control" placeholder="e.g. 28" %}
+                            {% if form.errors.age %}
+                            <div class="alert-danger">
+                                {{form.errors.age}}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.total_sessions.id_for_label }}">Total Sessions</label>
+                            {% render_field form.total_sessions class="form-control" placeholder="e.g. 2" %}
                         </div>
 
                         <div class="form-group">
@@ -106,7 +115,7 @@
                             <th>Client Name</th>
                             <th>Age</th>
                             <th>Active Package</th>
-                            <th>Sessions Left</th>
+                            <th>Total Sessions</th>
                             <th>Last Session</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -120,7 +129,7 @@
                             </td>
                             <td>{{client.age}}</td>
                             <td>{{client.services.title}}</td>
-                            <td><span class="session-badge">4 left</span></td>
+                            <td><span class="session-badge">{{client.total_sessions}}</span></td>
                             <td>{{client.started_training_from}}</td>
                             <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
                             <td class="actions">
