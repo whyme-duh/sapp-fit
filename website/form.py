@@ -75,3 +75,16 @@ class CustomServiceForm(forms.Form):
         choices=CustomService.ACTIVITY_LEVEL_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
     )   
+
+    def clean(self):
+        super(CustomServiceForm, self).clean()
+        age = self.cleaned_data['age']
+        weight = self.cleaned_data['weight']
+        phone = self.cleaned_data['phone_number']
+        if age < 10 or age > 60:
+            self._errors['age'] = self.error_class(['I can only provide services to people aged 10 to 60.'])
+        if weight < 40 or weight > 100:
+            self._errors['weight'] = self.error_class(['Please enter a valid weight in kg.'])
+        if len(phone) != 10:
+            self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+        return self.cleaned_data

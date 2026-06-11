@@ -15,6 +15,8 @@ class AboutAndQuote(models.Model):
     instagram = models.URLField(null=True)
     pinterest = models.URLField(null=True)
     youtube = models.URLField(null=True)
+    tag = models.CharField(max_length=100, null = True, blank = True, help_text="Add a comma after each tag and make sure it is less than 5.")
+
 
     def __str__(self):
         return self.bio

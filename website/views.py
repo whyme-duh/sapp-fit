@@ -13,13 +13,16 @@ from django.core.mail import send_mail
 
 
 def index(request):
+    about = AboutAndQuote.objects.first()
+    tags_list = [tag.strip() for tag in about.tag.split(',')] if about.tag else []
     return render(request, 'website/home.html', {
-    'about' : AboutAndQuote.objects.all(),
+    'about': about,
     'services': Service.objects.all(),
     'blogs': Blog.objects.all(),
     'date' :datetime.datetime.today().strftime("%Y"),
     'testimonials' : Testimonial.objects.all(),
-    'debug': settings.DEBUG
+    'debug': settings.DEBUG,
+    "tags_list": tags_list
     })
 
 
@@ -115,7 +118,7 @@ def service_detail_view(request, slug):
     other_services = Service.objects.all().exclude(slug = slug)
     return render(request, 'website/service/servicedetail.html', context = {'service' : service, "other_services" : other_services, 'form' : form})
 
-@ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
+# @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
     form = CustomServiceForm()
     if request.method == "POST":
@@ -220,7 +223,7 @@ def BlogDetailView(request, slug):
 
 
 def BlogPostView(request):
-    return render(request,'website/blog/blogs.html',  context)
+    return render(request,'website/blog/blogs.html',  {'blogs': Blog.objects.all()})
 
     
 

@@ -1,8 +1,9 @@
 {% extends 'website/index.html' %}
+{% load static %}
 <title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
 {% block content %}
 <div class=" navbar ">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{about.0.logo.url}}" alt="logo"></a></div>
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/logo.png' %}" alt="logo"></a></div>
     <nav class="right-side" id="responsive">
         <ul>
             <li><a href="{% url 'home-page' %}">Home</a></li>
@@ -29,7 +30,7 @@
 </div>  
 
 <div class="first-page">
-    <img src="{{about.0.backgroundImage.url}}" alt="background-images" class="bg-image">
+    <img src="{{about.backgroundImage.url}}" alt="background-images" class="bg-image">
     <div class="first-page-content">
         <h1>Hi,</h1>
         <h1>I'M <span class="name">Sapp-Fit</span></h1>
@@ -43,20 +44,30 @@
 </div>
 <div class="about-container" id="about">
     <div class="about hidden" >
-        <img src="{{about.0.profileImage.url}}" alt="profile" class="about-image">
+        <img src="{{about.profileImage.url}}" alt="profile" class="about-image">
         <div class="about-content">
+            
             <h1 class="title">About Me</h1>
+            <div class="tag-holder">
+            {% for t in tags_list %}
+                <p class="tag">
+                    {{t}}
+                </p>
+            {% endfor %}
+            </div>
+
             <p class="bio">
-                {{about.0.bio}}
+                {{about.bio}}
             </p>
+            
             <a href="#contact"><button>Train With Me <i class="fas fa-dumbbell"></i></button></a>
         </div>
     </div>
 </div>
-<div class="quotes-container" style="background-image: url({{about.0.quoteContainerImage.url}});">
+<div class="quotes-container" style="background-image: url({{about.quoteContainerImage.url}});">
     <div class="quotes">
         <h1 class="quote">"</h1>
-        <h1 class="sentence">{{about.0.quotes}} </h1>
+        <h1 class="sentence">{{about.quotes}} </h1>
         <h1 class="quote second">"</h1>
 
     </div>
@@ -171,17 +182,17 @@
             <h1 class="title">Contact Me</h1>
             <p class="bio">Slide into my DMs to start your fitness journey, or message me directly below</p>
             <div class="contact-detail">
-                <a href="{{about.0.instagram}}">
+                <a href="{{about.instagram}}">
                     <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
                 </a>
-                <p><i class="fa fa-phone"></i>&nbsp; +977 {{about.0.phone_number}}</p>
-                <p><i class="fa fa-envelope"></i>&nbsp; {{about.0.email_id}}</p>
+                <p><i class="fa fa-phone"></i>&nbsp; +977 {{about.phone_number}}</p>
+                <p><i class="fa fa-envelope"></i>&nbsp; {{about.email_id}}</p>
                 <div class="other-contact">
                     <div class="socials">
-                        <a href="{{about.0.facebook}}" class="fa fa-facebook"></a>
-                        <a href="{{about.0.instagram}}" class="fa fa-instagram"></a>
-                        <a href="{{about.0.youtube}}" class="fa fa-youtube"></a>
-                        <a href="{{about.0.pinterest}}" class="fa fa-pinterest"></a>
+                        <a href="{{about.facebook}}" class="fa fa-facebook"></a>
+                        <a href="{{about.instagram}}" class="fa fa-instagram"></a>
+                        <a href="{{about.youtube}}" class="fa fa-youtube"></a>
+                        <a href="{{about.pinterest}}" class="fa fa-pinterest"></a>
                     </div>
                 </div>  
                             
@@ -192,7 +203,7 @@
 </div>
 <!-- this is for the footer as well -->
 <div class=" navbar responsive-navbar">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{{about.0.logo.url}}" alt="svg"></a></div>
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/logo.png' %}" alt="svg"></a></div>
     <nav class="right-side" id="responsive">
         <ul>
             <li><a href="{% url 'home-page' %}">Home</a></li>

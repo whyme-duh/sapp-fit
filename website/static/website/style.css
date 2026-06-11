@@ -411,6 +411,31 @@ li a:hover{
     font-family: var(--role-font);
     border-radius: 10px;
 }
+.tag-holder{
+    position: relative;
+    display: flex;
+    width:100%;
+    gap:0.75em;
+    animation: aboutAnimation 1s ease-in-out;
+    
+}
+
+.tag{
+    background-color:#faedcd ;
+    padding-inline:1em;
+    padding-block:0.85em;
+    width: fit-content;
+    align-items: flex-start;
+    margin:0;
+    margin-top:2em;
+    font-size:0.85em;
+    border-radius: 10px;
+    font-family: var(--paragraph-font);
+    font-weight: 500;
+}
+.tag:hover{
+    background-color: #f8da88;
+}
 .dumbbell{
     visibility:hidden;
     width: 30px;
@@ -973,10 +998,10 @@ iframe{
 .copyright{
     background-color: var(--navbar-color);
     width: 100%;
-    color:rgb(138, 138, 138);
+    color:rgb(38, 38, 38);
     text-align: center;
+    font-size:0.85em;
     padding-bottom: 1em;
-    font-family: var(--role-font);
 }
 
 @media only screen and (max-width:600px){
