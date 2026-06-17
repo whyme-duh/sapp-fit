@@ -270,6 +270,7 @@ body {
 .delete{
     background: rgb(237, 55, 9);
     color: white;
+    cursor: pointer;
 }
 
 .edit:hover {
@@ -436,4 +437,53 @@ input:disabled{
     .modal-footer {
         border-radius: 0;
     }
+}
+
+.delete-modal{
+    position: absolute;
+    top: 0;
+    left:0;
+    height: 100vh;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.273);
+}
+.delete-modal-card{
+    background-color: white;
+    border-radius: 5px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding:1em;
+}
+.btn-groups{
+    margin-top: 1em;
+    display: flex;
+    flex-grow: 1;
+    gap:1em;
+}
+.btn-groups button{
+    width:100%;
+    border-radius: 5px;
+    padding-block: 0.5em;
+    cursor: pointer;
+}
+.alert-danger{
+    background-color: red;
+    color:white;
+    border: none;
+}
+
+.alert-success{
+    background-color: rgb(194, 194, 194);
+    color: black;
+    border: none;
+}
+.alert-danger:hover{
+    background-color: rgb(255, 60, 60);
+}
+.alert-success:hover{
+    background-color:grey ;
 }

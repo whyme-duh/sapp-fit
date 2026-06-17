@@ -147,6 +147,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+
+function deleteModalFunction(option, button){
+    const deleteModalContainer = document.getElementById('delete-modal-container');
+    const cancelDeleteBtn = document.getElementById('no-delete-btn');
+    const deleteForm = document.getElementById('delete-form');
+
+    if (option == "openModal"){
+        deleteForm.action = button.dataset.url;
+        deleteModalContainer.style.display = "flex";
+    }
+    else if (option == "closeModal"){
+        deleteModalContainer.style.display = "none";
+    }
+    
+}
+
+
+
 // code below is for the custom service request page
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("plan-request-form");

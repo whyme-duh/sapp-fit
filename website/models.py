@@ -111,6 +111,9 @@ class Client(models.Model):
     def save(self, *args, **kwargs):
         if self.total_sessions == 0:
             self.status = "Completed"
+
+        if self.status == "Completed":
+            self.total_sessions = 0
         super().save(*args, **kwargs)
     
 

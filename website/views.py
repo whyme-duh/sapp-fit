@@ -243,7 +243,7 @@ def client_view(request):
     else:
         form = ClientForm()
     active_clients_count = Client.objects.filter(status = "Ongoing").count()
-    clients = Client.objects.all()
+    clients = Client.objects.all().order_by("-status")
     return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'form': form})
 
 

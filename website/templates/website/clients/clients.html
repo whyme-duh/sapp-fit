@@ -146,12 +146,24 @@
                                 data-problem="{{ client.any_problem }}">
                                 Edit
                             </a>
-                                <a href="{% url 'delete-client' client.id %}" class="action-link delete">Delete</a>
+                                <a class="action-link delete" id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-url = "{% url 'delete-client' client.id %}">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="delete-modal" id="delete-modal-container">
+            <div class="delete-modal-card">
+                <h3>Are you sure you want to delete?</h>
+                <div class="btn-groups">
+                    <form action="" id="delete-form">
+                        {% csrf_token %}
+                        <button class="alert-danger" id="yes-delete-btn">Yes</button>
+                    </form>
+                    <button class="alert-success" id="no-delete-btn" onclick="deleteModalFunction('closeModal', this)">No</button>
+                </div>
             </div>
         </div>
 
