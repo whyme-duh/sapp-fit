@@ -1,0 +1,78 @@
+{% extends 'website/index.html' %}
+{% load static %}
+{% load widget_tweaks %}           
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/customrequeststyle.css' %}">
+
+
+{% endblock %}
+
+<title>{%block title%} Book - {{service.title}} {% endblock %}</title>
+
+{% block content %}
+
+{% include 'website/navbar.html' %}
+<div class="request-container">
+    <div class="request-header">
+        <h1 class="title">{{service.title}} </h1>
+        <p class="subtitle">{{service.info}} </p>
+    </div>
+
+    <div class="request-split">
+        <div class="request-info">
+            <h2>Features:</h2>
+            {% for feature in service.feature.all %}
+            <ul class="step">
+                <li>{{feature}}</li>
+            </ul>
+
+            {% endfor %}
+           
+        </div>
+
+            <div class="modal-box">
+            
+            <form method="POST" id="clientForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">First Name</label>
+                        {% render_field form.name class="form-control bt-4" placeholder="Jane" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email</label>
+                        {% render_field form.email class="form-control bt-4" placeholder="jane@example.com" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+                        {% render_field form.phone_number class="form-control bt-4" placeholder="9xxx xx xx xx " %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.service_type.id_for_label }}">Service</label>
+                        {% render_field form.service_type class="form-control bt-4" value=service.title %}
+                    </div>
+
+
+                    
+                    <div class="form-group">
+                        <label for="{{ form.preferred_date.id_for_label }}">Start Date</label>
+                        {% render_field form.preferred_date %}
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Send Request</button>
+                </div>
+            </form>
+            </div>
+
+        </div>
+   
+</div>
+
+
+{% endblock %}

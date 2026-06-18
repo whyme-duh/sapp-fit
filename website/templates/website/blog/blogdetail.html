@@ -27,14 +27,15 @@
         <div class="related-blog-list">
             {% for rel in related_blogs|slice:4 %}
             <div class="related-blog-card">
-                <a href="{% url 'blog-detail' rel.slug%}">
                 <img src="{{rel.thumbnail.url}}" alt="img">
                 <div class="rel-detail">
                     <h2>{{rel.title}}</h2>
                     <p>{{rel.content|safe|truncatewords:15}}</p>
-                    <small>{{rel.date|date}} • {{rel.total_time_to_read}} min read</small>
+                    <div class="blog-card-footer">
+                        <a href="{% url 'blog-detail' blog.slug %}" class="read-more-btn">Read This Article</a>
+                        <small class="small-text">{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+                    </div>
                 </div>
-                </a>
             </div>
             {% endfor %}
         </div>
