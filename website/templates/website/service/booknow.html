@@ -3,7 +3,7 @@
 {% load widget_tweaks %}           
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'website/customrequeststyle.css' %}">
+<link rel="stylesheet" href="{% static 'website/booknow.css' %}">
 
 
 {% endblock %}
@@ -18,7 +18,6 @@
         <h1 class="title">{{service.title}} </h1>
         <p class="subtitle">{{service.info}} </p>
     </div>
-
     <div class="request-split">
         <div class="request-info">
             <h2>Features:</h2>
@@ -28,10 +27,16 @@
             </ul>
 
             {% endfor %}
+
+            <div class="note">
+                <h4>Note: </h4>
+                <p>All information provided will be kept confidential and used solely for the purpose of creating your custom workout plan.</p>
+                <p>You will be contacted once I receive your request and the payment of <strong>Rs. {{service.price}}</strong> will be handled in person.</p>
+            </div>
            
         </div>
 
-            <div class="modal-box">
+        <div class="request-form-wrapper">
             
             <form method="POST" id="clientForm">
                 {% csrf_token %}
@@ -49,6 +54,9 @@
                     <div class="form-group">
                         <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
                         {% render_field form.phone_number class="form-control bt-4" placeholder="9xxx xx xx xx " %}
+                        {% if form.errors.phone_number %}
+                        <p class="alert-danger">{{form.errors.phone_number}}</p>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label for="{{ form.service_type.id_for_label }}">Service</label>
@@ -65,11 +73,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Send Request</button>
+                    <button type="submit" class="submit-btn primary">Send Request</button>
                 </div>
             </form>
-            </div>
-
         </div>
    
 </div>

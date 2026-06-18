@@ -129,7 +129,9 @@ class Booking(models.Model):
         ("Cancelled" , "Cancelled") ]
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(
+        max_length=10
+    )
     service = models.ForeignKey(Service, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
     preferred_date = models.DateField() 

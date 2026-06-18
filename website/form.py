@@ -7,7 +7,7 @@ class BookingForm(forms.Form):
 
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number'}))          
+    phone_number = forms.IntegerField( widget=forms.NumberInput(attrs={'class': 'form-control', 'maxlength' : 10}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -25,6 +25,15 @@ class BookingForm(forms.Form):
                 'value': '',
                 'disabled': 'disabled',
             }))
+    
+
+    def clean(self):
+        super(BookingForm, self).clean()
+        phone_number = self.cleaned_data['phone_number']
+        if len(str(phone_number)) != 10:
+            self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+        return self.cleaned_data
+
         
 
 class ClientForm(forms.ModelForm):

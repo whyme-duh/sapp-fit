@@ -71,7 +71,8 @@
     color: white;
 }
 .book-now-btn{
-    margin-top: 2em;
+    position: absolute;
+    margin-top: 3em;
     padding: 14px 35px;
     background-color: var(--accent-color);
     color: #fff;

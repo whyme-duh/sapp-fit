@@ -201,7 +201,8 @@ def service_book_now(request, slug):
             
         else:
             error_details = form.errors.as_text()
-            messages.error(request, f'Error occured. Try again! Details: {error_details}')
+            print(error_details)
+            messages.error(request, f'Error occured. Try again!')
     else:
         form = BookingForm()
     return render(request, 'website/service/booknow.html', {'service' : Service.objects.get(slug = slug), 'form': form} )
