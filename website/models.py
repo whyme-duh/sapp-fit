@@ -127,6 +127,8 @@ class Booking(models.Model):
         ("Pending" , "Pending"),    
         ("Confirmed" , "Confirmed"),
         ("Cancelled" , "Cancelled") ]
+    
+   
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.IntegerField(
@@ -141,6 +143,7 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.service.title}'
+    
     
 
 class CustomService(models.Model):

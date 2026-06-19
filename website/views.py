@@ -95,8 +95,8 @@ def service_detail_view(request, slug):
                 service = service_type,
                 preferred_date = preferred_date,
             )
-            email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
-            email_thread.start()
+            # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
+            # email_thread.start()
             messages.success(request, f'Your booking request has been sent! We will contact you soon.')
             
         return redirect('service-detail', slug = slug)
@@ -193,26 +193,27 @@ def custom_service_request(request):
 
 
 @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
-def service_book_now(request, slug):
+def service_book_now(request):
     if request.method == "POST":
         was_limited = getattr(request, 'limited', False)
 
         if was_limited:
             messages.error(request, f'Too many booking requests from this IP. Please try again later.')
-            return redirect('service-detail', slug = slug)
+            return redirect('services-page')
+        
         
         form = BookingForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            service_type = Service.objects.get(slug = slug)
+            service_type = form.cleaned_data['service_type']
             preferred_date = form.cleaned_data['preferred_date']
             phone_number = form.cleaned_data['phone_number']
 
             existing_booking_check = Booking.objects.filter(name = name, email = email, service = service_type, preferred_date = preferred_date).exists()
             if existing_booking_check:
                 messages.error(request, f'You have already booked this service for the selected date.')
-                return redirect('service-detail', slug = slug)
+                return redirect('services-page')
             else:
                 Booking.objects.create(
                     name = name,
@@ -221,19 +222,18 @@ def service_book_now(request, slug):
                     service = service_type,
                     preferred_date = preferred_date,
                 )
-                email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
-                email_thread.start()
+                # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
+                # email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
                 
-            return redirect('service-detail', slug = slug)
+            return redirect('home-page')
             
         else:
-            error_details = form.errors.as_text()
-            print(error_details)
+            # error_details = form.errors.as_text()
             messages.error(request, f'Error occured. Try again!')
     else:
         form = BookingForm()
-    return render(request, 'website/service/booknow.html', {'service' : Service.objects.get(slug = slug), 'form': form} )
+    return render(request, 'website/service/booknow.html', {'service' : Service.objects.all(), 'form': form} )
 
 
 def ai_response(request):

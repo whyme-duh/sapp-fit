@@ -17,13 +17,12 @@ class BookingForm(forms.Form):
             }
         )
     )
-    service_type = forms.CharField(
-        max_length=100, 
+    service_type = forms.ModelChoiceField(
         required=False,
-        widget=forms.TextInput(
+        queryset=Service.objects.all(),
+        empty_label="Select a service",
+        widget=forms.Select(
             attrs={'class': 'form-control', 
-                'value': '',
-                'disabled': 'disabled',
             }))
     
 

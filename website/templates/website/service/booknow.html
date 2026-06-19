@@ -14,19 +14,9 @@
 
 {% include 'website/navbar.html' %}
 <div class="request-container">
-    <div class="request-header">
-        <h1 class="title">{{service.title}} </h1>
-        <p class="subtitle">{{service.info}} </p>
-    </div>
     <div class="request-split">
         <div class="request-info">
-            <h2>Features:</h2>
-            {% for feature in service.feature.all %}
-            <ul class="step">
-                <li>{{feature}}</li>
-            </ul>
-
-            {% endfor %}
+            
 
             <div class="note">
                 <h4>Note: </h4>
@@ -60,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="{{ form.service_type.id_for_label }}">Service</label>
-                        {% render_field form.service_type class="form-control bt-4" value=service.title %}
+                        {% render_field form.service_type class="form-control bt-4"  %}
                     </div>
 
 
