@@ -24,7 +24,8 @@
 
 .service-header{
     font-family: var(--title-family);
-    position: relative;
+    /* position: relative; */
+    display: flex;
     width: 100%;
 
 }
@@ -36,42 +37,26 @@
 }
 
 .service-header-content{
-    position: absolute;
-    display: block;
+    /* position: absolute; */
+    display: flex   ;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: start;
-    top: 30%;
-    left: 5%;
-}
-.price-pill{
-    position: absolute;
-    bottom: 10%;
-    right: 5%;
-    border: none;
-    padding: 1em;
-    padding-inline: 2em;
-    background-color: rgb(151, 244, 151);
-    border-radius: 20px;
-    color:darkgreen;
-    font-weight: 700;
-    font-size: 0.95em;
-    font-family: var(--paragraph-font);
+    justify-content: center;
+    /* top: 30%;
+    left: 5%; */
 }
 .service-header-content h1{
     font-size: 4em;
     text-shadow: 2px 2px #555;
-    color: white;
+    color: black;
+
     padding-bottom: 0.15em;
 }
 .service-header-content p{
     font-family: var(--role-font);
-    text-shadow: 2px 2px 2px #000000;
     font-size: 0.9em;
-    color: white;
 }
 .book-now-btn{
-    position: absolute;
     margin-top: 3em;
     padding: 14px 35px;
     background-color: var(--accent-color);
@@ -87,48 +72,56 @@
     background-color: #6f63f2;
 }
 
-.service-detail-list {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2em;
+.service-form-wrapper{
     background-color: #fff;
-    padding: 50px;
+    margin-top: 1em;
+    width: 100%;
     border-radius: 12px;
-    margin-bottom: 80px;
 }
 
-.service-detail-list h1 {
+
+.service-form-wrapper h1 {
     font-size: 2.5rem;
     font-family: var(--title-family);
-    margin-bottom: 10px;
+    text-align: center;
+    padding-block: 1em;
+}
+.service-and-form-container{
+    display: flex;
+    justify-content: space-between;
+
+}
+.service-detail-list {
+    flex: 1;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    padding-inline: 50px;
 }
 
-.service-detail-list p {
+
+
+.service-detail-list p, .book-form-header small {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-bottom: 25px;
     color: #666;
 }
 
-.service-detail-list ul {
+
+.service-detail-list ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width:100%;
     list-style-type: none; 
     padding: 0;
-}
-.service-detail-list ul{
-    margin-top: 2em;
-    display: grid;
-    grid-template-columns:auto auto auto;
-    gap: 2em;
-    width:100%;
 }
 .service-detail-list li {
     display: flex;
     align-items: center;
     font-family: var(--paragraph-font);
-    box-shadow: 5px 5px 10px rgb(230, 230, 230);
-    padding: 2em;
+    padding: 0.85em;
     border-radius: 5px;
-    border-bottom: 1px solid #f0f0f0;
     font-size: 1.1rem;
     gap: 15px;
 }
@@ -154,6 +147,7 @@
 }
 .other-services-container{
     width: 100%;
+    margin-top: 2em;
 }
 .other-services{
     display: flex;
@@ -163,7 +157,156 @@
 .other-services h1{
     font-family: var(--title-family);
 }
+.book-form-wrapper{
+    background-color: #e9e6e68e;
+    flex: 1; 
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.note{
+    margin-top: 2em;
+}
 
+.note h4{
+    font-family: var(--role-font);
+    color:  #774936;
+    margin-bottom: 0.85em;
+}
+.note p{
+    font-family: var(--paragraph-font);
+    color: #555;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+    text-align: justify;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5em;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.form-group label {
+    font-family: var(--role-font);
+    text-align: left;
+    font-weight: bold;
+    margin:0;
+    padding-left:0.2em;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+}
+.alert-danger{
+    list-style-type: none;
+    font-size: 1em;
+    text-align: left;
+    margin:0;
+    padding:0;
+    margin-top: 1em;
+}
+.errorlist{
+    list-style-type:none ;
+    margin:0;
+    padding:0;
+}
+.errorlist li{
+    color:red;
+}
+
+
+.submit-btn {
+    width: 100%;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    padding-block :0.85em;
+    font-size: 1em;
+    font-family: var(--role-font);
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 2em;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #b65329;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .request-container { width: 90%; }
+    .request-split { flex-direction: column; gap: 3em; }
+    .form-row { flex-direction: column; gap: 1.5em; }
+}
+@media only screen and (max-width: 768px) {
+    .request-form-wrapper { padding: 1.5em; }
+    .radio-group { flex-direction: column; } 
+}
+
+
+.form-control {
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--paragraph-font);
+    font-size: 1em;
+    background-color: white;
+    box-sizing: border-box; 
+    transition: all 0.3s ease;
+}
+
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--button-color);
+    box-shadow: 0 0 0 3px rgba(186, 150, 134, 0.2); 
+}
+
+
+textarea.form-control {
+    resize: vertical; 
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+.form-row {
+    display: flex;
+    width: 100%;
+    gap: 1.5em; 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1; 
+}
+
+.form-label {
+    font-family: var(--role-font);
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+    color: #333;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+}
 
 @media (max-width: 900px) {
     .service-header {
@@ -185,14 +328,7 @@
         font-size:0.6em;
         left: 0;
     }
-    .price-pill{
-        font-size: 0.65em;
-        width: fit-content;
-        top: 10%;
-        left: 40%;
-        height: fit-content;
-        margin-top: 3em;
-    }
+   
     .service-detail-list{
         width:100%;
         padding:1em;

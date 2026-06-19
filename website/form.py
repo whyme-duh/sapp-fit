@@ -29,7 +29,7 @@ class BookingForm(forms.Form):
 
     def clean(self):
         super(BookingForm, self).clean()
-        phone_number = self.cleaned_data['phone_number']
+        phone_number = self.cleaned_data.get('phone_number')
         if len(str(phone_number)) != 10:
             self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
         return self.cleaned_data

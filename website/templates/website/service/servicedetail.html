@@ -15,23 +15,76 @@
 
 <div class="service-detail-container">
     <div class="service-header">
-        <img src="{{service.icon.url}}" alt="service" class="service-detail-image">
         <div class="service-header-content">
             <h1>{{service.title}}</h1>
             <p>{{service.info}}</p>
-            <a class="book-now-btn" href="{% url 'service-book-now' service.slug %}">Book Now for <span style="font-weight:800; color:rgb(151, 255, 82);"> Rs.{{service.price}}</span></a>
+            <a class="book-now-btn" >Book Now for <span style="font-weight:800; color:rgb(151, 255, 82);"> Rs.{{service.price}}</span></a>
         </div>
+        <img src="{{service.icon.url}}" alt="service" class="service-detail-image">
         
     </div>
-    
-    <div class="service-detail-list">
-        <h1>Service Detail</h1>
-        <p>Find out all the services I provide below:</p>
-        <ul>
-            {% for obj in service.feature.all %}
-                <li><i class="fa fa-check" aria-hidden="true"></i>{{obj.service_item}}</li>
-            {% endfor %}
-        </ul>
+    <div class="service-form-wrapper">
+        <h1>Book your Service Now</h1>
+        <div class="service-and-form-container">
+            <div class="service-detail-list">
+                <h2>Features:</h2>
+
+                <p>Find out all the services I provide below:</p>
+                <ul>
+                    {% for obj in service.feature.all %}
+                        <li><i class="fa fa-check" aria-hidden="true"></i>{{obj.service_item}}</li>
+                    {% endfor %}
+                </ul>
+                <div class="note">
+                    <h4>Note: </h4>
+                    <p>All information provided will be kept confidential and used solely for the purpose of creating your custom workout plan.</p>
+                    <p>You will be contacted once I receive your request and the payment of <strong>Rs. {{service.price}}</strong> will be handled in person.</p>
+                </div>
+            
+            </div>
+            <div class="book-form-wrapper">
+                <div class="book-form-header">
+                </div>
+                <form method="POST" id="clientForm">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="{{ form.name.id_for_label }}">First Name</label>
+                            {% render_field form.name class="form-control bt-4" placeholder="Jane" %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">Email</label>
+                            {% render_field form.email class="form-control bt-4" placeholder="jane@example.com" %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+                            {% render_field form.phone_number class="form-control bt-4" placeholder="9xxx xx xx xx " %}
+                            {% if form.errors.phone_number %}
+                            <p class="alert-danger">{{form.errors.phone_number}}</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.service_type.id_for_label }}">Service</label>
+                            {% render_field form.service_type class="form-control bt-4" value=service.title %}
+                        </div>
+
+
+                        
+                        <div class="form-group">
+                            <label for="{{ form.preferred_date.id_for_label }}">Start Date</label>
+                            {% render_field form.preferred_date %}
+                        </div>
+                    <button type="submit" class="submit-btn primary">Send Request</button>
+
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
     </div>
     <div class="other-services-container">
         <div class="other-services">
@@ -53,6 +106,7 @@
             </a>
             {% endfor %}
         </div>
+        
     </div>
 </div>
 
