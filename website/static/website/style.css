@@ -877,10 +877,15 @@ small{
     display: flex;
     gap: 1em; 
     width: 100%;
-    overflow-x: hidden; 
+    overflow-x: auto; 
     scroll-behavior: smooth; 
-    padding: 1em 0;
-    scroll-snap-type: x mandatory; 
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+.testimonial-list::-webkit-scrollbar{
+    display: none;
 }
 
 .testinomial-card {
@@ -892,7 +897,7 @@ small{
     border-radius: 10px;
     padding: 2em;
     text-align: left;
-    flex: 0 0 calc((var(--container-width)) / 3); 
+    flex: 0 0 calc((100% - (3 * 1.5em)) / 4);
     scroll-snap-align: start; 
 }
 

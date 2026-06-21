@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Slide to the next card
             track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-    }, 10000); 
+    }, 5000); 
 
     // pausing when the mouse enters or leaves the testimonial cards
     // for desktop

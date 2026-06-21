@@ -7,7 +7,7 @@ from .models import AboutAndQuote, Booking, Client, CustomService, Service, Blog
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 from django_ratelimit.decorators import ratelimit
-from .form import BookingForm, ClientForm, CustomServiceForm
+from .form import BookingForm, ClientForm, CustomServiceForm, OneServiceBookingForm
 from django.core.mail import send_mail
 
 
@@ -75,42 +75,46 @@ def send_email_about_booking(client_name, client_email,request_type, **kwargs):
         print(f"Error sending email: {e}")
 
 def service_detail_view(request, slug):
-    form = BookingForm(request.POST)
-    if form.is_valid():
-        name = form.cleaned_data['name']
-        email = form.cleaned_data['email']
-        service_type = Service.objects.get(slug = slug)
-        preferred_date = form.cleaned_data['preferred_date']
-        phone_number = form.cleaned_data['phone_number']
+    if request.method == "POST":
+        form = OneServiceBookingForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            service_type = Service.objects.get(slug = slug)
+            preferred_date = form.cleaned_data['preferred_date']
+            phone_number = form.cleaned_data['phone_number']
 
-        existing_booking_check = Booking.objects.filter(name = name, email = email, service = service_type, preferred_date = preferred_date).exists()
-        if existing_booking_check:
-            messages.error(request, f'You have already booked this service for the selected date.')
+            existing_booking_check = Booking.objects.filter(name = name, email = email, service = service_type, preferred_date = preferred_date).exists()
+            if existing_booking_check:
+                messages.error(request, f'You have already booked this service for the selected date.')
+                return redirect('service-detail', slug = slug)
+            else:
+                Booking.objects.create(
+                    name = name,
+                    email = email,
+                    phone_number = phone_number,
+                    service = service_type,
+                    preferred_date = preferred_date,
+                )
+                # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
+                # email_thread.start()
+                messages.success(request, f'Your booking request has been sent! We will contact you soon.')
+                
             return redirect('service-detail', slug = slug)
-        else:
-            Booking.objects.create(
-                name = name,
-                email = email,
-                phone_number = phone_number,
-                service = service_type,
-                preferred_date = preferred_date,
-            )
-            # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
-            # email_thread.start()
-            messages.success(request, f'Your booking request has been sent! We will contact you soon.')
             
-        return redirect('service-detail', slug = slug)
-        
+        else:
+            error_details = form.errors.as_text()
     else:
-        form = BookingForm()
+        form = OneServiceBookingForm()
     service = Service.objects.get(slug = slug)
     other_services = Service.objects.all().exclude(slug = slug)
     return render(request, 'website/service/servicedetail.html', context = {'service' : service, "other_services" : other_services, 'form':form})
 
 # @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
-    form = CustomServiceForm()
     if request.method == "POST":
+        form = CustomServiceForm()
+        
         was_limited = getattr(request, 'limited', False)
 
         if was_limited:

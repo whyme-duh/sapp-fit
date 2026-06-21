@@ -18,7 +18,7 @@ class BookingForm(forms.Form):
         )
     )
     service_type = forms.ModelChoiceField(
-        required=False,
+        required=True,
         queryset=Service.objects.all(),
         empty_label="Select a service",
         widget=forms.Select(
@@ -31,6 +31,48 @@ class BookingForm(forms.Form):
         phone_number = self.cleaned_data.get('phone_number')
         if len(str(phone_number)) != 10:
             self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+        return self.cleaned_data
+    
+
+class OneServiceBookingForm(forms.Form):
+
+    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
+    phone_number = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'maxlength' : 10}))          
+    preferred_date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                'type': 'date',
+                'min': timezone.localdate().isoformat(),
+                'class': 'form-control'
+            }
+        )
+    )
+    service_type = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 
+                   'disabled': 'disabled'
+            }))
+    
+
+    def clean(self):
+        super(OneServiceBookingForm, self).clean()
+        valid_prefixes = (
+            '984', '985', '986', '974', '975', '980', '981', 
+            '982', '970', '971', '961', '962', '988'
+        )
+        phone_number = self.cleaned_data.get('phone_number')
+
+        if phone_number:
+
+            phone_number_str= str(phone_number)
+
+            if len(str(phone_number)) != 10:
+                self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+
+            elif not phone_number_str.startswith(valid_prefixes):
+                self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
 
         

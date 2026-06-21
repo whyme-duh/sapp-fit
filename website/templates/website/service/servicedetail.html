@@ -62,7 +62,7 @@
                             <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
                             {% render_field form.phone_number class="form-control bt-4" placeholder="9xxx xx xx xx " %}
                             {% if form.errors.phone_number %}
-                            <p class="alert-danger">{{form.errors.phone_number}}</p>
+                            {{form.errors.phone_number}}
                             {% endif %}
                         </div>
                         <div class="form-group">
