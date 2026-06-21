@@ -68,7 +68,6 @@
         <h1 class="quote">"</h1>
         <h1 class="sentence">{{about.quotes}} </h1>
         <h1 class="quote second">"</h1>
-
     </div>
 </div>
 
@@ -129,13 +128,15 @@
                     <img src="{{blog.thumbnail.url}}" alt="img">
                 </div>
                 <div class="blog-detail">
-                    <div class="blog-content">
-                        <h3 class="blog-title">{{blog.title|title}}</h3>
-                        <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>
-                    </div>
-                    <div class="blog-card-footer">
-                        <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
-                        <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+                    <div class="blog-detail-content">
+                        <div class="blog-content">
+                            <h3 class="blog-title">{{blog.title|title}}</h3>
+                            <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
+                            <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -161,7 +161,16 @@
     .form-row { flex-direction: column; gap: 1.5em; }
 }
 @media only screen and (max-width: 768px) {
-    .request-form-wrapper { padding: 1.5em; }
+    .request-split{
+        flex-direction: column-reverse;
+    }
+    .request-form-wrapper { 
+        background-color: white !important;
+        box-shadow: none;
+        padding: 1.5em; margin: 0;}
+    .request-form-wrapper form{
+        margin: 0;
+    }
     .radio-group { flex-direction: column; } 
 }
 

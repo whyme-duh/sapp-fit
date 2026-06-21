@@ -193,6 +193,8 @@ def custom_service_request(request):
             except Exception as e:
                 print(f"Error processing custom service request: {e}")
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
+    else:
+        form = CustomServiceForm()
     return render(request, 'website/service/customservicepage.html', {'form':form})
 
 

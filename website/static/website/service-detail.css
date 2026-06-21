@@ -321,14 +321,36 @@ textarea.form-control {
         margin:0;
         width:100%;
     }
+    .service-header{
+        flex-direction: column-reverse;
+    }
     .service-header-content{
+        padding: 0.5em;
         font-size:0.6em;
-        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .book-now-btn{
+        margin-top: 1em;
+    }
+    .service-form-wrapper h1{
+        padding: 1em;
+        font-size: 1.85em;
     }
    
     .service-detail-list{
         width:100%;
-        padding:1em;
+        padding:2em;
+    }
+    .service-detail-image{
+
+        width: 100%;
+    }
+    .service-and-form-container{
+        flex-direction: column;
     }
     .service-detail-list h1{
         font-size:2em;
@@ -342,6 +364,9 @@ textarea.form-control {
     .service-detail-list li{
         width:100%;
         font-size: 0.8em;
+    }
+    .book-form-wrapper form{
+        margin-top: 1em;
     }
 }
 

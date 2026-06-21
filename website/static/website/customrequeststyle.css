@@ -206,7 +206,10 @@
 
 
 @media only screen and (max-width: 1024px) {
-    .request-container { width: 90%; }
+    .request-container { 
+        width: 90%;
+        margin-top: 1em;
+    }
     .request-split { flex-direction: column; gap: 3em; }
     .form-row { flex-direction: column; gap: 1.5em; }
 }
