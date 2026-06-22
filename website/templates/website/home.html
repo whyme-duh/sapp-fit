@@ -8,7 +8,7 @@
         <ul>
             <li><a href="#about">About Me</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#services">Shop</a></li>
+            <li><a href="#shop">Shop</a></li>
             {% if blogs %}
             <li><a href="#blogs">Blogs</a></li>
             {% endif %} 
@@ -103,7 +103,7 @@
 </div>
 
 <div class="merch-container">
-    <div class="merch hidden" id="services">
+    <div class="merch hidden" id="shop">
         <h1 class="title">Sapp-Fit Wear</h1>
         <p class="slogan" id="slogan">Get your premium fit from Sappfit Wear</p>
         <div class="merch-list child" id="merch-list">
@@ -128,7 +128,7 @@
                     <img src="{{blog.thumbnail.url}}" alt="img">
                 </div>
                 <div class="blog-detail">
-                    <div class="blog-detail-content">
+                    <div class="blog-detail-content-home">
                         <div class="blog-content">
                             <h3 class="blog-title">{{blog.title|title}}</h3>
                             <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>

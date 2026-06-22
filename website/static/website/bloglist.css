@@ -9,7 +9,7 @@
     --title-family :'Unbounded', cursive;
     --role-font :'Roboto Mono', monospace;
     --quote-family:'Lobster Two', cursive;
-
+    --read-more-btn: rgb(241, 180, 89);
     --blog-font : 'Andika', sans-serif;
     --container-width: 60%;
 
@@ -90,8 +90,8 @@ a{
     margin: 0;
     border: none;
     border-radius: 5px;
-    background-color: rgb(241, 180, 89);
-    color: black;
+    background-color: var(--read-more-btn);
+    color: white !important;
 }
 .read-more-btn:hover{
     background-color: rgb(255, 178, 62);
@@ -131,9 +131,13 @@ a{
         width: 90%; 
         padding-bottom:2em;
     }
+    .blog-detail-content{
+        font-size: 0.85em;
+    }
 
     .blog-header h1 {
-        font-size: 2em; 
+        font-size: 1.75em; 
+        padding-bottom: 0.5em;
     }
 
     .blog-header p {

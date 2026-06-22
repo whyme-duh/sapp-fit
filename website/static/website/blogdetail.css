@@ -123,6 +123,9 @@ button:active{
      .published-date{
         font-size: 0.75em;
      }
+     .blog-content{
+        text-align: justify;
+     }
      .blog-content p{
         font-size: 1em;
      }
