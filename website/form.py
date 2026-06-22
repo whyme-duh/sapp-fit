@@ -95,7 +95,7 @@ class ClientForm(forms.ModelForm):
 class CustomServiceForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.CharField(max_length=10, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number'}))          
+    phone_number = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number', 'inputmode' : 'numeric'}))          
     goal_choices = forms.ChoiceField(
         choices=CustomService.GOAL_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
@@ -134,15 +134,28 @@ class CustomServiceForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )   
 
+    def __init__(self, *args, **kwargs):
+        self.action_type = kwargs.pop('action_type', None)
+
+        super(CustomServiceForm,self).__init__(*args, **kwargs)
+
+        if self.action_type == "ai_preview":
+            if 'email' in self.fields:
+                self.fields['email'].required = False
+            if 'phone_number' in self.fields:
+                self.fields['phone_number'].required = False
+
     def clean(self):
         super(CustomServiceForm, self).clean()
         age = self.cleaned_data['age']
         weight = self.cleaned_data['weight']
-        phone = self.cleaned_data['phone_number']
         if age < 10 or age > 60:
             self._errors['age'] = self.error_class(['I can only provide services to people aged 10 to 60.'])
         if weight < 40 or weight > 100:
             self._errors['weight'] = self.error_class(['Please enter a valid weight in kg.'])
-        if len(phone) != 10:
-            self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+        if self.fields['phone_number'].required:
+            phone = self.cleaned_data['phone_number']
+            if len(phone) != 10:
+                self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
         return self.cleaned_data
+    

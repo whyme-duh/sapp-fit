@@ -183,6 +183,8 @@ class CustomService(models.Model):
         ("Super Active", "Super Active (very hard exercise/sports & physical job or 2x training)"),
     ]
 
+ 
+
     name = models.CharField(max_length=100)
     age = models.IntegerField(blank = True, null = True)
     weight = models.IntegerField(blank = True, null = True)

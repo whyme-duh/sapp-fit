@@ -1,4 +1,5 @@
 import datetime
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 import threading
 from sapfit import settings
@@ -104,6 +105,7 @@ def service_detail_view(request, slug):
             
         else:
             error_details = form.errors.as_text()
+            print(error_details)
     else:
         form = OneServiceBookingForm()
     service = Service.objects.get(slug = slug)
@@ -113,7 +115,6 @@ def service_detail_view(request, slug):
 # @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
     if request.method == "POST":
-        form = CustomServiceForm()
         
         was_limited = getattr(request, 'limited', False)
 
@@ -121,23 +122,26 @@ def custom_service_request(request):
             messages.error(request, f'Too many booking requests from this IP. Please try again later.')
             return redirect('home-page')
 
-        form = CustomServiceForm(request.POST)
+        button_clicked = request.POST.get('action')
+        form = CustomServiceForm(request.POST, action_type = button_clicked )
         if form.is_valid():
-            button_clicked = request.POST.get('action')
             name = form.cleaned_data['name']
             age = form.cleaned_data['age']
             weight = form.cleaned_data['weight']
             gender = form.cleaned_data['gender']
-            email = form.cleaned_data['email']
-            phone_number = form.cleaned_data['phone_number']
             goal_choices = form.cleaned_data['goal_choices']
             special_notes = form.cleaned_data['special_notes']
             equipment_used = form.cleaned_data['equipment_used']
             preferred_duration = form.cleaned_data['preferred_duration']
             workout_time = form.cleaned_data['workout_time']
             activity_level = form.cleaned_data['activity_level']
+
+            is_ajax = request.headers.get('X-Requested-With') == 'XMLHtppRequest'
             try:
                 if button_clicked == "human_request":
+                    phone_number = form.cleaned_data['phone_number']
+                    email = form.cleaned_data['email']
+
                     if CustomService.objects.filter(
                             name=name, 
                             email=email, 
@@ -188,6 +192,13 @@ def custom_service_request(request):
                         activity_level=activity_level
                     )
                     request.session['workout_plan'] = gemini_response_result
+
+                    if is_ajax:
+                        return JsonResponse({
+                            "status" : "success",
+                            "redirect_url" : redirect('ai=response'),
+                            "error_redirect_url" : redirect('custom-service')
+                        })
                     return redirect('ai-response')
 
             except Exception as e:
