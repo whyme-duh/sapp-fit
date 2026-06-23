@@ -276,6 +276,7 @@
     }
     .request-split { flex-direction: column; gap: 3em; }
     .form-row { flex-direction: column; gap: 1.5em; }
+   
 }
 @media only screen and (max-width: 768px) {
     .request-form-wrapper { padding: 1.5em; }
@@ -291,6 +292,10 @@
         width: 100%;
     }
     .radio-group { flex-direction: column; } 
+    #official-plan, #ai-plan{
+        font-size: 1em;
+    }
+
 }
 
 
@@ -360,8 +365,7 @@ textarea.form-control {
 
 
 .workout-result-container {
-    width: var(--container-width, 90%);
-    max-width: 800px; 
+    width: calc(var(--container-width)/1.5);
     margin: calc(var(--margin-top, 5em) + 2em) auto;
     font-family: var(--paragraph-font, sans-serif);
 }
@@ -534,27 +538,59 @@ textarea.form-control {
     margin-right: auto;
 }
 
-.final-cta {
-    background-color: #ba9686;
-    color: white;
-    padding: 1em 2em;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    display: inline-block;
-    transition: 0.3s;
-}
+
 
 .final-cta:hover {
     background-color: #a07d6d;
 }
 
+*{
+    /* outline: 1px solid red; */
+}
 
 @media only screen and (max-width: 768px) {
+    .workout-result-container{
+        margin: 0;
+        width: 100%;
+        margin-block:2em;
+      
+    }
+    .workout-result-wrapper{
+        width: 90%;
+    }
+    .workout-header{
+        width: 100%;
+    }
+    .workout-header .title{
+        font-size: 1.85em;
+    }
     .workout-stats {
         flex-direction: column;
+        justify-content: start;
         gap: 0.5em;
     }
+    .workout-stats .stat-box{
+        margin: 0;
+    }
+    .workout-stats strong{
+        margin: 0;
+    }
+    .workout-section .section-title{
+        font-size: 1.2em;
+    }
+    .card-header{
+        gap: 0.25em;
+    }
+    .card-header h3{
+        font-size: 1em;
+    }
+    p{
+        text-align: justify;
+    }
+    .conversion-cta p{
+        text-align: center;
+    }
+    
     
     .stat-box {
         display: flex;
@@ -567,9 +603,19 @@ textarea.form-control {
         border-bottom: none;
         padding-bottom: 0;
     }
+    
     .button-group{
         display:flex;
         flex-direction:column;
+    }
+    .exercise-card{
+        width: 80%;
+    }
+    .card-header{
+        flex-direction: column;
+    }
+    .pro-tips-box h2{
+        margin-bottom: 1em;
     }
 }
 

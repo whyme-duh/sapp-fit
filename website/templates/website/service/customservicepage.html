@@ -63,6 +63,7 @@ Custom Service Request
             <div class="note">
                 <h4>Note: </h4>
                 <p>All information provided will be kept confidential and used solely for the purpose of creating your custom workout plan.</p>
+                <p>"Request Official Plan" sends the request directly to me (Sappfit), and the cost will depend on your specific needs. Meanwhile, the "Ask AI for Preview" feature costs nothing!</p>
                 <p>The cost of the custom service will be determined based on the complexity of your request and the time required to create your personalized workout plan. (Rs. 500 - Rs. 2500)</p>
             </div>
             
@@ -161,11 +162,7 @@ Custom Service Request
                 <div class="custom-form">
     
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="{{form.name.id_for_label}}" class="form-label">{{form.name.label}}</label>
-                            {{form.name}}
-                            
-                        </div>
+                        
                         <div class="form-group">
                             <label for="{{form.age.id_for_label}}" class="form-label">{{form.age.label}}</label>
                             {{form.age}}
@@ -182,18 +179,22 @@ Custom Service Request
                             {% endif %}
                            
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="{{form.gender.id_for_label}}" class="form-label">{{form.gender.label}}</label>
                             {{form.gender}}
                         </div>
-                        <div class="form-group">
-                        <label for="{{form.goal_choices.id_for_label}}" class="form-label">{{form.goal_choices.label}}</label>
-                        {{form.goal_choices}}
                     </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{form.goal_choices.id_for_label}}" class="form-label">{{form.goal_choices.label}}</label>
+                            {{form.goal_choices}}
+                        </div>
                         
+                        <div class="form-group">
+                            <label for="{{form.activity_level.id_for_label}}" class="form-label">{{form.activity_level.label}}</label>
+                            {{form.activity_level}}
+                        </div>
                        
                     </div>
                      <div class="form-row">
@@ -211,10 +212,6 @@ Custom Service Request
                   
 
                     
-                    <div class="form-group">
-                        <label for="{{form.activity_level.id_for_label}}" class="form-label">{{form.activity_level.label}}</label>
-                        {{form.activity_level}}
-                    </div>
 
                     <div class="form-group">
                         <label for="{{form.equipment_used.id_for_label}}" class="form-label">{{form.equipment_used.label}} (Optional)</label>

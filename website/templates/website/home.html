@@ -29,6 +29,7 @@
 </div>  
 
 <div class="first-page">
+
     <img src="{{about.backgroundImage.url}}" alt="background-images" class="bg-image">
     <div class="first-page-content">
         <h1>Hi,</h1>
@@ -42,11 +43,12 @@
     </div>
 </div>
 <div class="about-container" id="about">
+    <h1 class="title" id="about-me-above-title" style="text-align: center;">About Me</h1>
+
     <div class="about hidden" >
         <img src="{{about.profileImage.url}}" alt="profile" class="about-image">
         <div class="about-content">
-            
-            <h1 class="title">About Me</h1>
+            <h1 class="title" id="about-me-title-below">About Me</h1>
             <div class="tag-holder">
             {% for t in tags_list %}
                 <p class="tag">
@@ -119,7 +121,7 @@
     
 {% if blogs %}
 <div class="blogs-container" id="blogs">
-    <h1 class="title" >Blogs</h1>
+    <h1 class="title">Blogs</h1>
     <div class="blog hidden">
         <div class="blogs-list">
             {% for blog in blogs|slice:2 %}

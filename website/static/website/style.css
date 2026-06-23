@@ -299,6 +299,18 @@ li a:hover{
         left: -5%;
     }
 }
+
+
+@media only screen and (max-width:450px) {
+    @keyframes slideInAnimation{
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: -30%;
+    }
+}
+}
 .first-page-content{
     position: absolute;
     width: 35%;
@@ -372,7 +384,9 @@ li a:hover{
     background: rgb(156, 78, 10);
 }
 /* about page */
-
+#about-me-above-title{
+    display: none;
+}
 @keyframes aboutAnimation{
     0%{
         left:40%;
@@ -1060,6 +1074,7 @@ iframe{
         margin-top: 0;
     }
     .about{
+        margin-top: 1em;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -1075,10 +1090,23 @@ iframe{
     }
     .about-content{
         text-align:center;
-        margin-top:1em;
         font-size: 0.85em;
         margin-left:0;
         padding:1em;
+    }
+    #about-me-title-below{
+        display: none;
+    }
+    #about-me-above-title{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-top: 1.5em;
+    }
+    .tag{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .tag-holder{
         justify-content: space-between;
