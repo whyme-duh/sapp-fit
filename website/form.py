@@ -145,6 +145,9 @@ class CustomServiceForm(forms.Form):
             if 'phone_number' in self.fields:
                 self.fields['phone_number'].required = False
 
+            if 'name' in self.fields:
+                self.fields['name'].required = False
+
     def clean(self):
         super(CustomServiceForm, self).clean()
         age = self.cleaned_data['age']

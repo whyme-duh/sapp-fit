@@ -35,7 +35,7 @@
 
 .request-container {
     width: var(--container-width);
-    margin: calc(var(--margin-top) + 2em) auto var(--margin-top) auto;
+    margin: calc(var(--margin-top)) auto var(--margin-top) auto;
 }
 
 .request-header {

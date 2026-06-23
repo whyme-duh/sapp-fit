@@ -136,7 +136,8 @@ def custom_service_request(request):
             workout_time = form.cleaned_data['workout_time']
             activity_level = form.cleaned_data['activity_level']
 
-            is_ajax = request.headers.get('X-Requested-With') == 'XMLHtppRequest'
+            is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+            print(is_ajax)
             try:
                 if button_clicked == "human_request":
                     phone_number = form.cleaned_data['phone_number']
@@ -196,7 +197,7 @@ def custom_service_request(request):
                     if is_ajax:
                         return JsonResponse({
                             "status" : "success",
-                            "redirect_url" : redirect('ai=response'),
+                            "redirect_url" : redirect('ai-response'),
                             "error_redirect_url" : redirect('custom-service')
                         })
                     return redirect('ai-response')

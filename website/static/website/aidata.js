@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("clientForm");
-    console.log("Form founded", form);
+    const form = document.getElementById("aiForm");
     const formContainer = document.querySelector(".request-container"); 
     const skeletonLoader = document.getElementById("skeleton-loader"); 
 
