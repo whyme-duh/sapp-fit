@@ -802,13 +802,12 @@ hr{
 .blog-title{
     font-family: var(--blog-title);
     text-align: left;
-    font-size: 2.35em;
+    font-size: 2em;
 }
-.blog-para{
+.blog-content p{
     font-family: var(--role-font);
     font-size: 0.85em;
     padding-top: 1em;
-    text-overflow: ellipsis;
 }
 .learn-more-btn{
     background-color: var(--read-more-btn);
@@ -876,7 +875,21 @@ small{
 }
 
 .sell-all-btn:hover{
-    background-color: #b65329;
+    background-color: #87300b;
+}
+.custom-request-btn{
+    background-color: #c3855f; 
+    color: white; 
+    display: inline-block;
+    font-size:1.15rem;
+    font-family: var(--role-font);
+    width:fit-content;
+    padding-inline:1em;
+    padding-block:0.75em;
+}
+.custom-request-btn:hover{
+    background-color: #b34b0b; 
+
 }
 /* testimonials */
 .testimonials-container {
@@ -1022,13 +1035,46 @@ iframe{
 
 
 
-.copyright{
+.maker{
+    font-family: var(--paragraph-font);
     background-color: var(--navbar-color);
     width: 100%;
+    padding-top: 2em;
     color:rgb(38, 38, 38);
     text-align: center;
     font-size:0.85em;
     padding-bottom: 1em;
+}
+.whyme-link{
+    font-weight: 800;
+}
+.whyme-link:hover{
+    text-decoration: underline;
+}
+
+.error-block{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    font-family:var(--blog-title);
+}
+.error-block h1{
+    font-family: var(--role-font);
+    margin-bottom: 1em;
+}
+.error-block .return-home{
+    background-color: var(--button-color);
+    padding-block: 0.8em;
+    padding-inline: 1.25em;
+    color: white;
+    margin-top: 2em;
+}
+.error-block .return-home:hover{
+    background-color: rgb(230, 103, 18);
+
 }
 
 @media only screen and (max-width:600px){

@@ -101,7 +101,7 @@
     <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;margin: 0 auto 2em auto;">
         Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
     </p>
-    <a href="{% url 'custom-service' %}" class="sell-all-btn" style="background-color: #c3855f; color: white; display: inline-block;font-size:1.15rem;font-family: var(--role-font);">Request a Custom Plan</a>
+    <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
 </div>
 
 <div class="merch-container">
@@ -133,7 +133,7 @@
                     <div class="blog-detail-content-home">
                         <div class="blog-content">
                             <h3 class="blog-title">{{blog.title|title}}</h3>
-                            <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>
+                            {{blog.content|safe|truncatewords:25}}
                         </div>
                         <div class="blog-card-footer">
                             <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
@@ -223,7 +223,8 @@
         
     </nav>
 </div>
-<p class="copyright">&copy; Copyright {{date}}</p>
+<p class="maker">Created and Managed by <a href="https://www.shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
+
 
 {% endblock %}
 

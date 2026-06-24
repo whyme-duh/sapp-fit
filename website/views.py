@@ -13,6 +13,14 @@ from django.core.mail import send_mail
 
 
 
+
+def page_not_found_404(request, exception):
+    return render(request, 'website/error/404.html', status = 404)
+
+
+def page_not_found_500(request):
+    return render(request, 'website/error/500.html', status = 500)
+
 def index(request):
     about = AboutAndQuote.objects.first()
     tags_list = [tag.strip() for tag in about.tag.split(',')] if about.tag else []
