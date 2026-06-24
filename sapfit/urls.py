@@ -22,7 +22,7 @@ if settings.DEBUG:
     )
 else:
     urlpatterns.append(
-        path(os.environ.get('ADMIN_URL'), admin.site.urls),
+        path(os.environ.get('ADMIN_URL'), 'admin/', admin.site.urls),
     )
 
 
