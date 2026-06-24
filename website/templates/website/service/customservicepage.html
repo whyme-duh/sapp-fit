@@ -14,6 +14,14 @@ Custom Service Request
 
 {% block content %}
 {% include 'website/navbar.html' %}
+<div id="skeleton-loader">
+    <h2>Hold on for a sec, while the AI is evaluating and preparing the response.</h2>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+</div>
 
 <div class="request-container">
     <div class="request-header">
@@ -45,15 +53,25 @@ Custom Service Request
                     <p>Receive your step-by-step PDF guide and start crushing your goals.</p>
                 </div>
             </div>
+            <div class="options">
+                <h2>Choose Option: </h2>
+               <div class="option-btns-group">
+                    <button id="official-plan" disabled="true">Request Official Plan</button>
+                    <button id="ai-plan">Ask AI for Preview</button>
+               </div>
+            </div>
             <div class="note">
                 <h4>Note: </h4>
                 <p>All information provided will be kept confidential and used solely for the purpose of creating your custom workout plan.</p>
+                <p>"Request Official Plan" sends the request directly to me (Sappfit), and the cost will depend on your specific needs. Meanwhile, the "Ask AI for Preview" feature costs nothing!</p>
                 <p>The cost of the custom service will be determined based on the complexity of your request and the time required to create your personalized workout plan. (Rs. 500 - Rs. 2500)</p>
             </div>
+            
         </div>
+        
 
-        <div class="request-form-wrapper">
-            <form method="POST" class="custom-form">
+        <div class="request-form-wrapper" id="official-plan-form">
+            <form method="POST" class="custom-form" id="clientForm">
                 {% csrf_token %}
                 <div class="custom-form">
     
@@ -135,6 +153,78 @@ Custom Service Request
                         Request Official Plan
                     </button>
                     
+                </div>
+            </form>
+        </div>
+        <div class="request-form-wrapper" id="ai-preview-form">
+            <form method="POST" class="custom-form" id="aiForm">
+                {% csrf_token %}
+                <div class="custom-form">
+    
+                    <div class="form-row">
+                        
+                        <div class="form-group">
+                            <label for="{{form.age.id_for_label}}" class="form-label">{{form.age.label}}</label>
+                            {{form.age}}
+                            {% if form.errors.age %}
+                            <p class="alert-danger">{{form.errors.age}}</p>
+                            {% endif %}
+
+                        </div>
+                        <div class="form-group">
+                            <label for="{{form.weight.id_for_label}}" class="form-label">{{form.weight.label}}</label>
+                            {{form.weight}}
+                            {% if form.errors.weight %}
+                            <p class="alert-danger">{{form.errors.weight}}</p>
+                            {% endif %}
+                           
+                        </div>
+                        <div class="form-group">
+                            <label for="{{form.gender.id_for_label}}" class="form-label">{{form.gender.label}}</label>
+                            {{form.gender}}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{form.goal_choices.id_for_label}}" class="form-label">{{form.goal_choices.label}}</label>
+                            {{form.goal_choices}}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{form.activity_level.id_for_label}}" class="form-label">{{form.activity_level.label}}</label>
+                            {{form.activity_level}}
+                        </div>
+                       
+                    </div>
+                     <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{form.workout_time.id_for_label}}" class="form-label">{{form.workout_time.label}}</label>
+                            {{form.workout_time}}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{form.preferred_duration.id_for_label}}" class="form-label">{{form.preferred_duration.label}}</label>
+                            {{form.preferred_duration}}
+                        </div>
+                    
+                    </div>
+                  
+
+                    
+
+                    <div class="form-group">
+                        <label for="{{form.equipment_used.id_for_label}}" class="form-label">{{form.equipment_used.label}} (Optional)</label>
+                        {{form.equipment_used}}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.special_notes.id_for_label}}" class="form-label">{{form.special_notes.label}} (Optional)</label>
+                        {{form.special_notes}}
+                    </div>
+
+                </div>
+                <div class="button-group" style="display: flex; gap: 1em; margin-top: 2em;">
                     <button type="submit" name="action" value="ai_preview" class="submit-btn secondary" style="background-color: #d3c1c1; color: #333;">
                         Ask AI for a Preview
                     </button>
@@ -142,13 +232,13 @@ Custom Service Request
             </form>
         </div>
     </div>
-    <div id="ai-loading-screen" class="loading-overlay" style="display: none;">
-        <div class="loader-content">
-            <div class="custom-spinner"></div>
-            
-            <h2 style="font-family: var(--title-family); color: #333; margin-top: 1em;">Analyzing your profile...</h2>
-            <p style="color: #666; font-family: var(--paragraph-font);">Saprina's AI is building your custom 45-minute routine.</p>
-        </div>
-    </div>
 </div>
+{% endblock %}
+
+{% block extra_script %}
+
+<script src="{% static 'website/aidata.js' %}"></script>
+
+
+
 {% endblock %}

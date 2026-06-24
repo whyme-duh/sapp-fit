@@ -8,7 +8,7 @@
         <ul>
             <li><a href="#about">About Me</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#services">Shop</a></li>
+            <li><a href="#shop">Shop</a></li>
             {% if blogs %}
             <li><a href="#blogs">Blogs</a></li>
             {% endif %} 
@@ -29,6 +29,7 @@
 </div>  
 
 <div class="first-page">
+
     <img src="{{about.backgroundImage.url}}" alt="background-images" class="bg-image">
     <div class="first-page-content">
         <h1>Hi,</h1>
@@ -42,11 +43,12 @@
     </div>
 </div>
 <div class="about-container" id="about">
+    <h1 class="title" id="about-me-above-title" style="text-align: center;">About Me</h1>
+
     <div class="about hidden" >
         <img src="{{about.profileImage.url}}" alt="profile" class="about-image">
         <div class="about-content">
-            
-            <h1 class="title">About Me</h1>
+            <h1 class="title" id="about-me-title-below">About Me</h1>
             <div class="tag-holder">
             {% for t in tags_list %}
                 <p class="tag">
@@ -68,7 +70,6 @@
         <h1 class="quote">"</h1>
         <h1 class="sentence">{{about.quotes}} </h1>
         <h1 class="quote second">"</h1>
-
     </div>
 </div>
 
@@ -100,11 +101,11 @@
     <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;margin: 0 auto 2em auto;">
         Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
     </p>
-    <a href="{% url 'custom-service' %}" class="sell-all-btn" style="background-color: #c3855f; color: white; display: inline-block;font-size:1.15rem;font-family: var(--role-font);">Request a Custom Plan</a>
+    <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
 </div>
 
 <div class="merch-container">
-    <div class="merch hidden" id="services">
+    <div class="merch hidden" id="shop">
         <h1 class="title">Sapp-Fit Wear</h1>
         <p class="slogan" id="slogan">Get your premium fit from Sappfit Wear</p>
         <div class="merch-list child" id="merch-list">
@@ -120,7 +121,7 @@
     
 {% if blogs %}
 <div class="blogs-container" id="blogs">
-    <h1 class="title" >Blogs</h1>
+    <h1 class="title">Blogs</h1>
     <div class="blog hidden">
         <div class="blogs-list">
             {% for blog in blogs|slice:2 %}
@@ -129,13 +130,15 @@
                     <img src="{{blog.thumbnail.url}}" alt="img">
                 </div>
                 <div class="blog-detail">
-                    <div class="blog-content">
-                        <h3 class="blog-title">{{blog.title|title}}</h3>
-                        <p class="blog-para">{{blog.content|safe|truncatewords:25}}</p>
-                    </div>
-                    <div class="blog-card-footer">
-                        <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
-                        <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+                    <div class="blog-detail-content-home">
+                        <div class="blog-content">
+                            <h3 class="blog-title">{{blog.title|title}}</h3>
+                            {{blog.content|safe|truncatewords:25}}
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
+                            <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -152,9 +155,7 @@
 {% if testimonials %}
 <div class="testimonials-container" id="testimonial">
     <h1 class="title">Testimonials</h1>
-    
     <div class="carousel-wrapper">
-
         <div class="testimonial-list" id="testimonial-track">
             {% for testi in testimonials %}
             <div class="testinomial-card">
@@ -166,8 +167,6 @@
             </div>
             {% endfor %}
         </div>
-
-        
     </div>
 </div>
 {% endif %}
@@ -224,5 +223,14 @@
         
     </nav>
 </div>
-<p class="copyright">&copy; Copyright {{date}}</p>
+<p class="maker">Created and Managed by <a href="https://www.shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
+
+
+{% endblock %}
+
+{% block extra_script %}
+
+<script src="{% static 'website/data.js' %}"></script>
+
+
 {% endblock %}

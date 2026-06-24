@@ -1,0 +1,11 @@
+{% extends 'website/index.html' %}
+
+<title></title>{% block title %}Page Not Found{%endblock %}</title>
+{% block content %}
+{% include 'website/navbar.html' %}
+<div class="error-block">
+    <h1>Oops! Page Not Found (404)</h1>
+    <p>The page you are looking for does not exist.</p>
+    <a href="/" class="return-home">Return Home</a>
+</div>
+{% endblock %}

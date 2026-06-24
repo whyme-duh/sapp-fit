@@ -1,0 +1,10 @@
+{% extends 'website/index.html' %}
+
+<title></title>{% block title %}Server Error{%endblock %}</title>
+{% block content %}
+{% include 'website/navbar.html' %}
+<div class="error-block">
+    <h1>Oops! Error Occured.</h1>
+    <a href="/" class="return-home">Return Home</a>
+</div>
+{% endblock %}

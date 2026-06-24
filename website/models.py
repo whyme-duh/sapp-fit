@@ -127,9 +127,13 @@ class Booking(models.Model):
         ("Pending" , "Pending"),    
         ("Confirmed" , "Confirmed"),
         ("Cancelled" , "Cancelled") ]
+    
+   
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(
+        max_length=10
+    )
     service = models.ForeignKey(Service, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
     preferred_date = models.DateField() 
@@ -139,6 +143,7 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.service.title}'
+    
     
 
 class CustomService(models.Model):
@@ -177,6 +182,8 @@ class CustomService(models.Model):
         ("Very Active", "Very Active (hard exercise/sports 6-7 days a week)"),
         ("Super Active", "Super Active (very hard exercise/sports & physical job or 2x training)"),
     ]
+
+ 
 
     name = models.CharField(max_length=100)
     age = models.IntegerField(blank = True, null = True)

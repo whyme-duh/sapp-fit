@@ -1,0 +1,240 @@
+
+.request-container {
+    width: var(--container-width);
+    margin-block: calc(var(--margin-top)/2);
+}
+
+.request-header {
+    text-align: center;
+    margin-bottom: 4em;
+}
+
+.request-header .subtitle {
+    font-family: var(--paragraph-font);
+    color: #666;
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 1em auto 0 auto;
+}
+
+
+.request-split {
+    display: flex;
+    gap: 6em;
+    justify-content: space-between;
+}
+
+.request-info {
+    flex: 1;
+}
+
+.request-form-wrapper {
+    flex: 1; 
+    background-color: #F6F2F2;
+    padding: 3em;
+    border-radius: 15px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+}
+
+
+.request-info h2 {
+    font-family: var(--title-family);
+    color: #774936;
+    margin-bottom: 1.5em;
+}
+
+
+
+
+.step  {
+    font-family: var(--role-font);
+    margin-bottom: 0.5em;
+}
+
+.note{
+    margin-top: 2em;
+}
+
+.note h4{
+    font-family: var(--role-font);
+    color:  #774936;
+    margin-bottom: 0.85em;
+}
+.note p{
+    font-family: var(--paragraph-font);
+    color: #555;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+    text-align: justify;
+}
+
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5em;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.form-group label {
+    font-family: var(--role-font);
+    text-align: left;
+    font-weight: bold;
+    margin:0;
+    padding-left:0.2em;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+}
+.alert-danger{
+    list-style-type: none;
+    font-size: 1em;
+    text-align: left;
+    margin:0;
+    padding:0;
+    margin-top: 1em;
+}
+.errorlist{
+    list-style-type:none ;
+    margin:0;
+    padding:0;
+}
+.errorlist li{
+    color:red;
+}
+
+.custom-form input[type="text"],
+.custom-form input[type="email"],
+.custom-form select,
+.custom-form textarea {
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--paragraph-font);
+    font-size: 1em;
+    width: 100%;
+    background-color: white;
+}
+
+.custom-form input:focus,
+.custom-form select:focus,
+.custom-form textarea:focus {
+    outline: 2px solid var(--button-color);
+    border-color: transparent;
+}
+
+
+
+
+.submit-btn {
+    width: 100%;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    padding-block :0.85em;
+    font-size: 1em;
+    font-family: var(--role-font);
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 2em;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #b65329;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .request-container { width: 90%; }
+    .request-split { flex-direction: column; gap: 3em; }
+    .form-row { flex-direction: column; gap: 1.5em; }
+}
+@media only screen and (max-width: 768px) {
+    .request-split{
+        flex-direction: column-reverse;
+    }
+    .request-form-wrapper { 
+        background-color: white !important;
+        box-shadow: none;
+        padding: 1.5em; margin: 0;}
+    .request-form-wrapper form{
+        margin: 0;
+    }
+    .radio-group { flex-direction: column; } 
+}
+
+
+.form-control {
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--paragraph-font);
+    font-size: 1em;
+    background-color: white;
+    box-sizing: border-box; 
+    transition: all 0.3s ease;
+}
+
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--button-color);
+    box-shadow: 0 0 0 3px rgba(186, 150, 134, 0.2); 
+}
+
+
+textarea.form-control {
+    resize: vertical; 
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+.custom-form {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em; 
+}
+
+.form-row {
+    display: flex;
+    width: 100%;
+    gap: 1.5em; 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1; 
+}
+
+.form-label {
+    font-family: var(--role-font);
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+    color: #333;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+}
+

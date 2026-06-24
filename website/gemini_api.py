@@ -24,9 +24,11 @@ def gemini_response(duration, age, gender, weight, goal, equipment, notes, worko
             1. You must respond ONLY with a valid JSON object. Do not include markdown formatting like ```json, do not include introductory text, and do not include concluding text. Just the raw JSON object.
             2. The workout must safely accommodate any listed injuries or special notes.
             3. Keep the tone in the "pro_tips" encouraging, empowering, and professional.
+            4. Add a small note 
 
             Ensure your JSON strictly follows this exact structure:
             {{
+            ""
             "workout_title": "A catchy, motivating title for the routine",
             "estimated_duration_minutes": {duration},
             "warmup": [
@@ -47,7 +49,8 @@ def gemini_response(duration, age, gender, weight, goal, equipment, notes, worko
             "pro_tips": [
                 "Tip 1 from Saprina regarding form or nutrition",
                 "Tip 2 regarding hydration or recovery"
-            ]
+            ],
+            "note": "A note that AI can make mistakes, and these instructions should be followed cautiously."
 
             Furthermore, add a notice on the importance of consulting with a healthcare provider before starting any new workout routine, especially if they have pre-existing conditions or injuries.
             }}

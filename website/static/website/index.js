@@ -112,6 +112,7 @@ window.onclick = function(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const track = document.getElementById('testimonial-track');
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
     
     if (!track || track.children.length === 0) return;
 
@@ -123,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (track.scrollWidth <= track.clientWidth || !isAutoPlaying) return;
 
         const card = track.querySelector('.testinomial-card');
-        const scrollAmount = card.offsetWidth + 16; 
+        const scrollAmount = card.offsetWidth + gap; 
         // checks if we have hit the very end of the scroll track
         // (Math.ceil fixes a bug where zoomed screens return fractional pixels)
         if (Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth) {
@@ -133,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Slide to the next card
             track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-    }, 10000); 
+    }, 5000); 
 
     // pausing when the mouse enters or leaves the testimonial cards
     // for desktop
