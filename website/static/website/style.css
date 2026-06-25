@@ -16,6 +16,7 @@
     --container-width: 70%;
     --paragraph-font: 'Rubik', sans-serif;
     --margin-top:5em;
+    --margin-bottom:5em;
     --padding-bottom:5em;
     --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
@@ -397,7 +398,7 @@ li a:hover{
 }
 .about-container{
     margin-top: var(--margin-top);
-    padding-bottom: var(--padding-bottom);
+    margin-bottom: var(--margin-bottom);
     /* background-color: rgb(230, 61, 61); */
 }
 .about{
@@ -405,7 +406,6 @@ li a:hover{
     justify-content: space-between;
     align-items: center;
     width:var(--container-width);
-    margin-top: var(--margin-top);
 }
 .about-image{
     width: 400px;
@@ -511,7 +511,8 @@ li a:hover{
     text-align: left;
 }
 .sentence{
-    width: 70%;
+    width: 100%;
+    text-align: center;
 }
 .second{
     text-align: right;
@@ -662,6 +663,26 @@ li a:hover{
     font-family: var(--role-font);
 }
 
+.custom-plan-banner{
+    background-color: #ffffff; 
+    text-align: center; 
+    color: white; 
+    margin-bottom:var(--margin-top); 
+}
+.custom-plan-banner h2{
+    font-family: var(--title-family); 
+    font-size: 2.5em; 
+    margin-bottom: 0.5em;
+    color:#4A3B32;
+}
+
+.custom-plan-banner p{
+    font-family: var(--paragraph-font); 
+    font-size: 1.2em; 
+    max-width: 600px; 
+    color:black;
+    margin: 0 auto 2em auto;
+}
 /* merch container */
 .merch-container{
     padding-block: calc(var(--padding-bottom)/2);
@@ -729,7 +750,7 @@ li a:hover{
     justify-content: center;
     align-items: center;
     margin-top: var(--margin-top);
-    padding-bottom: var(--padding-bottom);
+    margin-bottom: var(--margin-bottom);
     flex-direction: column;
 }
 .blog .title{
@@ -749,15 +770,13 @@ li a:hover{
     display: flex;
     flex-direction: column;
     gap: 2em;
-    margin-top: 5em;
+    margin-top: calc(var(--margin-top)/2);
     width: 70%;
 }
 .posts-list a, .blogs-list a{
     color: black;
 }
-hr{
-    margin-top: 5em;
-}
+
 .blog-card{
     width: 100%;
     height: 200px;
@@ -894,6 +913,7 @@ small{
 /* testimonials */
 .testimonials-container {
     margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
     width: 80%;
 }
 .testimonials-container .title {
@@ -905,7 +925,7 @@ small{
     align-items: center;
     position: relative;
     width:100%;
-    margin-top: calc(var(--margin-top) + 0.5em);
+    margin-top: calc(var(--margin-top) / 2);
 }
 
 .testimonial-list {
@@ -979,7 +999,7 @@ small{
 /* contacts */
 .contacts-container{
     width: 100%;
-    padding-bottom: var(--padding-bottom);
+    margin-bottom: var(--margin-bottom);
     margin-top: var(--margin-top) ;
     
 }
@@ -1020,7 +1040,6 @@ iframe{
     color: black;
 }
 .other-contact{
-    
     margin-top: 3em;
 }
 .other-contact h2{
@@ -1122,7 +1141,8 @@ iframe{
         padding: 1.25em;
     }
     .about-container{
-        margin-top: 0;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
     }
     .about{
         margin-top: 1em;
@@ -1152,7 +1172,8 @@ iframe{
         display: flex;
         justify-content: center;
         text-align: center;
-        margin-top: 1.5em;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
     }
     .tag{
         display: flex;
@@ -1180,8 +1201,9 @@ iframe{
 
     /* services */
     .services-container{
-        margin-top: 3em;
-        padding-bottom: 3em;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
+        padding: 0;
     }
     .services{
         width: 100%;
@@ -1210,6 +1232,10 @@ iframe{
     }
     .price{
         font-size: 1.5em;
+    }
+    .custom-plan-banner{
+        padding: 1em;
+        font-size: 0.75em;
     }
 
     /* for merch container */
@@ -1243,7 +1269,8 @@ iframe{
 
     /* blogs */
     .blogs-container{
-        margin-top: 3em;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
     }
     .blog{
         flex-direction: column;
@@ -1295,6 +1322,8 @@ iframe{
     /* testimonials */
     .testimonials-container{
         width: 90%;
+        margin-top: calc(var(--margin-top)/2);
+        margin-bottom: calc(var(--margin-bottom)/2);
     }
     
     .testimonial-list{
@@ -1309,6 +1338,7 @@ iframe{
     /* contacts */
     .contact-content{
         flex-wrap: wrap;
+        gap: 2em;
     }
     .map{
         width: 100%;

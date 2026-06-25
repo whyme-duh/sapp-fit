@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
     officialPlanBtn.addEventListener('click', function (){
         const officialPlanForm = document.getElementById('official-plan-form');
         const aiPlanForm = document.getElementById('ai-preview-form');
-        officialPlanForm.style.display = "flex";
+        officialPlanForm.style.display = "block";
         aiPlanForm.style.display = "none";
         this.disabled = true;
         aiPlanBtn.disabled = false;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const officialPlanForm = document.getElementById('official-plan-form');
         const aiPlanForm = document.getElementById('ai-preview-form');
         officialPlanForm.style.display = "none";
-        aiPlanForm.style.display = "flex";
+        aiPlanForm.style.display = "block";
         this.disabled = true;
         officialPlanBtn.disabled = false;
     })
