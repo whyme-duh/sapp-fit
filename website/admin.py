@@ -21,7 +21,6 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'service', 'preferred_date')
     list_filter = ('service', 'preferred_date', 'email')
 
-
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):  
     list_display = ('user_name', 'user_category')

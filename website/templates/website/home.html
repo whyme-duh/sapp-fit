@@ -139,13 +139,14 @@
                 </div>
             </div>
             {% endfor %}
+            {% if blogs.count >= 2   %}
+            <div class="see-all-wrapper">
+                <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
+            </div>
+            {% endif %}
         </div>
     </div>
-    {% if blogs.count >= 2   %}
-    <div class="see-all-wrapper">
-        <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
-    </div>
-    {% endif %}
+   
 </div>
 {% endif %}
 {% if testimonials %}

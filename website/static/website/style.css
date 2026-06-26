@@ -771,7 +771,7 @@ li a:hover{
     flex-direction: column;
     gap: 2em;
     margin-top: calc(var(--margin-top)/2);
-    width: 70%;
+    width: 100%;
 }
 .posts-list a, .blogs-list a{
     color: black;
@@ -878,7 +878,7 @@ small{
     margin: 0;
 }
 .see-all-wrapper{
-    width: 50%;
+    width: 100%;
     margin-top:var(--margin-top);
     display: flex;
     justify-content: flex-end;
@@ -888,13 +888,14 @@ small{
     padding-inline:1em;
     padding-block:0.75em;
     background-color:#a58577;
-    color:white;
+    color:white !important; 
+    font-family: var(--nav-font);
     display: inline-block;
     margin:0;
 }
 
 .sell-all-btn:hover{
-    background-color: #87300b;
+    background-color: #d86737;
 }
 .custom-request-btn{
     background-color: #c3855f; 
