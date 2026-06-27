@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 
 :root{
     --title-family :'Unbounded', cursive;
@@ -24,6 +26,7 @@
     --button-color: #d4a373;
     --text-primary: #4A3B32;
     --read-more-btn: rgb(241, 180, 89);
+    --second-parafont: "Inter", sans-serif;
 
 }
 
@@ -160,14 +163,28 @@ transition-delay: 1.2s;
     background-color: var(--navbar-color);
     justify-content: space-between;
     align-items: center;
+    padding: 0.1em;
+    position:fixed;
+    z-index: 10000;
+    width: 100%;
+}
+.page-navbar{
+    background-color: var(--navbar-color);
+    display: flex;
+    justify-content: center;
+    width: 100%;
     padding: 1em;
+}
+.page-navbar .brand{
+    width: fit-content;
+    
 }
 .right-side{
     display: flex;
 }
 
 .brand img{
-    width: 150px;
+    width: 120px;
 }
 
 nav ul{
@@ -315,7 +332,7 @@ li a:hover{
 .first-page-content{
     position: absolute;
     width: 35%;
-    top: 50%;
+    top: 60%;
     left: -5%;
     animation: slideInAnimation 1s ease-in-out;
     transform: translate(50%, -50%);
@@ -364,6 +381,7 @@ li a:hover{
     background-color: var(--button-color);
     font-size: 1.15em;
     cursor: pointer;
+    color: white;
 }
 .first-page-content button:hover{
     transition: ease-in 0.5s;
@@ -446,7 +464,7 @@ li a:hover{
     margin-top:2em;
     font-size:0.85em;
     border-radius: 10px;
-    font-family: var(--paragraph-font);
+    font-family: var(--second-parafont);
     font-weight: 500;
 }
 .tag:hover{
@@ -475,17 +493,16 @@ li a:hover{
 .about-content .bio{
     position: relative;
     animation: aboutAnimation 1.25s ease-in-out;
+    padding-top: 2em;
+    font-family: var(--second-parafont);
+    letter-spacing: 1px;
 }
 .title{
     font-family: var(--title-family);
     color: #774936;
 }
 
-.bio{
-   
-    padding-top: 2em;
-    font-family: var(--role-font);
-}
+
 
 /* quotes */
 
@@ -570,7 +587,7 @@ li a:hover{
 }
 .service-name {
     left:50%;
-    text-shadow: 5px 5px 10px rgb(0, 0, 0);
+    text-shadow: 5px 5px 5px rgb(0, 0, 0);
     transform: translate(-50%, -50%);
     font-family: var(--title-family);
     text-align: center;
@@ -769,7 +786,7 @@ li a:hover{
  .blogs-list{
     display: flex;
     flex-direction: column;
-    gap: 2em;
+    gap: 3em;
     margin-top: calc(var(--margin-top)/2);
     width: 100%;
 }
@@ -819,7 +836,7 @@ li a:hover{
 }
 
 .blog-title{
-    font-family: var(--blog-title);
+    font-family: var(--second-parafont);
     text-align: left;
     font-size: 2em;
 }
@@ -1019,7 +1036,10 @@ iframe{
     width: 100%;
 }
 .contact{
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
 }
 .contact .title{
     width: 100%;
@@ -1027,7 +1047,8 @@ iframe{
 }
 
 .contact-detail{
-    padding-top: 1.5em;
+    margin: 0;
+    margin-top: 3em;
 }
 
 .contact-detail p{
@@ -1036,6 +1057,9 @@ iframe{
     font-size: 1.15em;
     padding: 0.25em;
     align-items: center;
+}
+.contact-detail-msg{
+    margin-bottom: calc(var(--margin-bottom)/4);
 }
 .fa-envelop{
     color: black;
