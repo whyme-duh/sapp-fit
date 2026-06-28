@@ -63,8 +63,8 @@ Custom Service Request
              <div class="options">
                 <h2>Choose Option: </h2>
                <div class="option-btns-group">
-                    <button id="official-plan" disabled="true">Request Official Plan</button>
-                    <button id="ai-plan">Ask AI for Preview</button>
+                    <button id="official-plan" disabled="true" onclick='changeOption(this, "ai-plan", "human_preview")'>Request Custom Plan</button>
+                    <button id="ai-plan" onclick='changeOption(this, "official-plan", "ai_preview")'>Ask AI</button>
                </div>
             </div>
             
@@ -72,7 +72,7 @@ Custom Service Request
         
 
         <div class="request-form-wrapper" id="official-plan-form">
-            <h3>Request Official Plan to SappFit</h3>
+            <h3>Request Custom Plan to SappFit</h3>
             <form method="POST" class="custom-form" id="clientForm">
                 {% csrf_token %}
                 <div class="custom-form">
@@ -114,6 +114,10 @@ Custom Service Request
                             {{form.gender}}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="{{form.email.id_for_label}}" class="form-label">{{form.email.label}}</label>
+                        {{form.email}}
+                    </div>
                      <div class="form-row">
                         <div class="form-group">
                             <label for="{{form.workout_time.id_for_label}}" class="form-label">{{form.workout_time.label}}</label>
@@ -125,10 +129,7 @@ Custom Service Request
                             {{form.preferred_duration}}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="{{form.email.id_for_label}}" class="form-label">{{form.email.label}}</label>
-                        {{form.email}}
-                    </div>
+                    
 
                     <div class="form-group">
                         <label for="{{form.goal_choices.id_for_label}}" class="form-label">{{form.goal_choices.label}}</label>
@@ -150,7 +151,7 @@ Custom Service Request
                     </div>
 
                 </div>
-                <div class="button-group" style="display: flex; gap: 1em; margin-top: 2em;">
+                <div class="button-group" >
                     <button type="submit" name="action" value="human_request" class="submit-btn primary">
                         Request Official Plan
                     </button>
@@ -227,9 +228,9 @@ Custom Service Request
                     </div>
 
                 </div>
-                <div class="button-group" style="display: flex; gap: 1em; margin-top: 2em;">
-                    <button type="submit" name="action" value="ai_preview" class="submit-btn secondary" style="background-color: #d3c1c1; color: #333;">
-                        Ask AI for a Preview
+                <div class="button-group" >
+                    <button type="submit" name="action" value="ai_preview" class="submit-btn primary" >
+                        Request AI
                     </button>
                 </div>
             </form>

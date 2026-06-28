@@ -196,30 +196,7 @@
     </div>
     
 </div>
-<!-- this is for the footer as well -->
-<div class=" navbar responsive-navbar">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/logo.png' %}" alt="svg"></a></div>
-    <nav class="right-side" id="responsive">
-        <ul>
-            <li><a href="{% url 'home-page' %}">Home</a></li>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#services">Shop</a></li>
-            {% if blogs %}
-            <li><a href="#blogs">Blogs</a></li>
-            {% endif %} 
-            {% if testimonials %}
-            <li><a href="#testimonial">Testimonials</a></li>
-            {% endif %}
-            <li><a href="#contact">Contacts</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'client-view' %}">Clients</a></li>
-
-            {% endif %}
-        </ul>
-        
-    </nav>
-</div>
+{% include 'website/navbar.html' %}
 <p class="maker">Created and Managed by <a href="https://www.shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
 
 

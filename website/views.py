@@ -145,7 +145,6 @@ def custom_service_request(request):
             activity_level = form.cleaned_data['activity_level']
 
             is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-            print(is_ajax)
             try:
                 if button_clicked == "human_request":
                     phone_number = form.cleaned_data['phone_number']

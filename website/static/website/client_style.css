@@ -458,15 +458,15 @@ input:disabled{
     flex-direction: column;
     padding:1em;
 }
-.btn-groups{
+.client-btn-groups{
     margin-top: 1em;
     display: flex;
-    flex-grow: 1;
     gap:1em;
 }
-.btn-groups button{
+.client-btn-groups button{
     width:100%;
     border-radius: 5px;
+    margin: 0;
     padding-block: 0.5em;
     cursor: pointer;
 }
@@ -474,16 +474,17 @@ input:disabled{
     background-color: red;
     color:white;
     border: none;
+    text-align: center;
 }
 
 .alert-success{
-    background-color: rgb(194, 194, 194);
+    background-color: rgb(255, 255, 255);
     color: black;
-    border: none;
+    border: 1px solid rgb(154, 154, 154);
 }
 .alert-danger:hover{
     background-color: rgb(255, 60, 60);
 }
 .alert-success:hover{
-    background-color:grey ;
+    background-color:rgb(238, 237, 237) ;
 }

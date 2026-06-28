@@ -139,8 +139,9 @@
 
 #official-plan, #ai-plan{
     width: 100%;
-    padding-block:0.5em;
-    font-size:1.2em;
+    padding-block:0.85em;
+    padding-inline:0.25em;
+    font-size:1em;
     border: none;
     color: white;
     border-radius: 5px;
@@ -265,9 +266,9 @@
     background-color: var(--button-color);
     color: white;
     border: none;
-    padding: 1.25em;
-    font-size: 1.1em;
-    font-family: var(--role-font);
+    padding-inline: 1.25em;
+    font-size: 1em;
+    font-family: var(--second-parafont);
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;

@@ -34,7 +34,7 @@
     margin: 0 auto;
 }
 html{
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
 }
 body{
     overflow-x: hidden;
@@ -438,12 +438,13 @@ li a:hover{
     animation: opacAnimation 2s ease-in;
     border: none;
     cursor: pointer;
-    background-color: rgb(231, 177, 120);
+    background-color: var(--button-color);
     margin-top: 3em;
     padding: 1em;
-    font-size: 1em;
+    font-size: 0.9em;
     font-family: var(--role-font);
-    border-radius: 10px;
+    color: white;
+
 }
 .tag-holder{
     position: relative;
@@ -517,7 +518,6 @@ li a:hover{
     box-shadow: inset 500px 800px 10px rgba(52, 49, 47, 0.397);
     height: 35vh;
     color: white;
-    font-family: var(--quote-family);
 }
 .quotes{
     width: 50%;
@@ -528,6 +528,8 @@ li a:hover{
     text-align: left;
 }
 .sentence{
+    font-family: var(--quote-family);
+    text-shadow: 5px 5px 5px black;
     width: 100%;
     text-align: center;
 }
@@ -714,6 +716,10 @@ li a:hover{
     justify-content: space-around;
     font-size: 1.5em;
 }
+.merch button{
+    background-color: var(--button-color) !important;
+    color: white;
+}
 .slogan{
     font-family: var(--quote-family);
     font-size: 1.5em;
@@ -846,7 +852,7 @@ li a:hover{
     padding-top: 1em;
 }
 .learn-more-btn{
-    background-color: var(--read-more-btn);
+    background-color: var(--button-color);
     color: white !important;
     border-radius: 5px;
     padding-inline: 1em;
@@ -898,13 +904,13 @@ small{
     width: 100%;
     margin-top:var(--margin-top);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .sell-all-btn{
     width:fit-content;
     padding-inline:1em;
     padding-block:0.75em;
-    background-color:#a58577;
+    background-color:var(--button-color);
     color:white !important; 
     font-family: var(--nav-font);
     display: inline-block;
@@ -1083,7 +1089,6 @@ iframe{
     font-family: var(--paragraph-font);
     background-color: var(--navbar-color);
     width: 100%;
-    padding-top: 2em;
     color:rgb(38, 38, 38);
     text-align: center;
     font-size:0.85em;

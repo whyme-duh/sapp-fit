@@ -9,7 +9,6 @@
     --title-family :'Unbounded', cursive;
     --role-font :'Roboto Mono', monospace;
     --quote-family:'Lobster Two', cursive;
-    --read-more-btn: rgb(241, 180, 89);
     --blog-font : 'Andika', sans-serif;
     --container-width: 60%;
 
@@ -90,11 +89,11 @@ a{
     margin: 0;
     border: none;
     border-radius: 5px;
-    background-color: var(--read-more-btn);
+    background-color: var(--button-color);
     color: white !important;
 }
 .read-more-btn:hover{
-    background-color: rgb(255, 178, 62);
+    background-color: rgb(180, 114, 16);
     cursor: pointer;
 }
 .small-text{

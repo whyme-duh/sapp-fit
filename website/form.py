@@ -28,9 +28,19 @@ class BookingForm(forms.Form):
 
     def clean(self):
         super(BookingForm, self).clean()
+        valid_prefixes = (
+            '984', '985', '986', '974', '975', '980', '981', 
+            '982', '970', '971', '961', '962', '988'
+        )
         phone_number = self.cleaned_data.get('phone_number')
-        if len(str(phone_number)) != 10:
-            self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+        if phone_number:
+            phone_number_str= str(phone_number)
+
+            if len(str(phone_number)) != 10:
+                self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+
+            elif not phone_number_str.startswith(valid_prefixes):
+                self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
     
 
@@ -81,7 +91,28 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = "__all__"  
+        fields = "__all__"
+
+   
+
+    
+    services = forms.ModelChoiceField(
+        required=True,
+        queryset=Service.objects.all(),
+        empty_label="Select a service",
+        widget=forms.Select(
+            attrs={'class': 'form-control', 
+            }))
+
+    started_training_from = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                'type': 'date',
+                'min': timezone.localdate().isoformat(),
+                'class': 'form-control'
+            }
+        )
+    )
 
     def clean(self):
         super(ClientForm, self).clean()
