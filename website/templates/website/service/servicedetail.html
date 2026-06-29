@@ -18,7 +18,7 @@
         <div class="service-header-content">
             <h1>{{service.title}}</h1>
             <p>{{service.info}}</p>
-            <a class="book-now-btn" >Book Now for <span style="font-weight:800; color:rgb(151, 255, 82);"> Rs.{{service.price}}</span></a>
+            <a class="book-now-btn" >Book Now for <span style="font-weight:800; color:rgb(151, 255, 82);"> Rs.{{service.price}}/hr</span></a>
         </div>
         <img src="{{service.icon.url}}" alt="service" class="service-detail-image">
         
@@ -43,8 +43,7 @@
             
             </div>
             <div class="book-form-wrapper">
-                <div class="book-form-header">
-                </div>
+                
                 <form method="POST" id="clientForm">
                     {% csrf_token %}
                     <div class="modal-body">
