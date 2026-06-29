@@ -3,7 +3,7 @@
 <title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
 {% block content %}
 <div class=" navbar ">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/logo.png' %}" alt="logo"></a></div>
+    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/final_logo.png' %}" alt="logo"></a></div>
     <nav class="right-side" id="responsive">
         <ul>
             <li><a href="#about">About Me</a></li>
@@ -29,7 +29,6 @@
 </div>  
 
 <div class="first-page">
-
     <img src="{{about.backgroundImage.url}}" alt="background-images" class="bg-image">
     <div class="first-page-content">
         <h1>Hi,</h1>
@@ -44,7 +43,6 @@
 </div>
 <div class="about-container" id="about">
     <h1 class="title" id="about-me-above-title" style="text-align: center;">About Me</h1>
-
     <div class="about hidden" >
         <img src="{{about.profileImage.url}}" alt="profile" class="about-image">
         <div class="about-content">
@@ -67,9 +65,7 @@
 </div>
 <div class="quotes-container" style="background-image: url({{about.quoteContainerImage.url}});">
     <div class="quotes">
-        <h1 class="quote">"</h1>
         <h1 class="sentence">{{about.quotes}} </h1>
-        <h1 class="quote second">"</h1>
     </div>
 </div>
 
@@ -96,9 +92,9 @@
         </div>
     </div>
 </div>
-<div class="custom-plan-banner" style="background-color: #ffffff; padding: 4em 2em; text-align: center; color: white; margin-bottom:var(--margin-top); ">
-    <h2 style="font-family: var(--title-family); font-size: 2.5em; margin-bottom: 0.5em;color:#4A3B32;">Your Goals, Your Schedule.</h2>
-    <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;margin: 0 auto 2em auto;">
+<div class="custom-plan-banner" >
+    <h2 >Your Goals, Your Schedule.</h2>
+    <p>
         Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
     </p>
     <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
@@ -143,13 +139,14 @@
                 </div>
             </div>
             {% endfor %}
+            {% if blogs.count >= 2   %}
+            <div class="see-all-wrapper">
+                <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
+            </div>
+            {% endif %}
         </div>
     </div>
-    {% if blogs.count >= 2   %}
-    <div class="see-all-wrapper">
-        <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
-    </div>
-    {% endif %}
+   
 </div>
 {% endif %}
 {% if testimonials %}
@@ -178,8 +175,8 @@
         </div>
         <div class="contact" id="contact">
             <h1 class="title">Contact Me</h1>
-            <p class="bio">Slide into my DMs to start your fitness journey, or message me directly below</p>
             <div class="contact-detail">
+                <p class="contact-detail-msg">Slide into my DMs to start your fitness journey, or message me directly below</p>
                 <a href="{{about.instagram}}">
                     <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
                 </a>
@@ -199,30 +196,7 @@
     </div>
     
 </div>
-<!-- this is for the footer as well -->
-<div class=" navbar responsive-navbar">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/logo.png' %}" alt="svg"></a></div>
-    <nav class="right-side" id="responsive">
-        <ul>
-            <li><a href="{% url 'home-page' %}">Home</a></li>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#services">Shop</a></li>
-            {% if blogs %}
-            <li><a href="#blogs">Blogs</a></li>
-            {% endif %} 
-            {% if testimonials %}
-            <li><a href="#testimonial">Testimonials</a></li>
-            {% endif %}
-            <li><a href="#contact">Contacts</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'client-view' %}">Clients</a></li>
-
-            {% endif %}
-        </ul>
-        
-    </nav>
-</div>
+{% include 'website/navbar.html' %}
 <p class="maker">Created and Managed by <a href="https://www.shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
 
 

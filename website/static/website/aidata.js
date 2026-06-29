@@ -42,29 +42,49 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    const officialPlanBtn = document.getElementById('official-plan');
-    const aiPlanBtn = document.getElementById('ai-plan')
+    
+    
+    // const officialPlanBtn = document.getElementById('official-plan');
+    // const aiPlanBtn = document.getElementById('ai-plan')
 
 
-    officialPlanBtn.addEventListener('click', function (){
-        const officialPlanForm = document.getElementById('official-plan-form');
-        const aiPlanForm = document.getElementById('ai-preview-form');
-        officialPlanForm.style.display = "flex";
-        aiPlanForm.style.display = "none";
-        this.disabled = true;
-        aiPlanBtn.disabled = false;
-    })
+    // officialPlanBtn.addEventListener('click', function (){
+    //     const officialPlanForm = document.getElementById('official-plan-form');
+    //     const aiPlanForm = document.getElementById('ai-preview-form');
+    //     officialPlanForm.style.display = "block";
+    //     aiPlanForm.style.display = "none";
+    //     this.disabled = true;
+    //     aiPlanBtn.disabled = false;
+    // })
 
-    aiPlanBtn.addEventListener('click', function(){
+    // aiPlanBtn.addEventListener('click', function(){
 
-        const officialPlanForm = document.getElementById('official-plan-form');
-        const aiPlanForm = document.getElementById('ai-preview-form');
-        officialPlanForm.style.display = "none";
-        aiPlanForm.style.display = "flex";
-        this.disabled = true;
-        officialPlanBtn.disabled = false;
-    })
+    //     const officialPlanForm = document.getElementById('official-plan-form');
+    //     const aiPlanForm = document.getElementById('ai-preview-form');
+    //     officialPlanForm.style.display = "none";
+    //     aiPlanForm.style.display = "block";
+    //     this.disabled = true;
+    //     officialPlanBtn.disabled = false;
+    // })
 });
+
+function changeOption(currentBtn, targetBtn, option){
+    const targetBtnElement = document.getElementById(targetBtn);
+    const officialPlanForm = document.getElementById('official-plan-form');
+    const aiPlanForm = document.getElementById('ai-preview-form');
+    if (option == "ai_preview"){
+        officialPlanForm.style.display = "none";
+        aiPlanForm.style.display = "block";
+    }
+    else if(option == "human_preview"){
+        officialPlanForm.style.display = "block";
+        aiPlanForm.style.display = "none";
+    }
+    
+    currentBtn.disabled = true;
+    targetBtnElement.disabled = false;
+
+}
 
 
 

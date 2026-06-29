@@ -145,7 +145,6 @@ def custom_service_request(request):
             activity_level = form.cleaned_data['activity_level']
 
             is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-            print(is_ajax)
             try:
                 if button_clicked == "human_request":
                     phone_number = form.cleaned_data['phone_number']
@@ -302,8 +301,11 @@ def client_view(request):
     else:
         form = ClientForm()
     active_clients_count = Client.objects.filter(status = "Ongoing").count()
+    total_clients_count = Client.objects.all().count()
+    
     clients = Client.objects.all().order_by("-status")
-    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'form': form})
+    
+    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'form': form, 'total_clients_count': total_clients_count})
 
 
 @login_required

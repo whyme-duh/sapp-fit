@@ -21,16 +21,16 @@
             <div class="stat-card">
                 <h3>Active Clients</h3>
                 <p class="stat-number">{{active_clients_count}}</p>
-                <span class="stat-trend positive">↑ 2 this month</span>
+                <!-- <span class="stat-trend positive">↑ 2 this month</span> -->
             </div>
             <div class="stat-card">
-                <h3>Sessions This Week</h3>
-                <p class="stat-number">12</p>
-                <span class="stat-trend">4 remaining</span>
+                <h3>Total Clients</h3>
+                <p class="stat-number">{{total_clients_count}}</p>
+                <!-- <span class="stat-trend">4 remaining</span> -->
             </div>
             <div class="stat-card">
-                <h3>Packages Expiring Soon</h3>
-                <p class="stat-number text-accent">3</p>
+                <h3>Most Used Service</h3>
+                <p class="stat-number text-accent">Personal Trainer</p>
                 <span class="stat-trend">Requires follow-up</span>
             </div>
         </div>
@@ -72,20 +72,26 @@
 
                         <div class="form-group">
                             <label for="{{ form.started_training_from.id_for_label }}">Start Date</label>
-                            {% render_field form.started_training_from type="date" class="form-control" %}
+                            {% render_field form.started_training_from type="date" class="form-control"%}
                         </div>
 
                         <div class="form-group">
                             <label for="{{ form.services.id_for_label }}">Assigned Package</label>
                             {% render_field form.services class="form-select" %}
                         </div>
-
                         <div class="form-group">
                             <label for="{{ form.status.id_for_label }}">Status</label>
-                            {% render_field form.status class="form-select" %}
+                            {% render_field form.status class="form-select"  %}
                         </div>
+                        <div class="form-group">
+                            <label for="{{ form.paid_or_not.id_for_label }}">Paid or not?</label>
+                            
+                            {% render_field form.paid_or_not class="form-select"  %}
+                        </div>
+                       
 
                     </div>
+                     
 
                     <div class="form-group full-width mt-4">
                         <label for="{{ form.any_problem.id_for_label }}">Medical Notes & Injuries</label>
@@ -115,7 +121,7 @@
                             <th>Client Name</th>
                             <th>Age</th>
                             <th>Active Package</th>
-                            <th>Total Sessions</th>
+                            <th>Paid or Not?</th>
                             <th>Last Session</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -129,7 +135,7 @@
                             </td>
                             <td>{{client.age}}</td>
                             <td>{{client.services.title}}</td>
-                            <td><span class="session-badge">{{client.total_sessions}}</span></td>
+                            <td><span class="session-badge">{{client.paid_or_not|cut:"ne"}}</span></td>
                             <td>{{client.started_training_from}}</td>
                             <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
                             <td class="actions">
@@ -157,7 +163,7 @@
         <div class="delete-modal" id="delete-modal-container">
             <div class="delete-modal-card">
                 <h3>Are you sure you want to delete?</h>
-                <div class="btn-groups">
+                <div class="client-btn-groups">
                     <form action="" id="delete-form">
                         {% csrf_token %}
                         <button class="alert-danger" id="yes-delete-btn">Yes</button>

@@ -69,7 +69,14 @@
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
+.request-form-wrapper h3{
+    text-align: center;
+    font-family: var(--title-family);
+    color: rgb(145, 145, 145);
+    text-shadow: #111;
+    margin-bottom: calc(var(--margin-bottom)/4);
 
+}
 
 .request-info h2 {
     font-family: var(--title-family);
@@ -122,31 +129,36 @@
 }
 
 .options{
-    margin-top: 1em;
+    margin-top: calc(var(--margin-top)/3);
 }
 .option-btns-group{
-    width: fit-content;
     display: flex;
     justify-content: flex-start;
     gap:1em;
 }
 
 #official-plan, #ai-plan{
-    padding-inline: 1em;
-    padding-block:0.5em;
-    font-size:1.25em;
+    width: 100%;
+    padding-block:0.85em;
+    padding-inline:0.25em;
+    font-size:1em;
     border: none;
     color: white;
     border-radius: 5px;
+    font-family: var(--role-font);
+    cursor: pointer;
     background-color: var(--button-color);
 }
 
 #official-plan:disabled{
     color: rgb(198, 195, 195);
+    cursor:no-drop;
     background-color: rgba(128, 128, 128, 0.245);
    
 }
 #ai-plan:disabled{
+    cursor:no-drop;
+
     color: rgb(198, 195, 195);
     background-color: rgba(128, 128, 128, 0.245);
 }
@@ -254,9 +266,9 @@
     background-color: var(--button-color);
     color: white;
     border: none;
-    padding: 1.25em;
-    font-size: 1.1em;
-    font-family: var(--role-font);
+    padding-inline: 1.25em;
+    font-size: 1em;
+    font-family: var(--second-parafont);
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
@@ -279,9 +291,16 @@
    
 }
 @media only screen and (max-width: 768px) {
+    .request-container{
+        font-size: 0.85em;
+        padding: 1em;
+    }
     .request-form-wrapper { padding: 1.5em; }
     .request-form-wrapper form{
         margin: 0;
+    }
+    .request-header p{
+        text-align: center;
     }
     .button-group{
         margin: 0;

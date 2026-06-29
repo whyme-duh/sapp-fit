@@ -28,9 +28,19 @@ class BookingForm(forms.Form):
 
     def clean(self):
         super(BookingForm, self).clean()
+        valid_prefixes = (
+            '984', '985', '986', '974', '975', '980', '981', 
+            '982', '970', '971', '961', '962', '988'
+        )
         phone_number = self.cleaned_data.get('phone_number')
-        if len(str(phone_number)) != 10:
-            self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+        if phone_number:
+            phone_number_str= str(phone_number)
+
+            if len(str(phone_number)) != 10:
+                self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+
+            elif not phone_number_str.startswith(valid_prefixes):
+                self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
     
 
@@ -81,7 +91,44 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = "__all__"  
+        fields = "__all__"
+
+    
+    gender = forms.ChoiceField(
+        choices=Client.GENDER_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control'
+            }
+        )
+    )
+
+    paid_or_not = forms.ChoiceField(
+        choices=Client.PAID_OPTIONS,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control'
+            }
+        )
+    )
+
+    
+    services = forms.ModelChoiceField(
+        required=True,
+        queryset=Service.objects.all(),
+        empty_label="Select a service",
+        widget=forms.Select(
+            attrs={'class': 'form-control', 
+            }))
+
+    started_training_from = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }
+        )
+    )
 
     def clean(self):
         super(ClientForm, self).clean()
@@ -150,6 +197,10 @@ class CustomServiceForm(forms.Form):
 
     def clean(self):
         super(CustomServiceForm, self).clean()
+        valid_prefixes = (
+            '984', '985', '986', '974', '975', '980', '981', 
+            '982', '970', '971', '961', '962', '988'
+        )
         age = self.cleaned_data['age']
         weight = self.cleaned_data['weight']
         if age < 10 or age > 60:
@@ -157,8 +208,15 @@ class CustomServiceForm(forms.Form):
         if weight < 40 or weight > 100:
             self._errors['weight'] = self.error_class(['Please enter a valid weight in kg.'])
         if self.fields['phone_number'].required:
-            phone = self.cleaned_data['phone_number']
-            if len(phone) != 10:
-                self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+            phone_number = self.cleaned_data['phone_number']
+            if phone_number:
+
+                phone_number_str= str(phone_number)
+
+                if len(str(phone_number)) != 10:
+                    self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
+
+                elif not phone_number_str.startswith(valid_prefixes):
+                    self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
     

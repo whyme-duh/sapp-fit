@@ -62,4 +62,27 @@ class FormTest(TestCase):
             )
         
         self.assertTrue(form.is_valid())
-        print("✅ Passed! When the user clciks 'AI Preview' the form should not validate phone and other user detail")
+        print("✅ Passed! When the user clicks 'AI Preview' the form should not validate phone and other user detail")
+
+
+    def test_phone_prefix(self):
+        form = CustomServiceForm(
+            data = {
+                "name" : "Ritik",
+                "age" : 25, 
+                "weight" : 55, 
+                "phone_number": 1160930990,
+                "goal_choices" : "Fat Loss & Toning",
+                "preferred_duration" : "1 Week Plan",
+                "workout_time" : "45 minutes",
+                "gender" : "Male",
+                "email" : "riitk@gmail.comd",
+                "equipment_used": "nm.a",
+                "special_notes" : "adf",
+                "activity_level" : "Sedentary"
+                },
+            )
+        self.assertIn('phone_number', form.errors)
+        self.assertEqual(form.errors['phone_number'],["The provided number does not start with a valid Nepali carrier prefix."])
+        print("✅ Passed! When the user provides phone number with invalid prefix, it raises an error. ")
+

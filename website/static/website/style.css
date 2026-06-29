@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 
 :root{
     --title-family :'Unbounded', cursive;
@@ -16,6 +18,7 @@
     --container-width: 70%;
     --paragraph-font: 'Rubik', sans-serif;
     --margin-top:5em;
+    --margin-bottom:5em;
     --padding-bottom:5em;
     --testinomial-font :  'Inconsolata', monospace;
     --blog-title:'Roboto Condensed', sans-serif;
@@ -23,6 +26,7 @@
     --button-color: #d4a373;
     --text-primary: #4A3B32;
     --read-more-btn: rgb(241, 180, 89);
+    --second-parafont: "Inter", sans-serif;
 
 }
 
@@ -30,7 +34,7 @@
     margin: 0 auto;
 }
 html{
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
 }
 body{
     overflow-x: hidden;
@@ -159,14 +163,28 @@ transition-delay: 1.2s;
     background-color: var(--navbar-color);
     justify-content: space-between;
     align-items: center;
+    padding:1em;
+    position:fixed;
+    z-index: 10000;
+    width: 100%;
+}
+.page-navbar{
+    background-color: var(--navbar-color);
+    display: flex;
+    justify-content: center;
+    width: 100%;
     padding: 1em;
+}
+.page-navbar .brand{
+    width: fit-content;
+    
 }
 .right-side{
     display: flex;
 }
 
 .brand img{
-    width: 150px;
+    width: 50px;
 }
 
 nav ul{
@@ -187,14 +205,15 @@ a{
 
 
 nav ul a{
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-family: var(--nav-font);
     color: black;
     margin: 0;
 }
 
 li a:hover{
-    color: rgb(248, 62, 0);
+    color: rgb(237, 148, 23);
+    border-bottom: 1px solid rgb(237, 148, 23);
 }
 .socials .fa{
     padding: 15px;
@@ -216,7 +235,7 @@ li a:hover{
 @media only screen and (max-width:450px){
     .navbar{
         justify-content: space-between;
-        position:relative;
+        position:fixed;
     }
     .fa-bars{
         color:rgb(178, 135, 48);
@@ -231,9 +250,10 @@ li a:hover{
         display: block;
         text-decoration: none;
         font-size:2em;
+        padding-inline: 1em;
     }
     .right-side-responsive{
-        top: 100px;
+        top: 70px;
         height: fit-content;
         background-color: rgb(204, 177, 135);
         z-index:100;
@@ -314,7 +334,7 @@ li a:hover{
 .first-page-content{
     position: absolute;
     width: 35%;
-    top: 50%;
+    top: 60%;
     left: -5%;
     animation: slideInAnimation 1s ease-in-out;
     transform: translate(50%, -50%);
@@ -363,6 +383,7 @@ li a:hover{
     background-color: var(--button-color);
     font-size: 1.15em;
     cursor: pointer;
+    color: white;
 }
 .first-page-content button:hover{
     transition: ease-in 0.5s;
@@ -397,7 +418,7 @@ li a:hover{
 }
 .about-container{
     margin-top: var(--margin-top);
-    padding-bottom: var(--padding-bottom);
+    margin-bottom: var(--margin-bottom);
     /* background-color: rgb(230, 61, 61); */
 }
 .about{
@@ -405,7 +426,6 @@ li a:hover{
     justify-content: space-between;
     align-items: center;
     width:var(--container-width);
-    margin-top: var(--margin-top);
 }
 .about-image{
     width: 400px;
@@ -420,12 +440,13 @@ li a:hover{
     animation: opacAnimation 2s ease-in;
     border: none;
     cursor: pointer;
-    background-color: rgb(231, 177, 120);
+    background-color: var(--button-color);
     margin-top: 3em;
     padding: 1em;
-    font-size: 1em;
+    font-size: 0.9em;
     font-family: var(--role-font);
-    border-radius: 10px;
+    color: white;
+
 }
 .tag-holder{
     position: relative;
@@ -446,7 +467,7 @@ li a:hover{
     margin-top:2em;
     font-size:0.85em;
     border-radius: 10px;
-    font-family: var(--paragraph-font);
+    font-family: var(--second-parafont);
     font-weight: 500;
 }
 .tag:hover{
@@ -475,17 +496,16 @@ li a:hover{
 .about-content .bio{
     position: relative;
     animation: aboutAnimation 1.25s ease-in-out;
+    padding-top: 2em;
+    font-family: var(--second-parafont);
+    letter-spacing: 1px;
 }
 .title{
     font-family: var(--title-family);
     color: #774936;
 }
 
-.bio{
-   
-    padding-top: 2em;
-    font-family: var(--role-font);
-}
+
 
 /* quotes */
 
@@ -500,7 +520,6 @@ li a:hover{
     box-shadow: inset 500px 800px 10px rgba(52, 49, 47, 0.397);
     height: 35vh;
     color: white;
-    font-family: var(--quote-family);
 }
 .quotes{
     width: 50%;
@@ -511,7 +530,10 @@ li a:hover{
     text-align: left;
 }
 .sentence{
-    width: 70%;
+    font-family: var(--quote-family);
+    text-shadow: 5px 5px 5px black;
+    width: 100%;
+    text-align: center;
 }
 .second{
     text-align: right;
@@ -569,7 +591,7 @@ li a:hover{
 }
 .service-name {
     left:50%;
-    text-shadow: 5px 5px 10px rgb(0, 0, 0);
+    text-shadow: 5px 5px 5px rgb(0, 0, 0);
     transform: translate(-50%, -50%);
     font-family: var(--title-family);
     text-align: center;
@@ -662,6 +684,26 @@ li a:hover{
     font-family: var(--role-font);
 }
 
+.custom-plan-banner{
+    background-color: #ffffff; 
+    text-align: center; 
+    color: white; 
+    margin-bottom:var(--margin-top); 
+}
+.custom-plan-banner h2{
+    font-family: var(--title-family); 
+    font-size: 2.5em; 
+    margin-bottom: 0.5em;
+    color:#4A3B32;
+}
+
+.custom-plan-banner p{
+    font-family: var(--paragraph-font); 
+    font-size: 1.2em; 
+    max-width: 600px; 
+    color:black;
+    margin: 0 auto 2em auto;
+}
 /* merch container */
 .merch-container{
     padding-block: calc(var(--padding-bottom)/2);
@@ -675,6 +717,10 @@ li a:hover{
     align-items: center;
     justify-content: space-around;
     font-size: 1.5em;
+}
+.merch button{
+    background-color: var(--button-color) !important;
+    color: white;
 }
 .slogan{
     font-family: var(--quote-family);
@@ -729,7 +775,7 @@ li a:hover{
     justify-content: center;
     align-items: center;
     margin-top: var(--margin-top);
-    padding-bottom: var(--padding-bottom);
+    margin-bottom: var(--margin-bottom);
     flex-direction: column;
 }
 .blog .title{
@@ -748,16 +794,14 @@ li a:hover{
  .blogs-list{
     display: flex;
     flex-direction: column;
-    gap: 2em;
-    margin-top: 5em;
-    width: 70%;
+    gap: 3em;
+    margin-top: calc(var(--margin-top)/2);
+    width: 100%;
 }
 .posts-list a, .blogs-list a{
     color: black;
 }
-hr{
-    margin-top: 5em;
-}
+
 .blog-card{
     width: 100%;
     height: 200px;
@@ -800,7 +844,7 @@ hr{
 }
 
 .blog-title{
-    font-family: var(--blog-title);
+    font-family: var(--second-parafont);
     text-align: left;
     font-size: 2em;
 }
@@ -810,7 +854,7 @@ hr{
     padding-top: 1em;
 }
 .learn-more-btn{
-    background-color: var(--read-more-btn);
+    background-color: var(--button-color);
     color: white !important;
     border-radius: 5px;
     padding-inline: 1em;
@@ -859,23 +903,24 @@ small{
     margin: 0;
 }
 .see-all-wrapper{
-    width: 50%;
+    width: 100%;
     margin-top:var(--margin-top);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .sell-all-btn{
     width:fit-content;
     padding-inline:1em;
     padding-block:0.75em;
-    background-color:#a58577;
-    color:white;
+    background-color:var(--button-color);
+    color:white !important; 
+    font-family: var(--nav-font);
     display: inline-block;
     margin:0;
 }
 
 .sell-all-btn:hover{
-    background-color: #87300b;
+    background-color: #d86737;
 }
 .custom-request-btn{
     background-color: #c3855f; 
@@ -894,6 +939,7 @@ small{
 /* testimonials */
 .testimonials-container {
     margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
     width: 80%;
 }
 .testimonials-container .title {
@@ -905,7 +951,7 @@ small{
     align-items: center;
     position: relative;
     width:100%;
-    margin-top: calc(var(--margin-top) + 0.5em);
+    margin-top: calc(var(--margin-top) / 2);
 }
 
 .testimonial-list {
@@ -979,7 +1025,7 @@ small{
 /* contacts */
 .contacts-container{
     width: 100%;
-    padding-bottom: var(--padding-bottom);
+    margin-bottom: var(--margin-bottom);
     margin-top: var(--margin-top) ;
     
 }
@@ -998,7 +1044,10 @@ iframe{
     width: 100%;
 }
 .contact{
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
 }
 .contact .title{
     width: 100%;
@@ -1006,7 +1055,8 @@ iframe{
 }
 
 .contact-detail{
-    padding-top: 1.5em;
+    margin: 0;
+    margin-top: 3em;
 }
 
 .contact-detail p{
@@ -1016,11 +1066,13 @@ iframe{
     padding: 0.25em;
     align-items: center;
 }
+.contact-detail-msg{
+    margin-bottom: calc(var(--margin-bottom)/4);
+}
 .fa-envelop{
     color: black;
 }
 .other-contact{
-    
     margin-top: 3em;
 }
 .other-contact h2{
@@ -1039,7 +1091,6 @@ iframe{
     font-family: var(--paragraph-font);
     background-color: var(--navbar-color);
     width: 100%;
-    padding-top: 2em;
     color:rgb(38, 38, 38);
     text-align: center;
     font-size:0.85em;
@@ -1085,14 +1136,22 @@ iframe{
         font-size:0.5em;
     }
     .navbar{
-        justify-content: space-between;
+        padding: 0em;
     }
     .responsive-navbar{
         justify-content: center;
     }
-    .brand{
-        width:100px;
+    .page-navbar{
+        width: 100%;
+        padding: 0;
+    }
+    .brand, .page-navbar .brand{
+        padding: 1em;
+        width:50px;
         margin:0;
+    }
+    .page-navbar .brand{
+        width: 70px;
     }
     .icon{
         margin:0;
@@ -1105,7 +1164,7 @@ iframe{
         padding: 0;
     }
     .first-page,  .bg-image{
-        height: 60vh;
+        height: 80vh;
         object-fit: cover;
     }
    
@@ -1121,8 +1180,17 @@ iframe{
         font-size: 1.25em;
         padding: 1.25em;
     }
+    .role{
+        text-shadow: 1px 1px 1px rgb(112, 85, 5);
+        font-size: 1.5em;
+    }
+
+    .first-page-content button{
+        font-size: 1.5em;
+    }
     .about-container{
-        margin-top: 0;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
     }
     .about{
         margin-top: 1em;
@@ -1152,7 +1220,8 @@ iframe{
         display: flex;
         justify-content: center;
         text-align: center;
-        margin-top: 1.5em;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
     }
     .tag{
         display: flex;
@@ -1180,8 +1249,9 @@ iframe{
 
     /* services */
     .services-container{
-        margin-top: 3em;
-        padding-bottom: 3em;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
+        padding: 0;
     }
     .services{
         width: 100%;
@@ -1210,6 +1280,10 @@ iframe{
     }
     .price{
         font-size: 1.5em;
+    }
+    .custom-plan-banner{
+        padding: 1em;
+        font-size: 0.75em;
     }
 
     /* for merch container */
@@ -1243,7 +1317,8 @@ iframe{
 
     /* blogs */
     .blogs-container{
-        margin-top: 3em;
+        margin-top: calc(var(--margin-top)/4);
+        margin-bottom: calc(var(--margin-bottom)/4);
     }
     .blog{
         flex-direction: column;
@@ -1295,6 +1370,8 @@ iframe{
     /* testimonials */
     .testimonials-container{
         width: 90%;
+        margin-top: calc(var(--margin-top)/2);
+        margin-bottom: calc(var(--margin-bottom)/2);
     }
     
     .testimonial-list{
@@ -1309,6 +1386,7 @@ iframe{
     /* contacts */
     .contact-content{
         flex-wrap: wrap;
+        gap: 2em;
     }
     .map{
         width: 100%;

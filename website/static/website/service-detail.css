@@ -322,6 +322,7 @@ textarea.form-control {
         width:100%;
     }
     .service-header{
+        gap: 0;
         flex-direction: column-reverse;
     }
     .service-header-content{
@@ -333,11 +334,16 @@ textarea.form-control {
         text-align: center;
         justify-content: center;
     }
+    .service-header-content p{
+        font-size: 1em;
+    }
     .book-now-btn{
-        margin-top: 1em;
+        margin-top: calc(var(--margin-top)/3);
+        font-size: 1em;
     }
     .service-form-wrapper h1{
         padding: 1em;
+        display: none;
         font-size: 1.85em;
     }
    
