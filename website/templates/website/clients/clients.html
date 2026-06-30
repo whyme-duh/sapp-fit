@@ -30,8 +30,8 @@
             </div>
             <div class="stat-card">
                 <h3>Most Used Service</h3>
-                <p class="stat-number text-accent">Personal Trainer</p>
-                <span class="stat-trend">Requires follow-up</span>
+                <p class="stat-number text-accent">{{top_service}}</p>
+                <!-- <span class="stat-trend">Requires follow-up</span> -->
             </div>
         </div>
 
@@ -122,7 +122,7 @@
                             <th>Age</th>
                             <th>Active Package</th>
                             <th>Paid or Not?</th>
-                            <th>Last Session</th>
+                            <th>Total Session</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -136,7 +136,7 @@
                             <td>{{client.age}}</td>
                             <td>{{client.services.title}}</td>
                             <td><span class="session-badge">{{client.paid_or_not|cut:"ne"}}</span></td>
-                            <td>{{client.started_training_from}}</td>
+                            <td>{{client.total_sessions}}</td>
                             <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
                             <td class="actions">
                                 <a href="javascript:void(0);" 
@@ -150,9 +150,9 @@
                                 data-service="{{ client.services.id }}"
                                 data-status="{{ client.status }}"
                                 data-problem="{{ client.any_problem }}">
-                                Edit
+                               <i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>
                             </a>
-                                <a class="action-link delete" id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-url = "{% url 'delete-client' client.id %}">Delete</a>
+                                <a class="action-link delete" title="Edit"id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-url = "{% url 'delete-client' client.id %}"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>
                             </td>
                         </tr>
                         {% endfor %}

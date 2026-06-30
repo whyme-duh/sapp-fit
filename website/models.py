@@ -101,7 +101,7 @@ class Client(models.Model):
     gender = models.TextField(choices= GENDER_CHOICES)
     started_training_from = models.DateField()
     services = models.ForeignKey(Service, on_delete= models.PROTECT)
-    any_problem = models.TextField(default="N/A")
+    any_problem = models.CharField(max_length=500, default="N/A")
     status = models.CharField(max_length = 100, choices= STATUS_CHOICES, default="Ongoing")
     paid_or_not = models.CharField(max_length = 100, choices= PAID_OPTIONS, blank = True, null = True)
 

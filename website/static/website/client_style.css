@@ -95,7 +95,7 @@ body {
 }
 
 .stat-number {
-    font-size: 2.25rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 8px;
@@ -253,7 +253,6 @@ body {
 }
 .actions{
     display: flex;
-    gap: 2em;
 }
 .action-link {
     font-weight: 500;
@@ -263,21 +262,22 @@ body {
     padding-block: 0.5em;
     border-radius: 10px;
 }
-.edit{
-    background: rgb(212, 148, 19);
-    color: white;
-}
-.delete{
-    background: rgb(237, 55, 9);
-    color: white;
+.fa-pencil{
+    font-size: 1.25em;
     cursor: pointer;
+    color: rgb(212, 148, 19);
+}
+.fa-trash{
+    font-size: 1.25em;
+    cursor: pointer;
+
+    color: rgb(237, 55, 9);;
 }
 
+
 .edit:hover {
-    background: rgb(154, 106, 9);
 }
 .delete:hover {
-    background: rgb(146, 5, 5);
 }
 
 
