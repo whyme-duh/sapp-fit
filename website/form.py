@@ -7,7 +7,7 @@ class BookingForm(forms.Form):
 
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.IntegerField( widget=forms.NumberInput(attrs={'class': 'form-control', 'maxlength' : 10}))          
+    phone_number = forms.CharField(max_length=10, widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -48,7 +48,7 @@ class OneServiceBookingForm(forms.Form):
 
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'maxlength' : 10}))          
+    phone_number = forms.CharField(max_length = 10, required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={

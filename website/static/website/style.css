@@ -272,12 +272,18 @@ li a:hover{
         padding: 0;
         display: flex;
         flex-direction: column;
+        gap:1em;
+        align-items: center;
+        padding:1em;
     }
     .right-side-responsive li{
         width:100%;
-        padding:0.25em;
         text-align: center;
         font-size: 0.85em;
+    }
+    .right-side-responsive a:hover{
+        border:none;
+        color:#774936;
     }
    
     
@@ -1147,31 +1153,33 @@ iframe{
         width: 100%;
         padding: 0;
     }
+    
     .brand, .page-navbar .brand{
         padding: 1em;
         width:50px;
         margin:0;
     }
-    .page-navbar .brand{
-        width: 70px;
+    .navbar .brand{
+        padding-inline:1.5em;
+    }
+    .page-navbar .img{
+        width: 100px;
     }
     .icon{
         margin:0;
     }
-    .brand img{
-        width: 100%;
-    }
+    
     .header{
         margin: 0;
         padding: 0;
     }
     .first-page,  .bg-image{
-        height: 80vh;
+        height: 90vh;
         object-fit: cover;
     }
    
     .first-page-content{
-        font-size: 0.6em;
+        font-size: 0.65em;
         width: 70%;
         left: -30%;
     }
@@ -1183,7 +1191,7 @@ iframe{
         padding: 1.25em;
     }
     .role{
-        text-shadow: 1px 1px 1px rgb(112, 85, 5);
+        text-shadow: 1px 1px 1px rgb(179, 179, 179);
         font-size: 1.5em;
     }
 

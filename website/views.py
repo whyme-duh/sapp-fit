@@ -108,10 +108,10 @@ def service_detail_view(request, slug):
                 # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
                 # email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
-                
-            return redirect('service-detail', slug = slug)
+                return redirect('service-detail', slug = slug)
             
         else:
+            messages.error(request, f'Error occured. Try again!')
             error_details = form.errors.as_text()
             print(error_details)
     else:

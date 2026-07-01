@@ -429,10 +429,16 @@ input:disabled{
     .form-grid {
         grid-template-columns: 1fr; /* Stacks to 1 column on small screens */
     }
-    .modal-box {
+    .modal-overlay {
+        top:50%;
         height: 100%;
         border-radius: 0;
         max-width: 100%;
+        box-sizing: border-box;
+        box-shadow:5px 5px 5px black;
+    }
+    form{
+        margin:0;
     }
     .modal-footer {
         border-radius: 0;
