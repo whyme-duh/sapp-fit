@@ -1,7 +1,6 @@
 {% extends 'website/index.html' %}
 {% load static %}
 
-{% load widget_tweaks %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'website/client_style.css'%}">
 {% endblock %}
@@ -14,7 +13,7 @@
 <div class="dashboard-container">
         <div class="page-header">
             <h1>Client Overview</h1>
-            <button class="btn btn-primary" id="add-client-btn" onclick="openAddModal()">+ Add New Client</button>
+            <a class="btn btn-primary" id="add-client-btn" href="{% url 'client-form' %}">+ Add New Client</a>
         </div>
 
         <div class="stats-grid">
@@ -35,78 +34,7 @@
             </div>
         </div>
 
-        <div class="modal-overlay" id="modal-container">
-            <div class="modal-box">
-                <div class="modal-header">
-                    <h2 id="modalTitle">Add New Client</h2>
-                    <button class="close-btn" onclick="closeModal()">×</button>
-                </div>
-                <form method="POST" id="clientForm">
-                {% csrf_token %}
-                
-                    <div class="modal-body">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="{{ form.name.id_for_label }}">First Name</label>
-                                {% render_field form.name class="form-control" placeholder="Jane" %}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="{{ form.age.id_for_label }}">Age</label>
-                                {% render_field form.age class="form-control" placeholder="e.g. 28" %}
-                                {% if form.errors.age %}
-                                <div class="alert-danger">
-                                    {{form.errors.age}}
-                                </div>
-                                {% endif %}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.total_sessions.id_for_label }}">Total Sessions</label>
-                                {% render_field form.total_sessions class="form-control" placeholder="e.g. 2" %}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="{{ form.gender.id_for_label }}">Gender</label>
-                                {% render_field form.gender class="form-select" %}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="{{ form.started_training_from.id_for_label }}">Start Date</label>
-                                {% render_field form.started_training_from type="date" class="form-control"%}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="{{ form.services.id_for_label }}">Assigned Package</label>
-                                {% render_field form.services class="form-select" %}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.status.id_for_label }}">Status</label>
-                                {% render_field form.status class="form-select"  %}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.paid_or_not.id_for_label }}">Paid or not?</label>
-                                
-                                {% render_field form.paid_or_not class="form-select"  %}
-                            </div>
-                        
-
-                        </div>
-                        
-
-                        <div class="form-group full-width mt-4">
-                            <label for="{{ form.any_problem.id_for_label }}">Medical Notes & Injuries</label>
-                            {% render_field form.any_problem class="form-control" rows="3" placeholder="Note any specific focus areas, past injuries, or physical limitations..." %}
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save Client</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
+       
 
         <div class="table-card">
             <div class="table-header">
@@ -157,21 +85,22 @@
                         </tr>
                         {% endfor %}
                     </tbody>
+                    <div class="delete-modal" id="delete-modal-container">
+                        <div class="delete-modal-card">
+                            <h3>Are you sure you want to delete?</h>
+                            <div class="client-btn-groups">
+                                <form action="" id="delete-form">
+                                    {% csrf_token %}
+                                    <button class="alert-danger" id="yes-delete-btn">Yes</button>
+                                </form>
+                                <button class="alert-success" id="no-delete-btn" onclick="deleteModalFunction('closeModal', this)">No</button>
+                            </div>
+                        </div>
+                    </div>
                 </table>
             </div>
         </div>
-        <div class="delete-modal" id="delete-modal-container">
-            <div class="delete-modal-card">
-                <h3>Are you sure you want to delete?</h>
-                <div class="client-btn-groups">
-                    <form action="" id="delete-form">
-                        {% csrf_token %}
-                        <button class="alert-danger" id="yes-delete-btn">Yes</button>
-                    </form>
-                    <button class="alert-success" id="no-delete-btn" onclick="deleteModalFunction('closeModal', this)">No</button>
-                </div>
-            </div>
-        </div>
+       
 
     </div>
 

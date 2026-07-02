@@ -163,11 +163,12 @@ transition-delay: 1.2s;
     background-color: var(--navbar-color);
     justify-content: space-between;
     align-items: center;
-    padding:1em;
+    padding:2em;
     position:fixed;
     z-index: 10000;
     width: 100%;
 }
+
 .page-navbar{
     background-color: var(--navbar-color);
     display: flex;
@@ -205,7 +206,7 @@ a{
 
 
 nav ul a{
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-family: var(--nav-font);
     color: black;
     margin: 0;
@@ -253,11 +254,11 @@ li a:hover{
         padding-inline: 1em;
     }
     .right-side-responsive{
-        top: 70px;
+        top: 75px;
         height: fit-content;
-        background-color: rgb(204, 177, 135);
-        z-index:100;
+        background-color: rgba(204, 178, 135, 0.969);
         left:0;
+        z-index:-1;
         display: flex;
         position:absolute;
         flex-direction: column;
@@ -272,15 +273,16 @@ li a:hover{
         padding: 0;
         display: flex;
         flex-direction: column;
-        gap:1em;
+        gap:0.2em;
         align-items: center;
-        padding:1em;
     }
     .right-side-responsive li{
         width:100%;
         text-align: center;
+        padding:1em;
         font-size: 0.85em;
     }
+  
     .right-side-responsive a:hover{
         border:none;
         color:#774936;
@@ -1175,7 +1177,7 @@ iframe{
     }
     .first-page,  .bg-image{
         height: 90vh;
-        object-fit: cover;
+        object-fit:cover;
     }
    
     .first-page-content{
@@ -1191,7 +1193,7 @@ iframe{
         padding: 1.25em;
     }
     .role{
-        text-shadow: 1px 1px 1px rgb(179, 179, 179);
+        text-shadow: 1px 1px 1px rgb(250, 213, 198);
         font-size: 1.5em;
     }
 
@@ -1358,6 +1360,10 @@ iframe{
     }
     
     .blog-detail{
+        padding-inline:1em;
+        font-size:1em;
+    }
+    .blog-content p{
         font-size:1em;
     }
     .blog-card-footer{

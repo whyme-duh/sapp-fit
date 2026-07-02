@@ -1,0 +1,115 @@
+{% extends 'website/index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/client_form_style.css' %}">
+{% endblock %}
+
+{% block title %}Add a New Client{% endblock %}
+
+{% block content %}
+{% include 'website/navbar.html' %}
+
+<div class="admin-page-container">
+    
+    <!-- 1. Page Header -->
+    <div class="admin-header">
+        <!-- Make sure to replace 'client-dashboard' with your actual dashboard URL name -->
+        <a href="{% url 'client-view' %}" class="back-link">
+            &larr; Back to Dashboard
+        </a>
+        <h1>{% if form.instance.pk %}Edit Client{% else %}Add a Client{% endif %}</h1>
+        <p class="text-muted">Enter the client's details and program information below.</p>
+    </div>
+
+    <!-- 2. The Form Card -->
+    <div class="admin-form-card">
+        <form method="POST" id="clientForm" class="custom-form">
+            {% csrf_token %}
+            
+            <div class="form-grid-layout">
+                
+                <!-- Left Column: Personal Details -->
+                <div class="form-section">
+                    <h3>Personal Details</h3>
+                    <div class="divider"></div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">First Name</label>
+                        {% render_field form.name class="form-control" placeholder="Jane" %}
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ form.age.id_for_label }}">Age</label>
+                            {% render_field form.age class="form-control" placeholder="e.g. 28" %}
+                            
+                            {% if form.errors.age %}
+                            <div class="alert-danger">
+                                {{form.errors.age}}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.gender.id_for_label }}">Gender</label>
+                            {% render_field form.gender class="form-select" %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Program Details -->
+                <div class="form-section">
+                    <h3>Program Details</h3>
+                    <div class="divider"></div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ form.started_training_from.id_for_label }}">Start Date</label>
+                            {% render_field form.started_training_from type="date" class="form-control" %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.total_sessions.id_for_label }}">Total Sessions</label>
+                            {% render_field form.total_sessions class="form-control" placeholder="e.g. 12" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.services.id_for_label }}">Assigned Package</label>
+                        {% render_field form.services class="form-select" %}
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ form.status.id_for_label }}">Status</label>
+                            {% render_field form.status class="form-select" %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.paid_or_not.id_for_label }}">Payment</label>
+                            {% render_field form.paid_or_not class="form-select" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group full-width">
+                <label for="{{ form.any_problem.id_for_label }}">Medical Notes & Injuries</label>
+                {% render_field form.any_problem class="form-control" rows="3" placeholder="Note any specific focus areas, past injuries, or physical limitations..." %}
+            </div>
+            </div>
+
+            <!-- 3. Form Actions -->
+            <div class="form-actions">
+                <a href="{% url 'client-view' %}" class="cancel-btn">Cancel</a>
+                <button type="submit" class="submit-btn">Save Client</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}

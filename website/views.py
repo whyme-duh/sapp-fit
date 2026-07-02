@@ -290,6 +290,20 @@ def client_view(request):
     if not request.user.is_superuser:
         return redirect('home-page')
     
+    active_clients_count = Client.objects.filter(status = "Ongoing").count()
+    total_clients_count = Client.objects.all().count()
+    clients = Client.objects.all().order_by("-status")
+    # this is to find the most subscribed service name
+    top_service = Service.objects.annotate(
+        total_subs = Count('client')
+    ).order_by('-total_subs').values_list('title', flat=True).first()
+    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'total_clients_count': total_clients_count, 'top_service' : top_service})
+
+@login_required
+def client_form(request):
+    if not request.user.is_superuser:
+        return redirect('home-page')
+    
     if request.method == "POST":
         form = ClientForm(request.POST)
         if form.is_valid():
@@ -333,17 +347,7 @@ def client_view(request):
             messages.error(request, f'Error occured. Try again!')
     else:
         form = ClientForm()
-    active_clients_count = Client.objects.filter(status = "Ongoing").count()
-    total_clients_count = Client.objects.all().count()
-    clients = Client.objects.all().order_by("-status")
-    # this is to find the most subscribed service name
-    top_service = Service.objects.annotate(
-        total_subs = Count('client')
-    ).order_by('-total_subs').values_list('title', flat=True).first()
-    
-    
-    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'form': form, 'total_clients_count': total_clients_count, 'top_service' : top_service})
-
+    return render(request, 'website/clients/clientform.html', {'form' : form})
 
 @login_required
 def delete_client(request, id):
