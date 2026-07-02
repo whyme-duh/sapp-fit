@@ -67,17 +67,8 @@
                             <td>{{client.total_sessions}}</td>
                             <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
                             <td class="actions">
-                                <a href="javascript:void(0);" 
-                                class="action-link edit"
-                                onclick="openEditModal(this)"
-                                data-id="{{ client.id }}"
-                                data-name="{{ client.name }}"
-                                data-age="{{ client.age }}"
-                                data-gender="{{ client.gender }}"
-                                data-date="{{ client.started_training_from|date:'Y-m-d' }}"
-                                data-service="{{ client.services.id }}"
-                                data-status="{{ client.status }}"
-                                data-problem="{{ client.any_problem }}">
+                                <a href="{% url 'edit-client' client.id %}" 
+                                class="action-link edit">
                                <i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>
                             </a>
                                 <a class="action-link delete" title="Edit"id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-url = "{% url 'delete-client' client.id %}"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>

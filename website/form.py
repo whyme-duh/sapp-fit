@@ -87,7 +87,12 @@ class OneServiceBookingForm(forms.Form):
 
         
 
-class ClientForm(forms.Form):
+class ClientForm(forms.ModelForm):
+
+    class Meta:
+        model = Client
+        fields = "__all__"
+        
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(

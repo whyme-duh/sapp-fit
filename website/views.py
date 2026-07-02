@@ -292,7 +292,7 @@ def client_view(request):
     
     active_clients_count = Client.objects.filter(status = "Ongoing").count()
     total_clients_count = Client.objects.all().count()
-    clients = Client.objects.all().order_by("-status")
+    clients = Client.objects.all().order_by("-status", "-started_training_from")
     # this is to find the most subscribed service name
     top_service = Service.objects.annotate(
         total_subs = Count('client')
@@ -368,16 +368,18 @@ def edit_client(request, id):
         return redirect('home-page')
     
     client = get_object_or_404(Client, id = id)
+    
     if request.method == "POST":
         form = ClientForm(request.POST, instance = client)
         if form.is_valid():
             form.save()
             messages.success(request, f"{client.name}'s details updated!")
+            return redirect('client-view')
         else:
             messages.error(request, f"Failed to update the client's detail. Try again!")
     else:
-        form = ClientForm()
-    return redirect('client-view')
+        form = ClientForm(instance = client)
+    return render(request, 'website/clients/clientform.html', {'form' : form, 'client' : client})
 
 
 

@@ -13,9 +13,7 @@
 
 <div class="admin-page-container">
     
-    <!-- 1. Page Header -->
     <div class="admin-header">
-        <!-- Make sure to replace 'client-dashboard' with your actual dashboard URL name -->
         <a href="{% url 'client-view' %}" class="back-link">
             &larr; Back to Dashboard
         </a>
@@ -23,14 +21,12 @@
         <p class="text-muted">Enter the client's details and program information below.</p>
     </div>
 
-    <!-- 2. The Form Card -->
     <div class="admin-form-card">
         <form method="POST" id="clientForm" class="custom-form">
             {% csrf_token %}
             
             <div class="form-grid-layout">
                 
-                <!-- Left Column: Personal Details -->
                 <div class="form-section">
                     <h3>Personal Details</h3>
                     <div class="divider"></div>
@@ -59,7 +55,6 @@
                     </div>
                 </div>
 
-                <!-- Right Column: Program Details -->
                 <div class="form-section">
                     <h3>Program Details</h3>
                     <div class="divider"></div>
@@ -102,14 +97,16 @@
             </div>
             </div>
 
-            <!-- 3. Form Actions -->
             <div class="form-actions">
                 <a href="{% url 'client-view' %}" class="cancel-btn">Cancel</a>
-                <button type="submit" class="submit-btn">Save Client</button>
+                <button type="submit" class="save-btn">Save Client</button>
             </div>
             
         </form>
     </div>
+
+    
+    
 </div>
 
 {% endblock %}

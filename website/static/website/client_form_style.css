@@ -181,6 +181,8 @@ textarea.form-control {
     color:white;
     font-size: 1em;
     font-weight: 600;
+    width:50%;
+    text-align:center;
 
 }
 
@@ -189,22 +191,23 @@ textarea.form-control {
     color: var(--text-primary);
 }
 
-.submit-btn {
-    background-color: var(--brand-brown);
+.save-btn {
+    background-color: var(--brand-accent);
     color: #FFFFFF;
     border: none;
     border-radius: 8px;
     font-size: 1em;
-    padding: 0.9em 2em;
     font-weight: 600;
+    width:50%;
+    padding:0.9em 2em;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin:0;
 
 }
 
-.submit-btn:hover {
-    background-color: var(--brand-accent);
+.save-btn:hover {
+    background-color: var(--brand-brown);
 }
 
 
@@ -245,10 +248,12 @@ textarea.form-control {
         padding:1em;
     }
     .form-actions{
+        display:flex;
+        flex-direction:row;
         margin:0;
     }
     .cancel-btn, .submit-btn {
-        width: 50%;
+        width: 30%;
         margin:0;
         text-align: center;
     }
