@@ -1,0 +1,260 @@
+/* --- GLOBAL VARIABLES --- */
+:root {
+    --brand-beige: #FAFAF7;
+    --brand-brown: #4A3B32;
+    --brand-accent: #ba9686;
+    --text-primary: #222222;
+    --text-muted: #666666;
+    --bg-light: #f9f9f9;
+    --border-color: #e5e5e5;
+    --danger-color: #dc2626;
+    --danger-bg: #fee2e2;
+}
+
+
+
+/* --- PAGE CONTAINER --- */
+.admin-page-container {
+    width: 90%;
+    max-width: 900px; /* Keeps the form constrained and readable */
+    margin: 4em auto;
+    font-family: var(--paragraph-font, sans-serif);
+    color: var(--text-primary);
+}
+
+/* --- HEADER SECTION --- */
+.admin-header {
+    margin-bottom: 2em;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-bottom: 1em;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--brand-accent);
+}
+
+.admin-header h1 {
+    font-family: var(--title-family, serif);
+    font-size: 2.2em;
+    color: var(--brand-brown);
+    margin: 0 0 0.2em 0;
+}
+
+.text-muted {
+    color: var(--text-muted);
+    font-size: 0.95em;
+    margin: 0;
+}
+
+/* --- FORM CARD --- */
+.admin-form-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid var(--brand-accent);
+    padding: 3em;
+}
+
+/* --- GRID LAYOUT (DESKTOP) --- */
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3em;
+}
+
+.form-section h3 {
+    font-family: var(--title-family, serif);
+    font-size: 1.3em;
+    color: var(--brand-brown);
+    margin-bottom: 0.5em;
+}
+
+.divider {
+    height: 1px;
+    background: var(--border-color);
+    margin-bottom: 1.5em;
+    width: 100%;
+}
+
+/* --- INPUT ROWS & GROUPS --- */
+.form-row {
+    display: flex;
+    gap: 1.5em;
+}
+
+.form-row .form-group {
+    flex: 1; /* Makes side-by-side inputs equal width */
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--brand-brown);
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- INPUT STYLES --- */
+.form-control, .form-select {
+    width: 100%;
+    padding: 0.9em 1em;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    font-size: 1em;
+    font-family: inherit;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* Custom styling specifically for the date picker and select dropdowns */
+.form-select {
+    cursor: pointer;
+    appearance: auto; 
+}
+
+.form-control:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--brand-accent);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(186, 150, 134, 0.2);
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+/* Textarea specific height */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.mt-4 {
+    margin-top: 1.5em;
+}
+
+/* --- ERRORS --- */
+.alert-danger {
+    background-color: var(--danger-bg);
+    color: var(--danger-color);
+    padding: 0.5em 0.8em;
+    border-radius: 6px;
+    font-size: 0.85em;
+    margin-top: 0.5em;
+    border-left: 3px solid var(--danger-color);
+}
+
+/* --- FORM ACTIONS (BUTTONS) --- */
+.form-actions {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 1.5em;
+    margin-top: 3em;
+    padding-top:3em;
+    border-top: 1px solid var(--border-color);
+}
+
+.cancel-btn {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.9em 2em;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    background-color:red;
+    color:white;
+    font-size: 1em;
+    font-weight: 600;
+    width:50%;
+    text-align:center;
+
+}
+
+.cancel-btn:hover {
+    background: var(--bg-light);
+    color: var(--text-primary);
+}
+
+.save-btn {
+    background-color: var(--brand-accent);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    width:50%;
+    padding:0.9em 2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:0;
+
+}
+
+.save-btn:hover {
+    background-color: var(--brand-brown);
+}
+
+
+@media only screen and (max-width: 768px) {
+    .admin-page-container {
+        width: 95%;
+        margin: 2em auto;
+    }
+    
+    .admin-form-card {
+        margin:0;
+        padding:0;
+    }
+    form{
+        padding:0;
+        margin:0;
+    }
+    
+    /* 1. Stacks the main left/right columns */
+    .form-grid-layout {
+        grid-template-columns: 1fr; 
+        gap: 2em;
+    }
+    
+    /* 2. Stacks side-by-side inputs (like age/gender) */
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    /* 3. Reverses buttons so 'Save' is on top, 'Cancel' is below */
+    .form-actions {
+        flex-direction: column-reverse; 
+        gap: 1em;
+    }
+    .form-section{
+        width:90%;
+        padding:1em;
+    }
+    .form-actions{
+        display:flex;
+        flex-direction:row;
+        margin:0;
+    }
+    .cancel-btn, .submit-btn {
+        width: 30%;
+        margin:0;
+        text-align: center;
+    }
+}

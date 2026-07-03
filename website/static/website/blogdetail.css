@@ -114,8 +114,7 @@ button:active{
     
     .blog-container{
         width: 90%;
-        padding-bottom: 3em;
-        border-bottom: 1px solid grey;
+        margin-bottom:0;
     }
     .title{
         font-size: 2em;

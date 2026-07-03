@@ -7,7 +7,7 @@ class BookingForm(forms.Form):
 
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.IntegerField( widget=forms.NumberInput(attrs={'class': 'form-control', 'maxlength' : 10}))          
+    phone_number = forms.CharField(max_length=10, widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -48,7 +48,7 @@ class OneServiceBookingForm(forms.Form):
 
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'maxlength' : 10}))          
+    phone_number = forms.CharField(max_length = 10, required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -92,7 +92,31 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = "__all__"
+        
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs = {
+                'class' : 'form-control'
+            }
+        )
+    )
 
+    total_sessions = forms.IntegerField(
+        widget= forms.NumberInput(
+            attrs = {
+                'class-type' : 'form-control'
+            }
+        )
+    )
+
+    age = forms.IntegerField(
+        widget= forms.NumberInput(
+            attrs = {
+                'class-type' : 'form-control'
+            }
+        )
+    )
     
     gender = forms.ChoiceField(
         choices=Client.GENDER_CHOICES,
@@ -108,6 +132,25 @@ class ClientForm(forms.ModelForm):
         widget=forms.Select(
             attrs={
                 'class': 'form-control'
+            }
+        )
+    )
+
+    status = forms.ChoiceField(
+        choices=Client.STATUS_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control'
+            }
+        )
+    )
+
+    any_problem = forms.CharField(
+        max_length=500,
+        required = False,
+        widget=forms.Textarea(
+            attrs = {
+                'class' : 'form-control',
             }
         )
     )

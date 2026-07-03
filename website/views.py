@@ -10,7 +10,7 @@ from  django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 from .form import BookingForm, ClientForm, CustomServiceForm, OneServiceBookingForm
 from django.core.mail import send_mail
-
+from django.db.models import Count
 
 
 
@@ -108,10 +108,10 @@ def service_detail_view(request, slug):
                 # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
                 # email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
-                
-            return redirect('service-detail', slug = slug)
+                return redirect('service-detail', slug = slug)
             
         else:
+            messages.error(request, f'Error occured. Try again!')
             error_details = form.errors.as_text()
             print(error_details)
     else:
@@ -290,23 +290,64 @@ def client_view(request):
     if not request.user.is_superuser:
         return redirect('home-page')
     
+    active_clients_count = Client.objects.filter(status = "Ongoing").count()
+    total_clients_count = Client.objects.all().count()
+    clients = Client.objects.all().order_by("-status", "-started_training_from")
+    # this is to find the most subscribed service name
+    top_service = Service.objects.annotate(
+        total_subs = Count('client')
+    ).order_by('-total_subs').values_list('title', flat=True).first()
+    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'total_clients_count': total_clients_count, 'top_service' : top_service})
+
+@login_required
+def client_form(request):
+    if not request.user.is_superuser:
+        return redirect('home-page')
+    
     if request.method == "POST":
         form = ClientForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, f'New client succesfully added!')
+            name = form.cleaned_data['name']
+            age = form.cleaned_data['age']
+            total_sessions = form.cleaned_data['total_sessions']
+            gender = form.cleaned_data['gender']
+            started_training_from = form.cleaned_data['started_training_from']
+            services = form.cleaned_data['services']
+            any_problem = form.cleaned_data['any_problem']
+            status = form.cleaned_data['status']
+            paid_or_not = form.cleaned_data['paid_or_not']
+
+            if Client.objects.filter(
+                    name = name, 
+                    age = age, 
+                    total_sessions = total_sessions, 
+                    gender = gender, 
+                    started_training_from = started_training_from, 
+                    services = services,
+                    status = status, 
+                    paid_or_not = paid_or_not
+                ).exists():
+                    messages.error(request, "Error! It seems the entrie is already present.")
+                    return redirect('client-view')
+            else:
+                Client.objects.create(
+                    name = name, 
+                    age = age, 
+                    total_sessions = total_sessions, 
+                    gender = gender, 
+                    started_training_from = started_training_from, 
+                    services = services,
+                    any_problem = any_problem,
+                    status = status, 
+                    paid_or_not = paid_or_not
+                )
+                messages.success(request, f'New client succesfully added!')
             return redirect('client-view')
         else:
             messages.error(request, f'Error occured. Try again!')
     else:
         form = ClientForm()
-    active_clients_count = Client.objects.filter(status = "Ongoing").count()
-    total_clients_count = Client.objects.all().count()
-    
-    clients = Client.objects.all().order_by("-status")
-    
-    return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'form': form, 'total_clients_count': total_clients_count})
-
+    return render(request, 'website/clients/clientform.html', {'form' : form})
 
 @login_required
 def delete_client(request, id):
@@ -327,16 +368,18 @@ def edit_client(request, id):
         return redirect('home-page')
     
     client = get_object_or_404(Client, id = id)
+    
     if request.method == "POST":
         form = ClientForm(request.POST, instance = client)
         if form.is_valid():
             form.save()
             messages.success(request, f"{client.name}'s details updated!")
+            return redirect('client-view')
         else:
             messages.error(request, f"Failed to update the client's detail. Try again!")
     else:
-        form = ClientForm()
-    return redirect('client-view')
+        form = ClientForm(instance = client)
+    return render(request, 'website/clients/clientform.html', {'form' : form, 'client' : client})
 
 
 
