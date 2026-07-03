@@ -78,30 +78,7 @@ function openAddModal() {
     // document.body.style.overflow = "hidden";
 }
 
-function openEditModal(button) {
-    const data = button.dataset;
 
-    document.getElementById('id_name').value = data.name;
-    document.getElementById('id_age').value = data.age;
-    document.getElementById('id_gender').value = data.gender;
-    document.getElementById('id_started_training_from').value = data.date;
-    document.getElementById('id_services').value = data.service;
-    document.getElementById('id_status').value = data.status;
-    document.getElementById('id_any_problem').value = data.problem;
-
-    form.action = `/clients/${data.id}/edit/`; 
-    
-    modalTitle.innerText = "Edit Client Details";
-    submitBtn.innerText = "Update Details";
-    
-    modal.style.display = 'flex';
-}
-
-function closeModal() {
-    modal.style.display = 'none';
-    // document.body.style.overflow = "";
-
-}
 
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -149,21 +126,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-function deleteModalFunction(option, button){
-    const deleteModalContainer = document.getElementById('delete-modal-container');
-    const cancelDeleteBtn = document.getElementById('no-delete-btn');
-    const deleteForm = document.getElementById('delete-form');
-
-    if (option == "openModal"){
-        deleteForm.action = button.dataset.url;
-        deleteModalContainer.style.display = "flex";
-    }
-    else if (option == "closeModal"){
-        deleteModalContainer.style.display = "none";
-    }
-    
-}
 
 
 

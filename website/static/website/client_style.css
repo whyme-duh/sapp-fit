@@ -251,9 +251,7 @@ body {
     padding: 4px 8px;
     border-radius: 12px;
 }
-.actions{
-    display: flex;
-}
+
 .action-link {
     font-weight: 500;
     text-decoration: none;
@@ -273,6 +271,21 @@ body {
 
     color: rgb(237, 55, 9);;
 }
+.dont-delete{
+    border:none;
+    background:none;
+}
+.fa-times{
+    color:red;
+    font-size: 1.25em;
+}
+.fa-check{
+    color:rgb(78, 192, 78);
+    background:none;
+    padding:0;
+    font-size: 1.25em;
+}
+
 
 
 .modal-overlay {

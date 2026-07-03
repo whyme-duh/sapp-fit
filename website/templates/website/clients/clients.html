@@ -62,32 +62,25 @@
                                {{client.name}}
                             </td>
                             <td>{{client.age}}</td>
-                            <td>{{client.services.title}}</td>
+                            <td class="service-title-table">{{client.services.title}}</td>
                             <td><span class="session-badge">{{client.paid_or_not|cut:"ne"}}</span></td>
                             <td>{{client.total_sessions}}</td>
                             <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
-                            <td class="actions">
+                            
+                            <td id="action-{{client.id}}" style="display:flex;">
                                 <a href="{% url 'edit-client' client.id %}" 
                                 class="action-link edit">
                                <i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>
-                            </a>
-                                <a class="action-link delete" title="Edit"id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-url = "{% url 'delete-client' client.id %}"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>
+                                <a class="action-link delete" title="Edit"id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-id = {{client.id}}><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>
+                            </td>
+                            <td id="delete-option-{{client.id}}" style="display: none;justify-content: space-between;align-items: center;">
+                                <a href="{% url 'delete-client' client.id %}" class="action-link"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                <button onclick="deleteModalFunction('closeModal', this)" data-id="{{client.id}}" class="action-link dont-delete"><i class="fa fa-times" aria-hidden="true"></i></button>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
-                    <div class="delete-modal" id="delete-modal-container">
-                        <div class="delete-modal-card">
-                            <h3>Are you sure you want to delete?</h>
-                            <div class="client-btn-groups">
-                                <form action="" id="delete-form">
-                                    {% csrf_token %}
-                                    <button class="alert-danger" id="yes-delete-btn">Yes</button>
-                                </form>
-                                <button class="alert-success" id="no-delete-btn" onclick="deleteModalFunction('closeModal', this)">No</button>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </table>
             </div>
         </div>
