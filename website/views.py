@@ -294,9 +294,12 @@ def client_view(request):
     total_clients_count = Client.objects.all().count()
     clients = Client.objects.all().order_by("-status", "-started_training_from")
     # this is to find the most subscribed service name
-    top_service = Service.objects.annotate(
-        total_subs = Count('client')
-    ).order_by('-total_subs').values_list('title', flat=True).first()
+    if clients:
+        top_service = Service.objects.annotate(
+                total_subs = Count('client')
+            ).order_by('-total_subs').values_list('title', flat=True).first()
+    else:
+        top_service = None
     return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'total_clients_count': total_clients_count, 'top_service' : top_service})
 
 @login_required
@@ -328,7 +331,6 @@ def client_form(request):
                     paid_or_not = paid_or_not
                 ).exists():
                     messages.error(request, "Error! It seems the entrie is already present.")
-                    return redirect('client-view')
             else:
                 Client.objects.create(
                     name = name, 
@@ -354,11 +356,11 @@ def delete_client(request, id):
     if not request.user.is_superuser:
         return redirect('home-page')
     try:
-        Client.objects.get(id = id).delete()
-        messages.success(request, f'Deleted successfully')
-        return redirect('client-view')
+        client = Client.objects.get(id = id)
+        client.delete()
+        messages.success(request, f'{client.name} was deleted successfully')
     except:
-        messages.error(request, f'Failed to Delete')
+        messages.error(request, f'Failed to delete {client.name}')
     return redirect('client-view')
 
 
