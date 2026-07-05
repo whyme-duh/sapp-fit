@@ -163,7 +163,7 @@ transition-delay: 1.2s;
     background-color: var(--navbar-color);
     justify-content: space-between;
     align-items: center;
-    padding:2em;
+    padding:1.5em;
     position:fixed;
     z-index: 10000;
     width: 100%;
@@ -206,7 +206,7 @@ a{
 
 
 nav ul a{
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-family: var(--nav-font);
     color: black;
     margin: 0;

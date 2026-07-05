@@ -27,7 +27,7 @@ async function loadDataFromMerch(){
     const isDebug = JSON.parse(document.getElementById('django-debug-mode').textContent);
     var url = "http://127.0.0.1:8001/";
 
-    if (isDebug){
+    if (!isDebug){
         var url = "https://sappfitmerch.pythonanywhere.com/";
 
     }
