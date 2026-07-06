@@ -1,6 +1,6 @@
 {%extends 'website/index.html'%}
-
 {%load static %}
+{% load widget_tweaks %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'website/customrequeststyle.css' %}">
 
@@ -81,11 +81,10 @@ Custom Service Request
                         <div class="form-group">
                             <label for="{{form.name.id_for_label}}" class="form-label">{{form.name.label}}</label>
                             {{form.name}}
-                            
                         </div>
                         <div class="form-group">
                             <label for="{{form.age.id_for_label}}" class="form-label">{{form.age.label}}</label>
-                            {{form.age}}
+                            {% render_field form.age class="form-control bt-4" placeholder="Age " oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" %}
                             {% if form.errors.age %}
                             <p class="alert-danger">{{form.errors.age}}</p>
                             {% endif %}
@@ -93,7 +92,7 @@ Custom Service Request
                         </div>
                         <div class="form-group">
                             <label for="{{form.weight.id_for_label}}" class="form-label">{{form.weight.label}}</label>
-                            {{form.weight}}
+                            {% render_field form.weight class="form-control bt-4" placeholder="Weight (in Kg) " oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" %}
                             {% if form.errors.weight %}
                             <p class="alert-danger">{{form.errors.weight}}</p>
                             {% endif %}
@@ -104,7 +103,7 @@ Custom Service Request
                     <div class="form-row">
                         <div class="form-group">
                             <label for="{{form.phone_number.id_for_label}}" class="form-label">{{form.phone_number.label}}</label>
-                            {{form.phone_number}}
+                            {% render_field form.phone_number class="form-control bt-4" placeholder="9xxx xx xx xx " oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" %}
                             {% if form.errors.phone_number %}
                             <p class="alert-danger">{{form.errors.phone_number}}</p>
                             {% endif %}
@@ -169,7 +168,7 @@ Custom Service Request
                         
                         <div class="form-group">
                             <label for="{{form.age.id_for_label}}" class="form-label">{{form.age.label}}</label>
-                            {{form.age}}
+                            {% render_field form.age class="form-control bt-4" placeholder="Age " oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" %}
                             {% if form.errors.age %}
                             <p class="alert-danger">{{form.errors.age}}</p>
                             {% endif %}
@@ -177,7 +176,7 @@ Custom Service Request
                         </div>
                         <div class="form-group">
                             <label for="{{form.weight.id_for_label}}" class="form-label">{{form.weight.label}}</label>
-                            {{form.weight}}
+                            {% render_field form.weight class="form-control bt-4" placeholder="Weight (in Kg) " oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" %}
                             {% if form.errors.weight %}
                             <p class="alert-danger">{{form.errors.weight}}</p>
                             {% endif %}
@@ -213,10 +212,6 @@ Custom Service Request
                         </div>
                     
                     </div>
-                  
-
-                    
-
                     <div class="form-group">
                         <label for="{{form.equipment_used.id_for_label}}" class="form-label">{{form.equipment_used.label}} (Optional)</label>
                         {{form.equipment_used}}
@@ -238,11 +233,6 @@ Custom Service Request
     </div>
 </div>
 {% endblock %}
-
 {% block extra_script %}
-
 <script src="{% static 'website/aidata.js' %}"></script>
-
-
-
 {% endblock %}

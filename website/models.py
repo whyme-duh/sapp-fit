@@ -109,7 +109,8 @@ class Booking(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.IntegerField(
-        max_length=10,
+        blank=True,
+        null=True
     )
     service = models.ForeignKey(Service, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
@@ -121,7 +122,10 @@ class Booking(models.Model):
         return f'{self.name} - {self.service.title}'
 
 class CustomService(models.Model):
-
+    """
+    This model offer user to request a custom plan based on their requirements.
+    This include request to Sappfit and AI.
+    """
     GOAL_CHOICES = [
         ("Fat Loss & Toning" , "Fat Loss & Toning"),    
         ("Building Muscle & Strength" , "Building Muscle & Strength"),
@@ -130,25 +134,21 @@ class CustomService(models.Model):
         ("HYROX / Event Prep", "HYROX / Event Prep"),
         ("Other" , "Other")
     ]
-
     PLAN_DURATION_OPTIONS = [
         ("1 Week Plan", "1 Week Plan"),
         ("4 Weeks Plan", "4 Weeks Plan"),
         ("12 Weeks Plan", "12 Weeks Plan"),
     ]
-
     WORKOUT_TIME_OPTIONS = [
         ("30 minutes", "30 minutes"),
         ("45 minutes", "45 minutes"),
         ("1 hour", "1 hour"),
     ]
-
     GENDER_CHOICES = [
         ("Male", "Male"),
         ("Female", "Female"),
         ("Other", "Other"),
     ]
-
     ACTIVITY_LEVEL_CHOICES = [
         ("Sedentary", "Sedentary (little or no exercise)"),
         ("Lightly Active", "Lightly Active (light exercise/sports 1-3 days/week)"),
@@ -156,14 +156,13 @@ class CustomService(models.Model):
         ("Very Active", "Very Active (hard exercise/sports 6-7 days a week)"),
         ("Super Active", "Super Active (very hard exercise/sports & physical job or 2x training)"),
     ]
-
     name = models.CharField(max_length=100)
     age = models.IntegerField(blank = True, null = True)
     weight = models.IntegerField(blank = True, null = True)
     gender = models.TextField(choices= Client.GENDER_CHOICES, blank = True)
     activity_level = models.TextField(choices= ACTIVITY_LEVEL_CHOICES, blank = True)
     email = models.EmailField()
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(blank = True, null = True)
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     special_notes = models.TextField(blank=True)
