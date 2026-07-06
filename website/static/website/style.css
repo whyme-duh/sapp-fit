@@ -39,6 +39,11 @@ html{
 body{
     overflow-x: hidden;
 }
+a {
+  text-decoration: none !important;
+  -webkit-text-decoration: none !important;
+}
+
 /* splash screen effects */
 .intro{
     position:fixed;
@@ -172,10 +177,13 @@ transition-delay: 1.2s;
 .page-navbar{
     background-color: var(--navbar-color);
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    gap:1em;
+    align-items:center;
     width: 100%;
     padding: 1em;
 }
+
 .page-navbar .brand{
     width: fit-content;
     
@@ -258,7 +266,7 @@ li a:hover{
         height: fit-content;
         background-color: rgba(204, 178, 135, 0.969);
         left:0;
-        z-index:-1;
+        z-index:1000;
         display: flex;
         position:absolute;
         flex-direction: column;
@@ -279,7 +287,7 @@ li a:hover{
     .right-side-responsive li{
         width:100%;
         text-align: center;
-        padding:1em;
+        padding-block:1em;
         font-size: 0.85em;
     }
   
@@ -1104,7 +1112,7 @@ iframe{
     color:rgb(38, 38, 38);
     text-align: center;
     font-size:0.85em;
-    padding-bottom: 1em;
+    padding-block: 1em;
 }
 .whyme-link{
     font-weight: 800;
@@ -1148,13 +1156,16 @@ iframe{
     .navbar{
         padding: 0em;
     }
-    .responsive-navbar{
-        justify-content: center;
-    }
+   
     .page-navbar{
         width: 100%;
+        justify-content: space-between;
         padding: 0;
     }
+    .page-navbar ul{
+        padding:0;
+    }
+ 
     
     .brand, .page-navbar .brand{
         padding: 1em;

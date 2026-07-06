@@ -80,8 +80,13 @@ def send_email_about_booking(client_name, client_email,request_type, **kwargs):
     except Exception as e:  
         print(f"Error sending email: {e}")
 
+@ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def service_detail_view(request, slug):
     if request.method == "POST":
+        was_limited = getattr(request, 'limited', False)
+        if was_limited:
+            messages.error(request, f'Too many booking requests from this IP. Please try again later.')
+            return redirect('home-page')
         form = OneServiceBookingForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
