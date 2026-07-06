@@ -127,7 +127,7 @@
     background-color: rgba(231, 230, 230, 0.474);
 }
 .service-detail-list li:hover .fa-check{
-    background-color: rgb(0, 255, 0);
+    color: rgb(0, 255, 0);
 }
 
 .fa-check{
