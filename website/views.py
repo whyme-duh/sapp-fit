@@ -12,11 +12,8 @@ from .form import BookingForm, ClientForm, CustomServiceForm, OneServiceBookingF
 from django.core.mail import send_mail
 from django.db.models import Count
 
-
-
 def page_not_found_404(request, exception):
     return render(request, 'website/error/404.html', status = 404)
-
 
 def page_not_found_500(request):
     return render(request, 'website/error/500.html', status = 500)
@@ -25,15 +22,15 @@ def index(request):
     about = AboutAndQuote.objects.first()
     tags_list = [tag.strip() for tag in about.tag.split(',')] if about.tag else []
     return render(request, 'website/home.html', {
-    'about': about,
-    'services': Service.objects.all(),
-    'blogs': Blog.objects.all(),
-    'date' :datetime.datetime.today().strftime("%Y"),
-    'testimonials' : Testimonial.objects.all(),
-    'debug': settings.DEBUG,
-    "tags_list": tags_list
-    })
-
+        'about': about,
+        'services': Service.objects.all(),
+        'blogs': Blog.objects.all(),
+        'date' :datetime.datetime.today().strftime("%Y"),
+        'testimonials' : Testimonial.objects.all(),
+        'debug': settings.DEBUG,
+        "tags_list": tags_list
+        }
+    )
 
 def services(request):
     return render(request, 'website/service/servicelist.html', {"services": Service.objects.all()})
@@ -76,15 +73,20 @@ def send_email_about_booking(client_name, client_email,request_type, **kwargs):
             subject, 
             message, 
             settings.EMAIL_HOST_USER,
-            ['saprinashrestha72@gmail.com'],
+            [settings.EMAIL_RECEIVER],
             fail_silently=False,
         )
 
     except Exception as e:  
         print(f"Error sending email: {e}")
 
+@ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def service_detail_view(request, slug):
     if request.method == "POST":
+        was_limited = getattr(request, 'limited', False)
+        if was_limited:
+            messages.error(request, f'Too many booking requests from this IP. Please try again later.')
+            return redirect('home-page')
         form = OneServiceBookingForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -92,7 +94,6 @@ def service_detail_view(request, slug):
             service_type = Service.objects.get(slug = slug)
             preferred_date = form.cleaned_data['preferred_date']
             phone_number = form.cleaned_data['phone_number']
-
             existing_booking_check = Booking.objects.filter(name = name, email = email, service = service_type, preferred_date = preferred_date).exists()
             if existing_booking_check:
                 messages.error(request, f'You have already booked this service for the selected date.')
@@ -109,7 +110,6 @@ def service_detail_view(request, slug):
                 # email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
                 return redirect('service-detail', slug = slug)
-            
         else:
             messages.error(request, f'Error occured. Try again!')
             error_details = form.errors.as_text()
@@ -120,16 +120,13 @@ def service_detail_view(request, slug):
     other_services = Service.objects.all().exclude(slug = slug)
     return render(request, 'website/service/servicedetail.html', context = {'service' : service, "other_services" : other_services, 'form':form})
 
-# @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
+@ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
     if request.method == "POST":
-        
         was_limited = getattr(request, 'limited', False)
-
         if was_limited:
             messages.error(request, f'Too many booking requests from this IP. Please try again later.')
             return redirect('home-page')
-
         button_clicked = request.POST.get('action')
         form = CustomServiceForm(request.POST, action_type = button_clicked )
         if form.is_valid():
@@ -143,13 +140,11 @@ def custom_service_request(request):
             preferred_duration = form.cleaned_data['preferred_duration']
             workout_time = form.cleaned_data['workout_time']
             activity_level = form.cleaned_data['activity_level']
-
             is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
             try:
                 if button_clicked == "human_request":
                     phone_number = form.cleaned_data['phone_number']
                     email = form.cleaned_data['email']
-
                     if CustomService.objects.filter(
                             name=name, 
                             email=email, 
@@ -158,7 +153,6 @@ def custom_service_request(request):
                             preferred_duration=preferred_duration,
                             workout_time=workout_time).exists():
                                 messages.error(request, f'You have already submitted a similar custom service request.')
-
                     else:
                         CustomService.objects.create(
                             name=name,
@@ -172,7 +166,6 @@ def custom_service_request(request):
                             activity_level=activity_level,
                             age = age,
                             weight = weight,
-    
                         )
                         email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
                             'phone_number': phone_number,
@@ -184,7 +177,6 @@ def custom_service_request(request):
                             'activity_level': activity_level
                         })
                         # email_thread.start()
-                        
                         messages.success(request, f'Your custom service request has been submitted!')
                         return redirect('home-page')
                 elif button_clicked == "ai_preview":
@@ -200,7 +192,6 @@ def custom_service_request(request):
                         activity_level=activity_level
                     )
                     request.session['workout_plan'] = gemini_response_result
-
                     if is_ajax:
                         return JsonResponse({
                             "status" : "success",
@@ -208,7 +199,6 @@ def custom_service_request(request):
                             "error_redirect_url" : redirect('custom-service')
                         })
                     return redirect('ai-response')
-
             except Exception as e:
                 print(f"Error processing custom service request: {e}")
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
@@ -216,54 +206,8 @@ def custom_service_request(request):
         form = CustomServiceForm()
     return render(request, 'website/service/customservicepage.html', {'form':form})
 
-
-@ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
-def service_book_now(request):
-    if request.method == "POST":
-        was_limited = getattr(request, 'limited', False)
-
-        if was_limited:
-            messages.error(request, f'Too many booking requests from this IP. Please try again later.')
-            return redirect('services-page')
-        
-        
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            service_type = form.cleaned_data['service_type']
-            preferred_date = form.cleaned_data['preferred_date']
-            phone_number = form.cleaned_data['phone_number']
-
-            existing_booking_check = Booking.objects.filter(name = name, email = email, service = service_type, preferred_date = preferred_date).exists()
-            if existing_booking_check:
-                messages.error(request, f'You have already booked this service for the selected date.')
-                return redirect('services-page')
-            else:
-                Booking.objects.create(
-                    name = name,
-                    email = email,
-                    phone_number = phone_number,
-                    service = service_type,
-                    preferred_date = preferred_date,
-                )
-                # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
-                # email_thread.start()
-                messages.success(request, f'Your booking request has been sent! We will contact you soon.')
-                
-            return redirect('home-page')
-            
-        else:
-            # error_details = form.errors.as_text()
-            messages.error(request, f'Error occured. Try again!')
-    else:
-        form = BookingForm()
-    return render(request, 'website/service/booknow.html', {'service' : Service.objects.all(), 'form': form} )
-
-
 def ai_response(request):
     ai_workout_plan = request.session.get('workout_plan')
-
     if not ai_workout_plan:
         messages.error(request, f'No AI-generated workout plan found. Please submit a custom service request first.')
         return redirect('custom-service')
@@ -279,31 +223,29 @@ def BlogDetailView(request, slug):
     related_blogs = Blog.objects.filter().exclude(slug=slug) 
     return render(request, 'website/blog/blogdetail.html', {'blog' : blogs, 'related_blogs' : related_blogs})
 
-
 def BlogPostView(request):
     return render(request,'website/blog/blogs.html',  {'blogs': Blog.objects.all()})
-
-    
 
 @login_required
 def client_view(request):
     if not request.user.is_superuser:
         return redirect('home-page')
-    
     active_clients_count = Client.objects.filter(status = "Ongoing").count()
     total_clients_count = Client.objects.all().count()
     clients = Client.objects.all().order_by("-status", "-started_training_from")
     # this is to find the most subscribed service name
-    top_service = Service.objects.annotate(
-        total_subs = Count('client')
-    ).order_by('-total_subs').values_list('title', flat=True).first()
+    if clients:
+        top_service = Service.objects.annotate(
+                total_subs = Count('client')
+            ).order_by('-total_subs').values_list('title', flat=True).first()
+    else:
+        top_service = None
     return render(request, 'website/clients/clients.html', {'clients' : clients,  "active_clients_count": active_clients_count, 'total_clients_count': total_clients_count, 'top_service' : top_service})
 
 @login_required
 def client_form(request):
     if not request.user.is_superuser:
         return redirect('home-page')
-    
     if request.method == "POST":
         form = ClientForm(request.POST)
         if form.is_valid():
@@ -316,7 +258,6 @@ def client_form(request):
             any_problem = form.cleaned_data['any_problem']
             status = form.cleaned_data['status']
             paid_or_not = form.cleaned_data['paid_or_not']
-
             if Client.objects.filter(
                     name = name, 
                     age = age, 
@@ -328,7 +269,6 @@ def client_form(request):
                     paid_or_not = paid_or_not
                 ).exists():
                     messages.error(request, "Error! It seems the entrie is already present.")
-                    return redirect('client-view')
             else:
                 Client.objects.create(
                     name = name, 
@@ -354,21 +294,18 @@ def delete_client(request, id):
     if not request.user.is_superuser:
         return redirect('home-page')
     try:
-        Client.objects.get(id = id).delete()
-        messages.success(request, f'Deleted successfully')
-        return redirect('client-view')
+        client = Client.objects.get(id = id)
+        client.delete()
+        messages.success(request, f'{client.name} was deleted successfully')
     except:
-        messages.error(request, f'Failed to Delete')
+        messages.error(request, f'Failed to delete {client.name}')
     return redirect('client-view')
-
 
 @login_required
 def edit_client(request, id):
     if not request.user.is_superuser:
         return redirect('home-page')
-    
     client = get_object_or_404(Client, id = id)
-    
     if request.method == "POST":
         form = ClientForm(request.POST, instance = client)
         if form.is_valid():
@@ -380,9 +317,3 @@ def edit_client(request, id):
     else:
         form = ClientForm(instance = client)
     return render(request, 'website/clients/clientform.html', {'form' : form, 'client' : client})
-
-
-
-
-
-

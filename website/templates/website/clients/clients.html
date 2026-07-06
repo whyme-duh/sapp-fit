@@ -9,84 +9,83 @@
 {% block content %}
 {% include 'website/navbar.html' %}
 
-
 <div class="dashboard-container">
-        <div class="page-header">
-            <h1>Client Overview</h1>
-            <a class="btn btn-primary" id="add-client-btn" href="{% url 'client-form' %}">+ Add New Client</a>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Active Clients</h3>
-                <p class="stat-number">{{active_clients_count}}</p>
-                <!-- <span class="stat-trend positive">↑ 2 this month</span> -->
-            </div>
-            <div class="stat-card">
-                <h3>Total Clients</h3>
-                <p class="stat-number">{{total_clients_count}}</p>
-                <!-- <span class="stat-trend">4 remaining</span> -->
-            </div>
-            <div class="stat-card">
-                <h3>Most Used Service</h3>
-                <p class="stat-number text-accent">{{top_service}}</p>
-                <!-- <span class="stat-trend">Requires follow-up</span> -->
-            </div>
-        </div>
-
-       
-
-        <div class="table-card">
-            <div class="table-header">
-                <h2>All Clients</h2>
-                <input type="text" class="search-input" id="search-input" placeholder="Search clients..." >
-            </div>
-            
-            <div class="table-responsive">
-                <table class="client-table">
-                    <thead>
-                        <tr>
-                            <th>Client Name</th>
-                            <th>Age</th>
-                            <th>Active Package</th>
-                            <th>Paid or Not?</th>
-                            <th>Total Session</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for client in clients %}
-                        <tr class="client-row">
-                            <td class="client-name">
-                               {{client.name}}
-                            </td>
-                            <td>{{client.age}}</td>
-                            <td class="service-title-table">{{client.services.title}}</td>
-                            <td><span class="session-badge">{{client.paid_or_not|cut:"ne"}}</span></td>
-                            <td>{{client.total_sessions}}</td>
-                            <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
-                            
-                            <td id="action-{{client.id}}" style="display:flex;">
-                                <a href="{% url 'edit-client' client.id %}" 
-                                class="action-link edit">
-                               <i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>
-                                <a class="action-link delete" title="Edit"id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-id = {{client.id}}><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>
-                            </td>
-                            <td id="delete-option-{{client.id}}" style="display: none;justify-content: space-between;align-items: center;">
-                                <a href="{% url 'delete-client' client.id %}" class="action-link"><i class="fa fa-check" aria-hidden="true"></i></a>
-                                <button onclick="deleteModalFunction('closeModal', this)" data-id="{{client.id}}" class="action-link dont-delete"><i class="fa fa-times" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                   
-                </table>
-            </div>
-        </div>
-       
-
+    <div class="page-header">
+        <h1>Client Overview</h1>
+        <a class="btn btn-primary" id="add-client-btn" href="{% url 'client-form' %}">+ Add New Client</a>
     </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Active Clients</h3>
+            <p class="stat-number">{{active_clients_count}}</p>
+            <!-- <span class="stat-trend positive">↑ 2 this month</span> -->
+        </div>
+        <div class="stat-card">
+            <h3>Total Clients</h3>
+            <p class="stat-number">{{total_clients_count}}</p>
+            <!-- <span class="stat-trend">4 remaining</span> -->
+        </div>
+        <div class="stat-card">
+            <h3>Most Used Service</h3>
+            <p class="stat-number text-accent">{{top_service}}</p>
+            <!-- <span class="stat-trend">Requires follow-up</span> -->
+        </div>
+    </div>
+
+    
+
+    <div class="table-card">
+        <div class="table-header">
+            <h2>All Clients</h2>
+            <input type="text" class="search-input" id="search-input" placeholder="Search clients..." >
+        </div>
+        
+        <div class="table-responsive">
+            <table class="client-table">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Age</th>
+                        <th>Active Package</th>
+                        <th>Paid or Not?</th>
+                        <th>Total Session</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr class="client-row">
+                        <td class="client-name">
+                            {{client.name}}
+                        </td>
+                        <td>{{client.age}}</td>
+                        <td class="service-title-table">{{client.services.title}}</td>
+                        <td><span class="session-badge">{{client.paid_or_not|cut:"ne"}}</span></td>
+                        <td>{{client.total_sessions}}</td>
+                        <td><span class="status-badge {{client.status}}">{{client.status}}</span></td>
+                        
+                        <td id="action-{{client.id}}" style="display:flex;">
+                            <a href="{% url 'edit-client' client.id %}" 
+                            class="action-link edit">
+                            <i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>
+                            <a class="action-link delete" title="Edit"id="delete-btn" onclick="deleteModalFunction('openModal', this)" data-id = {{client.id}}><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>
+                        </td>
+                        <td id="delete-option-{{client.id}}" style="display: none;justify-content: space-between;align-items: center;">
+                            <a href="{% url 'delete-client' client.id %}" class="action-link"><i class="fa fa-check" aria-hidden="true"></i></a>
+                            <button onclick="deleteModalFunction('closeModal', this)" data-id="{{client.id}}" class="action-link dont-delete"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+    
+
+</div>
 
 {% endblock %}
 {% block extra_script %}

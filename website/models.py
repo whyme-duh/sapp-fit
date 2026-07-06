@@ -1,6 +1,5 @@
 from django.db import models
 from ckeditor.fields import RichTextField 
-import PIL
 
 class AboutAndQuote(models.Model):
     bio = models.TextField()
@@ -17,19 +16,14 @@ class AboutAndQuote(models.Model):
     youtube = models.URLField(null=True)
     tag = models.CharField(max_length=100, null = True, blank = True, help_text="Add a comma after each tag and make sure it is less than 5.")
 
-
     def __str__(self):
         return self.bio
     
-
-    
-
 class ServiceFeatureItem(models.Model):
     service_item = models.TextField(null = True)
 
     def __str__(self):
         return self.service_item
-
 
 class Service(models.Model):
     title = models.CharField(max_length=80)
@@ -38,18 +32,10 @@ class Service(models.Model):
     price= models.IntegerField()
     icon = models.ImageField(upload_to='images/pics')
     slug = models.SlugField(null = True)
-    
-
 
     def __str__(self):
         return f'{self.title} (Rs. {self.price})'
     
-    
-    
-
-
-
-
 class Blog(models.Model):
     title = models.CharField(max_length=80)
     content = RichTextField()
@@ -59,13 +45,13 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
 
     def total_time_to_read(self):
+        """
+        this function helps to calculate the total time to read the blog
+        based on the number of words present along with average reading speed.
+        """
         return len(self.content.split()) // 200
-
-
 
 class Testimonial(models.Model):
     testimonial = models.CharField(max_length=150)
@@ -74,8 +60,6 @@ class Testimonial(models.Model):
 
     def __str__(self) -> str:
         return self.user_name
-    
-
 
 class Client(models.Model):
 
@@ -92,7 +76,8 @@ class Client(models.Model):
 
     PAID_OPTIONS = [
         ("Paid", "Paid"),
-        ("Not Paid", "Not Paid")
+        ("Not Paid", "Not Paid"),
+        ("Half Paid", "Half Paid"),
     ]
 
     name = models.CharField(max_length=100)
@@ -111,28 +96,21 @@ class Client(models.Model):
     def save(self, *args, **kwargs):
         if self.total_sessions == 0:
             self.status = "Completed"
-
         if self.status == "Completed":
             self.total_sessions = 0
         super().save(*args, **kwargs)
     
-
-    
-
-
-
 class Booking(models.Model):
-
     status_choices = [
         ("Pending" , "Pending"),    
         ("Confirmed" , "Confirmed"),
         ("Cancelled" , "Cancelled") ]
-    
    
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.IntegerField(
-        max_length=10
+        blank=True,
+        null=True
     )
     service = models.ForeignKey(Service, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
@@ -140,14 +118,14 @@ class Booking(models.Model):
     status = models.CharField(max_length=20, choices=status_choices, default="Pending")
     created_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return f'{self.name} - {self.service.title}'
-    
-    
 
 class CustomService(models.Model):
-
+    """
+    This model offer user to request a custom plan based on their requirements.
+    This include request to Sappfit and AI.
+    """
     GOAL_CHOICES = [
         ("Fat Loss & Toning" , "Fat Loss & Toning"),    
         ("Building Muscle & Strength" , "Building Muscle & Strength"),
@@ -156,25 +134,21 @@ class CustomService(models.Model):
         ("HYROX / Event Prep", "HYROX / Event Prep"),
         ("Other" , "Other")
     ]
-
     PLAN_DURATION_OPTIONS = [
         ("1 Week Plan", "1 Week Plan"),
         ("4 Weeks Plan", "4 Weeks Plan"),
         ("12 Weeks Plan", "12 Weeks Plan"),
     ]
-
     WORKOUT_TIME_OPTIONS = [
+        ("30 minutes", "30 minutes"),
         ("45 minutes", "45 minutes"),
         ("1 hour", "1 hour"),
-        ("30 minutes", "30 minutes"),
     ]
-
     GENDER_CHOICES = [
         ("Male", "Male"),
         ("Female", "Female"),
         ("Other", "Other"),
     ]
-
     ACTIVITY_LEVEL_CHOICES = [
         ("Sedentary", "Sedentary (little or no exercise)"),
         ("Lightly Active", "Lightly Active (light exercise/sports 1-3 days/week)"),
@@ -182,17 +156,13 @@ class CustomService(models.Model):
         ("Very Active", "Very Active (hard exercise/sports 6-7 days a week)"),
         ("Super Active", "Super Active (very hard exercise/sports & physical job or 2x training)"),
     ]
-
- 
-
     name = models.CharField(max_length=100)
     age = models.IntegerField(blank = True, null = True)
     weight = models.IntegerField(blank = True, null = True)
     gender = models.TextField(choices= Client.GENDER_CHOICES, blank = True)
     activity_level = models.TextField(choices= ACTIVITY_LEVEL_CHOICES, blank = True)
-
     email = models.EmailField()
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(blank = True, null = True)
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     special_notes = models.TextField(blank=True)

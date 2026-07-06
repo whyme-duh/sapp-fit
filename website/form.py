@@ -4,10 +4,9 @@ from website.models import Booking, Client, CustomService, Service
 
 
 class BookingForm(forms.Form):
-
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.CharField(max_length=10, widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric'}))          
+    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric', 'maxlength': 10, 'placeholder': 'Your Phone Number'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -35,20 +34,17 @@ class BookingForm(forms.Form):
         phone_number = self.cleaned_data.get('phone_number')
         if phone_number:
             phone_number_str= str(phone_number)
-
             if len(str(phone_number)) != 10:
                 self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
-
             elif not phone_number_str.startswith(valid_prefixes):
                 self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
     
 
 class OneServiceBookingForm(forms.Form):
-
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.CharField(max_length = 10, required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric'}))          
+    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric', 'maxlength': 10, 'placeholder': 'Your Phone Number'}))          
     preferred_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -73,19 +69,13 @@ class OneServiceBookingForm(forms.Form):
             '982', '970', '971', '961', '962', '988'
         )
         phone_number = self.cleaned_data.get('phone_number')
-
         if phone_number:
-
             phone_number_str= str(phone_number)
-
             if len(str(phone_number)) != 10:
                 self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
-
             elif not phone_number_str.startswith(valid_prefixes):
                 self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
-
-        
 
 class ClientForm(forms.ModelForm):
 
@@ -101,19 +91,20 @@ class ClientForm(forms.ModelForm):
             }
         )
     )
-
     total_sessions = forms.IntegerField(
         widget= forms.NumberInput(
             attrs = {
-                'class-type' : 'form-control'
+                'class-type' : 'form-control',
+                'min': 0,
+                'max':100
             }
         )
     )
-
     age = forms.IntegerField(
         widget= forms.NumberInput(
             attrs = {
-                'class-type' : 'form-control'
+                'class-type' : 'form-control',
+                'maxlength': 2,
             }
         )
     )
@@ -185,7 +176,7 @@ class ClientForm(forms.ModelForm):
 class CustomServiceForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number', 'inputmode' : 'numeric'}))          
+    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Phone Number', 'inputmode' : 'numeric', 'maxlength': 10}))          
     goal_choices = forms.ChoiceField(
         choices=CustomService.GOAL_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
@@ -213,8 +204,8 @@ class CustomServiceForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     
-    age = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Age'}))
-    weight = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Weight in kg'}))
+    age = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Age', 'maxlength': 2}))
+    weight = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Your Weight in kg', 'maxlength':3}))
     gender  = forms.ChoiceField(
         choices=CustomService.GENDER_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
