@@ -18,7 +18,7 @@ python manage.py migrate
 
 echo "Collecting static files..."
 python manage.py collectstatic --no-input
-
+ch
 echo "Reloading the application server..."
 touch $WSGI_FILE
 
