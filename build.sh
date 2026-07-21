@@ -1,25 +1,35 @@
-#! /bin/bash
+# #! /bin/bash
 
-echo "Starting deployment process..."
+# echo "Starting deployment process..."
 
-WSGI_FILE="/var/www/sappfit_pythonanywhere_com_wsgi.py"
+# WSGI_FILE="/var/www/sappfit_pythonanywhere_com_wsgi.py"
 
-echo "Navigating to the project directory..."
-cd sapp-fit
+# echo "Navigating to the project directory..."
+# cd sapp-fit
 
-echo "Pulling latest changes from the repository..."
-git pull origin master
+# echo "Pulling latest changes from the repository..."
+# git pull origin master
 
-echo "Installing dependencies..."
+# echo "Installing dependencies..."
+# pip install -r requirements.txt
+
+# echo "Applying database migrations..."
+# python manage.py migrate
+
+# echo "Collecting static files..."
+# python manage.py collectstatic --no-input
+
+# echo "Reloading the application server..."
+# touch $WSGI_FILE
+
+# echo "Deployment process completed successfully!"
+
+
+#!/bin/bash
+set -o errexit
 pip install -r requirements.txt
 
-echo "Applying database migrations..."
-python manage.py migrate
+# Temporarily comment this out if database connection errors are stopping your build
+# python manage.py migrate 
 
-echo "Collecting static files..."
-python manage.py collectstatic --no-input
-
-echo "Reloading the application server..."
-touch $WSGI_FILE
-
-echo "Deployment process completed successfully!"
+python manage.py collectstatic --noinput --clear
