@@ -1,4 +1,3 @@
-# #! /bin/bash
 
 # echo "Starting deployment process..."
 
@@ -27,9 +26,9 @@
 
 #!/bin/bash
 set -o errexit
-pip install -r requirements.txt
+pip install -r requirements.txt --break-system-packages
 
 # Temporarily comment this out if database connection errors are stopping your build
-# python manage.py migrate 
+python manage.py migrate 
 
 python manage.py collectstatic --noinput --clear
