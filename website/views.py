@@ -20,7 +20,10 @@ def page_not_found_500(request):
 
 def index(request):
     about = AboutAndQuote.objects.first()
-    tags_list = [tag.strip() for tag in about.tag.split(',')] if about.tag else []
+    if about:
+        tags_list = [tag.strip() for tag in about.tag.split(',')] if about.tag else []
+    else:
+        tags_list = []
     return render(request, 'website/home.html', {
         'about': about,
         'services': Service.objects.all(),

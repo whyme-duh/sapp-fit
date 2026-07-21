@@ -3,7 +3,6 @@ from ckeditor.fields import RichTextField
 
 class AboutAndQuote(models.Model):
     bio = models.TextField()
-    phone_number = models.IntegerField(default= 9812312312)
     email_id = models.EmailField(blank = True)
     backgroundImage = models.ImageField(upload_to='images/bg', null=True)
     profileImage = models.ImageField(upload_to='images/bg', null=True)

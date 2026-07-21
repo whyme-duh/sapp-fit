@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='aboutandquote',
             name='phone_number',
-            field=models.IntegerField(default=98123123122, max_length=10),
+            field=models.IntegerField(),
         ),
     ]
