@@ -31,4 +31,8 @@ pip install -r requirements.txt --break-system-packages
 # Temporarily comment this out if database connection errors are stopping your build
 python manage.py migrate 
 
+if [ "$DJANGO_SUPERUSER_USERNAME" ]; then
+  python manage.py createsuperuser --noinput || true
+fi
+
 python manage.py collectstatic --noinput --clear
