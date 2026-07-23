@@ -19,10 +19,21 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'sappfit.com', 
+    'www.sappfit.com', 
+    '.vercel.app', # Keep this so your default Vercel URL still works
+    'localhost', 
+    '127.0.0.1',
+    'sappfit.pythonanywhere.com'
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://sappfit.com',
+    'https://www.sappfit.com',
+    'https://sappfit.pythonanywhere.com' 
+]
 
-# Application definition
 
 INSTALLED_APPS = [
     'ckeditor',
@@ -75,7 +86,8 @@ WSGI_APPLICATION = 'sapfit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+if not DEBUG:
+    DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': os.environ.get("DB_NAME"),         
@@ -88,12 +100,13 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
         conn_max_age=600
     )
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
-
+DATABASES = {
+    'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
+            conn_max_age=600
+        )
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

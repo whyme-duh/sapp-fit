@@ -2,207 +2,222 @@
 {% load static %}
 <title>{% block title %}SappFit - Your Favourite Trainer{% endblock %}</title>
 {% block content %}
-<div class=" navbar ">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/final_logo.png' %}" alt="logo"></a></div>
-    <nav class="right-side" id="responsive">
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#shop">Shop</a></li>
-            {% if blogs %}
-            <li><a href="#blogs">Blogs</a></li>
-            {% endif %} 
-            {% if testimonials %}
-            <li><a href="#testimonial">Testimonials</a></li>
-            {% endif %}
-            <li><a href="#contact">Contacts</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'client-view' %}">Clients</a></li>
+<header>
+    <div class="navbar">
+        <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/final_logo.png' %}" alt="logo"></a></div>
+        <nav class="right-side" id="responsive">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#shop">Shop</a></li>
+                {% if blogs %}
+                <li><a href="#blogs">Blogs</a></li>
+                {% endif %} 
+                {% if testimonials %}
+                <li><a href="#testimonial">Testimonials</a></li>
+                {% endif %}
+                <li><a href="#contact">Contacts</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'client-view' %}">Clients</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+            <a href="javascript:void(0)" class="icon" onclick="navFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>  
+</header>
 
-            {% endif %}
-        </ul>
-        
-    </nav>
-        <a href="javascript:void(0)" class="icon" onclick="navFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
-</div>  
-
-<div class="first-page">
-    <img src="{{about.backgroundImage.url}}" alt="background-images" class="bg-image">
-    <div class="first-page-content">
-        <h1>Hi,</h1>
-        <h1>I'M <span class="name">Sapp-Fit</span></h1>
-        <h2 class="role">Fitness Influencer & Personal Trainer</h2>
-        <div class="hr">
-            <div class="line"></div>
-        </div>
-        
-        <a href="#services"><button>View My Services <i class="fas fa-dumbbell"></i></button></a>
-    </div>
-</div>
-<div class="about-container" id="about">
-    <h1 class="title" id="about-me-above-title" style="text-align: center;">About Me</h1>
-    <div class="about hidden" >
-        <img src="{{about.profileImage.url}}" alt="profile" class="about-image">
-        <div class="about-content">
-            <h1 class="title" id="about-me-title-below">About Me</h1>
-            <div class="tag-holder">
-            {% for t in tags_list %}
-                <p class="tag">
-                    {{t}}
-                </p>
-            {% endfor %}
+<section>
+    <div class="first-page">
+        <div class="first-page-content">
+            <h1>Hi,</h1>
+            <h1>I'M <span class="name">Sapp-Fit</span></h1>
+            <h2 class="role">Fitness Influencer & Personal Trainer</h2>
+            <div class="hr">
+                <div class="line"></div>
             </div>
+            <p class="call-to-action-info">Ready to elevate your fitness journey? Explore professional training programs designed to match your goals.</p>
 
-            <p class="bio">
-                {{about.bio}}
-            </p>
-            
-            <a href="#contact"><button>Train With Me <i class="fas fa-dumbbell"></i></button></a>
+            <a href="#services"><button>View My Services <i class="fas fa-dumbbell"></i></button></a>
+        </div>
+        <img src="{{about.profileImage.url}}" alt="background-images" class="bg-image">
+    </div>
+</section>
+<section>
+    <div class="about-container" id="about">
+        <h1 class="title" id="about-me-above-title" style="text-align: center;">About Me</h1>
+        <div class="about hidden" >
+            <div class="about-img-holder-grid">
+                <div class="grid-col-stacked">
+                    <img src="{{about.backgroundImage.url}}" alt="profile" class="clinical-img reveal-top">
+                    <img src="{{about.quoteContainerImage.url}}" alt="profile" class="clinical-img reveal-down">
+                </div>
+                <div class="grid-col-single">
+                    <img src="{{about.profileImage.url}}" alt="profile" class="clinical-img reveal-side">
+                </div>
+            </div>
+            <div class="about-content">
+                <h1 class="title" id="about-me-title-below">About Me</h1>
+                <div class="tag-holder">
+                {% for t in tags_list %}
+                    <p class="tag">
+                        {{t}}
+                    </p>
+                {% endfor %}
+                </div>
+
+                <p class="bio">
+                    {{about.bio}}
+                </p>
+                
+                <a href="#contact"><button>Train With Me <i class="fas fa-dumbbell"></i></button></a>
+            </div>
         </div>
     </div>
-</div>
-<div class="quotes-container" style="background-image: url({{about.quoteContainerImage.url}});">
-    <div class="quotes">
-        <h1 class="sentence">{{about.quotes}} </h1>
+</section>
+    <div class="quotes-container" style="background-image: url({{about.quoteContainerImage.url}});">
+        <div class="quotes">
+            <h1 class="sentence">{{about.quotes}} </h1>
+        </div>
     </div>
-</div>
 
 
-<div class="services-container">
-    <div class="services hidden" id="services">
-        <h1 class="title">My Services</h1>
-        <div class="services-list">
-            {% for service in services %}
-            <a href="{% url 'service-detail' service.slug %}" class="service-card child">
-                    <img src={{service.icon.url}} alt="img" class="img">
-                    <div class="overlay-color"></div>
-                    <h1 class="service-name">{{service.title}}</h1>
-                    <div class="service-content">
-                        <div class="service-content-detail">
-                            <h2 class="service-title">{{service.title}}</h2>
-                            <p class="service-detail">{{service.info}}</p>
-                            <p class="price">Rs.{{service.price}}/hr</p>
+<section>
+    <div class="services-container">
+        <div class="services hidden" id="services">
+            <h1 class="title">My Services</h1>
+            <div class="services-list">
+                {% for service in services %}
+                <a href="{% url 'service-detail' service.slug %}" class="service-card child">
+                        <img src={{service.icon.url}} alt="img" class="img">
+                        <div class="overlay-color"></div>
+                        <h1 class="service-name">{{service.title}}</h1>
+                        <div class="service-content">
+                            <div class="service-content-detail">
+                                <h2 class="service-title">{{service.title}}</h2>
+                                <p class="service-detail">{{service.info}}</p>
+                                <p class="price">Rs.{{service.price}}/hr</p>
+                            </div>
                         </div>
-                    </div>
-            </a>
-            {% endfor %} 
+                </a>
+                {% endfor %} 
 
+            </div>
         </div>
     </div>
-</div>
-<div class="custom-plan-banner" >
-    <h2 >Your Goals, Your Schedule.</h2>
-    <p>
-        Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
-    </p>
-    <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
-</div>
-
-<div class="merch-container">
-    <div class="merch hidden" id="shop">
-        <h1 class="title">Sapp-Fit Wear</h1>
-        <p class="slogan" id="slogan">Get your premium fit from Sappfit Wear</p>
-        <div class="merch-list child" id="merch-list">
-            
-        </div>
-        <a href="" id="visit-store"><button >Visit Store </button></a>
-
-        <small class = "notice" id="notice"></small>
+    <div class="custom-plan-banner" >
+        <h2 >Your Goals, Your Schedule.</h2>
+        <p>
+            Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
+        </p>
+        <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
     </div>
-</div>
+</section>
+
+    <div class="merch-container">
+        <div class="merch hidden" id="shop">
+            <h1 class="title">Sapp-Fit Wear</h1>
+            <p class="slogan" id="slogan">Get your premium fit from Sappfit Wear</p>
+            <div class="merch-list child" id="merch-list">
+                
+            </div>
+            <a href="" id="visit-store"><button >Visit Store </button></a>
+
+            <small class = "notice" id="notice"></small>
+        </div>
+    </div>
 
 
     
 {% if blogs %}
-<div class="blogs-container" id="blogs">
-    <h1 class="title">Blogs</h1>
-    <div class="blog hidden">
-        <div class="blogs-list">
-            {% for blog in blogs|slice:2 %}
-            <div class="blog-card child">
-                <div class="img-part">
-                    <img src="{{blog.thumbnail.url}}" alt="img">
-                </div>
-                <div class="blog-detail">
-                    <div class="blog-detail-content-home">
-                        <div class="blog-content">
-                            <h3 class="blog-title">{{blog.title|title}}</h3>
-                            {{blog.content|safe|truncatewords:25}}
-                        </div>
-                        <div class="blog-card-footer">
-                            <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
-                            <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+<section>
+    <div class="blogs-container" id="blogs">
+        <h1 class="title">Blogs</h1>
+        <div class="blog hidden">
+            <div class="blogs-list">
+                {% for blog in blogs|slice:2 %}
+                <div class="blog-card child">
+                    <div class="img-part">
+                        <img src="{{blog.thumbnail.url}}" alt="img">
+                    </div>
+                    <div class="blog-detail">
+                        <div class="blog-detail-content-home">
+                            <div class="blog-content">
+                                <h3 class="blog-title">{{blog.title|title}}</h3>
+                                {{blog.content|safe|truncatewords:25}}
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
+                                <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
+                {% if blogs.count >= 2   %}
+                <div class="see-all-wrapper">
+                    <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
+                </div>
+                {% endif %}
             </div>
-            {% endfor %}
-            {% if blogs.count >= 2   %}
-            <div class="see-all-wrapper">
-                <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
-            </div>
-            {% endif %}
         </div>
+    
     </div>
-   
-</div>
+</section>
 {% endif %}
 {% if testimonials %}
-<div class="testimonials-container" id="testimonial">
-    <h1 class="title">Testimonials</h1>
-    <div class="carousel-wrapper">
-        <div class="testimonial-list" id="testimonial-track">
-            {% for testi in testimonials %}
-            <div class="testinomial-card">
-                <h3>{{testi.testimonial}}</h3>
-                <div class="user">
-                    <h4>{{testi.user_name}}</h4>
-                    <p><i>{{testi.user_category}}</i></p>
+<section>
+    <div class="testimonials-container" id="testimonial">
+        <h1 class="title">Testimonials</h1>
+        <div class="carousel-wrapper">
+            <div class="testimonial-list" id="testimonial-track">
+                {% for testi in testimonials %}
+                <div class="testinomial-card">
+                    <h3>{{testi.testimonial}}</h3>
+                    <div class="user">
+                        <h4>{{testi.user_name}}</h4>
+                        <p><i>{{testi.user_category}}</i></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<section>
+    <div class="contacts-container">
+        <div class="contact-content hidden">
+            <div class="map">
+                <h1 class="title">Meet Me At Pump</h1>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="contact" id="contact">
+                <h1 class="title">Contact Me</h1>
+                <div class="contact-detail">
+                    <p class="contact-detail-msg">Slide into my DMs to start your fitness journey, or message me directly below</p>
+                    <a href="{{about.instagram}}">
+                        <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
+                    </a>
+                    <p><i class="fa fa-envelope"></i>&nbsp; {{about.email_id}}</p>
+                    <div class="other-contact">
+                        <div class="socials">
+                            <a href="{{about.facebook}}" class="fa fa-facebook"></a>
+                            <a href="{{about.instagram}}" class="fa fa-instagram"></a>
+                            <a href="{{about.youtube}}" class="fa fa-youtube"></a>
+                            <a href="{{about.pinterest}}" class="fa fa-pinterest"></a>
+                        </div>
+                    </div>  
+                                
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
-{% endif %}
-<div class="contacts-container">
-    <div class="contact-content hidden">
-        <div class="map">
-            <h1 class="title">Meet Me At Pump</h1>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <div class="contact" id="contact">
-            <h1 class="title">Contact Me</h1>
-            <div class="contact-detail">
-                <p class="contact-detail-msg">Slide into my DMs to start your fitness journey, or message me directly below</p>
-                <a href="{{about.instagram}}">
-                    <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
-                </a>
-                <p><i class="fa fa-envelope"></i>&nbsp; {{about.email_id}}</p>
-                <div class="other-contact">
-                    <div class="socials">
-                        <a href="{{about.facebook}}" class="fa fa-facebook"></a>
-                        <a href="{{about.instagram}}" class="fa fa-instagram"></a>
-                        <a href="{{about.youtube}}" class="fa fa-youtube"></a>
-                        <a href="{{about.pinterest}}" class="fa fa-pinterest"></a>
-                    </div>
-                </div>  
-                            
-            </div>
-        </div>
-    </div>
-    
-</div>
+</section>
 <p class="maker">Created and Managed by <a href="https://shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
 
-
 {% endblock %}
-
 {% block extra_script %}
-
 <script src="{% static 'website/data.js' %}"></script>
-
-
 {% endblock %}

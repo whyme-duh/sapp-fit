@@ -15,7 +15,7 @@
     --role-font :'Roboto Mono', monospace;
     --nav-font:"Playfair Display", serif;
     --quote-family:'Lobster Two', cursive;
-    --container-width: 70%;
+    --container-width: 80%;
     --paragraph-font: 'Rubik', sans-serif;
     --margin-top:5em;
     --margin-bottom:5em;
@@ -163,21 +163,31 @@ transition-delay: 1.2s;
     right: 0%;
   }
 /* navbar styles */
-.navbar{
+header{
+    background-color: white;
     display: flex;
-    background-color: var(--navbar-color);
-    justify-content: space-between;
+    justify-content: center;
+    position: fixed;
     align-items: center;
-    padding:1.5em;
-    position:fixed;
     z-index: 10000;
     width: 100%;
+
+}
+section{
+    width: var(--container-width);
+}
+.navbar{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding:1.5em;
+    width: var(--container-width);
 }
 
 .page-navbar{
     background-color: var(--navbar-color);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     gap:1em;
     align-items:center;
     width: 100%;
@@ -189,11 +199,18 @@ transition-delay: 1.2s;
     
 }
 .right-side{
+    margin: 0;
+    width: fit-content;
     display: flex;
+    
 }
+.navbar .brand{
+    margin: 0;
+    width: fit-content;
 
+}
 .brand img{
-    width: 50px;
+    width: 70px;
 }
 
 nav ul{
@@ -201,7 +218,7 @@ nav ul{
     gap: 2em;
     list-style-type: none;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 a{
     text-decoration: none;
@@ -318,15 +335,6 @@ li a:hover{
     }
 }
 
-.bg-image{
-    width: 100%;
-    height: 100vh;
-}
-
-.first-page{
-    position: relative;
-}
-
 @keyframes slideInAnimation{
     0%{
         left: -100%;
@@ -347,16 +355,29 @@ li a:hover{
     }
 }
 }
+
+
+.bg-image{
+    width: 50%;
+    margin: 0;
+    height: 90vh;
+    object-fit: cover;
+}
+
+.first-page{
+    padding-top: calc(var(--margin-top)/4);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .first-page-content{
-    position: absolute;
-    width: 35%;
-    top: 60%;
-    left: -5%;
+    margin: 0;
+    width: 40%;
     animation: slideInAnimation 1s ease-in-out;
-    transform: translate(50%, -50%);
 }
 .first-page-content h1{
-    position: relative;
     animation: introAnimation 0.5s ease-in;
     color: #8a5a44;
     font-size:3.5em ;
@@ -374,6 +395,12 @@ li a:hover{
     letter-spacing: 2px;
     color: #8a5a44;
     font-family: var(--role-font);
+}
+.call-to-action-info{
+    font-family:var(--nav-font);
+    font-size:1.25em;
+    margin-block: calc(var(--margin-top)/4);
+    color: #774936;
 }
 .hr{
     margin-top: 1em;
@@ -394,7 +421,7 @@ li a:hover{
     padding: 1em;
     margin-top: 1em;
     animation: opacAnimation 1.5s ease-in;
-    font-family: var(--role-font);
+    font-family: var(--nav-font);
     border: none;
     background-color: var(--button-color);
     font-size: 1.15em;
@@ -441,15 +468,86 @@ li a:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width:var(--container-width);
+    width: 100%;
 }
-.about-image{
-    width: 400px;
-    height: 500px;
-    box-shadow: -100px 70px l rgb(246, 220, 201);
+@keyframes revealTop {
+    0%{
+        left: 0;
+    }
+    100%{
+        left:5%;
+    }
+}
+.about-img-holder-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em; 
+    width: 100%;
+    margin: 0 auto;
+    align-items: center; 
+    animation: revealTop 1,5s ease-in;
+}
+
+.grid-col-single {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-col-single img {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 8px; 
+}
+
+.grid-col-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+}
+
+.grid-col-stacked img {
+    width: 100%;
+    height: 290px; 
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(74, 59, 50, 0.15);
+}
+
+
+
+.clinical-img {
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.clinical-img:hover {
+    transform: translateY(-6px);
+}
+
+
+@media only screen and (max-width: 768px) {
+    .clinical-image-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 100%;
+        margin-top: 2rem;
+    }
+
+    .grid-col-single img {
+        height: 300px; 
+    }
+
+    .grid-col-stacked {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+    }
+
+    .grid-col-stacked img {
+        height: 160px;
+    }
 }
 .about-content{
-    
+    width: 90%;
     margin-left: 3em;
 }
 .about-content button{
@@ -1048,7 +1146,6 @@ small{
     
 }
 .contact-content{
-    width: 80%;
     display: flex;
     justify-content: space-between;
     gap: 10em;
