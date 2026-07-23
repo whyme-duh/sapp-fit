@@ -17,7 +17,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY_SETTINGS')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'ckeditor',
     "django_browser_reload",
     'widget_tweaks',
+    'storages',
     'website.apps.WebsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -87,6 +88,10 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
         conn_max_age=600
     )
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
@@ -147,3 +152,25 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+if not DEBUG:
+    AWS_ACCESS_KEY_ID = os.environ.get('B2_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('B2_APPLICATION_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME')
+    AWS_S3_ENDPOINT_URL = os.environ.get('B2_ENDPOINT_URL') 
+    AWS_S3_REGION_NAME = os.environ.get('B2_REGION_NAME')   
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400', 
+    }
+
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
