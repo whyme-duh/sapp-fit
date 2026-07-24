@@ -326,6 +326,18 @@ li a:hover{
 @keyframes introAnimation{
     0%{
         opacity: 0;
+        left : -100%;
+    }
+    100%{
+        opacity: 1;
+        left: 0;
+    }
+}
+
+@keyframes slideFromRightAnimation{
+    0%{
+        opacity: 0;
+        right : -100%;
     }
     100%{
         opacity: 1;
@@ -365,10 +377,13 @@ li a:hover{
 
 
 .bg-image{
+    position: relative;
     width: 50%;
     margin: 0;
     height: 90vh;
     object-fit: cover;
+    animation: slideFromRightAnimation 1.25s ease-in-out;
+
 }
 
 .first-page{
@@ -385,11 +400,13 @@ li a:hover{
     animation: slideInAnimation 1s ease-in-out;
 }
 .first-page-content h1{
-    animation: introAnimation 0.5s ease-in;
+    position: relative;
     color: #8a5a44;
     font-size:3.5em ;
     letter-spacing: l;
     font-family: var(--trial-font);
+    animation: introAnimation 1s ease-in-out;
+
 }
 .name{
     color: #774936;
@@ -398,18 +415,22 @@ li a:hover{
 .role{
     position: relative;
     font-size: 1em;
-    animation: introAnimation 1.5s ease-in-out;
+    animation: introAnimation 1.2s ease-in-out;
     letter-spacing: 2px;
     color: #8a5a44;
     font-family: var(--role-font);
 }
 .call-to-action-info{
+    position: relative;
     font-family:var(--nav-font);
     font-size:1.25em;
     margin-block: calc(var(--margin-top)/4);
     color: #774936;
+    animation: introAnimation 1.6s ease-in-out;
 }
 .hr{
+    position: relative;
+    animation: introAnimation 1.4s ease-in-out;
     margin-top: 1em;
     text-align: left;
     
@@ -425,14 +446,16 @@ li a:hover{
     font-size: 1.35em;
 }
 .first-page-content button{
+    position: relative;
     padding: 1em;
     margin-top: 1em;
-    animation: opacAnimation 1.5s ease-in;
+    animation: opacAnimation 1.8s ease-in;
     font-family: var(--nav-font);
     border: none;
     background-color: var(--button-color);
     font-size: 1.15em;
     cursor: pointer;
+    animation: introAnimation 2s ease-in-out;
     color: white;
 }
 .first-page-content button:hover{
@@ -458,14 +481,7 @@ li a:hover{
 #about-me-above-title{
     display: none;
 }
-@keyframes aboutAnimation{
-    0%{
-        left:40%;
-    }
-    100%{
-        left: -5%;
-    }
-}
+
 .about-container{
     margin-top: var(--margin-top);
     margin-bottom: var(--margin-bottom);
@@ -479,10 +495,10 @@ li a:hover{
 }
 @keyframes revealTop {
     0%{
-        left: 0;
+        top: -100%;
     }
     100%{
-        left:5%;
+        top:0;
     }
 }
 .about-img-holder-grid{
@@ -501,6 +517,8 @@ li a:hover{
 }
 
 .grid-col-single img {
+    position: relative;
+    animation: aboutAnimation 1s ease-in-out;
     width: 100%;
     height: 90%;
     object-fit: cover;
@@ -513,14 +531,24 @@ li a:hover{
     gap: 1rem; 
 }
 
+@keyframes aboutAnimationOpposite{
+    0%{
+        left:-100%;
+    }
+    100%{
+        left: 0;
+    }
+}
 .grid-col-stacked img {
+    position: relative;
     width: 100%;
     height: 290px; 
+    animation: aboutAnimationOpposite 1s ease-in-out;
+
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid rgba(74, 59, 50, 0.15);
 }
-
 
 
 .clinical-img {
@@ -556,17 +584,14 @@ li a:hover{
     width: 90%;
     margin-left: 3em;
 }
-.about-content button{
-    animation: opacAnimation 2s ease-in;
-    border: none;
-    cursor: pointer;
-    background-color: var(--button-color);
-    margin-top: 3em;
-    padding: 1em;
-    font-size: 0.9em;
-    font-family: var(--role-font);
-    color: white;
 
+@keyframes aboutAnimation{
+    0%{
+        left:40%;
+    }
+    100%{
+        left: -5%;
+    }
 }
 .tag-holder{
     position: relative;
@@ -623,6 +648,19 @@ li a:hover{
 .title{
     font-family: var(--title-family);
     color: #774936;
+}
+.about-content button{
+    position: relative;
+    animation: aboutAnimation 1.25s ease-in;
+    border: none;
+    cursor: pointer;
+    background-color: var(--button-color);
+    margin-top: 3em;
+    padding: 1em;
+    font-size: 0.9em;
+    font-family: var(--role-font);
+    color: white;
+
 }
 
 

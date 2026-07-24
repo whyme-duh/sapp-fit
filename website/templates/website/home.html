@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="about-content">
-                <h1 class="title" id="about-me-title-below">About Me</h1>
+                <h1 class="title child" id="about-me-title-below">About Me</h1>
                 <!-- <div class="tag-holder">
                 {% for t in tags_list %}
                     <p class="tag">
@@ -67,11 +67,11 @@
                 {% endfor %}
                 </div> -->
 
-                <p class="bio">
+                <p class="bio child">
                     {{about.bio}}
                 </p>
                 
-                <a href="{% url 'about-me' %}"><button>Learn More <i class="fas fa-dumbbell"></i></button></a>
+                <a href="{% url 'about-me' %}"><button class="child">Learn More <i class="fas fa-dumbbell"></i></button></a>
             </div>
         </div>
     </div>

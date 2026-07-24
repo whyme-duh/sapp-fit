@@ -7,16 +7,16 @@
 {% block content %}
 {%include 'website/navbar.html' %}
 <section class="about-hero">
-        <span class="section-tag">About Me</span>
-        <h1>Hi, I'm Sophie Moore,<br> your personal trainer</h1>
-        <div class="hero-content-grid">
-            <p class="hero-desc">{{about.bio}}</p>
-        </div>
-        <div class="hero-images">
-            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Trainer working out" class="img-main">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Trainer portrait" class="img-secondary">
-        </div>
-    </section>
+    <span class="section-tag">About Me</span>
+    <h1>Hi, I'm Sappfit,<br> your personal trainer</h1>
+    <div class="hero-content-grid">
+        <p class="hero-desc">{{about.bio}}</p>
+    </div>
+    <div class="hero-images">
+        <img src="{{about.parrallex_img.url}}" alt="Trainer working out" class="img-main">
+        <img src="{{about.front_image.url}}" alt="Trainer portrait" class="img-secondary">
+    </div>
+</section>
 
     <!-- Story Section -->
     <section class="story-section">
@@ -26,7 +26,7 @@
                 <p>{{about.story}}</p>
             </div>
             <div class="story-image">
-                <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Trainer tying shoes">
+                <img src="{{about.grid_big.url}}" alt="Trainer tying shoes">
             </div>
         </div>
     </section>
@@ -35,26 +35,26 @@
     <section class="experience-section">
         <div class="experience-grid">
             <div class="experience-image">
-                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Trainer stretching">
+                <img src="{{about.grid_small_two.url}}" alt="Trainer stretching">
             </div>
             <div class="experience-content">
                 <h2>My experience in numbers</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor et, ultrices fermentum felis pretium. Vel ut sed aliquam.</p>
+                <p>Guiding clients through intentional movement, expert technique, and progressive programming designed to deliver sustainable, real-world results.</p>
                 <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3>{{about.year_of_experiences}}+</h3>
+                    <div class="stat-item reveal">
+                        <h3 class="counter" data-target="{{about.year_of_experiences}}">0</h3>
                         <p>Years of experience</p>
                     </div>
-                    <div class="stat-item">
-                        <h3>{{about.class_completed}}+</h3>
+                    <div class="stat-item reveal">
+                        <h3 class="counter" data-target="{{about.class_completed}}">0</h3>
                         <p>Classes taught</p>
                     </div>
-                    <div class="stat-item">
-                        <h3>{{about.client_taught}}+</h3>
+                    <div class="stat-item reveal">
+                        <h3 class="counter" data-target="{{about.client_taught}}">0</h3>
                         <p>Happy clients</p>
                     </div>
-                    <div class="stat-item">
-                        <h3>{{about.instagram_follower}}+</h3>
+                    <div class="stat-item reveal">
+                        <h3 class="counter" data-target="{{about.instagram_follower}}">0</h3>
                         <p>Instagram followers</p>
                     </div>
                 </div>
@@ -66,20 +66,19 @@
     <section class="values-section">
         <div class="values-header">
             <h2>My core work values</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor et, ultrices fermentum felis pretium. Vel ut sed aliquam.</p>
+            <p>Driven by discipline, progressive growth, and sustainable habits. I believe in training with intention, honoring the process, and building strength that lasts a lifetime.</p>
         </div>
         <div class="values-grid">
             
             {% for obj in core_values %}
             <div class="value-card">
-                <div class="icon-box">{{obj.emoji}}</div>
                 <h4>{{obj.item}}</h4>
                 <p>{{obj.description}}</p>
             </div>
             {% endfor %}
         </div>
         <div class="cta-container">
-            <a href="#book" class="btn-primary">Book a Class</a>
+            <a href="{% url 'services-page' %}" class="btn-primary">Book a Class</a>
         </div>
     </section>
 
@@ -87,21 +86,26 @@
     <section class="studio-section">
         <div class="studio-header">
             <span class="sub-heading">Want presential classes?</span>
-            <h2>Come to my studio</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor et, ultrices fermentum felis pretium. Vel ut sed aliquam.</p>
+            <h2>Come to my gym</h2>
+            <p>Train in a fully equipped, private studio designed for focus, comfort, and zero distractions. Step inside and let's elevate your training experience together.</p>
         </div>
         <div class="studio-content">
             <div class="studio-info-card">
                 <h3>Address</h3>
-                <p>3506 Madera Ave<br>Los Angeles, California(CA)</p>
-                <h3>Phone Number</h3>
-                <p>(323) 661-3993</p>
+                <p>The Pump Jhamsikhel<br>Jhamsikhel Road, ललितपुर</p>
+                <h3>Instagram</h3>
+                <a href="{{about.instagram}}"><i class="fa fa-instagram"></i>&nbsp;sappfit</a>
                 <h3>Email</h3>
-                <p>contact@coach.com</p>
+                <p>{{about.email_id}}</p>
             </div>
             <div class="studio-map">
-                <div class="map-placeholder">📍 Studio Location Map Placeholder</div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
+
+{% endblock %}
+{% block extra_script %}
+<script src="{% static 'website/about.js' %}"></script>
+
 {% endblock %}
