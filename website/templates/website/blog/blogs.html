@@ -1,31 +1,37 @@
 {% extends 'website/index.html' %}
+{% load static %}
+<title>{% block title %}Blogs{% endblock %}</title>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/bloglist.css'%}">
+{% endblock %}
 {% block content %}
-
-    <title>{% block title %}Blogs{% endblock %}</title>
-
 {% include 'website/navbar.html' %}
-
-<div class="blog-container">
-    <div class="blog-header">
-        <h1>Read My Latest Blogs</h1>
-        <p>Here are some of my blogs that I have written. Hope it helps!</p>
+<section>
+    <div class="blog-container">
+    <div class="blog-header-list">
+        <h1>Read My Latest Articles</h1>
+        <p>Here are some of my artlces that I have written. Hope it helps!</p>
     </div>
     <div class="blog-lists" id="blogs-list">
         {% for blog in blogs %}
             <div class="blogs-content child">
                 <img src="{{blog.thumbnail.url}}" alt="img">
                 <div class="blogs-detail">
+                    <div class="blog-card-footer">
+                        <p class="blog-date">{{blog.date|date}}</p>
+                        <small>{{blog.total_time_to_read}} min read</small>
+                    </div>
                     <div class="blog-detail-content">
                         <h2>{{blog.title}}</h2>
                         <p>{{blog.content|safe|truncatewords:15}}</p>
                     </div>
                     <div class="blog-card-footer">
-                        <a href="{% url 'blog-detail' blog.slug %}" class="read-more-btn">Read This Article</a>
-                        <p class="small-text">{{blog.date|date}} • {{blog.total_time_to_read}} min read</p>
+                        <a href="{% url 'blog-detail' blog.slug %}" class="read-more">Learn More</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 </div>
+</section>
 {% endblock %}

@@ -1,5 +1,9 @@
 @import 'style.css';
 
+
+header{
+    position: static;
+}
 #skeleton-loader{
     display: none; 
     width: 100%; 

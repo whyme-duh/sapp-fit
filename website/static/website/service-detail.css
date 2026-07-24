@@ -12,7 +12,9 @@
     --border-color: #E5E7EB;   
     --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
-
+header{
+    position: static;
+}
 .service-detail-container{
     margin: 0 auto;
     width: 80%;
@@ -52,8 +54,10 @@
 .service-header-content p{
     font-family: var(--role-font);
     font-size: 0.9em;
+    margin: 0;
 }
 .book-now-btn{
+    margin: 0;
     margin-top: 3em;
     padding: 14px 35px;
     background-color: var(--accent-color);
@@ -95,7 +99,9 @@
     flex-direction: column;
     padding-inline: 50px;
 }
-
+.service-detail-list h2, p, li{
+    margin: 0;
+}
 
 
 .service-detail-list p, .book-form-header small {
@@ -104,7 +110,9 @@
     color: #666;
 }
 
-
+.service-content-detail{
+    color: black;
+}
 .service-detail-list ul{
     display: flex;
     flex-direction: column;
@@ -114,13 +122,17 @@
     padding: 0;
 }
 .service-detail-list li {
+    width:100%;
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
     font-family: var(--paragraph-font);
     padding: 0.85em;
     border-radius: 5px;
     font-size: 1.1rem;
     gap: 15px;
+}
+.service-detail-list li i{
+    margin: 0;
 }
 .service-detail-list li:hover{
     transform: translateY(-5px);
@@ -144,7 +156,7 @@
 }
 .other-services-container{
     width: 100%;
-    margin-top: 2em;
+    margin-block: var(--margin-top);
 }
 .other-services{
     display: flex;

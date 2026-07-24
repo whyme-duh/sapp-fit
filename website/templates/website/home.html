@@ -76,36 +76,46 @@
         </div>
     </div>
 </section>
-    <div class="quotes-container" style="background-image: url({{about.quoteContainerImage.url}});">
-        <div class="quotes">
-            <h1 class="sentence">{{about.quotes}} </h1>
+    <div class="stats-container" style="background-image: url({{about.quoteContainerImage.url}});">
+        <div class="stats">
+            <div class="stat-group reveal">
+                <h1 class="counter" data-target="500">0</h1>
+                <p>Classes Completed</p>
+            </div>
+            <div class="stat-group reveal">
+                <h1 class="counter" data-target="150">0</h1>
+                <p>Clients Trained</p>
+            </div>
+            <div class="stat-group reveal">
+                <h1 class="counter" data-target="8">0</h1>
+                <p>Years of Experience</p>
+            </div>
         </div>
     </div>
-
-
 <section>
     <div class="services-container">
         <div class="services hidden" id="services">
             <h1 class="title">My Services</h1>
             <div class="services-list">
-                {% for service in services %}
-                <a href="{% url 'service-detail' service.slug %}" class="service-card child">
-                        <img src={{service.icon.url}} alt="img" class="img">
-                        <div class="overlay-color"></div>
-                        <h1 class="service-name">{{service.title}}</h1>
-                        <div class="service-content">
-                            <div class="service-content-detail">
-                                <h2 class="service-title">{{service.title}}</h2>
-                                <p class="service-detail">{{service.info}}</p>
-                                <p class="price">Rs.{{service.price}}/hr</p>
-                            </div>
+                {% for service in services|slice:3 %}
+                <div class="service-card child">
+                        <img src={{service.icon.url}} alt="img" class="service-img">
+                        <div class="service-content-detail">
+                            <h2 class="service-title">{{service.title}}</h2>
+                            <p class="service-detail">{{service.info}}</p>
+                            <p class="price">Rs.{{service.price}}/hr</p>
+                            <a href="{% url 'service-detail' service.slug %}" class="learn-more">Learn More</a>
                         </div>
-                </a>
+                        
+                    </div>
                 {% endfor %} 
 
             </div>
         </div>
     </div>
+    
+</section>
+<section style="width: 100%;">
     <div class="custom-plan-banner" >
         <h2 >Your Goals, Your Schedule.</h2>
         <p>
@@ -114,6 +124,48 @@
         <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
     </div>
 </section>
+{% if blogs %}
+<section>
+    <div class="blogs-container" id="blogs">
+        <div class="blog hidden">
+            <div class="blog-header">
+                <h1 class="title">Articles & News</h1>
+                {% if blogs.count >= 2   %}
+                <div class="see-all-wrapper">
+                    <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="blogs-list">
+                {% for blog in blogs|slice:3 %}
+                <div class="blog-card child">
+                    <div class="img-part">
+                        <img src="{{blog.thumbnail.url}}" alt="img">
+
+                    </div>
+                    <div class="blog-detail">
+                        <div class="blog-detail-content-home">
+                            
+                            <div class="blog-card-footer">
+                                <p class="blog-date">{{blog.date|date}}</p>
+                                <small>{{blog.total_time_to_read}} min read</small>
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">{{blog.title|title}}</h3>
+                                {{blog.content|safe|truncatewords:25}}
+                            </div>
+                            <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    
+    </div>
+</section>
+{% endif %}
 
     <div class="merch-container">
         <div class="merch hidden" id="shop">
@@ -130,42 +182,7 @@
 
 
     
-{% if blogs %}
-<section>
-    <div class="blogs-container" id="blogs">
-        <h1 class="title">Blogs</h1>
-        <div class="blog hidden">
-            <div class="blogs-list">
-                {% for blog in blogs|slice:2 %}
-                <div class="blog-card child">
-                    <div class="img-part">
-                        <img src="{{blog.thumbnail.url}}" alt="img">
-                    </div>
-                    <div class="blog-detail">
-                        <div class="blog-detail-content-home">
-                            <div class="blog-content">
-                                <h3 class="blog-title">{{blog.title|title}}</h3>
-                                {{blog.content|safe|truncatewords:25}}
-                            </div>
-                            <div class="blog-card-footer">
-                                <a href="{% url 'blog-detail' blog.slug %}" class="learn-more-btn">Read This Article</a>
-                                <small>{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% if blogs.count >= 2   %}
-                <div class="see-all-wrapper">
-                    <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    
-    </div>
-</section>
-{% endif %}
+
 {% if testimonials %}
 <section>
     <div class="testimonials-container" id="testimonial">

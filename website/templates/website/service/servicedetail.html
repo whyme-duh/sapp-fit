@@ -3,6 +3,8 @@
 {% load widget_tweaks %}           
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'website/client_style.css' %}">
+<link rel="stylesheet" href="{% static 'website/service-detail.css'%}">
+
 {% endblock %}
 <title>{%block title%} {{service.title}} {% endblock %}</title>
 {% block content %}
@@ -85,8 +87,6 @@
             {% for obj in other_services %}
             <a href="{% url 'service-detail' obj.slug %}" class="service-card">
                 <img src={{obj.icon.url}} alt="img" class="img">
-                <div class="overlay-color"></div>
-                <h1 class="service-name">{{obj.title}}</h1>
                 <div class="service-content">
                     <div class="service-content-detail">
                         <h2 class="service-title">{{obj.title}}</h2>

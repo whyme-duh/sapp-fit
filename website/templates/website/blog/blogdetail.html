@@ -3,7 +3,6 @@
 {% load static %}
 {% block extra_css %} 
 <link rel="stylesheet" href="{% static 'website/blogdetail.css'%}">
-
 {% endblock %}
 <title>{%block title %}
     {% for object in blogs %} 
@@ -14,32 +13,39 @@
 
 {% include 'website/navbar.html' %}
 
-<div class="blog-container">
-    <div class="blog-content">
-        <h1 class="title"> {{blog.title}}</h1>
-        <small class="published-date">Published On: {{blog.date|date}}</small>
-        {{blog.content|safe}}
-    </div>
-    <hr>
-    {% if related_blogs %}
-    <div class="other-blogs">
-        <h1>Other Related Blogs</h1>
-        <div class="related-blog-list">
-            {% for rel in related_blogs|slice:4 %}
-            <div class="related-blog-card">
-                <img src="{{rel.thumbnail.url}}" alt="img">
-                <div class="rel-detail">
-                    <h2>{{rel.title}}</h2>
-                    <p>{{rel.content|safe|truncatewords:15}}</p>
-                    <div class="blog-card-footer">
-                        <a href="{% url 'blog-detail' blog.slug %}" class="read-more-btn">Read This Article</a>
-                        <small class="small-text">{{blog.date|date}} • {{blog.total_time_to_read}} min read</small>
+<section>
+    <div class="blog-container">
+        <div class="blog-content">
+            <h1 class="title"> {{blog.title}}</h1>
+            <small class="published-date">Published On: {{blog.date|date}}</small>
+            {{blog.content|safe}}
+        </div>
+        <hr>
+        {% if related_blogs %}
+        <div class="other-blogs">
+            <h1>Other Related Blogs</h1>
+            <div class="related-blog-list">
+                {% for rel in related_blogs|slice:4 %}
+                <div class="related-blog-card">
+                    <img src="{{rel.thumbnail.url}}" alt="img">
+                    <div class="blogs-detail">
+                        <div class="blog-card-footer">
+                            <p class="blog-date">{{blog.date|date}}</p>
+                            <small>{{blog.total_time_to_read}} min read</small>
+                        </div>
+                        <div class="blog-detail-content">
+                            <h2>{{blog.title}}</h2>
+                            <p>{{blog.content|safe|truncatewords:15}}</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="{% url 'blog-detail' blog.slug %}" class="read-more">Learn More</a>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+        {% endif %}
     </div>
-    {% endif %}
-</div>
+</section>
 {% endblock %}

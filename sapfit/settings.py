@@ -25,6 +25,7 @@ ALLOWED_HOSTS = [
     '.vercel.app', # Keep this so your default Vercel URL still works
     'localhost', 
     '127.0.0.1',
+    '192.168.1.208',
     'sappfit.pythonanywhere.com'
 ]
 
@@ -86,27 +87,27 @@ WSGI_APPLICATION = 'sapfit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if not DEBUG:
-    DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': os.environ.get("DB_NAME"),         
-    #     'USER': os.environ.get("DB_USER"), 
-    #     'PASSWORD': os.environ.get("DB_PASSWORD"),   
-    #     'HOST': os.environ.get("DB_HOST"),            
-    #     'PORT': os.environ.get("DB_PORT"),                
-    # }
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
-        conn_max_age=600
-    )
-}
+# if not DEBUG:
+#     DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.postgresql',
+#     #     'NAME': os.environ.get("DB_NAME"),         
+#     #     'USER': os.environ.get("DB_USER"), 
+#     #     'PASSWORD': os.environ.get("DB_PASSWORD"),   
+#     #     'HOST': os.environ.get("DB_HOST"),            
+#     #     'PORT': os.environ.get("DB_PORT"),                
+#     # }
+#     'default': dj_database_url.config(
+#         default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
+#         conn_max_age=600
+#     )
+# }
 DATABASES = {
-    'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
-            conn_max_age=600
-        )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -167,7 +168,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-if DEBUG:
+if not DEBUG:
     AWS_ACCESS_KEY_ID = os.environ.get('B2_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('B2_APPLICATION_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME')

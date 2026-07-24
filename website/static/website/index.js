@@ -38,13 +38,12 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 // responsive navbar
 
-const responsiveNav = document.getElementById('responsive');
-function navFunction(){
-    if(responsiveNav.classList == "right-side"){
-        responsiveNav.className = "right-side-responsive";
-    }
-    else{
-        responsiveNav.className = "right-side";
+function navFunction() {
+    var x = document.getElementById("responsive");
+    if (x.className === "right-side") {
+        x.className += " right-side-responsive";
+    } else {
+        x.className = "right-side";
     }
 }
 
@@ -148,3 +147,51 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
+// this is for stats counter
+document.addEventListener("DOMContentLoaded", function () {
+    const statsSection = document.querySelector('.stats-container');
+    const counters = document.querySelectorAll('.counter');
+    let animated = false;
+
+    const runCounters = () => {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            const increment = target / 50; 
+
+            const updateCount = () => {
+                count += increment;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(updateCount, 30);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    };
+
+    const observerOptions = {
+        root: null,
+        threshold: 0.3 // Triggers when 30% of the container is visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animated) {
+                // Fade in all stat elements
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                // Run the numbers up
+                runCounters();
+                animated = true;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+});
