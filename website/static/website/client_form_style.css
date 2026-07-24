@@ -11,7 +11,9 @@
     --danger-bg: #fee2e2;
 }
 
-
+header{
+    position: static;
+}
 
 /* --- PAGE CONTAINER --- */
 .admin-page-container {

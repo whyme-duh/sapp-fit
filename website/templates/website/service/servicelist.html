@@ -1,12 +1,16 @@
 {% extends 'website/index.html'%}
-{% block title %}Our Services - SAPFIT{% endblock %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/service-detail.css'%}">
+{% endblock %}
+{% block title %}Our Services{% endblock %}
 {% block content %}
 {% include 'website/navbar.html' %}
-
-<div class="services-container">
+<section>
+    <div class="services-container">
     <div class="services hidden" id="services" style="align-items: center;">
         <h1 class="title" style="margin:0;margin-bottom:1em;">My Services</h1>
-        <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;text-align: center;">Prsenting you with various services that can ease your body and improves your health. Start your plan now!</p>
+        <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;text-align: center;">Presenting you with various services that can ease your body and improves your health. Start your plan now!</p>
         <div class="services-list">
             {% for service in services %}
             <a href="{% url 'service-detail' service.slug %}" class="service-card child">
@@ -25,13 +29,13 @@
 
         </div>
         <div class="custom-plan-banner" style="background-color: #ffffff; padding: 4em 2em; text-align: center; color: white; margin-bottom:var(--margin-top); ">
-    <h2 style="font-family: var(--title-family); font-size: 2.5em; margin-bottom: 0.5em;color:#4A3B32;">Your Goals, Your Schedule.</h2>
-    <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;margin: 0 auto 2em auto;">
-        Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
-    </p>
-    <a href="{% url 'custom-service' %}" class="sell-all-btn" style="background-color: #c3855f; color: white; display: inline-block;font-size:1.15rem;font-family: var(--role-font);">Request a Custom Plan</a>
-</div>
+        <h2 style="font-family: var(--title-family); font-size: 2.5em; margin-bottom: 0.5em;color:#4A3B32;">Your Goals, Your Schedule.</h2>
+        <p style="font-family: var(--paragraph-font); font-size: 1.2em; max-width: 600px; color:black;margin: 0 auto 2em auto;">
+            Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
+        </p>
+        <a href="{% url 'custom-service' %}" class="sell-all-btn" style="background-color: #c3855f; color: white; display: inline-block;font-size:1.15rem;font-family: var(--role-font);">Request a Custom Plan</a>
     </div>
 </div>
+</section>
 
 {% endblock %}

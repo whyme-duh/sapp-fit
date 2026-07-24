@@ -17,12 +17,24 @@ SECRET_KEY = os.environ.get('SECRET_KEY_SETTINGS')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'sappfit.com', 
+    'www.sappfit.com', 
+    '.vercel.app', 
+    'localhost', 
+    '127.0.0.1',
+    '192.168.1.208',
+    'sappfit.pythonanywhere.com'
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://sappfit.com',
+    'https://www.sappfit.com',
+    'https://sappfit.pythonanywhere.com' 
+]
 
-# Application definition
 
 INSTALLED_APPS = [
     'ckeditor',
@@ -75,6 +87,7 @@ WSGI_APPLICATION = 'sapfit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
@@ -88,12 +101,13 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
         conn_max_age=600
     )
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -154,7 +168,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-if DEBUG:
+if not DEBUG:
     AWS_ACCESS_KEY_ID = os.environ.get('B2_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('B2_APPLICATION_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME')

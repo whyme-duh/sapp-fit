@@ -3,20 +3,34 @@ from ckeditor.fields import RichTextField
 
 class AboutAndQuote(models.Model):
     bio = models.TextField()
+    story = models.TextField(blank =True)
     email_id = models.EmailField(blank = True)
-    backgroundImage = models.ImageField(upload_to='images/bg', null=True)
-    profileImage = models.ImageField(upload_to='images/bg', null=True)
-    quoteContainerImage = models.ImageField(upload_to='images/bg', null=True)
-    quotes = models.CharField(max_length=150)
-    logo = models.FileField(upload_to='images/icon')
+    # these images would be used in the home page
+    front_image = models.ImageField(upload_to='images/pics', null=True)
+    grid_big = models.ImageField(upload_to='images/pics', null=True)
+    grid_small_one = models.ImageField(upload_to='images/pics', null=True)
+    grid_small_two = models.ImageField(upload_to='images/pics', null=True)
+    parrallex_img = models.ImageField(upload_to='images/pics', null=True)
     facebook = models.URLField(null=True)
     instagram = models.URLField(null=True)
-    pinterest = models.URLField(null=True)
+    tiktok = models.URLField(null=True)
     youtube = models.URLField(null=True)
     tag = models.CharField(max_length=100, null = True, blank = True, help_text="Add a comma after each tag and make sure it is less than 5.")
+    year_of_experiences = models.IntegerField(blank = True, null = True)
+    class_completed = models.IntegerField(blank = True, null = True)
+    client_taught = models.IntegerField(blank = True, null = True)
+    instagram_follower = models.IntegerField(blank = True, null = True)
 
     def __str__(self):
         return self.bio
+
+class CoreValues(models.Model):
+    item = models.CharField(max_length=20, blank = False)
+    description = models.TextField(blank = False)
+    emoji = models.CharField(max_length=2, blank = False)
+
+    def __str__(self):
+        return self.item
     
 class ServiceFeatureItem(models.Model):
     service_item = models.TextField(null = True)

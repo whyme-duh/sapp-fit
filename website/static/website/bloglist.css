@@ -10,33 +10,43 @@
     --role-font :'Roboto Mono', monospace;
     --quote-family:'Lobster Two', cursive;
     --blog-font : 'Andika', sans-serif;
-    --container-width: 60%;
+    --container-width: 80%;
 
     --margin-top:10em;
     --padding-bottom:10em;
     --blog-title:'Roboto Condensed', sans-serif;
 }
-
+header{
+    position: static;
+}
+.page-navbar{
+    width: var(--container-width);
+}
 a{
     color: black;
 }
-.blog-container{
+section{
     width: var(--container-width);
+}
+.blog-container{
+    width:100%;
     margin-bottom:var(--padding-bottom);
 }
-.blog-header{
+.blog-header-list{
+   
     padding-block-start:2em;
     display: block;
 }
-.blog-header h1{
+.blog-header-list h1{
     font-size: 2.5em;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: var(--poppins-font);
 }
-.blog-header p{
+.blog-header-list p{
     font-size: 1.25em;
-    font-family: monospace;
+    font-family: var(--poppins-font);
 }
 .blog-lists{
+    width: 100%;
     margin-top: 2em;
     display: flex;
     gap:2em;
@@ -44,13 +54,13 @@ a{
 }
 
 .blogs-content{
-    width: calc(var(--container-width)/2.5);
+    width: 50%;
     margin: 0;
-    box-shadow: 0px 0px 10px rgb(221, 221, 221);
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    border-radius: 5px;    
+    border-radius: 5px;   
+     
 }
 .blogs-content img{
     border-top-left-radius: 5px;
@@ -77,20 +87,20 @@ a{
     background-color: rgb(89, 101, 199);
 }
 .blog-detail-content{
+    font-family: var(--poppins-font);
     display: block;
 }
 .blog-detail-content p{
     margin-top:0.5em;
 }
+.blogs-detail:hover .read-more{
+    font-weight: 700;
+}
 
-.read-more-btn{
-    padding: 0.85em;
-    font-size: 0.75em;
+.read-more{
     margin: 0;
+    font-size: 1.25em;
     border: none;
-    border-radius: 5px;
-    background-color: var(--button-color);
-    color: white !important;
 }
 .read-more-btn:hover{
     background-color: rgb(180, 114, 16);
@@ -105,7 +115,6 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top:1em;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -126,8 +135,11 @@ a{
 
 
 @media only screen and (max-width: 600px) {
+    section{
+        width: 90%;
+    }
     .blog-container {
-        width: 90%; 
+        width: 100%; 
         padding-bottom:2em;
     }
     .blog-detail-content{

@@ -1,16 +1,19 @@
 {%load static %}
 
-<div class="page-navbar">
-    <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/final_logo.png' %}" alt="logo"></a></div>
-    <nav class="right-side" id="responsive">
-        <ul>
-            <li><a href="{% url 'home-page' %}">Home</a></li>
-            <li><a href="{% url 'services-page' %}">Services</a></li>
-            <li><a href="{% url 'blogs' %}">Blogs</a></li>
-         
-        </ul>
-    </nav>
-    <a href="javascript:void(0)" class="icon" onclick="navFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
-</div>
+<header>
+    <div class="page-navbar">
+        <div class="brand"><a href="{% url 'home-page' %}"><img src="{% static 'website/final_logo.png' %}" alt="logo"></a></div>
+        <nav class="right-side" id="responsive">
+            <ul>
+                <li><a href="{% url 'home-page' %}">Home</a></li>
+                <li><a href="{% url 'about-me' %}">About Me</a></li>
+                <li><a href="{% url 'services-page' %}">Services</a></li>
+                <li><a href="{% url 'blogs' %}">Blogs</a></li>
+            
+            </ul>
+        </nav>
+        <a href="javascript:void(0)" class="icon" onclick="navFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+</header>
