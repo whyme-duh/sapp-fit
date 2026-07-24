@@ -135,8 +135,11 @@ section{
 
 
 @media only screen and (max-width: 600px) {
+    section{
+        width: 90%;
+    }
     .blog-container {
-        width: 90%; 
+        width: 100%; 
         padding-bottom:2em;
     }
     .blog-detail-content{

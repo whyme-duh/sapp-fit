@@ -41,7 +41,7 @@
 
             <a href="#services"><button>View My Services <i class="fas fa-dumbbell"></i></button></a>
         </div>
-        <img src="{{about.profileImage.url}}" alt="background-images" class="bg-image">
+        <img src="{{about.front_image.url}}" alt="background-images" class="bg-image">
     </div>
 </section>
 <section>
@@ -50,44 +50,44 @@
         <div class="about hidden" >
             <div class="about-img-holder-grid">
                 <div class="grid-col-stacked">
-                    <img src="{{about.backgroundImage.url}}" alt="profile" class="clinical-img reveal-top">
-                    <img src="{{about.quoteContainerImage.url}}" alt="profile" class="clinical-img reveal-down">
+                    <img src="{{about.grid_small_one.url}}" alt="profile" class="clinical-img reveal-top">
+                    <img src="{{about.grid_small_two.url}}" alt="profile" class="clinical-img reveal-down">
                 </div>
                 <div class="grid-col-single">
-                    <img src="{{about.profileImage.url}}" alt="profile" class="clinical-img reveal-side">
+                    <img src="{{about.grid_big.url}}" alt="profile" class="clinical-img reveal-side">
                 </div>
             </div>
             <div class="about-content">
                 <h1 class="title" id="about-me-title-below">About Me</h1>
-                <div class="tag-holder">
+                <!-- <div class="tag-holder">
                 {% for t in tags_list %}
                     <p class="tag">
                         {{t}}
                     </p>
                 {% endfor %}
-                </div>
+                </div> -->
 
                 <p class="bio">
                     {{about.bio}}
                 </p>
                 
-                <a href="#contact"><button>Train With Me <i class="fas fa-dumbbell"></i></button></a>
+                <a href="{% url 'about-me' %}"><button>Learn More <i class="fas fa-dumbbell"></i></button></a>
             </div>
         </div>
     </div>
 </section>
-    <div class="stats-container" style="background-image: url({{about.quoteContainerImage.url}});">
+    <div class="stats-container" style="background-image: url({{about.parrallex_img.url}});">
         <div class="stats">
             <div class="stat-group reveal">
-                <h1 class="counter" data-target="500">0</h1>
+                <h1 class="counter" data-target="{{about.class_completed}}">0</h1>
                 <p>Classes Completed</p>
             </div>
             <div class="stat-group reveal">
-                <h1 class="counter" data-target="150">0</h1>
+                <h1 class="counter" data-target="{{about.client_taught}}">0</h1>
                 <p>Clients Trained</p>
             </div>
             <div class="stat-group reveal">
-                <h1 class="counter" data-target="8">0</h1>
+                <h1 class="counter" data-target="{{about.year_of_experiences}}">0</h1>
                 <p>Years of Experience</p>
             </div>
         </div>
@@ -104,7 +104,10 @@
                             <h2 class="service-title">{{service.title}}</h2>
                             <p class="service-detail">{{service.info}}</p>
                             <p class="price">Rs.{{service.price}}/hr</p>
-                            <a href="{% url 'service-detail' service.slug %}" class="learn-more">Learn More</a>
+                        </div>
+                        <div class="blog-card-end">
+                            <a href="{% url 'service-detail' service.slug %}" class="learn-more">LEARN MORE</a>
+                            <div class="bar"></div>
                         </div>
                         
                     </div>
@@ -154,7 +157,10 @@
                                 <h3 class="blog-title">{{blog.title|title}}</h3>
                                 {{blog.content|safe|truncatewords:25}}
                             </div>
-                            <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">Learn More</a>
+                            <div class="blog-card-end">
+                                <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">LEARN MORE</a>
+                                <div class="bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,6 +173,7 @@
 </section>
 {% endif %}
 
+<section style="width: 100%;">
     <div class="merch-container">
         <div class="merch hidden" id="shop">
             <h1 class="title">Sapp-Fit Wear</h1>
@@ -179,6 +186,7 @@
             <small class = "notice" id="notice"></small>
         </div>
     </div>
+</section>
 
 
     
@@ -223,7 +231,7 @@
                             <a href="{{about.facebook}}" class="fa fa-facebook"></a>
                             <a href="{{about.instagram}}" class="fa fa-instagram"></a>
                             <a href="{{about.youtube}}" class="fa fa-youtube"></a>
-                            <a href="{{about.pinterest}}" class="fa fa-pinterest"></a>
+                            <a href="{{about.tiktok}}" class="fab fa-tiktok"></a>
                         </div>
                     </div>  
                                 
@@ -232,8 +240,10 @@
         </div>
     </div>
 </section>
-<p class="maker">Created and Managed by <a href="https://shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
+<section style="width: 100%;">
+    <p class="maker">Created and Managed by <a href="https://shrestharitik.com.np/" target="_blank" class="whyme-link">Whyme-duh</a></p>
 
+</section>
 {% endblock %}
 {% block extra_script %}
 <script src="{% static 'website/data.js' %}"></script>

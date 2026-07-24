@@ -349,6 +349,7 @@ textarea.form-control {
     .service-header-content p{
         font-size: 1em;
     }
+    
     .book-now-btn{
         margin-top: calc(var(--margin-top)/3);
         font-size: 1.5em;
@@ -358,10 +359,13 @@ textarea.form-control {
         display: none;
         font-size: 1.85em;
     }
+    .services-list{
+        width: 90%;
+    }
    
     .service-detail-list{
         width:100%;
-        padding:2em;
+        padding:1em;
     }
     .service-detail-image{
 
@@ -383,8 +387,14 @@ textarea.form-control {
         width:100%;
         font-size: 0.8em;
     }
+    .book-form-wrapper{
+        margin: 0;
+    }
     .book-form-wrapper form{
         margin-top: 1em;
+    }
+    .modal-body{
+        padding: 0;
     }
 }
 

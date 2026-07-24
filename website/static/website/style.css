@@ -34,6 +34,8 @@
 
 *{
     margin: 0 auto;
+    padding: 0 auto;
+    box-sizing: border-box;
 }
 html{
     scroll-behavior: smooth !important;
@@ -243,6 +245,9 @@ nav ul a{
 li a:hover{
     color: rgb(237, 148, 23);
     border-bottom: 1px solid rgb(237, 148, 23);
+}
+.socials a{
+    box-sizing: content-box;
 }
 .socials .fa{
     padding: 15px;
@@ -528,8 +533,8 @@ li a:hover{
 
 
 @media only screen and (max-width: 768px) {
-    .clinical-image-grid {
-        grid-template-columns: 1fr;
+    .about-img-holder-grid {
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
         max-width: 100%;
         margin-top: 2rem;
@@ -540,9 +545,8 @@ li a:hover{
     }
 
     .grid-col-stacked {
-        display: grid;
-        grid-template-columns: 1fr 1fr; 
-    }
+        display: flex;
+        }
 
     .grid-col-stacked img {
         height: 160px;
@@ -613,7 +617,7 @@ li a:hover{
     position: relative;
     animation: aboutAnimation 1.25s ease-in-out;
     padding-top: 2em;
-    font-family: var(--second-parafont);
+    font-family: var(--poppins-font);
     letter-spacing: 1px;
 }
 .title{
@@ -1014,12 +1018,26 @@ li a:hover{
     font-weight: 300;
     padding-top: 1em;
 }
-
-.learn-more{
+.blog-card-end{
     margin: 0;
     margin-top: calc(var(--margin-top)/5);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
+.learn-more{
+    color: black;
+    margin: 0;
     font-size: 1.25em;
     font-family: var(--poppins-font);
+}
+
+.bar{
+    width: 50px;
+    height: 2px;
+    background-color:black ;
+    margin: 0;
 }
 
 .learn-more:hover{
@@ -1279,9 +1297,7 @@ iframe{
 }
 
 @media only screen and (max-width:600px){
-    *{
-        /* outline: 1px solid red; */
-    }
+   
     body{ 
         overflow-x: hidden; 
     }
@@ -1289,8 +1305,7 @@ iframe{
         width: 100%;
     }
     section{
-        width: 100%;
-        margin-inline: 1em;
+        width: 90%;
     }
     .intro{ 
         font-size:0.5em; 
@@ -1329,10 +1344,9 @@ iframe{
         flex-wrap:wrap; 
         flex-direction: column-reverse;
         padding: 0;
-
         padding-top: 6em;
         gap: 1em;
-        width: 100%; 
+        width: 100%;
     }
     .bg-image{ 
         height: 50vh; 
@@ -1349,7 +1363,10 @@ iframe{
     .role{ 
         font-size: 1em; 
     }
-    .first-page-content button{ font-size: 1.25em; }
+    .first-page-content button{ font-size: 1.35em; }
+    .first-page-content button{
+        width: 100%;
+    }
     .about-container{
         margin-top: calc(var(--margin-top)/4);
         margin-bottom: calc(var(--margin-bottom)/4);
@@ -1373,10 +1390,15 @@ iframe{
 
     }
     .about-content{
-        text-align:center;
+        width: 100%;
+        text-align:justify;
         font-size: 0.85em;
-        margin-left:0;
+        margin:0;
         padding:1em;
+    }
+    .about-content button{
+        width: 100%;
+        font-size: 1.35em;
     }
     #about-me-title-below{
         display: none;
@@ -1385,8 +1407,8 @@ iframe{
         display: flex;
         justify-content: center;
         text-align: center;
-        margin-top: calc(var(--margin-top)/4);
-        margin-bottom: calc(var(--margin-bottom)/4);
+        margin-top: calc(var(--margin-top)/2);
+        margin-bottom: calc(var(--margin-bottom)/10);
     }
     .tag{
         display: flex;
@@ -1437,17 +1459,18 @@ iframe{
     }
    
     .service-title{
-        font-size: 1.5em;
+        font-size: 2.25em;
     }
     .service-detail{
-        font-size: 1.5em;
+        font-size: 1.75em;
         padding: 0;
     }
     .price{
-        font-size: 1.5em;
+        font-size: 1.75em;
     }
     .custom-plan-banner{
         width: 100%;
+        padding-block: 2em;
         font-size: 0.75em;
     }
 
@@ -1475,10 +1498,14 @@ iframe{
     .notice{
         width:100%;
         text-align: center;
-        font-size:0.9em;
+        font-family: var(--poppins-font);
+        font-size:0.65em;
+        margin-top: 2em;
 
     }
-    
+    .learn-more{font-size: 1.85em;
+        font-weight: 700;
+    }
 
     /* blogs */
     .blogs-container{
@@ -1487,6 +1514,11 @@ iframe{
     }
     .blog-header{
         flex-wrap: wrap;
+        justify-content: center;
+        gap:2em;
+    }
+    .blog-header .see-all-btn{
+        width: 100%;
     }
     .blog{
         margin:0;
@@ -1501,7 +1533,6 @@ iframe{
     }
     .blog-card{
         height: auto;
-        box-shadow: 0px 0px 10px rgb(221, 221, 221);
         width:100%;
         flex-direction: column;
         font-size: 0.65em;
@@ -1519,8 +1550,7 @@ iframe{
     }
     
     .blog-detail{
-        padding-inline:1em;
-        font-size:1em;
+        font-size:1.5em;
     }
     .blog-content p{
         font-size:1em;
@@ -1529,9 +1559,8 @@ iframe{
         padding-bottom: 1em;
     }
    
-    .learn-more-btn{
+    .blog-detail .learn-more{
         font-size: 1.25em;
-        margin:0;
     }
 
     .see-all-wrapper{
@@ -1544,7 +1573,7 @@ iframe{
     }
     /* testimonials */
     .testimonials-container{
-        width: 90%;
+        width: 100%;
         margin-top: calc(var(--margin-top)/2);
         margin-bottom: calc(var(--margin-bottom)/2);
     }
@@ -1555,7 +1584,7 @@ iframe{
 
     }
     .testinomial-card{
-        padding: 1em;
+        width: 100%;
         font-size: 0.75em;
     }
     /* contacts */
@@ -1585,6 +1614,9 @@ iframe{
         width: 100%;
         margin: 0;
         margin-top: 5em;
+    }
+    .socials a{
+        box-sizing: content-box;
     }
     
     .copyright{

@@ -2,9 +2,11 @@ import datetime
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 import threading
+
+from idna import core
 from sapfit import settings
 from website.gemini_api import gemini_response
-from .models import AboutAndQuote, Booking, Client, CustomService, Service, Blog, Testimonial
+from .models import AboutAndQuote, Booking, Client, CoreValues, CustomService, Service, Blog, Testimonial
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 from django_ratelimit.decorators import ratelimit
@@ -34,6 +36,11 @@ def index(request):
         "tags_list": tags_list
         }
     )
+
+def about_me(request):
+    about = AboutAndQuote.objects.first()
+    core_values = CoreValues.objects.all()
+    return render(request, 'website/about.html', {"about" : about, "core_values" : core_values})
 
 def services(request):
     return render(request, 'website/service/servicelist.html', {"services": Service.objects.all()})

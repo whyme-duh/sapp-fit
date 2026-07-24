@@ -1,0 +1,107 @@
+{% extends 'website/index.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/about.css' %}">
+{% endblock %}
+<title>{%block title%} About Me{% endblock %}</title>
+{% block content %}
+{%include 'website/navbar.html' %}
+<section class="about-hero">
+        <span class="section-tag">About Me</span>
+        <h1>Hi, I'm Sophie Moore,<br> your personal trainer</h1>
+        <div class="hero-content-grid">
+            <p class="hero-desc">{{about.bio}}</p>
+        </div>
+        <div class="hero-images">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Trainer working out" class="img-main">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Trainer portrait" class="img-secondary">
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-grid">
+            <div class="story-text">
+                <h2>What’s my story?</h2>
+                <p>{{about.story}}</p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Trainer tying shoes">
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience in Numbers Section -->
+    <section class="experience-section">
+        <div class="experience-grid">
+            <div class="experience-image">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Trainer stretching">
+            </div>
+            <div class="experience-content">
+                <h2>My experience in numbers</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor et, ultrices fermentum felis pretium. Vel ut sed aliquam.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>{{about.year_of_experiences}}+</h3>
+                        <p>Years of experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{about.class_completed}}+</h3>
+                        <p>Classes taught</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{about.client_taught}}+</h3>
+                        <p>Happy clients</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{about.instagram_follower}}+</h3>
+                        <p>Instagram followers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="values-section">
+        <div class="values-header">
+            <h2>My core work values</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor et, ultrices fermentum felis pretium. Vel ut sed aliquam.</p>
+        </div>
+        <div class="values-grid">
+            
+            {% for obj in core_values %}
+            <div class="value-card">
+                <div class="icon-box">{{obj.emoji}}</div>
+                <h4>{{obj.item}}</h4>
+                <p>{{obj.description}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="cta-container">
+            <a href="#book" class="btn-primary">Book a Class</a>
+        </div>
+    </section>
+
+    <!-- Studio / Location Section -->
+    <section class="studio-section">
+        <div class="studio-header">
+            <span class="sub-heading">Want presential classes?</span>
+            <h2>Come to my studio</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor et, ultrices fermentum felis pretium. Vel ut sed aliquam.</p>
+        </div>
+        <div class="studio-content">
+            <div class="studio-info-card">
+                <h3>Address</h3>
+                <p>3506 Madera Ave<br>Los Angeles, California(CA)</p>
+                <h3>Phone Number</h3>
+                <p>(323) 661-3993</p>
+                <h3>Email</h3>
+                <p>contact@coach.com</p>
+            </div>
+            <div class="studio-map">
+                <div class="map-placeholder">📍 Studio Location Map Placeholder</div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
