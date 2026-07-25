@@ -90,18 +90,18 @@
             <div class="services-list">
                 {% for service in services|slice:3 %}
                 <div class="service-card child">
-                        <img src={{service.icon.url}} alt="img" class="service-img">
-                        <div class="service-content-detail">
-                            <h2 class="service-title">{{service.title}}</h2>
-                            <p class="service-detail">{{service.info}}</p>
-                            <p class="price">Rs.{{service.price}}/hr</p>
-                        </div>
-                        <div class="blog-card-end">
-                            <a href="{% url 'service-detail' service.slug %}" class="learn-more">LEARN MORE</a>
-                            <div class="bar"></div>
-                        </div>
-                        
+                    <img src={{service.icon.url}} alt="img" class="service-img">
+                    <div class="service-content-detail">
+                        <h2 class="service-title">{{service.title}}</h2>
+                        <p class="service-detail">{{service.info}}</p>
+                        <p class="price">Rs.{{service.price}}/hr</p>
                     </div>
+                    <div class="blog-card-end">
+                        <a href="{% url 'service-detail' service.slug %}" class="learn-more">LEARN MORE</a>
+                        <div class="bar"></div>
+                    </div>
+                        
+                </div>
                 {% endfor %} 
 
             </div>

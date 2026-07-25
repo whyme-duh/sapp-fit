@@ -396,5 +396,8 @@ textarea.form-control {
     .modal-body{
         padding: 0;
     }
+    .service-content{
+        margin: 0;
+    }
 }
 

@@ -311,8 +311,9 @@ header{
     }
     .submit-btn{
         margin: 0;
-        font-size: 0.85em;
+        font-size: 1em;
         width: 100%;
+        padding: 1em;
     }
     .radio-group { flex-direction: column; } 
     #official-plan, #ai-plan{
