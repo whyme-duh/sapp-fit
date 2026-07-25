@@ -83,6 +83,30 @@ h1, h2, h3, h4 {
     object-fit: cover;
     border-radius: 4px;
 }
+/* fancy little animation */
+.reveal-fancy {
+    opacity: 0;
+    transform: translateY(45px) scale(0.96);
+    filter: blur(2px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+}
+
+.reveal-fancy.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+iframe{
+    margin: 0;
+}
+
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+.delay-4 { transition-delay: 0.6s; }
 
 /* Story Section */
 .story-grid {

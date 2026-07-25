@@ -5,9 +5,7 @@
 <link rel="stylesheet" href="{% static 'website/blogdetail.css'%}">
 {% endblock %}
 <title>{%block title %}
-    {% for object in blogs %} 
-    {{object.title}}
-    {% endfor %}
+     {{blog.title}}
     {%endblock %}</title>
 {% block content %}
 
@@ -37,8 +35,9 @@
                             <h2>{{blog.title}}</h2>
                             <p>{{blog.content|safe|truncatewords:15}}</p>
                         </div>
-                        <div class="blog-card-footer">
-                            <a href="{% url 'blog-detail' blog.slug %}" class="read-more">Learn More</a>
+                        <div class="blog-card-end">
+                            <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">LEARN MORE</a>
+                            <div class="bar"></div>
                         </div>
                     </div>
                 </div>

@@ -50,28 +50,19 @@
         <div class="about hidden" >
             <div class="about-img-holder-grid">
                 <div class="grid-col-stacked">
-                    <img src="{{about.grid_small_one.url}}" alt="profile" class="clinical-img reveal-top">
-                    <img src="{{about.grid_small_two.url}}" alt="profile" class="clinical-img reveal-down">
+                    <img src="{{about.grid_small_one.url}}" alt="profile" class="clinical-img reveal-top-init">
+                    <img src="{{about.grid_small_two.url}}" alt="profile" class="clinical-img reveal-down-init">
                 </div>
                 <div class="grid-col-single">
-                    <img src="{{about.grid_big.url}}" alt="profile" class="clinical-img reveal-side">
+                    <img src="{{about.grid_big.url}}" alt="profile" class="clinical-img reveal-side-init">
                 </div>
             </div>
-            <div class="about-content">
-                <h1 class="title child" id="about-me-title-below">About Me</h1>
-                <!-- <div class="tag-holder">
-                {% for t in tags_list %}
-                    <p class="tag">
-                        {{t}}
-                    </p>
-                {% endfor %}
-                </div> -->
-
-                <p class="bio child">
+            <div class="about-content text-reveal-right">
+                <h1 class="title" id="about-me-title-below">About Me</h1>
+                <p class="bio">
                     {{about.bio}}
                 </p>
-                
-                <a href="{% url 'about-me' %}"><button class="child">Learn More <i class="fas fa-dumbbell"></i></button></a>
+                <a href="{% url 'about-me' %}"><button>Learn More <i class="fas fa-dumbbell"></i></button></a>
             </div>
         </div>
     </div>
@@ -134,7 +125,7 @@
             <div class="blog-header">
                 <h1 class="title">Articles & News</h1>
                 {% if blogs.count >= 2   %}
-                <div class="see-all-wrapper">
+                <div class="see-all-wrapper"  id="blog-header-btn">
                     <a href="{% url 'blogs'%}" class="sell-all-btn">View All Articles</a>
                 </div>
                 {% endif %}
@@ -161,12 +152,17 @@
                                 <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">LEARN MORE</a>
                                 <div class="bar"></div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
                 {% endfor %}
                 
+                
             </div>
+            <div class="see-all-wrapper" id="blog-footer-btn">
+                    <a href="{% url 'blogs'%}" class="sell-all-btn" >View All Articles</a>
+                </div>
         </div>
     
     </div>

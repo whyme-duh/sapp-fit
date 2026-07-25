@@ -124,6 +124,11 @@ button:active{
         width: 100%;
         margin-bottom:0;
     }
+    .page-navbar{
+        width: 100%;
+        padding: 0.25em;
+        justify-content: space-between;
+    }
     .title{
         font-size: 2em;
     }

@@ -1,111 +1,115 @@
 {% extends 'website/index.html' %}
 {% load static %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'website/about.css' %}">
 {% endblock %}
-<title>{%block title%} About Me{% endblock %}</title>
+
+<title>{% block title %}About Me{% endblock %}</title>
+
 {% block content %}
-{%include 'website/navbar.html' %}
-<section class="about-hero">
+{% include 'website/navbar.html' %}
+
+<!-- Hero Section -->
+<section class="about-hero reveal-fancy">
     <span class="section-tag">About Me</span>
     <h1>Hi, I'm Sappfit,<br> your personal trainer</h1>
     <div class="hero-content-grid">
-        <p class="hero-desc">{{about.bio}}</p>
+        <p class="hero-desc">{{ about.bio }}</p>
     </div>
     <div class="hero-images">
-        <img src="{{about.parrallex_img.url}}" alt="Trainer working out" class="img-main">
-        <img src="{{about.front_image.url}}" alt="Trainer portrait" class="img-secondary">
+        <img src="{{ about.parrallex_img.url }}" alt="Trainer working out" class="img-main reveal-fancy">
+        <img src="{{ about.front_image.url }}" alt="Trainer portrait" class="img-secondary reveal-fancy delay-1">
     </div>
 </section>
 
-    <!-- Story Section -->
-    <section class="story-section">
-        <div class="story-grid">
-            <div class="story-text">
-                <h2>What’s my story?</h2>
-                <p>{{about.story}}</p>
-            </div>
-            <div class="story-image">
-                <img src="{{about.grid_big.url}}" alt="Trainer tying shoes">
-            </div>
+<!-- Story Section -->
+<section class="story-section">
+    <div class="story-grid">
+        <div class="story-text reveal-fancy">
+            <h2>What’s my story?</h2>
+            <p>{{ about.story }}</p>
         </div>
-    </section>
+        <div class="story-image reveal-fancy delay-1">
+            <img src="{{ about.grid_big.url }}" alt="Trainer tying shoes">
+        </div>
+    </div>
+</section>
 
-    <!-- Experience in Numbers Section -->
-    <section class="experience-section">
-        <div class="experience-grid">
-            <div class="experience-image">
-                <img src="{{about.grid_small_two.url}}" alt="Trainer stretching">
-            </div>
-            <div class="experience-content">
-                <h2>My experience in numbers</h2>
-                <p>Guiding clients through intentional movement, expert technique, and progressive programming designed to deliver sustainable, real-world results.</p>
-                <div class="stats-grid">
-                    <div class="stat-item reveal">
-                        <h3 class="counter" data-target="{{about.year_of_experiences}}">0</h3>
-                        <p>Years of experience</p>
-                    </div>
-                    <div class="stat-item reveal">
-                        <h3 class="counter" data-target="{{about.class_completed}}">0</h3>
-                        <p>Classes taught</p>
-                    </div>
-                    <div class="stat-item reveal">
-                        <h3 class="counter" data-target="{{about.client_taught}}">0</h3>
-                        <p>Happy clients</p>
-                    </div>
-                    <div class="stat-item reveal">
-                        <h3 class="counter" data-target="{{about.instagram_follower}}">0</h3>
-                        <p>Instagram followers</p>
-                    </div>
+<!-- Experience in Numbers Section -->
+<section class="experience-section">
+    <div class="experience-grid">
+        <div class="experience-image reveal-fancy">
+            <img src="{{ about.grid_small_two.url }}" alt="Trainer stretching">
+        </div>
+        <div class="experience-content reveal-fancy delay-1">
+            <h2>My experience in numbers</h2>
+            <p>Guiding clients through intentional movement, expert technique, and progressive programming designed to deliver sustainable, real-world results.</p>
+            <div class="stats-grid">
+                <div class="stat-item reveal-fancy">
+                    <h3 class="counter" data-target="{{ about.year_of_experiences }}">0</h3>
+                    <p>Years of experience</p>
+                </div>
+                <div class="stat-item reveal-fancy delay-1">
+                    <h3 class="counter" data-target="{{ about.class_completed }}">0</h3>
+                    <p>Classes taught</p>
+                </div>
+                <div class="stat-item reveal-fancy delay-2">
+                    <h3 class="counter" data-target="{{ about.client_taught }}">0</h3>
+                    <p>Happy clients</p>
+                </div>
+                <div class="stat-item reveal-fancy delay-3">
+                    <h3 class="counter" data-target="{{ about.instagram_follower }}">0</h3>
+                    <p>Instagram followers</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Core Values Section -->
-    <section class="values-section">
-        <div class="values-header">
-            <h2>My core work values</h2>
-            <p>Driven by discipline, progressive growth, and sustainable habits. I believe in training with intention, honoring the process, and building strength that lasts a lifetime.</p>
+<!-- Core Values Section -->
+<section class="values-section">
+    <div class="values-header reveal-fancy">
+        <h2>My core work values</h2>
+        <p>Driven by discipline, progressive growth, and sustainable habits. I believe in training with intention, honoring the process, and building strength that lasts a lifetime.</p>
+    </div>
+    <div class="values-grid">
+        {% for obj in core_values %}
+        <div class="value-card reveal-fancy delay-{{ forloop.counter }}">
+            <h4>{{ obj.item }}</h4>
+            <p>{{ obj.description }}</p>
         </div>
-        <div class="values-grid">
-            
-            {% for obj in core_values %}
-            <div class="value-card">
-                <h4>{{obj.item}}</h4>
-                <p>{{obj.description}}</p>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="cta-container">
-            <a href="{% url 'services-page' %}" class="btn-primary">Book a Class</a>
-        </div>
-    </section>
+        {% endfor %}
+    </div>
+    <div class="cta-container reveal-fancy">
+        <a href="{% url 'services-page' %}" class="btn-primary">Book a Class</a>
+    </div>
+</section>
 
-    <!-- Studio / Location Section -->
-    <section class="studio-section">
-        <div class="studio-header">
-            <span class="sub-heading">Want presential classes?</span>
-            <h2>Come to my gym</h2>
-            <p>Train in a fully equipped, private studio designed for focus, comfort, and zero distractions. Step inside and let's elevate your training experience together.</p>
+<!-- Studio / Location Section -->
+<section class="studio-section reveal-fancy">
+    <div class="studio-header">
+        <span class="sub-heading">Want presential classes?</span>
+        <h2>Come to my gym</h2>
+        <p>Train in a fully equipped, private studio designed for focus, comfort, and zero distractions. Step inside and let's elevate your training experience together.</p>
+    </div>
+    <div class="studio-content">
+        <div class="studio-info-card">
+            <h3>Address</h3>
+            <p>The Pump Jhamsikhel<br>Jhamsikhel Road, ललितपुर</p>
+            <h3>Instagram</h3>
+            <a href="{{ about.instagram }}"><i class="fa fa-instagram"></i>&nbsp;sappfit</a>
+            <h3>Email</h3>
+            <p>{{ about.email_id }}</p>
         </div>
-        <div class="studio-content">
-            <div class="studio-info-card">
-                <h3>Address</h3>
-                <p>The Pump Jhamsikhel<br>Jhamsikhel Road, ललितपुर</p>
-                <h3>Instagram</h3>
-                <a href="{{about.instagram}}"><i class="fa fa-instagram"></i>&nbsp;sappfit</a>
-                <h3>Email</h3>
-                <p>{{about.email_id}}</p>
-            </div>
-            <div class="studio-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+        <div class="studio-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-    </section>
+    </div>
+</section>
 
 {% endblock %}
+
 {% block extra_script %}
 <script src="{% static 'website/about.js' %}"></script>
-
 {% endblock %}
