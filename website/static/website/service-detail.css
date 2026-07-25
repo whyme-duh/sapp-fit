@@ -139,16 +139,16 @@ header{
     background-color: rgba(231, 230, 230, 0.474);
 }
 .service-detail-list li:hover .fa-check{
-    color: rgb(0, 255, 0);
+    color: rgb(138, 255, 138);
 }
 
 .fa-check{
-    background-color: lightgreen;
     font-size: 0.75em;
     padding-inline: 0.5em;
     padding-block: 0.5em;
     border-radius: 50%;
-    color: white;
+    color: rgb(0, 255, 0);
+
 }
 
 .service-detail-list li:last-child {

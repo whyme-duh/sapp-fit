@@ -138,9 +138,17 @@ section{
     section{
         width: 90%;
     }
+    .page-navbar{
+        width: 100%;
+        padding: 0.25em;
+        justify-content: space-between;
+    }
     .blog-container {
         width: 100%; 
         padding-bottom:2em;
+    }
+    .blogs-detail{
+        padding: 0;
     }
     .blog-detail-content{
         font-size: 0.85em;
@@ -163,6 +171,13 @@ section{
 
     .blogs-content {
         width: 100%; 
+    }
+    .blog-header-list{
+        font-size: 0.85em;
+    }
+    .learn-more{
+        font-size: 1.25em;
+        font-weight: 500;
     }
     
 }

@@ -1,41 +1,3 @@
-let intro = document.querySelector('.intro');
-let introheader = document.querySelector('.intro-header');
-let logos = document.querySelectorAll('.logo');
-
-window.addEventListener("DOMContentLoaded", ()=>{   
-    let splashScreenCount = parseInt(localStorage.getItem('splashScreenCount')) || 0;
-
-    if (splashScreenCount == 1){
-        intro.style.display = "none";
-    } 
-    else{
-        localStorage.setItem('splashScreenCount', splashScreenCount + 1);
-        logos.forEach((logo, index) => {
-            setTimeout(()=>{
-                setTimeout(()=>{
-                    logo.classList.add('add');
-                    
-                }, (index+1) * 400)
-            })
-            setTimeout(()=>{
-                logos.forEach((logo, index)=>{
-                    setTimeout(()=>{
-                        logo.classList.remove('add');
-                        logo.classList.add('fade');
-                    }, (index+1) * 50)
-                })
-            }, 2000)
-
-            setTimeout(() =>{
-                intro.style.top = "-200vh";
-            }, 2300)
-        })
-    }
-
-})
-
-
-
 // responsive navbar
 
 function navFunction() {
@@ -46,7 +8,6 @@ function navFunction() {
         x.className = "right-side";
     }
 }
-
 
 const hiddenClass = document.querySelectorAll('.hidden');
 const childElemets = document.querySelectorAll('.child');
@@ -63,28 +24,6 @@ const observer = new IntersectionObserver((entries)=>{
 hiddenClass.forEach((el)=> observer.observe(el));
 childElemets.forEach((el)=> observer.observe(el));
 
-
-
-
-const modal = document.getElementById('modal-container');
-const form = document.getElementById('clientForm');
-const modalTitle = document.getElementById('modalTitle');
-const submitBtn = document.querySelector('.modal-footer .btn-primary');
-
-function openAddModal() {
-    form.reset(); 
-    modal.style.display = 'flex';
-    // document.body.style.overflow = "hidden";
-}
-
-
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        closeModal();
-        
-    }
-}
 
 document.addEventListener("DOMContentLoaded", function() {
     const track = document.getElementById('testimonial-track');
@@ -123,9 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => isAutoPlaying = true, 2000);
     });
 });
-
-
-
 
 
 // code below is for the custom service request page
@@ -194,4 +130,28 @@ document.addEventListener("DOMContentLoaded", function () {
     if (statsSection) {
         observer.observe(statsSection);
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const observerOptions = {
+        root: null,
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Also trigger child elements if it's the about-content wrapper
+                if(entry.target.classList.contains('text-reveal-right')) {
+                    entry.target.classList.add('active');
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all directional animation elements
+    const animatedElements = document.querySelectorAll('.reveal-top-init, .reveal-down-init, .reveal-side-init, .text-reveal-right, .about');
+    animatedElements.forEach(el => observer.observe(el));
 });
