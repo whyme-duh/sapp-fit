@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'website/bloglist.css'%}">
     <link rel="icon" href="{% static 'website/logo_sappit.png' %}" type="image/x-icon"> 
@@ -14,10 +14,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    
    <main>
-        
-      
         {% if messages %}
         <div class="toast-container">
             {% for message in messages %}
@@ -26,7 +23,6 @@
                 </div>
             {% endfor %}
         </div>
-
         <script>
             setTimeout(function() {
                 let toasts = document.querySelectorAll('.toast');
@@ -39,17 +35,14 @@
     {% endif %}
         {%block content %}{%endblock %}
     {{ debug|json_script:"django-debug-mode" }}
-
     </main>
     {% block extra_script %}{% endblock %}
-    
     <script>
         if ( window.history.replaceState ) {
             window.history.replaceState( null, null, window.location.href );
             
         }
     </script>
-  
     <script src="{% static 'website/index.js' %}"></script>
 </body>
 </html>

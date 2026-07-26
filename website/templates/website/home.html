@@ -62,7 +62,7 @@
                 <p class="bio">
                     {{about.bio}}
                 </p>
-                <a href="{% url 'about-me' %}"><button>Learn More <i class="fas fa-dumbbell"></i></button></a>
+                <a href="{% url 'about-me' %}"><button>Learn More</button></a>
             </div>
         </div>
     </div>
@@ -86,24 +86,36 @@
 <section>
     <div class="services-container">
         <div class="services hidden" id="services">
-            <h1 class="title">My Services</h1>
+            <div class="service-header">
+                {% if services.count >= 3   %}
+                <div class="service-sub-header">
+                    <h1 class="title">My Services</h1>
+                    <div class="see-all-wrapper"  id="blog-header-btn">
+                        <a href="{% url 'services-page' %}" class="sell-all-btn">View All Services</a>
+                    </div>
+                </div>
+                {% else %}
+                <h1 class="title">My Services</h1>
+                {% endif %}
+            </div>
             <div class="services-list">
                 {% for service in services|slice:3 %}
                 <div class="service-card child">
-                        <img src={{service.icon.url}} alt="img" class="service-img">
-                        <div class="service-content-detail">
-                            <h2 class="service-title">{{service.title}}</h2>
-                            <p class="service-detail">{{service.info}}</p>
-                            <p class="price">Rs.{{service.price}}/hr</p>
-                        </div>
-                        <div class="blog-card-end">
-                            <a href="{% url 'service-detail' service.slug %}" class="learn-more">LEARN MORE</a>
-                            <div class="bar"></div>
-                        </div>
-                        
+                    <img src={{service.icon.url}} alt="img" class="service-img">
+                    <div class="service-content-detail">
+                        <h2 class="service-title">{{service.title}}</h2>
+                        <p class="service-detail">{{service.info}}</p>
+                        <p class="price">Rs.{{service.price}}/hr</p>
                     </div>
+                    <div class="blog-card-end">
+                        <a href="{% url 'service-detail' service.slug %}" class="learn-more">LEARN MORE</a>
+                        <div class="bar"></div>
+                    </div>
+                </div>
                 {% endfor %} 
-
+            </div>
+            <div class="see-all-wrapper" id="blog-footer-btn">
+                <a href="{% url 'services-page'%}" class="sell-all-btn" >View All Services</a>
             </div>
         </div>
     </div>
@@ -111,11 +123,11 @@
 </section>
 <section style="width: 100%;">
     <div class="custom-plan-banner" >
-        <h2 >Your Goals, Your Schedule.</h2>
-        <p>
+        <h2 class="child">Your Goals, Your Schedule.</h2>
+        <p class="child">
             Can't make it to a live session? Request a fully personalized 45-minute or 1-hour training program tailored specifically to your body and equipment.
         </p>
-        <a href="{% url 'custom-service' %}" class="custom-request-btn" >Request a Custom Plan</a>
+        <a href="{% url 'custom-service' %}" class="custom-request-btn child" >Request a Custom Plan</a>
     </div>
 </section>
 {% if blogs %}
@@ -192,9 +204,9 @@
     <div class="testimonials-container" id="testimonial">
         <h1 class="title">Testimonials</h1>
         <div class="carousel-wrapper">
-            <div class="testimonial-list" id="testimonial-track">
+            <div class="testimonial-list child" id="testimonial-track">
                 {% for testi in testimonials %}
-                <div class="testinomial-card">
+                <div class="testinomial-card ">
                     <h3>{{testi.testimonial}}</h3>
                     <div class="user">
                         <h4>{{testi.user_name}}</h4>
@@ -211,23 +223,23 @@
     <div class="contacts-container">
         <div class="contact-content hidden">
             <div class="map">
-                <h1 class="title">Meet Me At Pump</h1>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <h1 class="title child">Meet Me At Pump</h1>
+                <iframe class="child" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28261.37229871885!2d85.29090633701595!3d27.6965450489523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18345f546213%3A0xa13e2eea6786b743!2sThe%20Pump!5e0!3m2!1sen!2snp!4v1672416948828!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="contact" id="contact">
-                <h1 class="title">Contact Me</h1>
+                <h1 class="title child">Contact Me</h1>
                 <div class="contact-detail">
-                    <p class="contact-detail-msg">Slide into my DMs to start your fitness journey, or message me directly below</p>
-                    <a href="{{about.instagram}}">
+                    <p class="contact-detail-msg child">Slide into my DMs to start your fitness journey, or message me directly below</p>
+                    <a href="{{about.instagram}}" class="child">
                         <p><i class="fa fa-instagram"></i>&nbsp; sappfit</p>
                     </a>
-                    <p><i class="fa fa-envelope"></i>&nbsp; {{about.email_id}}</p>
+                    <p class="child"><i class="fa fa-envelope"></i>&nbsp; {{about.email_id}}</p>
                     <div class="other-contact">
                         <div class="socials">
-                            <a href="{{about.facebook}}" class="fa fa-facebook"></a>
-                            <a href="{{about.instagram}}" class="fa fa-instagram"></a>
-                            <a href="{{about.youtube}}" class="fa fa-youtube"></a>
-                            <a href="{{about.tiktok}}" class="fab fa-tiktok"></a>
+                            <a href="{{about.facebook}}" class="fa fa-facebook child"></a>
+                            <a href="{{about.instagram}}" class="fa fa-instagram child"></a>
+                            <a href="{{about.youtube}}" class="fa fa-youtube child"></a>
+                            <a href="{{about.tiktok}}" class="fa-brands fa-tiktok child"></a>
                         </div>
                     </div>  
                                 

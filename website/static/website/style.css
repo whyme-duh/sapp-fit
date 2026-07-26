@@ -197,7 +197,7 @@ li a:hover{
 .socials a{
     box-sizing: content-box;
 }
-.socials .fa{
+.socials .fa, .socials .fa-brands{
     padding: 15px;
     font-size: 20px;
     width: 20px;
@@ -205,13 +205,15 @@ li a:hover{
     text-decoration: none;
     margin: 0.5em;
     border-radius: 50%;
-    background-color: #ba9686;
+    background-color: #613b09;
     color: white;
 
 }
 .socials .fa:hover{
     background-color: #a58577;
-
+}
+.socials .fa-brands:hover{
+    background-color: #a58577;
 }
 @media only screen and (max-width: 450px) {
     .navbar {
@@ -701,17 +703,33 @@ li a:hover{
     width: var(--container-width);
     flex-direction: column;
 }
+.service-header, .service-sub-header{
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.service-sub-header .title{
+    margin: 0;
+}
+.service-sub-header .see-all-wrapper{
+    width: fit-content;
+    margin: 0;
+}
 .services-list{
     margin-top: calc(var(--margin-top)/1);
     display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
+    flex-wrap:wrap;
     width: 100%;
-    justify-content: flex-start;
+    gap: 2em;
+    justify-content:safe;
+    align-items: stretch;
 }
 .service-card{
+    display: flex;
+    flex-direction: column;
     width: 30%;
-    height: 100%;
 }
 .service-card img{
     width: 100%;
@@ -719,29 +737,23 @@ li a:hover{
     height: 230px;
 }
 
-.service-name {
-    left:50%;
-    text-shadow: 5px 5px 5px rgb(0, 0, 0);
-    transform: translate(-50%, -50%);
-    font-family: var(--title-family);
-    text-align: center;
-    top: 50%;
-    padding: 0em 0 0.5em 0.5em  ;
-    color: white;
-    position: absolute;
+.service-content{
+    margin: 0;
 }
-
 .service-content-detail{
     display: flex;
     flex-direction: column;
     text-align: left;
     justify-content: flex-start;
     align-items: flex-start;
+    flex-grow: 1;
+    margin: 0;
     padding-top: calc(var(--margin-top)/4);
     
 }
 .service-content-detail .price{
     margin-top: 0.5em;
+    font-weight: 500;
 }
 .service-card h2{
     font-family: var(--poppins-font);
@@ -772,6 +784,15 @@ li a:hover{
     font-weight: 500;
 }
 
+@keyframes customBannerAnimation{
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 0;
+    }
+}
+
 .custom-plan-banner{
     background-color: #f5caa85a; 
     padding-block: var(--margin-top);
@@ -784,6 +805,8 @@ li a:hover{
     font-size: 2.5em; 
     margin-bottom: 0.5em;
     color:#4A3B32;
+    position: relative;
+    animation:customBannerAnimation 1s ease-in-out;
 }
 
 .custom-plan-banner p{
@@ -910,8 +933,9 @@ li a:hover{
     width: 35%;
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    justify-content: center;
+    gap: 0.5em;
+    flex-grow:1;
+    justify-content: space-between;
 
 }
 .img-part{
@@ -1272,7 +1296,7 @@ iframe{
     .navbar .brand, .page-navbar .brand{ 
         padding: 1em; 
     }
-    .navbar .brand{ 
+    .navbar .brand, .page-navbar .brand{ 
         padding-inline:1.5em; 
     }
     .navbar img, .page-navbar img{ 
@@ -1385,17 +1409,24 @@ iframe{
         margin-top: calc(var(--margin-top)/4);
         margin-bottom: calc(var(--margin-bottom)/4);
         padding: 0;
+        width: 95%;
     }
     .services{
         width: 100%;
     }   
     .services-list{
+        width: 100%;
+        margin: 0;
+        margin-top: calc(var(--margin-top)/2);
         justify-content: center;
         align-items: center;
     } 
-    
+ 
+    .service-sub-header{
+        justify-content: center;
+    }
     .service-card{
-        width: 95%;
+        width: 100%;
         font-size: 0.65em;
     }
     .service-card img , .overlay-color{
@@ -1419,6 +1450,9 @@ iframe{
         margin-top:calc(var(--margin-top)/1);
         padding-block: calc(var(--padding-bottom)/1.5);
         font-size: 0.75em;
+    }
+    .custom-request-btn{
+        width: 95%;
     }
 
     /* for merch container */
@@ -1501,8 +1535,7 @@ iframe{
        
     }
     .img-part img{
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: 0;
     }
     
     .blog-detail{
@@ -1523,9 +1556,25 @@ iframe{
         width:100%;
         justify-content: center;
     }
+    .see-all-wrapper .sell-all-btn{
+        width: 100%;
+        text-align: center;
+        margin-block: calc(var(--margin-top)/2.5);
+
+        font-size: 1.25em;
+    }
     .learn-more-btn{
         font-size: 1.25em;
         margin:0;
+    }
+    /* merch */
+    .merch a{
+        margin: 0;
+        width: 100%;
+    }
+    .merch button{
+        width: 100%;
+        font-size: 1.25em;
     }
     /* testimonials */
     .testimonials-container{
@@ -1541,7 +1590,7 @@ iframe{
     }
     .testinomial-card{
         width: 100%;
-        font-size: 0.75em;
+        font-size: 0.9em;
     }
     .carousel-wrapper{
         margin: 0;
