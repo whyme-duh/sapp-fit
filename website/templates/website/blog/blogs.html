@@ -14,23 +14,23 @@
     </div>
     <div class="blog-lists" id="blogs-list">
         {% for blog in blogs %}
-            <div class="blogs-content child">
-                <img src="{{blog.thumbnail.url}}" alt="img">
-                <div class="blogs-detail">
-                    <div class="blog-card-footer">
-                        <p class="blog-date">{{blog.date|date}}</p>
-                        <small>{{blog.total_time_to_read}} min read</small>
-                    </div>
-                    <div class="blog-detail-content">
-                        <h2>{{blog.title}}</h2>
-                        <p>{{blog.content|safe|truncatewords:15}}</p>
-                    </div>
-                    <div class="blog-card-end">
-                        <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">LEARN MORE</a>
-                        <div class="bar"></div>
-                    </div>
+        <div class="blogs-content child">
+            <img src="{{blog.thumbnail.url}}" alt="img">
+            <div class="blogs-detail">
+                <div class="blog-card-footer">
+                    <p class="blog-date">{{blog.date|date}}</p>
+                    <small>{{blog.total_time_to_read}} min read</small>
+                </div>
+                <div class="blog-detail-content">
+                    <h2>{{blog.title}}</h2>
+                    <p>{{blog.content|safe|truncatewords:15}}</p>
+                </div>
+                <div class="blog-card-end">
+                    <a href="{% url 'blog-detail' blog.slug %}" class="learn-more">LEARN MORE</a>
+                    <div class="bar"></div>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>

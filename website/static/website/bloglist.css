@@ -59,12 +59,10 @@ section{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    border-radius: 5px;   
-     
+    border-radius: 5px; 
+    gap:1em;  
 }
 .blogs-content img{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     width: 100%;
     height: 250px;
     object-fit: cover;
@@ -73,7 +71,6 @@ section{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1em;
     font-family:var(--blog-font);
     flex-grow:1;
 }

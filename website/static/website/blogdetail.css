@@ -46,8 +46,11 @@ section{
     font-size: 1.25em;
     font-family: var(--blog-font);
     color: rgb(25, 25, 25);
+    border: none;
 }
-
+hr{
+    margin-block:calc(var(--margin-top)/4) ;
+}
 .other-blogs{
     margin-top: 5em;
     width: 100%;

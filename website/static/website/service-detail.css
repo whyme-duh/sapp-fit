@@ -2,13 +2,12 @@
 
 :root {
     --text-primary: #4A3B32;
-    --accent-color: #C87965; 
     --bg-color: #FAFAF7;     
     --card-bg: #FFFFFF;        
     --text-primary: #111827;   
     --text-secondary: #6B7280; 
-    --accent-color: #4F46E5;   
-    --accent-hover: #4338CA;   
+    --accent-color: #c9ad74;   
+    --accent-hover: rgb(242, 216, 163);   
     --border-color: #E5E7EB;   
     --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -35,11 +34,14 @@ header{
 .service-detail-image{
     height: 50vh;
     width: 60%;
+    margin: 0;
     object-fit: cover;
 }
 
 .service-header-content{
     display: flex;
+    margin: 0;
+    width: 35%;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -48,7 +50,7 @@ header{
     font-size: 4em;
     text-shadow: 2px 2px #555;
     color: black;
-
+    margin: 0;
     padding-bottom: 0.15em;
 }
 .service-header-content p{
@@ -70,7 +72,7 @@ header{
     transition: background-color 0.3s ease;
 }
 .book-now-btn:hover{
-    background-color: #6f63f2;
+    background-color: #e5a557;
 }
 
 .service-form-wrapper{
@@ -341,13 +343,14 @@ textarea.form-control {
         padding: 0.5em;
         font-size:0.6em;
         display: flex;
+        width: 100%;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: center;
     }
     .service-header-content p{
-        font-size: 1em;
+        font-size: 1.25em;
     }
     
     .book-now-btn{
@@ -359,8 +362,9 @@ textarea.form-control {
         display: none;
         font-size: 1.85em;
     }
-    .services-list{
-        width: 90%;
+    
+    .other-services-container{
+       width: 90%;
     }
    
     .service-detail-list{

@@ -197,7 +197,7 @@ li a:hover{
 .socials a{
     box-sizing: content-box;
 }
-.socials .fa{
+.socials .fa, .socials .fa-brands{
     padding: 15px;
     font-size: 20px;
     width: 20px;
@@ -211,7 +211,9 @@ li a:hover{
 }
 .socials .fa:hover{
     background-color: #a58577;
-
+}
+.socials .fa-brands:hover{
+    background-color: #a58577;
 }
 @media only screen and (max-width: 450px) {
     .navbar {
@@ -701,13 +703,27 @@ li a:hover{
     width: var(--container-width);
     flex-direction: column;
 }
+.service-header, .service-sub-header{
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.service-sub-header .title{
+    margin: 0;
+}
+.service-sub-header .see-all-wrapper{
+    width: fit-content;
+    margin: 0;
+}
 .services-list{
     margin-top: calc(var(--margin-top)/1);
     display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
+    flex-wrap:wrap;
     width: 100%;
-    justify-content: flex-start;
+    gap: 2em;
+    justify-content:safe;
     align-items: stretch;
 }
 .service-card{
@@ -721,7 +737,9 @@ li a:hover{
     height: 230px;
 }
 
-
+.service-content{
+    margin: 0;
+}
 .service-content-detail{
     display: flex;
     flex-direction: column;
@@ -766,6 +784,15 @@ li a:hover{
     font-weight: 500;
 }
 
+@keyframes customBannerAnimation{
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 0;
+    }
+}
+
 .custom-plan-banner{
     background-color: #f5caa85a; 
     padding-block: var(--margin-top);
@@ -778,6 +805,8 @@ li a:hover{
     font-size: 2.5em; 
     margin-bottom: 0.5em;
     color:#4A3B32;
+    position: relative;
+    animation:customBannerAnimation 1s ease-in-out;
 }
 
 .custom-plan-banner p{
@@ -1267,7 +1296,7 @@ iframe{
     .navbar .brand, .page-navbar .brand{ 
         padding: 1em; 
     }
-    .navbar .brand{ 
+    .navbar .brand, .page-navbar .brand{ 
         padding-inline:1.5em; 
     }
     .navbar img, .page-navbar img{ 
@@ -1380,17 +1409,24 @@ iframe{
         margin-top: calc(var(--margin-top)/4);
         margin-bottom: calc(var(--margin-bottom)/4);
         padding: 0;
+        width: 95%;
     }
     .services{
         width: 100%;
     }   
     .services-list{
+        width: 100%;
+        margin: 0;
+        margin-top: calc(var(--margin-top)/2);
         justify-content: center;
         align-items: center;
     } 
-    
+ 
+    .service-sub-header{
+        justify-content: center;
+    }
     .service-card{
-        width: 95%;
+        width: 100%;
         font-size: 0.65em;
     }
     .service-card img , .overlay-color{
@@ -1499,8 +1535,7 @@ iframe{
        
     }
     .img-part img{
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: 0;
     }
     
     .blog-detail{
