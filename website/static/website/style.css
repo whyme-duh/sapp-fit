@@ -1240,16 +1240,16 @@ iframe{
 }
 
 .error-block{
-    height: 50vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: left;
-    font-family:var(--blog-title);
+    font-family:var(--poppins-font);
 }
 .error-block h1{
-    font-family: var(--role-font);
+    font-family: var(--poppins-font);
     margin-bottom: 1em;
 }
 .error-block .return-home{

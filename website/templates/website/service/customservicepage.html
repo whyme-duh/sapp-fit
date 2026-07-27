@@ -60,19 +60,18 @@ Custom Service Request
                 <p><strong>"Request Official Plan"</strong> sends the request directly to me (Sappfit), and the cost will depend on your specific needs. Meanwhile, the <strong>"Ask AI for Preview"</strong> feature costs nothing!</p>
                 <p>The cost of the custom service will be determined based on the complexity of your request and the time required to create your personalized workout plan. (Rs. 500 - Rs. 2500)</p>
             </div>
-             <div class="options">
+             <!-- <div class="options">
                 <h2>Choose Option: </h2>
                <div class="option-btns-group">
                     <button id="official-plan" disabled="true" onclick='changeOption(this, "ai-plan", "human_preview")'>Request Custom Plan</button>
                     <button id="ai-plan" onclick='changeOption(this, "official-plan", "ai_preview")'>Ask AI</button>
                </div>
-            </div>
+            </div> -->
             
         </div>
         
 
         <div class="request-form-wrapper" id="official-plan-form">
-            <h3>Request Custom Plan to SappFit</h3>
             <form method="POST" class="custom-form" id="clientForm">
                 {% csrf_token %}
                 <div class="custom-form">
@@ -157,7 +156,7 @@ Custom Service Request
                 </div>
             </form>
         </div>
-        <div class="request-form-wrapper" id="ai-preview-form">
+        <!-- <div class="request-form-wrapper" id="ai-preview-form">
             <h3>Ask AI for Workout Plan</h3>
             <form method="POST" class="custom-form" id="aiForm">
                 {% csrf_token %}
@@ -228,7 +227,7 @@ Custom Service Request
                     </button>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
 </div>
 {% endblock %}

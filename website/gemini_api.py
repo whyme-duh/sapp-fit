@@ -24,7 +24,8 @@ def gemini_response(duration, age, gender, weight, goal, equipment, notes, worko
             1. You must respond ONLY with a valid JSON object. Do not include markdown formatting like ```json, do not include introductory text, and do not include concluding text. Just the raw JSON object.
             2. The workout must safely accommodate any listed injuries or special notes.
             3. Keep the tone in the "pro_tips" encouraging, empowering, and professional.
-            4. Add a small note 
+            4. The week plans are: 1-week, 2-weeks and 3-weeks plans, so make sure to provide the exercise set based on these week plans. 
+
 
             Ensure your JSON strictly follows this exact structure:
             {{

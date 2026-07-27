@@ -75,8 +75,9 @@ header{
 }
 .request-form-wrapper h3{
     text-align: center;
-    font-family: var(--title-family);
-    color: rgb(145, 145, 145);
+    font-family: var(--poppins-font);
+    color: rgb(24, 23, 23);
+    font-size: 1.5em;
     text-shadow: #111;
     margin-bottom: calc(var(--margin-bottom)/4);
 
