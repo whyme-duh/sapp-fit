@@ -176,7 +176,7 @@ class CustomService(models.Model):
     gender = models.TextField(choices= Client.GENDER_CHOICES, blank = True)
     activity_level = models.TextField(choices= ACTIVITY_LEVEL_CHOICES, blank = True)
     email = models.EmailField()
-    phone_number = models.CharField(blank = True, null = True)
+    phone_number = models.CharField(max_length = 10, blank = True, null = True)
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     special_notes = models.TextField(blank=True)
