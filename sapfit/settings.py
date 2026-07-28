@@ -19,6 +19,10 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# CUSTOM VARIABLE FOR TURNING ON EMAILS
+
+EMAIL_ENABLE = True
+
 ALLOWED_HOSTS = [
     'sappfit.com', 
     'www.sappfit.com', 

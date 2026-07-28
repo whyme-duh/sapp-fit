@@ -121,9 +121,10 @@ class Booking(models.Model):
    
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.IntegerField(
+    phone_number = models.BigIntegerField(
         blank=True,
-        null=True
+        null=True,
+        default=0,
     )
     service = models.ForeignKey(Service, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
@@ -170,12 +171,12 @@ class CustomService(models.Model):
         ("Super Active", "Super Active (very hard exercise/sports & physical job or 2x training)"),
     ]
     name = models.CharField(max_length=100)
-    age = models.IntegerField(blank = True, null = True)
-    weight = models.IntegerField(blank = True, null = True)
+    age = models.IntegerField(blank = True, null = True, default=0)
+    weight = models.IntegerField(blank = True, null = True, default=0)
     gender = models.TextField(choices= Client.GENDER_CHOICES, blank = True)
     activity_level = models.TextField(choices= ACTIVITY_LEVEL_CHOICES, blank = True)
     email = models.EmailField()
-    phone_number = models.IntegerField(blank = True, null = True)
+    phone_number = models.CharField(max_length = 10, blank = True, null = True)
     goal_choices = models.CharField(max_length=200, choices = GOAL_CHOICES, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     special_notes = models.TextField(blank=True)

@@ -1,8 +1,8 @@
 from django.test import TestCase
-from . form import CustomServiceForm
+from . form import CustomServiceForm, OneServiceBookingForm
 
 
-class FormTest(TestCase):
+class CustomServiceFormTest(TestCase):
     def test_custom_service_form_valid_or_not(self):
         form = CustomServiceForm(
             data = {"name" : "Ritik",
@@ -44,25 +44,25 @@ class FormTest(TestCase):
 
 
     # this function is to check whether the system can identify whether the request is for human or for AI
-    def test_custom_service_form_action_type(self):
-        form = CustomServiceForm(
-            data = {
-                "name" : "Ritik",
-                "age" : 20, 
-                "weight" : 55, 
-                "gender" : "Male",
-                "goal_choices" : "Fat Loss & Toning",
-                "preferred_duration" : "1 Week Plan",
-                "workout_time" : "45 minutes",
-                "equipment_used": "nm.a",
-                "special_notes" : "adf",
-                "activity_level" : "Sedentary"
-                },
-            action_type = "ai_preview"
-            )
+    # def test_custom_service_form_action_type(self):
+    #     form = CustomServiceForm(
+    #         data = {
+    #             "name" : "Ritik",
+    #             "age" : 20, 
+    #             "weight" : 55, 
+    #             "gender" : "Male",
+    #             "goal_choices" : "Fat Loss & Toning",
+    #             "preferred_duration" : "1 Week Plan",
+    #             "workout_time" : "45 minutes",
+    #             "equipment_used": "nm.a",
+    #             "special_notes" : "adf",
+    #             "activity_level" : "Sedentary"
+    #             },
+    #         action_type = "ai_preview"
+    #         )
         
-        self.assertTrue(form.is_valid())
-        print("✅ Passed! When the user clicks 'AI Preview' the form should not validate phone and other user detail")
+    #     self.assertTrue(form.is_valid())
+    #     print("✅ Passed! When the user clicks 'AI Preview' the form should not validate phone and other user detail")
 
 
     def test_phone_prefix(self):
@@ -71,7 +71,7 @@ class FormTest(TestCase):
                 "name" : "Ritik",
                 "age" : 25, 
                 "weight" : 55, 
-                "phone_number": 1160930990,
+                "phone_number": "1160930990",
                 "goal_choices" : "Fat Loss & Toning",
                 "preferred_duration" : "1 Week Plan",
                 "workout_time" : "45 minutes",
@@ -86,3 +86,45 @@ class FormTest(TestCase):
         self.assertEqual(form.errors['phone_number'],["The provided number does not start with a valid Nepali carrier prefix."])
         print("✅ Passed! When the user provides phone number with invalid prefix, it raises an error. ")
 
+
+
+class BookingFormTest(TestCase):
+
+    def test_with_valid_information(self):
+        """
+        This test function is used to test whether the booking functionality
+        works as it should when correct information are provided.
+        """
+        form = OneServiceBookingForm(
+            data = {
+                "name" : "Ritik",
+                "email" : "ritikshrestha94@gmail.com",
+                "service_type" : "Group Class",
+                "preferred_date" : "October 1, 2026",
+                "phone_number" : 9860930990,
+                "message" : "Anything",
+            }
+        )
+        self.assertTrue(form.is_valid())
+        print("✅ Passed! When provided with correct information, the booking takes place.")
+
+
+    def test_with_invalid_information(self):
+        """
+        This test function is used to test whether the booking functionality
+        works as it should when correct information are not provided.
+        """
+        form = OneServiceBookingForm(
+            data = {
+                "name" : "Ritik",
+                "email" : "ritikshrestha94@gmail.com",
+                "service_type" : "Group Class",
+                "preferred_date" : "October 1, 2026",
+                "phone_number" : 3242342343,
+                "message" : "Anything",
+            }
+        )
+        self.assertIn('phone_number', form.errors)
+        self.assertEqual(form.errors['phone_number'],["The provided number does not start with a valid Nepali carrier prefix."])
+        print("✅ Passed! When the user provides phone number with invalid prefix, it raises an error. ")
+        

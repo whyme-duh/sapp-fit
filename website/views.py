@@ -10,7 +10,7 @@ from .models import AboutAndQuote, Booking, Client, CoreValues, CustomService, S
 from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 from django_ratelimit.decorators import ratelimit
-from .form import BookingForm, ClientForm, CustomServiceForm, OneServiceBookingForm
+from .form import BMIForm, ClientForm, CustomServiceForm, OneServiceBookingForm
 from django.core.mail import send_mail
 from django.db.models import Count
 
@@ -45,6 +45,29 @@ def about_me(request):
 def services(request):
     return render(request, 'website/service/servicelist.html', {"services": Service.objects.all()})
 
+def bmi_calculator(request):
+    bmi_category = ""
+    bmi = 0
+    bmi_class = {
+        "Underweight" : {"min" : 0, "max" : 18.5},
+        "Normal" : {"min" : 18.5, "max" : 25},
+        "Overweight" : {"min" : 25, "max" : 30},
+        "Obesity" : {"min" : 30, "max" : float('inf')},
+    }
+    if request.method == "POST":
+        bmi_form = BMIForm(request.POST)
+        if bmi_form.is_valid():
+            height = bmi_form.cleaned_data['height']
+            weight = bmi_form.cleaned_data['weight']
+            height_in_meter = height/100
+            bmi = round(weight/(height_in_meter*height_in_meter), 1)
+            for label, bounds in bmi_class.items():
+                if bounds["min"] <= bmi < bounds["max"]:
+                    bmi_category = label
+
+    else:
+        bmi_form = BMIForm()
+    return render(request, 'website/tools/bmi_calculator.html', {"bmi_form":bmi_form, "bmi" : bmi, "bmi_category" : bmi_category})
 
 def send_email_about_booking(client_name, client_email,request_type, **kwargs):
     if request_type == "predefined-service":
@@ -104,6 +127,7 @@ def service_detail_view(request, slug):
             service_type = Service.objects.get(slug = slug)
             preferred_date = form.cleaned_data['preferred_date']
             phone_number = form.cleaned_data['phone_number']
+            message = form.cleaned_data['message']
             existing_booking_check = Booking.objects.filter(name = name, email = email, service = service_type, preferred_date = preferred_date).exists()
             if existing_booking_check:
                 messages.error(request, f'You have already booked this service for the selected date.')
@@ -114,10 +138,13 @@ def service_detail_view(request, slug):
                     email = email,
                     phone_number = phone_number,
                     service = service_type,
+                    message = message,
                     preferred_date = preferred_date,
                 )
-                # email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
-                # email_thread.start()
+                if settings.EMAIL_ENABLE:
+                    print("emabled", settings.EMAIL_ENABLE)
+                    email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
+                    email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
                 return redirect('service-detail', slug = slug)
         else:
@@ -130,6 +157,92 @@ def service_detail_view(request, slug):
     other_services = Service.objects.all().exclude(slug = slug)
     return render(request, 'website/service/servicedetail.html', context = {'service' : service, "other_services" : other_services, 'form':form})
 
+# @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
+# def custom_service_request(request):
+#     if request.method == "POST":
+#         was_limited = getattr(request, 'limited', False)
+#         if was_limited:
+#             messages.error(request, f'Too many booking requests from this IP. Please try again later.')
+#             return redirect('home-page')
+#         button_clicked = request.POST.get('action')
+#         form = CustomServiceForm(request.POST, action_type = button_clicked )
+#         if form.is_valid():
+#             name = form.cleaned_data['name']
+#             age = form.cleaned_data['age']
+#             weight = form.cleaned_data['weight']
+#             gender = form.cleaned_data['gender']
+#             goal_choices = form.cleaned_data['goal_choices']
+#             special_notes = form.cleaned_data['special_notes']
+#             equipment_used = form.cleaned_data['equipment_used']
+#             preferred_duration = form.cleaned_data['preferred_duration']
+#             workout_time = form.cleaned_data['workout_time']
+#             activity_level = form.cleaned_data['activity_level']
+#             # is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+#             try:
+#                 if button_clicked == "human_request":
+#                     phone_number = form.cleaned_data['phone_number']
+#                     email = form.cleaned_data['email']
+#                     if CustomService.objects.filter(
+#                             name=name, 
+#                             email=email, 
+#                             phone_number=phone_number, 
+#                             goal_choices=goal_choices, 
+#                             preferred_duration=preferred_duration,
+#                             workout_time=workout_time).exists():
+#                                 messages.error(request, f'You have already submitted a similar custom service request.')
+#                     else:
+#                         CustomService.objects.create(
+#                             name=name,
+#                             email=email,
+#                             phone_number=phone_number,
+#                             goal_choices=goal_choices,
+#                             special_notes=special_notes,
+#                             equipment_used=equipment_used,
+#                             preferred_duration=preferred_duration,
+#                             workout_time=workout_time,
+#                             activity_level=activity_level,
+#                             age = age,
+#                             weight = weight,
+#                         )
+#                         email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
+#                             'phone_number': phone_number,
+#                             'goal_choices': goal_choices,
+#                             'special_notes': special_notes,
+#                             'equipment_used': equipment_used,
+#                             'preferred_duration': preferred_duration,
+#                             'workout_time': workout_time,
+#                             'activity_level': activity_level
+#                         })
+#                         # email_thread.start()
+#                         messages.success(request, f'Your custom service request has been submitted!')
+#                         return redirect('home-page')
+#                 # elif button_clicked == "ai_preview":
+#                 #     gemini_response_result = gemini_response(
+#                 #         duration=preferred_duration,
+#                 #         age=age,
+#                 #         gender=gender,
+#                 #         weight=weight,
+#                 #         goal=goal_choices,
+#                 #         equipment=equipment_used,
+#                 #         notes=special_notes,
+#                 #         workout_time=workout_time,
+#                 #         activity_level=activity_level
+#                 #     )
+#                 #     request.session['workout_plan'] = gemini_response_result
+#                 #     if is_ajax:
+#                 #         return JsonResponse({
+#                 #             "status" : "success",
+#                 #             "redirect_url" : redirect('ai-response'),
+#                 #             "error_redirect_url" : redirect('custom-service')
+#                 #         })
+#                 #     return redirect('ai-response')
+#             except Exception as e:
+#                 print(f"Error processing custom service request: {e}")
+#                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
+#     else:
+#         form = CustomServiceForm()
+#     return render(request, 'website/service/customservicepage.html', {'form':form})
+
 @ratelimit(key='ip', rate='3/h', method= 'POST', block = False)
 def custom_service_request(request):
     if request.method == "POST":
@@ -137,8 +250,7 @@ def custom_service_request(request):
         if was_limited:
             messages.error(request, f'Too many booking requests from this IP. Please try again later.')
             return redirect('home-page')
-        button_clicked = request.POST.get('action')
-        form = CustomServiceForm(request.POST, action_type = button_clicked )
+        form = CustomServiceForm(request.POST )
         if form.is_valid():
             name = form.cleaned_data['name']
             age = form.cleaned_data['age']
@@ -150,33 +262,33 @@ def custom_service_request(request):
             preferred_duration = form.cleaned_data['preferred_duration']
             workout_time = form.cleaned_data['workout_time']
             activity_level = form.cleaned_data['activity_level']
-            is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+            phone_number = form.cleaned_data['phone_number']
+            email = form.cleaned_data['email']
             try:
-                if button_clicked == "human_request":
-                    phone_number = form.cleaned_data['phone_number']
-                    email = form.cleaned_data['email']
-                    if CustomService.objects.filter(
-                            name=name, 
-                            email=email, 
-                            phone_number=phone_number, 
-                            goal_choices=goal_choices, 
-                            preferred_duration=preferred_duration,
-                            workout_time=workout_time).exists():
-                                messages.error(request, f'You have already submitted a similar custom service request.')
-                    else:
-                        CustomService.objects.create(
-                            name=name,
-                            email=email,
-                            phone_number=phone_number,
-                            goal_choices=goal_choices,
-                            special_notes=special_notes,
-                            equipment_used=equipment_used,
-                            preferred_duration=preferred_duration,
-                            workout_time=workout_time,
-                            activity_level=activity_level,
-                            age = age,
-                            weight = weight,
-                        )
+                if CustomService.objects.filter(
+                        name=name, 
+                        email=email, 
+                        phone_number=phone_number, 
+                        goal_choices=goal_choices, 
+                        preferred_duration=preferred_duration,
+                        workout_time=workout_time).exists():
+                            messages.error(request, f'You have already submitted a similar custom service request.')
+                else:
+                    CustomService.objects.create(
+                        name=name,
+                        email=email,
+                        gender = gender,
+                        phone_number=phone_number,
+                        goal_choices=goal_choices,
+                        special_notes=special_notes,
+                        equipment_used=equipment_used,
+                        preferred_duration=preferred_duration,
+                        workout_time=workout_time,
+                        activity_level=activity_level,
+                        age = age,
+                        weight = weight,
+                    )
+                    if settings.EMAIL_ENABLE:
                         email_thread = threading.Thread(target=send_email_about_booking, args=(name, email, "custom-service"), kwargs={
                             'phone_number': phone_number,
                             'goal_choices': goal_choices,
@@ -186,35 +298,17 @@ def custom_service_request(request):
                             'workout_time': workout_time,
                             'activity_level': activity_level
                         })
-                        # email_thread.start()
-                        messages.success(request, f'Your custom service request has been submitted!')
-                        return redirect('home-page')
-                elif button_clicked == "ai_preview":
-                    gemini_response_result = gemini_response(
-                        duration=preferred_duration,
-                        age=age,
-                        gender=gender,
-                        weight=weight,
-                        goal=goal_choices,
-                        equipment=equipment_used,
-                        notes=special_notes,
-                        workout_time=workout_time,
-                        activity_level=activity_level
-                    )
-                    request.session['workout_plan'] = gemini_response_result
-                    if is_ajax:
-                        return JsonResponse({
-                            "status" : "success",
-                            "redirect_url" : redirect('ai-response'),
-                            "error_redirect_url" : redirect('custom-service')
-                        })
-                    return redirect('ai-response')
+                        email_thread.start()
+                    print("Created successfully")
+                    messages.success(request, f'Your custom service request has been submitted!')
+                    return redirect('home-page')
             except Exception as e:
                 print(f"Error processing custom service request: {e}")
                 messages.error(request, f'Error occurred while submitting the request. Please try again.')
     else:
         form = CustomServiceForm()
     return render(request, 'website/service/customservicepage.html', {'form':form})
+
 
 def ai_response(request):
     ai_workout_plan = request.session.get('workout_plan')

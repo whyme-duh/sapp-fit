@@ -61,16 +61,16 @@
                             <label for="{{ form.service_type.id_for_label }}">Service</label>
                             {% render_field form.service_type class="form-control bt-4" value=service.title %}
                         </div>
-
-
                         
                         <div class="form-group">
                             <label for="{{ form.preferred_date.id_for_label }}">Start Date</label>
                             {% render_field form.preferred_date %}
                         </div>
-                    <button type="submit" class="submit-btn primary">Send Request</button>
-
-
+                        <div class="form-group">
+                            <label for="{{ form.message.id_for_label }}">Message (Optional)</label>
+                            {% render_field form.message class="form-control bt-4" placeholder="Enter message" %}
+                        </div>
+                        <button type="submit" class="submit-btn primary">Send Request</button>
                     </div>
                 </form>
 

@@ -36,5 +36,5 @@ jobs:
           SECRET_KEY: "dummy-key-for-testing"
           DEBUG: "True"
       run: |
-        python manage.py test
+        python manage.py test --keepdb
         
