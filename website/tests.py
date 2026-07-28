@@ -1,8 +1,8 @@
 from django.test import TestCase
-from . form import CustomServiceForm
+from . form import CustomServiceForm, OneServiceBookingForm
 
 
-class FormTest(TestCase):
+class CustomServiceFormTest(TestCase):
     def test_custom_service_form_valid_or_not(self):
         form = CustomServiceForm(
             data = {"name" : "Ritik",
@@ -71,7 +71,7 @@ class FormTest(TestCase):
                 "name" : "Ritik",
                 "age" : 25, 
                 "weight" : 55, 
-                "phone_number": 1160930990,
+                "phone_number": "1160930990",
                 "goal_choices" : "Fat Loss & Toning",
                 "preferred_duration" : "1 Week Plan",
                 "workout_time" : "45 minutes",
@@ -86,3 +86,45 @@ class FormTest(TestCase):
         self.assertEqual(form.errors['phone_number'],["The provided number does not start with a valid Nepali carrier prefix."])
         print("✅ Passed! When the user provides phone number with invalid prefix, it raises an error. ")
 
+
+
+class BookingFormTest(TestCase):
+
+    def test_with_valid_information(self):
+        """
+        This test function is used to test whether the booking functionality
+        works as it should when correct information are provided.
+        """
+        form = OneServiceBookingForm(
+            data = {
+                "name" : "Ritik",
+                "email" : "ritikshrestha94@gmail.com",
+                "service_type" : "Group Class",
+                "preferred_date" : "October 1, 2026",
+                "phone_number" : 9860930990,
+                "message" : "Anything",
+            }
+        )
+        self.assertTrue(form.is_valid())
+        print("✅ Passed! When provided with correct information, the booking takes place.")
+
+
+    def test_with_invalid_information(self):
+        """
+        This test function is used to test whether the booking functionality
+        works as it should when correct information are not provided.
+        """
+        form = OneServiceBookingForm(
+            data = {
+                "name" : "Ritik",
+                "email" : "ritikshrestha94@gmail.com",
+                "service_type" : "Group Class",
+                "preferred_date" : "October 1, 2026",
+                "phone_number" : 3242342343,
+                "message" : "Anything",
+            }
+        )
+        self.assertIn('phone_number', form.errors)
+        self.assertEqual(form.errors['phone_number'],["The provided number does not start with a valid Nepali carrier prefix."])
+        print("✅ Passed! When the user provides phone number with invalid prefix, it raises an error. ")
+        

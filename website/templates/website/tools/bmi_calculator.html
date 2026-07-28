@@ -1,0 +1,60 @@
+{% extends 'website/index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}BMI Calculator{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/bmi_style.css' %}">
+{% endblock %}
+{% block content %}
+{% include 'website/navbar.html' %}
+<section class="bmi-section">
+    <div class="bmi-container">
+        <div class="bmi-header">
+            <h2 class="title">Check Your Body Mass Index (BMI)</h2>
+            <p class="bmi-subtitle">Understand your body composition and take the first step toward your fitness goals.</p>
+        </div>
+
+        <div class="bmi-content-wrapper">
+            <div class="bmi-card">
+                <form id="bmi-form" method="POST">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <label for="{{bmi_form.weight.id_for_label}}">Weight (kg)</label>
+                        {% render_field bmi_form.weight class="form-control bt-4" placeholder="Enter Weight in Kg "  %}
+
+                    </div>
+
+                    <div class="input-group">
+                        <label for="height">Height (cm)</label>
+                        {% render_field bmi_form.height class="form-control bt-4" placeholder="Enter Height in Cm "  %}
+                    </div>
+
+
+                    <button type="submit" id="calculate-btn">Calculate BMI</button>
+                </form>
+
+                {% if bmi %}
+                <div id="bmi-result" class="bmi-result-box">
+                    <h3>Your BMI: <span id="bmi-value">{{bmi}}</span></h3>
+                    <p>Status: <strong id="bmi-category">{{bmi_category}}</strong></p>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="bmi-info-card">
+                <h3>BMI Categories Reference</h3>
+                <ul class="bmi-scale-list">
+                    <li><span>Underweight</span> <strong>&lt; 18.5</strong></li>
+                    <li><span>Normal Weight</span> <strong>18.5 – 24.9</strong></li>
+                    <li><span>Overweight</span> <strong>25.0 – 29.9</strong></li>
+                    <li><span>Obesity</span> <strong>≥ 30.0</strong></li>
+                </ul>
+                <div class="bmi-cta-box">
+                    <p>Want a personalized routine to hit your ideal weight?</p>
+                    <a href="{% url 'services-page' %}" class="bmi-cta-btn">Book a Session</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

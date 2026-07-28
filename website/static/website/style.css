@@ -50,7 +50,7 @@ a {
 
 .toast-container {
     position: fixed;
-    top: 20px;
+    top: 120px;
     right: 20px;
     z-index: 9999;
     display: flex;
@@ -61,6 +61,7 @@ a {
 .toast {
     background-color: #339724; 
     color: #FFFFFF;
+    font-family: var(--poppins-font);
     padding: 12px 24px;
     border-radius: 8px;
     font-size: 0.9rem;

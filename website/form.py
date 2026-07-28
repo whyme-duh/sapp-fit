@@ -1,45 +1,10 @@
+from turtle import width, window_height
+
 from django import forms
 from django.utils import timezone
 from website.models import Booking, Client, CustomService, Service
 from django.core.validators import RegexValidator
 
-class BookingForm(forms.Form):
-    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
-    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'inputmode' : 'numeric', 'maxlength': 10, 'placeholder': 'Your Phone Number'}))          
-    preferred_date = forms.DateField(
-        widget=forms.DateInput(
-            attrs={
-                'type': 'date',
-                'min': timezone.localdate().isoformat(),
-                'class': 'form-control'
-            }
-        )
-    )
-    service_type = forms.ModelChoiceField(
-        required=True,
-        queryset=Service.objects.all(),
-        empty_label="Select a service",
-        widget=forms.Select(
-            attrs={'class': 'form-control', 
-            }))
-    
-
-    def clean(self):
-        super(BookingForm, self).clean()
-        valid_prefixes = (
-            '984', '985', '986', '974', '975', '980', '981', 
-            '982', '970', '971', '961', '962', '988'
-        )
-        phone_number = self.cleaned_data.get('phone_number')
-        if phone_number:
-            phone_number_str= str(phone_number)
-            if len(str(phone_number)) != 10:
-                self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
-            elif not phone_number_str.startswith(valid_prefixes):
-                self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
-        return self.cleaned_data
-    
 
 class OneServiceBookingForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
@@ -54,6 +19,9 @@ class OneServiceBookingForm(forms.Form):
             }
         )
     )
+    message = forms.CharField(
+        required=False,
+        max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter any message'}))
     service_type = forms.CharField(
         required=False,
         widget=forms.TextInput(
@@ -176,13 +144,7 @@ class CustomServiceForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'})) 
     phone_number = forms.CharField(
-        max_length=15,
-        validators=[
-            RegexValidator(
-                regex=r'^(?:\+977[- ]?)?(?:98|97|96)\d{8}$',
-                message="Enter a valid Nepali phone number (e.g., 9812345678)"
-            )
-        ],
+        max_length=10,
         widget=forms.TextInput(attrs={'placeholder': '98XXXXXXXX'})
     )
     goal_choices = forms.ChoiceField(
@@ -243,15 +205,14 @@ class CustomServiceForm(forms.Form):
         if weight < 40 or weight > 100:
             self._errors['weight'] = self.error_class(['Please enter a valid weight in kg.'])
         if self.fields['phone_number'].required:
-            phone_number = self.cleaned_data['phone_number']
-            if phone_number:
+            phnnumber = self.cleaned_data.get('phone_number')
+            if phnnumber:
 
-                phone_number_str= str(phone_number)
 
-                if len(str(phone_number)) != 10:
+                if len(phnnumber) != 10:
                     self._errors['phone_number'] = self.error_class(['Please enter valid phone number with 10 digits.'])
 
-                elif not phone_number_str.startswith(valid_prefixes):
+                elif not phnnumber.startswith(valid_prefixes):
                     self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
         return self.cleaned_data
 
@@ -336,3 +297,21 @@ class CustomServiceForm(forms.Form):
 #                     self.add_error('phone_number', 'The provided number does not start with a valid Nepali carrier prefix.')
 #         return self.cleaned_data
     
+
+
+# tools
+
+class BMIForm(forms.Form):
+    height = forms.IntegerField(widget=forms.NumberInput(attrs = {"class" : "form-control", "placeholder" : "Enter height in cm"}))
+    weight = forms.IntegerField(widget=forms.NumberInput(attrs = {"class" : "form-control", "placeholder" : "Enter weight in kg"}))
+
+
+    def clean(self):
+        super(BMIForm, self).clean()
+        weight = self.cleaned_data['weight']
+        height = self.cleaned_data['height']
+        if weight < 40 or weight > 100:
+            self._errors['weight'] = self.error_class(['Please enter a valid weight in kg.'])
+        if height < 40 or weight > 200:
+            self._errors['height'] = self.error_class(['Please enter a valid weight in kg.'])
+        return self.cleaned_data
