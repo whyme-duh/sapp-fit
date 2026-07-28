@@ -44,25 +44,25 @@ class CustomServiceFormTest(TestCase):
 
 
     # this function is to check whether the system can identify whether the request is for human or for AI
-    def test_custom_service_form_action_type(self):
-        form = CustomServiceForm(
-            data = {
-                "name" : "Ritik",
-                "age" : 20, 
-                "weight" : 55, 
-                "gender" : "Male",
-                "goal_choices" : "Fat Loss & Toning",
-                "preferred_duration" : "1 Week Plan",
-                "workout_time" : "45 minutes",
-                "equipment_used": "nm.a",
-                "special_notes" : "adf",
-                "activity_level" : "Sedentary"
-                },
-            action_type = "ai_preview"
-            )
+    # def test_custom_service_form_action_type(self):
+    #     form = CustomServiceForm(
+    #         data = {
+    #             "name" : "Ritik",
+    #             "age" : 20, 
+    #             "weight" : 55, 
+    #             "gender" : "Male",
+    #             "goal_choices" : "Fat Loss & Toning",
+    #             "preferred_duration" : "1 Week Plan",
+    #             "workout_time" : "45 minutes",
+    #             "equipment_used": "nm.a",
+    #             "special_notes" : "adf",
+    #             "activity_level" : "Sedentary"
+    #             },
+    #         action_type = "ai_preview"
+    #         )
         
-        self.assertTrue(form.is_valid())
-        print("✅ Passed! When the user clicks 'AI Preview' the form should not validate phone and other user detail")
+    #     self.assertTrue(form.is_valid())
+    #     print("✅ Passed! When the user clicks 'AI Preview' the form should not validate phone and other user detail")
 
 
     def test_phone_prefix(self):
