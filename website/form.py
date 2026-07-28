@@ -1,5 +1,3 @@
-from turtle import width, window_height
-
 from django import forms
 from django.utils import timezone
 from website.models import Booking, Client, CustomService, Service
