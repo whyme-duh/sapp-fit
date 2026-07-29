@@ -24,8 +24,8 @@ DEBUG = False
 EMAIL_ENABLE = True
 
 ALLOWED_HOSTS = [
-    'sappfit.com', 
-    'www.sappfit.com', 
+    'shresthasaprina.com.np', 
+    'www.shresthasaprina.com.np', 
     '.vercel.app', 
     'localhost', 
     '127.0.0.1',
@@ -34,8 +34,8 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://sappfit.com',
-    'https://www.sappfit.com',
+    'https://shresthasaprina.com.np',
+    'https://www.shresthasaprina.com.np',
     'https://sappfit.pythonanywhere.com' 
 ]
 
@@ -98,12 +98,8 @@ DATABASES = {
         conn_max_age=600
     )
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

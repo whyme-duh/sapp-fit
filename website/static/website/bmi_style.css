@@ -160,4 +160,10 @@ header{
     .bmi-content-wrapper {
         flex-direction: column;
     }
+    .bmi-card{
+        width: 100%;
+    }
+    #bmi-form{
+        margin-top:0;
+    }
 }

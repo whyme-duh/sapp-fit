@@ -1,9 +1,6 @@
 import datetime
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 import threading
-
-from idna import core
 from sapfit import settings
 from website.gemini_api import gemini_response
 from .models import AboutAndQuote, Booking, Client, CoreValues, CustomService, Service, Blog, Testimonial
@@ -11,8 +8,10 @@ from django.contrib.auth.decorators import login_required
 from  django.contrib import messages 
 from django_ratelimit.decorators import ratelimit
 from .form import BMIForm, ClientForm, CustomServiceForm, OneServiceBookingForm
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.db.models import Count
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
 
 def page_not_found_404(request, exception):
     return render(request, 'website/error/404.html', status = 404)
@@ -64,52 +63,44 @@ def bmi_calculator(request):
             for label, bounds in bmi_class.items():
                 if bounds["min"] <= bmi < bounds["max"]:
                     bmi_category = label
-
     else:
         bmi_form = BMIForm()
     return render(request, 'website/tools/bmi_calculator.html', {"bmi_form":bmi_form, "bmi" : bmi, "bmi_category" : bmi_category})
 
 def send_email_about_booking(client_name, client_email,request_type, **kwargs):
-    if request_type == "predefined-service":
-        subject  = f"New Booking Request from {client_name}"
-        message = f"""
-        Great news! You have a new booking request.
-        
-        Client Name: {client_name}
-        Client Email: {client_email}
-        Requested Service: {kwargs.get('service_type', 'N/A')}
-        Preferred Time: {kwargs.get('preferred_date', 'N/A')}
-        
-        Log into the SAPPFIT dashboard to approve or manage this booking.
-        """
-    elif request_type == "custom-service":
-        subject  = f"New Custom Service Request from {client_name}"
-        message = f"""
-        You have received a new custom service request.
-        
-        Name: {client_name}
-        Email: {client_email}
-        Phone Number: {kwargs.get('phone_number', 'N/A')}
-        Goal: {kwargs.get('goal_choices', 'N/A')}
-        Special Notes: {kwargs.get('special_notes', 'N/A')}
-        Equipment Used: {kwargs.get('equipment_used', 'N/A')}
-        Preferred Duration: {kwargs.get('preferred_duration', 'N/A')}
-        Workout Time: {kwargs.get('workout_time', 'N/A')}
-        
-        Log into the SAPPFIT dashboard to review this request.
-        """
-    else:
-        subject = "New Booking/Service Request"
-        message = f"You have received a new request from {client_name} ({client_email}). Please check the dashboard for details."
     try:
-        send_mail(
-            subject, 
-            message, 
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_RECEIVER],
-            fail_silently=False,
-        )
+        subject  = f"New Booking Request from {client_name}"
+        # message = f"""
+        # Great news! You have a new booking request.
+        
+        # Client Name: {client_name}
+        # Client Email: {client_email}
+        # Requested Service: {kwargs.get('service_type', 'N/A')}
+        # Preferred Time: {kwargs.get('preferred_date', 'N/A')}
+        
+        # Log into the dashboard to approve or manage this booking.
+        # """
+        context = {
+            "client_name" : client_name,
+            "client_email" : client_email,
+            "service_type" : kwargs.get('service_type', 'N/A'),
+            "preferred_date" : kwargs.get('preferred_date', 'N/A'),
+            "request_type" : request_type,
+            "client_email" : client_email,
+            "phone_number" : {kwargs.get('phone_number', 'N/A')},
+            "goal" : {kwargs.get('goal_choices', 'N/A')},
+            "special_notes" : {kwargs.get('special_notes', 'N/A')},
+            "preferred_duration" : {kwargs.get('preferred_duration', 'N/A')},
+            "workout_time" : {kwargs.get('workout_time', 'N/A')},
+            "message" : {kwargs.get('message', 'N/A')}
 
+        }
+        html_content = render_to_string('website/email/email_template.html' , context)
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER,[settings.EMAIL_RECEIVER])
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+      
     except Exception as e:  
         print(f"Error sending email: {e}")
 
@@ -143,7 +134,15 @@ def service_detail_view(request, slug):
                 )
                 if settings.EMAIL_ENABLE:
                     print("emabled", settings.EMAIL_ENABLE)
-                    email_thread = threading.Thread(target=send_email_about_booking, args=(name, email,"predefined-service"), kwargs={'service_type': service_type.title, 'preferred_date': preferred_date})
+                    email_thread = threading.Thread(
+                        target=send_email_about_booking, 
+                        args=(name, email,"predefined-service"), 
+                        kwargs={
+                            'service_type': service_type.title, 
+                            'preferred_date': preferred_date,
+                            'phone_number': phone_number,
+                            'message' : message
+                        })
                     email_thread.start()
                 messages.success(request, f'Your booking request has been sent! We will contact you soon.')
                 return redirect('service-detail', slug = slug)
