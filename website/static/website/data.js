@@ -21,57 +21,58 @@ const template_products = [
     }
 ]
 
-async function loadDataFromMerch(){
+// async function loadDataFromMerch(){
 
-    const isDebug = JSON.parse(document.getElementById('django-debug-mode').textContent);
-    var url = "http://127.0.0.1:8001/";
+//     const isDebug = JSON.parse(document.getElementById('django-debug-mode').textContent);
+//     var url = "http://127.0.0.1:8001/";
 
-    if (!isDebug){
-        var url = "https://sappfitmerch.pythonanywhere.com/";
+//     if (!isDebug){
+//         var url = "https://sappfitmerch.pythonanywhere.com/";
 
-    }
+//     }
 
+//     const container = document.getElementById('merch-list');
+//     const viewBtn = document.getElementById('visit-store');
+
+//     try{
+//         const response = await fetch(url + "featured/");
+//         console.log("response", response);
+//         if (!response.ok){
+//             throw new Error("Error occured as the server was unreachable.")
+//         }
+//         const data = await response.json();
+//         if (data.length > 0 || data.length <= 3){
+//             viewBtn.href = url + "products";
+//             container.innerHTML = data.map(product => `
+//             <a href="${product.product_url}" class="product-card"> 
+//                 <img src="${product.image_url}" alt="${product.name}">
+//                 <h3>${product.name}</h3>
+//                 <strike>Rs. ${product.discount_price}</strike>
+//                 <p>Rs. ${product.price}</p>
+//             </a>
+//             `).join(""); 
+//         }else{
+//             renderProducts(container, template_products, viewBtn);
+//         }
+           
+//     }catch(e){
+//         console.log("Error occured! The server might not be online.", e);
+//         renderProducts(container, template_products, viewBtn);
+//     }
+// }
+
+function renderProducts(data){
+    const sloganEnd = document.getElementById('slogan');
+    const notice = document.getElementById('notice');
     const container = document.getElementById('merch-list');
     const viewBtn = document.getElementById('visit-store');
 
-    try{
-        const response = await fetch(url + "featured/");
-        console.log("response", response);
-        if (!response.ok){
-            throw new Error("Error occured as the server was unreachable.")
-        }
-        const data = await response.json();
-        if (data.length > 0 || data.length <= 3){
-            viewBtn.href = url + "products";
-            container.innerHTML = data.map(product => `
-            <a href="${product.product_url}" class="product-card"> 
-                <img src="${product.image_url}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <strike>Rs. ${product.discount_price}</strike>
-                <p>Rs. ${product.price}</p>
-            </a>
-            `).join(""); 
-        }else{
-            renderProducts(container, template_products, viewBtn);
-        }
-           
-    }catch(e){
-        console.log("Error occured! The server might not be online.", e);
-        renderProducts(container, template_products, viewBtn);
-    }
-}
-
-loadDataFromMerch();
-
-function renderProducts(container, data, viewBtn){
-    const sloganEnd = document.getElementById('slogan');
-    const notice = document.getElementById('notice');
     viewBtn.href = instapage;
     notice.innerText = "* Please note that price and products may vary from what is shown here! Thank you!"
     sloganEnd.innerHTML = "<p>Get your premium fit from Sappfit Wear <strong>@sappfitwear</strong></p>";
     container.innerHTML = data.map(product => `
        
-        <a href="${product.link}" class="product-card">
+        <a href="${product.link}" class="product-card child">
             <img src="${product.image_url}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>Rs. ${product.price}</p>
@@ -79,3 +80,6 @@ function renderProducts(container, data, viewBtn){
         
     `).join('');
 }
+
+renderProducts(template_products);
+

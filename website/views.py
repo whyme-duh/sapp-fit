@@ -1,4 +1,5 @@
 import datetime
+import os
 from django.shortcuts import get_object_or_404, redirect, render
 import threading
 from sapfit import settings
@@ -70,16 +71,6 @@ def bmi_calculator(request):
 def send_email_about_booking(client_name, client_email,request_type, **kwargs):
     try:
         subject  = f"New Booking Request from {client_name}"
-        # message = f"""
-        # Great news! You have a new booking request.
-        
-        # Client Name: {client_name}
-        # Client Email: {client_email}
-        # Requested Service: {kwargs.get('service_type', 'N/A')}
-        # Preferred Time: {kwargs.get('preferred_date', 'N/A')}
-        
-        # Log into the dashboard to approve or manage this booking.
-        # """
         context = {
             "client_name" : client_name,
             "client_email" : client_email,
@@ -87,13 +78,13 @@ def send_email_about_booking(client_name, client_email,request_type, **kwargs):
             "preferred_date" : kwargs.get('preferred_date', 'N/A'),
             "request_type" : request_type,
             "client_email" : client_email,
-            "phone_number" : {kwargs.get('phone_number', 'N/A')},
-            "goal" : {kwargs.get('goal_choices', 'N/A')},
-            "special_notes" : {kwargs.get('special_notes', 'N/A')},
-            "preferred_duration" : {kwargs.get('preferred_duration', 'N/A')},
-            "workout_time" : {kwargs.get('workout_time', 'N/A')},
-            "message" : {kwargs.get('message', 'N/A')}
-
+            "phone_number" : kwargs.get('phone_number', 'N/A'),
+            "goal" : kwargs.get('goal_choices', 'N/A'),
+            "special_notes" : kwargs.get('special_notes', 'N/A'),
+            "preferred_duration" : kwargs.get('preferred_duration', 'N/A'),
+            "workout_time" : kwargs.get('workout_time', 'N/A'),
+            "message" : kwargs.get('message', 'N/A'),
+            "admin_url": os.environ.get("ADMIN_URL")
         }
         html_content = render_to_string('website/email/email_template.html' , context)
         text_content = strip_tags(html_content)
