@@ -36,7 +36,8 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://shresthasaprina.com.np',
     'https://www.shresthasaprina.com.np',
-    'https://sappfit.pythonanywhere.com' 
+    'https://sappfit.pythonanywhere.com' ,
+    "https://sappfitmerch.pythonanywhere.com"
 ]
 
 

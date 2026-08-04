@@ -3,6 +3,7 @@
 {% load widget_tweaks %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'website/customrequeststyle.css' %}">
+<link rel="stylesheet" href="{% static 'website/service-detail.css' %}">
 
 {% endblock %}
 
@@ -150,8 +151,9 @@ Custom Service Request
 
                 </div>
                 <div class="button-group" >
-                    <button type="submit" name="action" value="human_request" class="submit-btn primary">
-                        Request Official Plan
+                    <button type="submit" name="action" value="human_request" class="submit-btn primary" id="submit-btn">
+                        <span class="btn-text">Request Official Plan</span>
+                        <span class="spinner hidden"></span>
                     </button>
                 </div>
             </form>

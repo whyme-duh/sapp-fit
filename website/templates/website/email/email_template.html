@@ -53,13 +53,14 @@
                                             </tr>
                                             {% else %}
                                             <tr>
+                                                <td style="font-weight: bold; color: #333333; font-size: 14px;">Selected Service:</td>
+                                                <td style="color: #555555; font-size: 14px;">Custom Service Request</td>
+                                            </tr>
+                                            <tr>
                                                 <td style="font-weight: bold; color: #333333; font-size: 14px;">Goal:</td>
                                                 <td style="color: #555555; font-size: 14px;">{{ goal }}</td>
                                             </tr>
-                                            <tr>
-                                                <td style="font-weight: bold; color: #333333; font-size: 14px;">Special Notes:</td>
-                                                <td style="color: #555555; font-size: 14px;">{{ special_notes }}</td>
-                                            </tr>
+                                           
                                             <tr>
                                                 <td style="font-weight: bold; color: #333333; font-size: 14px;">Workout Time:</td>
                                                 <td style="color: #555555; font-size: 14px;">{{ workout_time }}</td>
@@ -67,6 +68,10 @@
                                             <tr>
                                                 <td style="font-weight: bold; color: #333333; font-size: 14px;">Preferred Workout Duration:</td>
                                                 <td style="color: #555555; font-size: 14px;">{{ preferred_duration }}</td>
+                                            </tr>
+                                             <tr>
+                                                <td style="font-weight: bold; color: #333333; font-size: 14px;">Special Notes:</td>
+                                                <td style="color: #555555; font-size: 14px;">{{ special_notes }}</td>
                                             </tr>
                                             {% endif %}
                                         </table>
@@ -83,7 +88,7 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td align="center" style="padding: 10px 0 20px 0;">
-                                        <a href="https://sappfit.com.np/admin/" target="_blank" style="background-color: #774936; color: #ffffff; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; display: inline-block;">View in Admin Panel</a>
+                                        <a href="https://shresthasaprina.com.np/{{admin_url}}" target="_blank" style="background-color: #774936; color: #ffffff; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; display: inline-block;">View in Admin Panel</a>
                                     </td>
                                 </tr>
                             </table>

@@ -155,3 +155,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const animatedElements = document.querySelectorAll('.reveal-top-init, .reveal-down-init, .reveal-side-init, .text-reveal-right, .about');
     animatedElements.forEach(el => observer.observe(el));
 });
+
+document.getElementById('clientForm').addEventListener('submit', function(e) {
+    const btn = document.getElementById('submit-btn');
+    const btnText = btn.querySelector('.btn-text');
+    const spinner = btn.querySelector('.spinner');
+    
+    btn.classList.add('loading');
+    btn.disabled = true;
+    btnText.style.display = "none";
+    spinner.classList.remove('hidden');
+});
